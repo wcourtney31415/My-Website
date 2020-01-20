@@ -24,4 +24,4 @@ update msg model =
 
 view : Model -> Html.Html Msg
 view model =
-    mainContainer model
+    website model

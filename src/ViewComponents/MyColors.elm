@@ -16,7 +16,7 @@ colorGray2 =
     hsv 0 0 0.96
 
 
-colorSmallTitleBar =
+colorInlineTitleBar =
     hsv 120 0.39 0.67
 
 

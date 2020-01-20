@@ -1,4 +1,4 @@
-module ViewComponents.Components exposing (..)
+module ViewComponents.Components exposing (website)
 
 import Element exposing (..)
 import Element.Background as Background
@@ -16,8 +16,8 @@ import ViewComponents.MyColors exposing (..)
 --Website Itself
 
 
-mainContainer : Model -> Html.Html Msg
-mainContainer model =
+website : Model -> Html.Html Msg
+website model =
     Element.layout
         []
     <|
@@ -28,8 +28,9 @@ mainContainer model =
             , height fill
             , centerX
             ]
-            [ upperNavBar model
+            [ header model
             , pageLanguagePreferences model
+            , footer model
             ]
 
 
@@ -59,8 +60,8 @@ navLinks model =
     ]
 
 
-upperNavBar : Model -> Element Msg
-upperNavBar model =
+header : Model -> Element Msg
+header model =
     Element.wrappedRow
         [ Background.color colorNavBar
         , spacing 20
@@ -73,8 +74,8 @@ upperNavBar model =
             ++ navLinks model
 
 
-lowerNavBar : Model -> Element Msg
-lowerNavBar model =
+footer : Model -> Element Msg
+footer model =
     Element.wrappedRow
         [ Background.color colorNavBar
         , spacing 20
@@ -88,7 +89,7 @@ lowerNavBar model =
             model
 
 
-smallTitleBar model color str =
+inlineTitleBar model color str =
     Element.paragraph
         [ Background.color color
         , padding 30
@@ -160,20 +161,6 @@ leftBlock model img txt =
             ]
 
 
-
---This background Wrapper is to allow the blocks to have a maximum
---width, but let their background span the width of the screen.
-
-
-backgroundWrapper : Color -> Model -> Element Msg -> Element Msg
-backgroundWrapper color model el =
-    Element.el
-        [ Background.color color
-        , width fill
-        ]
-        el
-
-
 rightBlock : Model -> Element Msg -> String -> Element Msg
 rightBlock model img txt =
     backgroundWrapper colorGray2 model <|
@@ -197,6 +184,21 @@ rightBlock model img txt =
 
 
 
+{- This background Wrapper is to allow the blocks to have a maximum
+   width, but let their background span the width of the screen.
+-}
+
+
+backgroundWrapper : Color -> Model -> Element Msg -> Element Msg
+backgroundWrapper color model el =
+    Element.el
+        [ Background.color color
+        , width fill
+        ]
+        el
+
+
+
 --Page: Language Preferences
 
 
@@ -207,10 +209,25 @@ pageLanguagePreferences model =
         ]
         [ quoteBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
-        , smallTitleBar model colorSmallTitleBar "Language Preferences"
+        , inlineTitleBar model colorInlineTitleBar "Language Preferences"
         , rightBlock model (elmLogo []) firstParagraphText
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) firstParagraphText
         , leftBlock model (arduinoLogo []) firstParagraphText
-        , lowerNavBar model
+        ]
+
+
+pageMyStory model =
+    Element.column
+        [ width fill
+        , centerX
+        ]
+        [ quoteBlock model
+        , leftBlock model (pictureOfMe []) langPrefIntroText
+        , inlineTitleBar model colorInlineTitleBar "Story"
+        , rightBlock model (elmLogo []) firstParagraphText
+        , leftBlock model (javaLogo []) firstParagraphText
+        , rightBlock model (visualStudioLogo []) firstParagraphText
+        , leftBlock model (arduinoLogo []) firstParagraphText
+        , footer model
         ]
