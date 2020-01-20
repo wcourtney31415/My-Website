@@ -7,6 +7,7 @@ import Element.Input as Input
 import Html exposing (Html)
 import Images.Images exposing (..)
 import ModelAndMessages exposing (..)
+import ViewComponents.HsvToRgb exposing (..)
 import ViewComponents.LongText exposing (..)
 import ViewComponents.MyColors exposing (..)
 
@@ -131,7 +132,10 @@ navBarLink model label url =
 
 quoteBlock model =
     Element.paragraph
-        [ Background.color colorBody
+        [ Background.gradient
+            { angle = pi
+            , steps = [ colorBody, hsv 120 0.52 0.6 ]
+            }
         , padding 65
         , width fill
         , fontShadows
