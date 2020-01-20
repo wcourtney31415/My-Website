@@ -35,14 +35,19 @@ view model =
 
 
 type alias Model =
-    { h : Int
+    { selectedPage : Page
     }
 
 
 init : Model
 init =
-    { h = 0
+    { selectedPage = LanguagePreferences
     }
+
+
+type Page
+    = LanguagePreferences
+    | MyStory
 
 
 type Msg
@@ -50,8 +55,8 @@ type Msg
 
 
 
-{- /////////////////////        Visual Componen          //////////////////// -}
---Website Itself
+{- /////////////////////        Visual Components        //////////////////// -}
+{- /////////////////////        Website Itself           //////////////////// -}
 
 
 website : Model -> Html.Html Msg
@@ -67,13 +72,13 @@ website model =
             , centerX
             ]
             [ header model
-            , pageLanguagePreferences model
+            , selectedPage model
             , footer model
             ]
 
 
 
---Website scoped visual components
+{- /////////////        Website wide Visual Components        /////////////// -}
 
 
 myName : Model -> Element Msg
@@ -237,7 +242,20 @@ backgroundWrapper color model el =
 
 
 
---Page: Language Preferences
+{- /////////////////////           Webpages           /////////////////////// -}
+
+
+selectedPage model =
+    case model.selectedPage of
+        LanguagePreferences ->
+            pageLanguagePreferences model
+
+        MyStory ->
+            pageMyStory model
+
+
+
+{- ////////////           Page: Language Preferences       ////////////////// -}
 
 
 pageLanguagePreferences model =
@@ -255,6 +273,10 @@ pageLanguagePreferences model =
         ]
 
 
+
+{- ////////////                  Page: My Story            ////////////////// -}
+
+
 pageMyStory model =
     Element.column
         [ width fill
@@ -267,11 +289,11 @@ pageMyStory model =
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) firstParagraphText
         , leftBlock model (arduinoLogo []) firstParagraphText
-        , footer model
         ]
 
 
 
+{- /////////////////////        RESOURCES BELOW          //////////////////// -}
 {- /////////////////////        Resources: Images        //////////////////// -}
 
 
