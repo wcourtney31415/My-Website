@@ -148,8 +148,7 @@ fontShadows =
 
 navLinks : Model -> List (Element Msg)
 navLinks model =
-    [ navBarLink model "Link" "https://github.com/wcourtney31415"
-    , navBarButton model "Language Preferences" LanguagePreferences
+    [ navBarButton model "Language Preferences" LanguagePreferences
     , navBarButton model "My Story" MyStory
     , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
     ]
@@ -293,10 +292,7 @@ pageMyStory model =
         [ width fill
         , centerX
         ]
-        [ quoteBlock model
-        , leftBlock model (pictureOfMe []) langPrefIntroText
-        , inlineTitleBar model colorInlineTitleBar "Story"
-        , rightBlock model (elmLogo []) firstParagraphText
+        [ inlineTitleBar model colorInlineTitleBar "Story"
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) firstParagraphText
         , leftBlock model (arduinoLogo []) firstParagraphText
