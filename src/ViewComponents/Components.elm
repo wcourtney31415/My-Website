@@ -12,6 +12,10 @@ import ViewComponents.LongText exposing (..)
 import ViewComponents.MyColors exposing (..)
 
 
+
+--Website Itself
+
+
 mainContainer : Model -> Html.Html Msg
 mainContainer model =
     Element.layout
@@ -29,35 +33,30 @@ mainContainer model =
             ]
 
 
-pageLanguagePreferences model =
-    Element.column
-        [ width fill
-        , centerX
-        ]
-        [ quoteBlock model
-        , leftBlock model (pictureOfMe []) langPrefIntroText
-        , smallTitleBar model colorSmallTitleBar "Language Preferences"
-        , rightBlock model (elmLogo []) firstParagraphText
-        , leftBlock model (javaLogo []) firstParagraphText
-        , rightBlock model (visualStudioLogo []) firstParagraphText
-        , leftBlock model (arduinoLogo []) firstParagraphText
-        , lowerNavBar model
-        ]
+
+--Website scoped visual components
 
 
-smallTitleBar model color str =
-    Element.paragraph
-        [ Background.color color
-        , padding 30
-        , width fill
-        , fontShadows
+myName : Model -> Element Msg
+myName model =
+    el
+        [ alignLeft
         , Font.color white
-        , Font.center
-        , Font.size 30
+        , Font.size 25
         , Font.bold
+        , fontShadows
         ]
-        [ text str
-        ]
+    <|
+        text "Wesley Courtney"
+
+
+navLinks : Model -> List (Element Msg)
+navLinks model =
+    [ navBarLink model "Link" "https://github.com/wcourtney31415"
+    , navBarLink model "Language Preferences" "https://github.com/wcourtney31415"
+    , navBarLink model "My Story" "https://github.com/wcourtney31415"
+    , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
+    ]
 
 
 upperNavBar : Model -> Element Msg
@@ -89,26 +88,19 @@ lowerNavBar model =
             model
 
 
-navLinks : Model -> List (Element Msg)
-navLinks model =
-    [ navBarLink model "Link" "https://github.com/wcourtney31415"
-    , navBarLink model "Language Preferences" "https://github.com/wcourtney31415"
-    , navBarLink model "My Story" "https://github.com/wcourtney31415"
-    , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
-    ]
-
-
-myName : Model -> Element Msg
-myName model =
-    el
-        [ alignLeft
-        , Font.color white
-        , Font.size 25
-        , Font.bold
+smallTitleBar model color str =
+    Element.paragraph
+        [ Background.color color
+        , padding 30
+        , width fill
         , fontShadows
+        , Font.color white
+        , Font.center
+        , Font.size 30
+        , Font.bold
         ]
-    <|
-        text "Wesley Courtney"
+        [ text str
+        ]
 
 
 fontShadows =
@@ -202,3 +194,23 @@ rightBlock model img txt =
                 ]
             , img
             ]
+
+
+
+--Page: Language Preferences
+
+
+pageLanguagePreferences model =
+    Element.column
+        [ width fill
+        , centerX
+        ]
+        [ quoteBlock model
+        , leftBlock model (pictureOfMe []) langPrefIntroText
+        , smallTitleBar model colorSmallTitleBar "Language Preferences"
+        , rightBlock model (elmLogo []) firstParagraphText
+        , leftBlock model (javaLogo []) firstParagraphText
+        , rightBlock model (visualStudioLogo []) firstParagraphText
+        , leftBlock model (arduinoLogo []) firstParagraphText
+        , lowerNavBar model
+        ]
