@@ -1,4 +1,4 @@
-module ViewComponents.HsvToRgb exposing (hsv)
+module HsvToRgb exposing (hsv)
 
 import Element exposing (..)
 
