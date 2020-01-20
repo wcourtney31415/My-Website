@@ -97,7 +97,7 @@ myName model =
 header : Model -> Element Msg
 header model =
     Element.wrappedRow
-        [ Background.color colorNavBar
+        [ Background.color colorHeader
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -111,7 +111,7 @@ header model =
 footer : Model -> Element Msg
 footer model =
     Element.wrappedRow
-        [ Background.color colorNavBar
+        [ Background.color colorFooter
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -180,7 +180,7 @@ quoteBlock model =
     Element.paragraph
         [ Background.gradient
             { angle = pi
-            , steps = [ colorBody, hsv 120 0.52 0.6 ]
+            , steps = [ colorQuoteBlock1, colorQuoteBlock2 ]
             }
         , padding 65
         , width fill
@@ -194,7 +194,7 @@ quoteBlock model =
 
 leftBlock : Model -> Element Msg -> String -> Element Msg
 leftBlock model img txt =
-    backgroundWrapper colorGray1 model <|
+    backgroundWrapper colorLeftBlock model <|
         Element.wrappedRow
             [ paddingXY 40 40
             , spacing 20
@@ -216,7 +216,7 @@ leftBlock model img txt =
 
 rightBlock : Model -> Element Msg -> String -> Element Msg
 rightBlock model img txt =
-    backgroundWrapper colorGray2 model <|
+    backgroundWrapper colorRightBlock model <|
         Element.wrappedRow
             [ paddingXY 40 40
             , spacing 20
@@ -348,15 +348,11 @@ arduinoLogo list =
 {- /////////////////////        Resources: Colors        //////////////////// -}
 
 
-myHue =
-    160
-
-
-colorGray1 =
+colorLeftBlock =
     hsv 0 0 0.93
 
 
-colorGray2 =
+colorRightBlock =
     hsv 0 0 0.96
 
 
@@ -364,36 +360,20 @@ colorInlineTitleBar =
     hsv 120 0.39 0.67
 
 
-colorNavBar =
+colorHeader =
     hsv 120 1 0.5
 
 
-colorBody =
+colorFooter =
+    hsv 120 1 0.5
+
+
+colorQuoteBlock1 =
     hsv 120 0.52 0.69
 
 
-colorA =
-    hsv myHue 1 1
-
-
-colorB =
-    hsv myHue 0.93 1
-
-
-colorC =
-    hsv myHue 0.83 1
-
-
-colorD =
-    hsv myHue 0.73 1
-
-
-colorE =
-    hsv myHue 0.63 1
-
-
-colorF =
-    hsv myHue 0.51 1
+colorQuoteBlock2 =
+    hsv 120 0.52 0.6
 
 
 white =
