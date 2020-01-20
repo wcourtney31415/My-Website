@@ -94,15 +94,6 @@ myName model =
         text "Wesley Courtney"
 
 
-navLinks : Model -> List (Element Msg)
-navLinks model =
-    [ navBarLink model "Link" "https://github.com/wcourtney31415"
-    , navBarLink model "Language Preferences" "https://github.com/wcourtney31415"
-    , navBarLink model "My Story" "https://github.com/wcourtney31415"
-    , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
-    ]
-
-
 header : Model -> Element Msg
 header model =
     Element.wrappedRow
@@ -152,6 +143,26 @@ fontShadows =
         { offset = ( 3, 3 )
         , blur = 4
         , color = black
+        }
+
+
+navLinks : Model -> List (Element Msg)
+navLinks model =
+    [ navBarLink model "Link" "https://github.com/wcourtney31415"
+    , navBarButton model "Language Preferences" LanguagePreferences
+    , navBarButton model "My Story" MyStory
+    , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
+    ]
+
+
+navBarButton : Model -> String -> Page -> Element Msg
+navBarButton model label page =
+    Input.button
+        [ alignRight
+        , Font.color white
+        ]
+        { onPress = Just (SomethingHappened { model | selectedPage = page })
+        , label = text label
         }
 
 
