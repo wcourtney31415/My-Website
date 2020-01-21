@@ -22,7 +22,7 @@ main =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        SomethingHappened myModel ->
+        SomemyStoryTextBodyHappened myModel ->
             myModel
 
 
@@ -52,7 +52,7 @@ type Page
 
 
 type Msg
-    = SomethingHappened Model
+    = SomemyStoryTextBodyHappened Model
 
 
 
@@ -161,7 +161,7 @@ navBarButton model label page =
         [ alignRight
         , Font.color white
         ]
-        { onPress = Just (SomethingHappened { model | selectedPage = page })
+        { onPress = Just (SomemyStoryTextBodyHappened { model | selectedPage = page })
         , label = text label
         }
 
@@ -294,12 +294,12 @@ pageMyStory model =
         , centerX
         ]
         [ inlineTitleBar model colorInlineTitleBar "Story"
-        , thing
+        , myStoryTextBody
         ]
 
 
-thing =
-    Element.textColumn [ spacing 50, paddingXY 0 30, width (fill |> maximum 1200), centerX ]
+myStoryTextBody =
+    Element.textColumn [ spacing 50, paddingXY 30 30, width (fill |> maximum 1200), centerX ]
         [ gameMakerLogo [ alignLeft, paddingXY 20 10 ]
         , paragraph [] [ text declarationOfIndependence ]
         , paragraph [] [ text declarationOfIndependence ]
