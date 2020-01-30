@@ -22,7 +22,7 @@ main =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        SomemyStoryTextBodyHappened myModel ->
+        NavBarButtonClicked myModel ->
             myModel
 
 
@@ -49,10 +49,11 @@ init =
 type Page
     = LanguagePreferences
     | MyStory
+    | HireMe
 
 
 type Msg
-    = SomemyStoryTextBodyHappened Model
+    = NavBarButtonClicked Model
 
 
 
@@ -149,7 +150,8 @@ fontShadows =
 
 navLinks : Model -> List (Element Msg)
 navLinks model =
-    [ navBarButton model "Language Preferences" LanguagePreferences
+    [ navBarButton model "Hire Me" HireMe
+    , navBarButton model "Language Preferences" LanguagePreferences
     , navBarButton model "My Story" MyStory
     , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
     ]
@@ -161,7 +163,7 @@ navBarButton model label page =
         [ alignRight
         , Font.color white
         ]
-        { onPress = Just (SomemyStoryTextBodyHappened { model | selectedPage = page })
+        { onPress = Just (NavBarButtonClicked { model | selectedPage = page })
         , label = text label
         }
 
@@ -264,6 +266,9 @@ selectedPage model =
         MyStory ->
             pageMyStory model
 
+        HireMe ->
+            pageHireMe model
+
 
 
 {- ////////////           Page: Language Preferences       ////////////////// -}
@@ -299,7 +304,7 @@ pageMyStory model =
 
 
 myStoryTextBody =
-    Element.textColumn [ spacing 50, paddingXY 30 30, width (fill |> maximum 1200), centerX ]
+    Element.textColumn [ spacing 50, padding 30, width (fill |> maximum 1200), centerX ]
         [ gameMakerLogo [ alignLeft, paddingXY 20 10 ]
         , paragraph [] [ text declarationOfIndependence ]
         , paragraph [] [ text declarationOfIndependence ]
@@ -317,6 +322,21 @@ myStoryTextBody =
                 }
             ]
         , paragraph [] [ text declarationOfIndependence ]
+        ]
+
+
+
+{- ////////////                  Page: HireMe            ////////////////// -}
+
+
+pageHireMe model =
+    Element.column
+        [ width fill
+        , centerX
+        ]
+        [ inlineTitleBar model colorInlineTitleBar "Story"
+        , leftBlock model (pictureOfMe []) langPrefIntroText
+        , myStoryTextBody
         ]
 
 
