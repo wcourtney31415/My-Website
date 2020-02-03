@@ -37,12 +37,22 @@ view model =
 
 type alias Model =
     { selectedPage : Page
+    , siteHue : Color
+    , siteSaturation : Color
+    , colors : {}
     }
 
 
 init : Model
 init =
     { selectedPage = MyStory
+    , colors =
+        { header = hsv 270 1 0.85
+        , footer = hsv 270 1 0.85
+        , quoteGrad1 = hsv 270 1 0.7
+        , quoteGrad2 = hsv 270 1 0.8
+        , inlineTitleBar = hsv 270 1 0.65
+        }
     }
 
 
@@ -421,36 +431,18 @@ colorRightBlock =
     hsv 0 0 0.96
 
 
-colorInlineTitleBar =
-    hsv 120 0.39 0.67
-
-
-colorHeader =
-    hsv 120 1 0.5
-
-
-colorFooter =
-    hsv 120 1 0.5
-
-
-colorQuoteBlock1 =
-    hsv 120 0.52 0.69
-
-
-colorQuoteBlock2 =
-    hsv 120 0.52 0.6
-
-
 white =
     rgb255 255 255 255
 
 
 black =
-    rgb255 0 0 0
-
-
-obviousRed =
-    rgb255 255 0 0
+    rgb255 0
+        0
+        0
+        rgb255
+        255
+        0
+        0
 
 
 obviousGreen =
