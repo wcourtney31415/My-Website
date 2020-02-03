@@ -51,7 +51,7 @@ type alias Model =
 
 init : Model
 init =
-    { selectedPage = LanguagePreferences
+    { selectedPage = ColorSelection
     , hue = 270
     , saturation = 1
     , colors =
@@ -64,15 +64,11 @@ init =
     }
 
 
-getColor : Model -> Float -> Color
-getColor model val =
-    hsv model.hue model.saturation val
-
-
 type Page
     = LanguagePreferences
     | MyStory
     | HireMe
+    | ColorSelection
 
 
 type Msg
@@ -296,6 +292,9 @@ selectedPage model =
         HireMe ->
             pageHireMe model
 
+        ColorSelection ->
+            pageColorSelection model
+
 
 
 {- ////////////           Page: Language Preferences       ////////////////// -}
@@ -372,6 +371,20 @@ pageHireMe model =
 
 
 
+{- ////////////                  Page: ColorSelection            ////////////////// -}
+
+
+pageColorSelection : Model -> Element Msg
+pageColorSelection model =
+    Element.column
+        [ width fill
+        , centerX
+        ]
+        [ inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Color Preferences"
+        ]
+
+
+
 {- /////////////////////        RESOURCES BELOW          //////////////////// -}
 {- /////////////////////        Resources: Images        //////////////////// -}
 
@@ -442,6 +455,11 @@ cPlusPlusLogo list =
 
 
 {- /////////////////////        Resources: Colors        //////////////////// -}
+
+
+getColor : Model -> Float -> Color
+getColor model val =
+    hsv model.hue model.saturation val
 
 
 colorLeftBlock : Color
