@@ -37,22 +37,12 @@ view model =
 
 type alias Model =
     { selectedPage : Page
-    , siteHue : Color
-    , siteSaturation : Color
-    , colors : {}
     }
 
 
 init : Model
 init =
     { selectedPage = MyStory
-    , colors =
-        { header = hsv 270 1 0.85
-        , footer = hsv 270 1 0.85
-        , quoteGrad1 = hsv 270 1 0.7
-        , quoteGrad2 = hsv 270 1 0.8
-        , inlineTitleBar = hsv 270 1 0.65
-        }
     }
 
 
@@ -135,6 +125,7 @@ footer model =
             model
 
 
+inlineTitleBar : Model -> Color -> String -> Element msg
 inlineTitleBar model color str =
     Element.paragraph
         [ Background.color color
@@ -150,6 +141,7 @@ inlineTitleBar model color str =
         ]
 
 
+fontShadows : Attr decorative msg
 fontShadows =
     Font.shadow
         { offset = ( 3, 3 )
@@ -189,6 +181,7 @@ navBarLink model label url =
         }
 
 
+quoteBlock : Model -> Element msg
 quoteBlock model =
     Element.paragraph
         [ Background.gradient
@@ -268,6 +261,7 @@ backgroundWrapper color model el =
 {- /////////////////////           Webpages           /////////////////////// -}
 
 
+selectedPage : { selectedPage : Page } -> Element Msg
 selectedPage model =
     case model.selectedPage of
         LanguagePreferences ->
@@ -284,6 +278,7 @@ selectedPage model =
 {- ////////////           Page: Language Preferences       ////////////////// -}
 
 
+pageLanguagePreferences : { selectedPage : Page } -> Element Msg
 pageLanguagePreferences model =
     Element.column
         [ width fill
@@ -303,6 +298,7 @@ pageLanguagePreferences model =
 {- ////////////                  Page: My Story            ////////////////// -}
 
 
+pageMyStory : { selectedPage : Page } -> Element Msg
 pageMyStory model =
     Element.column
         [ width fill
@@ -313,6 +309,7 @@ pageMyStory model =
         ]
 
 
+myStoryTextBody : Element Msg
 myStoryTextBody =
     Element.textColumn [ spacing 50, padding 30, width (fill |> maximum 1200), centerX ]
         [ gameMakerLogo [ alignLeft, paddingXY 20 10 ]
@@ -339,6 +336,7 @@ myStoryTextBody =
 {- ////////////                  Page: HireMe            ////////////////// -}
 
 
+pageHireMe : { selectedPage : Page } -> Element Msg
 pageHireMe model =
     Element.column
         [ width fill
@@ -423,32 +421,62 @@ cPlusPlusLogo list =
 {- /////////////////////        Resources: Colors        //////////////////// -}
 
 
+colorLeftBlock : Color
 colorLeftBlock =
     hsv 0 0 0.93
 
 
+colorRightBlock : Color
 colorRightBlock =
     hsv 0 0 0.96
 
 
+colorInlineTitleBar : Color
+colorInlineTitleBar =
+    hsv 120 0.39 0.67
+
+
+colorHeader : Color
+colorHeader =
+    hsv 120 1 0.5
+
+
+colorFooter : Color
+colorFooter =
+    hsv 120 1 0.5
+
+
+colorQuoteBlock1 : Color
+colorQuoteBlock1 =
+    hsv 120 0.52 0.69
+
+
+colorQuoteBlock2 : Color
+colorQuoteBlock2 =
+    hsv 120 0.52 0.6
+
+
+white : Color
 white =
     rgb255 255 255 255
 
 
+black : Color
 black =
-    rgb255 0
-        0
-        0
-        rgb255
-        255
-        0
-        0
+    rgb255 0 0 0
 
 
+obviousRed : Color
+obviousRed =
+    rgb255 255 0 0
+
+
+obviousGreen : Color
 obviousGreen =
     rgb255 0 255 0
 
 
+obviousBlue : Color
 obviousBlue =
     rgb255 0 0 255
 
@@ -472,6 +500,7 @@ langPrefIntroText =
     declarationOfIndependence
 
 
+textStoryBody : String
 textStoryBody =
     lotsOfText
 
@@ -480,9 +509,11 @@ textStoryBody =
 --Below are some placeholder texts until I finish the site layout.
 
 
+declarationOfIndependence : String
 declarationOfIndependence =
     "We hold these truths to be self-evident, that all men are created equal, that they are endowed by their creator with certain unalienable rights, that among these are life, liberty and the pursuit of happiness. That to secure these rights, Governments are instituted among men, deriving their just powers from the consent of the governed. That whenever any form of government becomes destructive of these ends, it is the right of the people to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their safety and happiness."
 
 
+lotsOfText : String
 lotsOfText =
     "This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. This is some placeholder text until I decide to fill it in with actual personal information about myself. This is some long text as an example of what could be placed here. Once I have the layout for the website completed I will replace this text with actual information. Lets repeat this text so it appears to be a large paragraph. "
