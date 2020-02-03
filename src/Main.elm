@@ -37,13 +37,36 @@ view model =
 
 type alias Model =
     { selectedPage : Page
+    , hue : Int
+    , saturation : Float
+    , colors :
+        { header : Float
+        , footer : Float
+        , quoteBlock1 : Float
+        , quoteBlock2 : Float
+        , inlineTitleBar : Float
+        }
     }
 
 
 init : Model
 init =
-    { selectedPage = MyStory
+    { selectedPage = LanguagePreferences
+    , hue = 270
+    , saturation = 1
+    , colors =
+        { header = 0.4
+        , footer = 0.6
+        , quoteBlock1 = 0.2
+        , quoteBlock2 = 0.7
+        , inlineTitleBar = 0.4
+        }
     }
+
+
+getColor : Model -> Float -> Color
+getColor model val =
+    hsv model.hue model.saturation val
 
 
 type Page
@@ -99,7 +122,7 @@ myName model =
 header : Model -> Element Msg
 header model =
     Element.wrappedRow
-        [ Background.color colorHeader
+        [ Background.color (getColor model model.colors.header)
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -113,7 +136,7 @@ header model =
 footer : Model -> Element Msg
 footer model =
     Element.wrappedRow
-        [ Background.color colorFooter
+        [ Background.color (getColor model model.colors.footer)
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -186,7 +209,7 @@ quoteBlock model =
     Element.paragraph
         [ Background.gradient
             { angle = pi
-            , steps = [ colorQuoteBlock1, colorQuoteBlock2 ]
+            , steps = [ getColor model model.colors.quoteBlock1, getColor model model.colors.quoteBlock2 ]
             }
         , padding 65
         , width fill
@@ -261,7 +284,7 @@ backgroundWrapper color model el =
 {- /////////////////////           Webpages           /////////////////////// -}
 
 
-selectedPage : { selectedPage : Page } -> Element Msg
+selectedPage : Model -> Element Msg
 selectedPage model =
     case model.selectedPage of
         LanguagePreferences ->
@@ -278,7 +301,7 @@ selectedPage model =
 {- ////////////           Page: Language Preferences       ////////////////// -}
 
 
-pageLanguagePreferences : { selectedPage : Page } -> Element Msg
+pageLanguagePreferences : Model -> Element Msg
 pageLanguagePreferences model =
     Element.column
         [ width fill
@@ -286,7 +309,7 @@ pageLanguagePreferences model =
         ]
         [ quoteBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
-        , inlineTitleBar model colorInlineTitleBar "Language Preferences"
+        , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
         , rightBlock model (elmLogo []) firstParagraphText
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) firstParagraphText
@@ -298,13 +321,13 @@ pageLanguagePreferences model =
 {- ////////////                  Page: My Story            ////////////////// -}
 
 
-pageMyStory : { selectedPage : Page } -> Element Msg
+pageMyStory : Model -> Element Msg
 pageMyStory model =
     Element.column
         [ width fill
         , centerX
         ]
-        [ inlineTitleBar model colorInlineTitleBar "Story"
+        [ inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Story"
         , myStoryTextBody
         ]
 
@@ -336,13 +359,13 @@ myStoryTextBody =
 {- ////////////                  Page: HireMe            ////////////////// -}
 
 
-pageHireMe : { selectedPage : Page } -> Element Msg
+pageHireMe : Model -> Element Msg
 pageHireMe model =
     Element.column
         [ width fill
         , centerX
         ]
-        [ inlineTitleBar model colorInlineTitleBar "Story"
+        [ inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Story"
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , myStoryTextBody
         ]
@@ -429,31 +452,6 @@ colorLeftBlock =
 colorRightBlock : Color
 colorRightBlock =
     hsv 0 0 0.96
-
-
-colorInlineTitleBar : Color
-colorInlineTitleBar =
-    hsv 120 0.39 0.67
-
-
-colorHeader : Color
-colorHeader =
-    hsv 120 1 0.5
-
-
-colorFooter : Color
-colorFooter =
-    hsv 120 1 0.5
-
-
-colorQuoteBlock1 : Color
-colorQuoteBlock1 =
-    hsv 120 0.52 0.69
-
-
-colorQuoteBlock2 : Color
-colorQuoteBlock2 =
-    hsv 120 0.52 0.6
 
 
 white : Color
