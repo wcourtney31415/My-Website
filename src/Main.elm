@@ -25,6 +25,12 @@ update msg model =
         NavBarButtonClicked myModel ->
             myModel
 
+        HueSliderMoved myModel ->
+            myModel
+
+        ABrightnessSliderMoved myModel ->
+            myModel
+
 
 view : Model -> Html.Html Msg
 view model =
@@ -73,6 +79,8 @@ type Page
 
 type Msg
     = NavBarButtonClicked Model
+    | HueSliderMoved Model
+    | ABrightnessSliderMoved Model
 
 
 
@@ -380,8 +388,136 @@ pageColorSelection model =
         [ width fill
         , centerX
         ]
-        [ inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Color Preferences"
+        [ quoteBlock model
+        , hueSlider model
+        , headerSlider model
+        , footerSlider model
+        , quoteBlock1Slider model
+        , quoteBlock2Slider model
+        , inlineTitleBarSlider model
+        , leftBlock model (pictureOfMe []) langPrefIntroText
+        , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
+        , rightBlock model (elmLogo []) firstParagraphText
+        , leftBlock model (javaLogo []) firstParagraphText
+        , rightBlock model (visualStudioLogo []) firstParagraphText
+        , leftBlock model (arduinoLogo []) firstParagraphText
         ]
+
+
+headerSlider : Model -> Element Msg
+headerSlider model =
+    let
+        colorsRecord =
+            model.colors
+    in
+    makeSlider
+        "Header: "
+        model.colors.header
+        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | header = new } })
+
+
+footerSlider : Model -> Element Msg
+footerSlider model =
+    let
+        colorsRecord =
+            model.colors
+    in
+    makeSlider
+        "Footer: "
+        model.colors.footer
+        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | footer = new } })
+
+
+quoteBlock1Slider : Model -> Element Msg
+quoteBlock1Slider model =
+    let
+        colorsRecord =
+            model.colors
+    in
+    makeSlider
+        "Quote Block Gradient 1: "
+        model.colors.quoteBlock1
+        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | quoteBlock1 = new } })
+
+
+quoteBlock2Slider : Model -> Element Msg
+quoteBlock2Slider model =
+    let
+        colorsRecord =
+            model.colors
+    in
+    makeSlider
+        "Quote Block Gradient 2: "
+        model.colors.quoteBlock2
+        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | quoteBlock2 = new } })
+
+
+inlineTitleBarSlider : Model -> Element Msg
+inlineTitleBarSlider model =
+    let
+        colorsRecord =
+            model.colors
+    in
+    makeSlider
+        "Inline Title Bar: "
+        model.colors.inlineTitleBar
+        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | inlineTitleBar = new } })
+
+
+makeSlider : String -> Float -> (Float -> Msg) -> Element Msg
+makeSlider label myValue myAction =
+    Input.slider
+        [ Element.height (Element.px 30)
+        , Element.behindContent
+            (Element.el
+                [ Element.width Element.fill
+                , Element.height (Element.px 2)
+                , Element.centerY
+                , Background.color (hsv 0 1 0.7)
+                , Border.rounded 2
+                ]
+                Element.none
+            )
+        ]
+        { onChange = myAction
+        , label =
+            Input.labelAbove []
+                (text (label ++ String.fromFloat myValue))
+        , min = 0
+        , max = 1
+        , step = Just 0.01
+        , value = myValue
+        , thumb =
+            Input.defaultThumb
+        }
+
+
+hueSlider : Model -> Element Msg
+hueSlider model =
+    Input.slider
+        [ Element.height (Element.px 30)
+        , Element.behindContent
+            (Element.el
+                [ Element.width Element.fill
+                , Element.height (Element.px 2)
+                , Element.centerY
+                , Background.color (hsv 0 1 0.7)
+                , Border.rounded 2
+                ]
+                Element.none
+            )
+        ]
+        { onChange = \new -> HueSliderMoved { model | hue = round new }
+        , label =
+            Input.labelAbove []
+                (text ("Hue: " ++ String.fromInt model.hue))
+        , min = 0
+        , max = 360
+        , step = Just 1
+        , value = toFloat model.hue
+        , thumb =
+            Input.defaultThumb
+        }
 
 
 
