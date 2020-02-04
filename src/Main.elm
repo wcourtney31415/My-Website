@@ -31,6 +31,9 @@ update msg model =
         ABrightnessSliderMoved myModel ->
             myModel
 
+        AttemptedTextBoxChange ->
+            model
+
 
 view : Model -> Html.Html Msg
 view model =
@@ -81,6 +84,7 @@ type Msg
     = NavBarButtonClicked Model
     | HueSliderMoved Model
     | ABrightnessSliderMoved Model
+    | AttemptedTextBoxChange
 
 
 
@@ -395,6 +399,7 @@ pageColorSelection model =
         , quoteBlock1Slider model
         , quoteBlock2Slider model
         , inlineTitleBarSlider model
+        , colorsRecordTextBox model
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
         , rightBlock model (elmLogo []) firstParagraphText
@@ -517,6 +522,19 @@ hueSlider model =
         , value = toFloat model.hue
         , thumb =
             Input.defaultThumb
+        }
+
+
+colorsRecordString model =
+    "{" ++ "Header = " ++ String.fromFloat model.colors.header ++ ", Footer: " ++ String.fromFloat model.colors.footer
+
+
+colorsRecordTextBox model =
+    Input.text []
+        { text = colorsRecordString model
+        , label = Input.labelAbove [] (text "Color Record: ")
+        , placeholder = Nothing
+        , onChange = \new -> AttemptedTextBoxChange
         }
 
 
