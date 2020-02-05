@@ -61,14 +61,14 @@ type alias Model =
 init : Model
 init =
     { selectedPage = ColorSelection
-    , hue = 270
-    , saturation = 1
+    , hue = 194
+    , saturation = 0.73
     , colors =
-        { header = 0.4
-        , footer = 0.6
-        , quoteBlock1 = 0.2
-        , quoteBlock2 = 0.7
-        , inlineTitleBar = 0.4
+        { header = 0.76
+        , footer = 0.91
+        , quoteBlock1 = 1
+        , quoteBlock2 = 0.73
+        , inlineTitleBar = 0.91
         }
     }
 
@@ -393,13 +393,7 @@ pageColorSelection model =
         , centerX
         ]
         [ quoteBlock model
-        , hueSlider model
-        , headerSlider model
-        , footerSlider model
-        , quoteBlock1Slider model
-        , quoteBlock2Slider model
-        , inlineTitleBarSlider model
-        , colorsRecordTextBox model
+        , sliderBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
         , rightBlock model (elmLogo []) firstParagraphText
@@ -409,6 +403,33 @@ pageColorSelection model =
         ]
 
 
+sliderBlock model =
+    Element.column
+        [ width fill
+        , centerX
+        , width (fill |> maximum 1200)
+        , padding 100
+        ]
+        [ hueSlider model
+        , saturationSlider model
+        , headerSlider model
+        , footerSlider model
+        , quoteBlock1Slider model
+        , quoteBlock2Slider model
+        , inlineTitleBarSlider model
+        , colorsRecordTextBox model
+        ]
+
+
+saturationSlider : Model -> Element Msg
+saturationSlider model =
+    makeSlider
+        model
+        "Saturation: "
+        model.saturation
+        (\new -> ABrightnessSliderMoved { model | saturation = new })
+
+
 headerSlider : Model -> Element Msg
 headerSlider model =
     let
@@ -416,6 +437,7 @@ headerSlider model =
             model.colors
     in
     makeSlider
+        model
         "Header: "
         model.colors.header
         (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | header = new } })
@@ -428,6 +450,7 @@ footerSlider model =
             model.colors
     in
     makeSlider
+        model
         "Footer: "
         model.colors.footer
         (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | footer = new } })
@@ -440,6 +463,7 @@ quoteBlock1Slider model =
             model.colors
     in
     makeSlider
+        model
         "Quote Block Gradient 1: "
         model.colors.quoteBlock1
         (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | quoteBlock1 = new } })
@@ -452,6 +476,7 @@ quoteBlock2Slider model =
             model.colors
     in
     makeSlider
+        model
         "Quote Block Gradient 2: "
         model.colors.quoteBlock2
         (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | quoteBlock2 = new } })
@@ -464,13 +489,14 @@ inlineTitleBarSlider model =
             model.colors
     in
     makeSlider
+        model
         "Inline Title Bar: "
         model.colors.inlineTitleBar
         (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | inlineTitleBar = new } })
 
 
-makeSlider : String -> Float -> (Float -> Msg) -> Element Msg
-makeSlider label myValue myAction =
+makeSlider : Model -> String -> Float -> (Float -> Msg) -> Element Msg
+makeSlider model label myValue myAction =
     Input.slider
         [ Element.height (Element.px 30)
         , Element.behindContent
@@ -478,7 +504,7 @@ makeSlider label myValue myAction =
                 [ Element.width Element.fill
                 , Element.height (Element.px 2)
                 , Element.centerY
-                , Background.color (hsv 0 1 0.7)
+                , Background.color (hsv model.hue model.saturation model.colors.inlineTitleBar)
                 , Border.rounded 2
                 ]
                 Element.none
@@ -506,7 +532,7 @@ hueSlider model =
                 [ Element.width Element.fill
                 , Element.height (Element.px 2)
                 , Element.centerY
-                , Background.color (hsv 0 1 0.7)
+                , Background.color (hsv model.hue model.saturation model.colors.inlineTitleBar)
                 , Border.rounded 2
                 ]
                 Element.none
@@ -526,7 +552,21 @@ hueSlider model =
 
 
 colorsRecordString model =
-    "{" ++ "Header = " ++ String.fromFloat model.colors.header ++ ", Footer: " ++ String.fromFloat model.colors.footer
+    ", hue = "
+        ++ String.fromInt model.hue
+        ++ ", saturation = "
+        ++ String.fromFloat model.saturation
+        ++ ", colors = {header = "
+        ++ String.fromFloat model.colors.header
+        ++ ", footer = "
+        ++ String.fromFloat model.colors.footer
+        ++ ", quoteBlock1 = "
+        ++ String.fromFloat model.colors.quoteBlock1
+        ++ ", quoteBlock2 = "
+        ++ String.fromFloat model.colors.quoteBlock2
+        ++ ", inlineTitleBar = "
+        ++ String.fromFloat model.colors.inlineTitleBar
+        ++ "}"
 
 
 colorsRecordTextBox model =
