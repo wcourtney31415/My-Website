@@ -586,7 +586,7 @@ colorsRecordTextBox model =
 pictureOfMe : List (Attribute Msg) -> Element Msg
 pictureOfMe list =
     Element.image list
-        { src = "/src/Images/Example.jpg"
+        { src = "./Images/Example.jpg"
         , description = "Wesley Courtney"
         }
 
@@ -594,7 +594,7 @@ pictureOfMe list =
 elmLogo : List (Attribute Msg) -> Element Msg
 elmLogo list =
     Element.image list
-        { src = "/src/Images/ElmLogo.png"
+        { src = "./Images/ElmLogo.png"
         , description = "Elm  Logo"
         }
 
@@ -602,7 +602,7 @@ elmLogo list =
 javaLogo : List (Attribute Msg) -> Element Msg
 javaLogo list =
     Element.image list
-        { src = "/src/Images/JavaLogo.png"
+        { src = "./Images/JavaLogo.png"
         , description = "Java  Logo"
         }
 
@@ -610,7 +610,7 @@ javaLogo list =
 visualStudioLogo : List (Attribute Msg) -> Element Msg
 visualStudioLogo list =
     Element.image list
-        { src = "/src/Images/VSLogo.png"
+        { src = "./Images/VSLogo.png"
         , description = "Visual Studio  Logo"
         }
 
@@ -618,7 +618,7 @@ visualStudioLogo list =
 arduinoLogo : List (Attribute Msg) -> Element Msg
 arduinoLogo list =
     Element.image list
-        { src = "/src/Images/ArduinoLogo.png"
+        { src = "./Images/ArduinoLogo.png"
         , description = "Arduino Logo"
         }
 
@@ -626,7 +626,7 @@ arduinoLogo list =
 gameMakerLogo : List (Attribute Msg) -> Element Msg
 gameMakerLogo list =
     Element.image list
-        { src = "/src/Images/GameMakerLogo.png"
+        { src = "./Images/GameMakerLogo.png"
         , description = "Game Maker Logo"
         }
 
@@ -634,7 +634,7 @@ gameMakerLogo list =
 ivyTechLogo : List (Attribute Msg) -> Element Msg
 ivyTechLogo list =
     Element.image list
-        { src = "/src/Images/IVYTechLogo.png"
+        { src = "./Images/IVYTechLogo.png"
         , description = "IVY Tech Community College Logo"
         }
 
@@ -642,7 +642,7 @@ ivyTechLogo list =
 cPlusPlusLogo : List (Attribute Msg) -> Element Msg
 cPlusPlusLogo list =
     Element.image list
-        { src = "/src/Images/CPlusPlusLogo.png"
+        { src = "./Images/CPlusPlusLogo.png"
         , description = "C++ Logo"
         }
 
