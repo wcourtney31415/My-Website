@@ -60,7 +60,7 @@ type alias Model =
 
 init : Model
 init =
-    { selectedPage = ColorSelection
+    { selectedPage = LanguagePreferences
     , hue = 194
     , saturation = 0.73
     , colors =
@@ -192,10 +192,22 @@ navLinks model =
 
 navBarButton : Model -> String -> Page -> Element Msg
 navBarButton model label page =
+    let
+        underline =
+            if model.selectedPage == page then
+                [ Border.widthEach { bottom = 2, left = 0, right = 0, top = 0 } ]
+
+            else
+                []
+    in
     Input.button
-        [ alignRight
-        , Font.color white
-        ]
+        ([ alignRight
+         , Font.color white
+         , Border.color white
+         , paddingXY 0 4
+         ]
+            ++ underline
+        )
         { onPress = Just (NavBarButtonClicked { model | selectedPage = page })
         , label = text label
         }
@@ -212,7 +224,7 @@ navBarLink model label url =
         }
 
 
-quoteBlock : Model -> Element msg
+quoteBlock : Model -> Element Msg
 quoteBlock model =
     Element.paragraph
         [ Background.gradient
@@ -225,7 +237,7 @@ quoteBlock model =
         , Font.color white
         , Font.center
         ]
-        [ text quoteText
+        [ quoteElement model
         ]
 
 
@@ -251,8 +263,8 @@ leftBlock model img txt =
             ]
 
 
-rightBlock : Model -> Element Msg -> String -> Element Msg
-rightBlock model img txt =
+rightBlock : Model -> Element Msg -> Element Msg -> Element Msg
+rightBlock model img txtElement =
     backgroundWrapper colorRightBlock model <|
         Element.wrappedRow
             [ paddingXY 40 40
@@ -266,7 +278,7 @@ rightBlock model img txt =
                 , alignLeft
                 ]
                 [ Element.paragraph []
-                    [ text txt
+                    [ txtElement
                     ]
                 ]
             , img
@@ -321,9 +333,9 @@ pageLanguagePreferences model =
         [ quoteBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
-        , rightBlock model (elmLogo []) firstParagraphText
+        , rightBlock model (elmLogo []) (elmLangPrefElement model)
         , leftBlock model (javaLogo []) firstParagraphText
-        , rightBlock model (visualStudioLogo []) firstParagraphText
+        , rightBlock model (visualStudioLogo []) (elmLangPrefElement model)
         , leftBlock model (arduinoLogo []) firstParagraphText
         ]
 
@@ -396,9 +408,9 @@ pageColorSelection model =
         , sliderBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
-        , rightBlock model (elmLogo []) firstParagraphText
+        , rightBlock model (elmLogo []) (elmLangPrefElement model)
         , leftBlock model (javaLogo []) firstParagraphText
-        , rightBlock model (visualStudioLogo []) firstParagraphText
+        , rightBlock model (visualStudioLogo []) (elmLangPrefElement model)
         , leftBlock model (arduinoLogo []) firstParagraphText
         ]
 
@@ -700,14 +712,56 @@ firstParagraphText =
     declarationOfIndependence
 
 
+
+--</////////////////////////////////////////////////////////////////////////////>--
+
+
 quoteText : String
 quoteText =
     "\"Any fool can write code that a computer can understand. Good programmers write code that humans can understand.\"― Martin Fowler"
 
 
+quoteElement : Model -> Element Msg
+quoteElement model =
+    Element.el [] (text quoteText)
+
+
+
+--</////////////////////////////////////////////////////////////////////////////>--
+--</////////////////////////////////////////////////////////////////////////////>--
+
+
+elmLangPrefText =
+    "Elm is relatively new to me, however it has quickly become my favorite language for front end application development. It has also been my first real introduction to purely functional programming, which has me very interested in switching to the functional paradigm whenever possible/appropriate. This entire website is actually written in elm. During it's creation I was struggling to choose a color scheme for the site. To remedy this, I coded up a page for adjusting the colors on the fly. "
+
+
+colorSelectionLink model =
+    Input.button
+        [ Font.color obviousBlue ]
+        { onPress = Just (NavBarButtonClicked { model | selectedPage = ColorSelection })
+        , label = text "Click here to modify the site theme!"
+        }
+
+
+elmLangPrefElement model =
+    Element.paragraph
+        []
+        [ text elmLangPrefText
+        , colorSelectionLink model
+        ]
+
+
+
+--</////////////////////////////////////////////////////////////////////////////>--
+
+
 langPrefIntroText : String
 langPrefIntroText =
     declarationOfIndependence
+
+
+
+--</////////////////////////////////////////////////////////////////////////////>--
 
 
 textStoryBody : String
