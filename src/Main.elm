@@ -34,6 +34,20 @@ update msg model =
         AttemptedTextBoxChange ->
             model
 
+        SliderUpdated selectedColor hSOrV number ->
+            case selectedColor of
+                FavoriteColor ->
+                    case hSOrV of
+                        Hue ->
+                          
+                            {model | myColro}
+
+                        Saturation ->
+                            model
+
+                        Value ->
+                            model
+
 
 view : Model -> Html.Html Msg
 view model =
@@ -55,12 +69,13 @@ type alias Model =
         , quoteBlock2 : Float
         , inlineTitleBar : Float
         }
+    , favoriteColor : HsvColor
     }
 
 
 init : Model
 init =
-    { selectedPage = LanguagePreferences
+    { selectedPage = ColorSelection
     , hue = 194
     , saturation = 0.73
     , colors =
@@ -70,7 +85,29 @@ init =
         , quoteBlock2 = 0.73
         , inlineTitleBar = 0.91
         }
+    , favoriteColor =
+        { hue = 121
+        , saturation = 1
+        , value = 0.66
+        }
     }
+
+
+type alias HsvColor =
+    { hue : Int
+    , saturation : Float
+    , value : Float
+    }
+
+
+type Colors
+    = FavoriteColor
+
+
+type Hsv
+    = Hue
+    | Saturation
+    | Value
 
 
 type Page
@@ -85,6 +122,7 @@ type Msg
     | HueSliderMoved Model
     | ABrightnessSliderMoved Model
     | AttemptedTextBoxChange
+    | SliderUpdated Colors Hsv HsvColor
 
 
 
