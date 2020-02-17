@@ -37,16 +37,73 @@ update msg model =
         SliderUpdated selectedColor hSOrV number ->
             case selectedColor of
                 FavoriteColor ->
+                    let
+                        favoriteColor =
+                            model.favoriteColor
+                    in
                     case hSOrV of
                         Hue ->
-                          
-                            {model | myColro}
+                            let
+                                newColor =
+                                    { favoriteColor | hue = round number }
+                            in
+                            { model | favoriteColor = newColor }
 
                         Saturation ->
-                            model
+                            let
+                                newColor =
+                                    { favoriteColor | saturation = number }
+                            in
+                            { model | favoriteColor = newColor }
 
                         Value ->
-                            model
+                            let
+                                newColor =
+                                    { favoriteColor | value = number }
+                            in
+                            { model | favoriteColor = newColor }
+
+
+genericSlider : { color : Colors, hsOrV : Hsv, label : String, value : Float } -> Element Msg
+genericSlider record =
+    let
+        sliderProps =
+            if record.hsOrV == Hue then
+                { min = 0
+                , max = 360
+                , step = 1
+                }
+
+            else
+                { min = 0
+                , max = 1
+                , step = 0.01
+                }
+    in
+    Input.slider
+        [ Element.height (Element.px 30)
+        , Element.behindContent
+            (Element.el
+                [ Element.width Element.fill
+                , Element.height (Element.px 2)
+                , Element.centerY
+                , Background.color (hsv 270 1 1)
+                , Border.rounded 2
+                ]
+                Element.none
+            )
+        ]
+        { onChange = \new -> SliderUpdated record.color record.hsOrV new
+        , label =
+            Input.labelAbove []
+                (text record.label)
+        , min = sliderProps.min
+        , max = sliderProps.max
+        , step = Just sliderProps.step
+        , value = record.value
+        , thumb =
+            Input.defaultThumb
+        }
 
 
 view : Model -> Html.Html Msg
@@ -122,7 +179,7 @@ type Msg
     | HueSliderMoved Model
     | ABrightnessSliderMoved Model
     | AttemptedTextBoxChange
-    | SliderUpdated Colors Hsv HsvColor
+    | SliderUpdated Colors Hsv Float
 
 
 
@@ -450,6 +507,12 @@ pageColorSelection model =
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) (elmLangPrefElement model)
         , leftBlock model (arduinoLogo []) firstParagraphText
+        , genericSlider
+            { label = "Hue: "
+            , value = 250
+            , color = FavoriteColor
+            , hsOrV = Hue
+            }
         ]
 
 
