@@ -503,12 +503,112 @@ pageWelcome model =
         [ width fill
         , centerX
         ]
-        [ thing model
+        [ slideShow
         , quadGroup
+        , quoteBlock model
+        , anchorTexts1
+        , anchorTexts2
+        , anchorTexts1
         ]
 
 
-thing model =
+anchorTexts1 =
+    Element.column
+        [ width (fill |> maximum 1200)
+        , centerX
+        , paddingEach { top = 150, bottom = 150, right = 40, left = 40 }
+        , Background.gradient
+            { angle = pi
+            , steps =
+                [ hsv 136 0 1
+                , hsv 136 0 0.95
+                , hsv 136 0 0.97
+                ]
+            }
+        ]
+        [ Element.paragraph
+            [ Font.bold
+            , Font.size 30
+            , paddingEach { top = 0, bottom = 20, left = 0, right = 0 }
+            ]
+            [ text "Clean Code" ]
+        , Element.paragraph
+            [ Font.bold
+            , Font.size 20
+            ]
+            [ text "And here's why it matters!" ]
+        ]
+
+
+anchorTexts2 =
+    Element.column
+        [ width (fill |> maximum 1200)
+        , centerX
+        , paddingEach { top = 150, bottom = 150, right = 40, left = 40 }
+        , Background.gradient
+            { angle = pi
+            , steps =
+                [ hsv 136 0 1
+                , hsv 136 0 0.95
+                , hsv 136 0 0.97
+                ]
+            }
+        ]
+        [ Element.paragraph
+            [ Font.bold
+            , Font.size 30
+            , paddingEach { top = 0, bottom = 20, left = 0, right = 0 }
+            , Font.alignRight
+            ]
+            [ text "Clean Code" ]
+        , Element.paragraph
+            [ Font.bold
+            , Font.size 20
+            , Font.alignRight
+            ]
+            [ text "And here's why it matters!" ]
+        ]
+
+
+slide =
+    Element.row
+        [ width fill, padding 20 ]
+        [ elmLogo []
+        , Element.column
+            [ alignTop
+            , paddingEach { right = 0, left = 40, top = 30, bottom = 0 }
+            , width fill
+            , spacing 15
+            ]
+            [ Element.paragraph
+                [ Font.bold
+                , Font.size 23
+                ]
+                [ text "Lets put some text here and see what exactly this looks like." ]
+            , Element.paragraph
+                [ Font.size 20
+                ]
+                [ text "Maybe some subtext?" ]
+            , Element.paragraph
+                [ Font.size 18
+                ]
+                [ text "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here." ]
+            ]
+        ]
+
+
+slideShow : Element Msg
+slideShow =
+    let
+        col1 =
+            hsv 136 0 0.98
+
+        col2 =
+            hsv 136 0 0.9
+
+        col3 =
+            hsv 136 0 0.8
+    in
     Element.row
         [ centerX
         , width (fill |> maximum 1200)
@@ -517,8 +617,17 @@ thing model =
                 |> minimum 300
             )
         , Background.gradient
-            { angle = 0.4
-            , steps = [ hsv 217 0.7 0.26, hsv 217 0.16 0.29, hsv 215 0.2 0.41 ]
+            { angle = pi
+            , steps =
+                [ col1
+                , col2
+                , col2
+                , col2
+                , col2
+                , col2
+                , col2
+                , col3
+                ]
             }
         ]
         [ Element.column
@@ -531,7 +640,7 @@ thing model =
             , Border.shadow { blur = 15, color = hsv 270 0 0, offset = ( 3, 0 ), size = 0 }
             ]
             [ Element.el [ centerY, centerX ] (text "«") ]
-        , leftBlock model (elmLogo []) "elmLangPrefElement model"
+        , slide
         , Element.column
             [ paddingEach { left = 20, right = 20, bottom = 0, top = 0 }
             , Background.color (hsv 136 0 0.84)
@@ -565,7 +674,7 @@ quadBlock =
 quadGroup =
     Element.column
         [ spacing 40
-        , padding 20
+        , padding 40
         , width (fill |> maximum 1200)
         , centerX
         ]
