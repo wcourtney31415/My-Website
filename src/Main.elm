@@ -132,7 +132,7 @@ type alias Model =
 
 init : Model
 init =
-    { selectedPage = ColorSelection
+    { selectedPage = Welcome
     , hue = 194
     , saturation = 0.73
     , colors =
@@ -172,6 +172,7 @@ type Page
     | MyStory
     | HireMe
     | ColorSelection
+    | Welcome
 
 
 type Msg
@@ -414,6 +415,9 @@ selectedPage model =
         ColorSelection ->
             pageColorSelection model
 
+        Welcome ->
+            pageWelcome model
+
 
 
 {- ////////////           Page: Language Preferences       ////////////////// -}
@@ -491,6 +495,111 @@ pageHireMe model =
 
 
 {- ////////////                  Page: ColorSelection            ////////////////// -}
+
+
+pageWelcome : Model -> Element Msg
+pageWelcome model =
+    Element.column
+        [ width fill
+        , centerX
+        ]
+        [ thing model
+        , quadGroup
+        ]
+
+
+thing model =
+    Element.row
+        [ centerX
+        , width (fill |> maximum 1200)
+        , height
+            (fill
+                |> minimum 300
+            )
+        , Background.gradient
+            { angle = 0.4
+            , steps = [ hsv 217 0.7 0.26, hsv 217 0.16 0.29, hsv 215 0.2 0.41 ]
+            }
+        ]
+        [ Element.column
+            [ paddingEach { left = 20, right = 20, bottom = 0, top = 0 }
+            , Background.color (hsv 136 0 0.84)
+            , alpha 0.08
+            , height fill
+            , alignLeft
+            , width (fill |> maximum 30)
+            , Border.shadow { blur = 15, color = hsv 270 0 0, offset = ( 3, 0 ), size = 0 }
+            ]
+            [ Element.el [ centerY, centerX ] (text "«") ]
+        , leftBlock model (elmLogo []) "elmLangPrefElement model"
+        , Element.column
+            [ paddingEach { left = 20, right = 20, bottom = 0, top = 0 }
+            , Background.color (hsv 136 0 0.84)
+            , alpha 0.08
+            , height fill
+            , alignLeft
+            , width (fill |> maximum 30)
+            , Border.shadow { blur = 15, color = hsv 270 0 0, offset = ( -3, 0 ), size = 0 }
+            ]
+            [ Element.el [ centerY, centerX ] (text "»") ]
+        ]
+
+
+quadBlock =
+    Element.column
+        [ Background.color (hsv 136 0 0.94)
+        , Border.rounded 5
+        , Border.shadow { blur = 1.5, color = hsv 136 0 0.75, offset = ( 2, 2 ), size = 1 }
+        , paddingXY 20 20
+        , spacing 10
+        , width (fill |> maximum 350)
+        , centerX
+        ]
+        [ Element.el [ Font.size 25, Font.bold ] (text "Click Here for Details")
+        , text "Detail 1"
+        , text "Detail 2"
+        , text "Detail 3"
+        ]
+
+
+quadGroup =
+    Element.column
+        [ spacing 40
+        , padding 20
+        , width (fill |> maximum 1200)
+        , centerX
+        ]
+        [ Element.row
+            [ spacing 10
+            , width fill
+            ]
+            [ Element.column
+                [ width fill
+                , centerX
+                ]
+                [ quadBlock ]
+            , Element.column
+                [ width fill
+                , centerX
+                ]
+                [ quadBlock ]
+            ]
+        , Element.row
+            [ spacing 10
+            , width fill
+            ]
+            [ Element.column
+                [ width fill
+                , centerX
+                ]
+                [ quadBlock ]
+            , Element.column
+                [ width fill
+                , centerX
+                ]
+                [ quadBlock ]
+            ]
+        ]
 
 
 pageColorSelection : Model -> Element Msg
@@ -802,6 +911,16 @@ obviousGreen =
 obviousBlue : Color
 obviousBlue =
     rgb255 0 0 255
+
+
+obviousPurple : Color
+obviousPurple =
+    hsv 270 0.91 0.85
+
+
+obviousOrange : Color
+obviousOrange =
+    hsv 30 0.91 0.99
 
 
 
