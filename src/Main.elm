@@ -19,96 +19,38 @@ main =
         }
 
 
+init : Model
+init =
+    { selectedPage = Welcome
+    , header = { hue = 194, saturation = 0.73, value = 0.76 }
+    , footer = { hue = 194, saturation = 0.73, value = 0.91 }
+    , quoteBlock1 = { hue = 194, saturation = 0.73, value = 1 }
+    , quoteBlock2 = { hue = 194, saturation = 0.73, value = 0.73 }
+    , inlineTitleBar = { hue = 194, saturation = 0.73, value = 0.91 }
+    }
+
+
 update : Msg -> Model -> Model
 update msg model =
     case msg of
         NavBarButtonClicked myModel ->
             myModel
 
-        HueSliderMoved myModel ->
-            myModel
-
-        ABrightnessSliderMoved myModel ->
-            myModel
-
         AttemptedTextBoxChange ->
             model
-
-        SliderUpdated selectedColor hSOrV number ->
-            case selectedColor of
-                FavoriteColor ->
-                    let
-                        favoriteColor =
-                            model.favoriteColor
-                    in
-                    case hSOrV of
-                        Hue ->
-                            let
-                                newColor =
-                                    { favoriteColor | hue = round number }
-                            in
-                            { model | favoriteColor = newColor }
-
-                        Saturation ->
-                            let
-                                newColor =
-                                    { favoriteColor | saturation = number }
-                            in
-                            { model | favoriteColor = newColor }
-
-                        Value ->
-                            let
-                                newColor =
-                                    { favoriteColor | value = number }
-                            in
-                            { model | favoriteColor = newColor }
-
-
-genericSlider : { color : Colors, hsOrV : Hsv, label : String, value : Float } -> Element Msg
-genericSlider record =
-    let
-        sliderProps =
-            if record.hsOrV == Hue then
-                { min = 0
-                , max = 360
-                , step = 1
-                }
-
-            else
-                { min = 0
-                , max = 1
-                , step = 0.01
-                }
-    in
-    Input.slider
-        [ Element.height (Element.px 30)
-        , Element.behindContent
-            (Element.el
-                [ Element.width Element.fill
-                , Element.height (Element.px 2)
-                , Element.centerY
-                , Background.color (hsv 270 1 1)
-                , Border.rounded 2
-                ]
-                Element.none
-            )
-        ]
-        { onChange = \new -> SliderUpdated record.color record.hsOrV new
-        , label =
-            Input.labelAbove []
-                (text record.label)
-        , min = sliderProps.min
-        , max = sliderProps.max
-        , step = Just sliderProps.step
-        , value = record.value
-        , thumb =
-            Input.defaultThumb
-        }
 
 
 view : Model -> Html.Html Msg
 view model =
     website model
+
+
+hsvRecordToColor : HsvRecord -> Color
+hsvRecordToColor hsvRecord =
+    hsv
+        hsvRecord.hue
+        hsvRecord.saturation
+        hsvRecord.value
 
 
 
@@ -117,40 +59,15 @@ view model =
 
 type alias Model =
     { selectedPage : Page
-    , hue : Int
-    , saturation : Float
-    , colors :
-        { header : Float
-        , footer : Float
-        , quoteBlock1 : Float
-        , quoteBlock2 : Float
-        , inlineTitleBar : Float
-        }
-    , favoriteColor : HsvColor
+    , header : HsvRecord
+    , footer : HsvRecord
+    , quoteBlock1 : HsvRecord
+    , quoteBlock2 : HsvRecord
+    , inlineTitleBar : HsvRecord
     }
 
 
-init : Model
-init =
-    { selectedPage = Welcome
-    , hue = 194
-    , saturation = 0.73
-    , colors =
-        { header = 0.76
-        , footer = 0.91
-        , quoteBlock1 = 1
-        , quoteBlock2 = 0.73
-        , inlineTitleBar = 0.91
-        }
-    , favoriteColor =
-        { hue = 121
-        , saturation = 1
-        , value = 0.66
-        }
-    }
-
-
-type alias HsvColor =
+type alias HsvRecord =
     { hue : Int
     , saturation : Float
     , value : Float
@@ -177,10 +94,7 @@ type Page
 
 type Msg
     = NavBarButtonClicked Model
-    | HueSliderMoved Model
-    | ABrightnessSliderMoved Model
     | AttemptedTextBoxChange
-    | SliderUpdated Colors Hsv Float
 
 
 
@@ -226,7 +140,8 @@ myName model =
 header : Model -> Element Msg
 header model =
     Element.wrappedRow
-        [ Background.color (getColor model model.colors.header)
+        [ Background.color <|
+            hsvRecordToColor model.header
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -240,7 +155,8 @@ header model =
 footer : Model -> Element Msg
 footer model =
     Element.wrappedRow
-        [ Background.color (getColor model model.colors.footer)
+        [ Background.color <|
+            hsvRecordToColor model.footer
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -325,7 +241,10 @@ quoteBlock model =
     Element.paragraph
         [ Background.gradient
             { angle = pi
-            , steps = [ getColor model model.colors.quoteBlock1, getColor model model.colors.quoteBlock2 ]
+            , steps =
+                [ hsvRecordToColor model.quoteBlock1
+                , hsvRecordToColor model.quoteBlock2
+                ]
             }
         , padding 65
         , width fill
@@ -431,7 +350,9 @@ pageLanguagePreferences model =
         ]
         [ quoteBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
-        , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
+        , inlineTitleBar model
+            (hsvRecordToColor model.inlineTitleBar)
+            "Language Preferences"
         , rightBlock model (elmLogo []) (elmLangPrefElement model)
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) (elmLangPrefElement model)
@@ -449,7 +370,9 @@ pageMyStory model =
         [ width fill
         , centerX
         ]
-        [ inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Story"
+        [ inlineTitleBar model
+            (hsvRecordToColor model.inlineTitleBar)
+            "Story"
         , myStoryTextBody
         ]
 
@@ -487,7 +410,9 @@ pageHireMe model =
         [ width fill
         , centerX
         ]
-        [ inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Story"
+        [ inlineTitleBar model
+            (hsvRecordToColor model.inlineTitleBar)
+            "Story"
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , myStoryTextBody
         ]
@@ -720,20 +645,17 @@ pageColorSelection model =
         [ quoteBlock model
         , sliderBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
-        , inlineTitleBar model (getColor model model.colors.inlineTitleBar) "Language Preferences"
+        , inlineTitleBar model
+            (hsvRecordToColor model.inlineTitleBar)
+            "Language Preferences"
         , rightBlock model (elmLogo []) (elmLangPrefElement model)
         , leftBlock model (javaLogo []) firstParagraphText
         , rightBlock model (visualStudioLogo []) (elmLangPrefElement model)
         , leftBlock model (arduinoLogo []) firstParagraphText
-        , genericSlider
-            { label = "Hue: "
-            , value = 250
-            , color = FavoriteColor
-            , hsOrV = Hue
-            }
         ]
 
 
+sliderBlock : Model -> Element Msg
 sliderBlock model =
     Element.column
         [ width fill
@@ -741,168 +663,18 @@ sliderBlock model =
         , width (fill |> maximum 1200)
         , padding 100
         ]
-        [ hueSlider model
-        , saturationSlider model
-        , headerSlider model
-        , footerSlider model
-        , quoteBlock1Slider model
-        , quoteBlock2Slider model
-        , inlineTitleBarSlider model
-        , colorsRecordTextBox model
+        [ paletteRecordTextBox model
         ]
 
 
-saturationSlider : Model -> Element Msg
-saturationSlider model =
-    makeSlider
-        model
-        "Saturation: "
-        model.saturation
-        (\new -> ABrightnessSliderMoved { model | saturation = new })
+paletteRecordString model =
+    "Output record goes here."
 
 
-headerSlider : Model -> Element Msg
-headerSlider model =
-    let
-        colorsRecord =
-            model.colors
-    in
-    makeSlider
-        model
-        "Header: "
-        model.colors.header
-        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | header = new } })
-
-
-footerSlider : Model -> Element Msg
-footerSlider model =
-    let
-        colorsRecord =
-            model.colors
-    in
-    makeSlider
-        model
-        "Footer: "
-        model.colors.footer
-        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | footer = new } })
-
-
-quoteBlock1Slider : Model -> Element Msg
-quoteBlock1Slider model =
-    let
-        colorsRecord =
-            model.colors
-    in
-    makeSlider
-        model
-        "Quote Block Gradient 1: "
-        model.colors.quoteBlock1
-        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | quoteBlock1 = new } })
-
-
-quoteBlock2Slider : Model -> Element Msg
-quoteBlock2Slider model =
-    let
-        colorsRecord =
-            model.colors
-    in
-    makeSlider
-        model
-        "Quote Block Gradient 2: "
-        model.colors.quoteBlock2
-        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | quoteBlock2 = new } })
-
-
-inlineTitleBarSlider : Model -> Element Msg
-inlineTitleBarSlider model =
-    let
-        colorsRecord =
-            model.colors
-    in
-    makeSlider
-        model
-        "Inline Title Bar: "
-        model.colors.inlineTitleBar
-        (\new -> ABrightnessSliderMoved { model | colors = { colorsRecord | inlineTitleBar = new } })
-
-
-makeSlider : Model -> String -> Float -> (Float -> Msg) -> Element Msg
-makeSlider model label myValue myAction =
-    Input.slider
-        [ Element.height (Element.px 30)
-        , Element.behindContent
-            (Element.el
-                [ Element.width Element.fill
-                , Element.height (Element.px 2)
-                , Element.centerY
-                , Background.color (hsv model.hue model.saturation model.colors.inlineTitleBar)
-                , Border.rounded 2
-                ]
-                Element.none
-            )
-        ]
-        { onChange = myAction
-        , label =
-            Input.labelAbove []
-                (text (label ++ String.fromFloat myValue))
-        , min = 0
-        , max = 1
-        , step = Just 0.01
-        , value = myValue
-        , thumb =
-            Input.defaultThumb
-        }
-
-
-hueSlider : Model -> Element Msg
-hueSlider model =
-    Input.slider
-        [ Element.height (Element.px 30)
-        , Element.behindContent
-            (Element.el
-                [ Element.width Element.fill
-                , Element.height (Element.px 2)
-                , Element.centerY
-                , Background.color (hsv model.hue model.saturation model.colors.inlineTitleBar)
-                , Border.rounded 2
-                ]
-                Element.none
-            )
-        ]
-        { onChange = \new -> HueSliderMoved { model | hue = round new }
-        , label =
-            Input.labelAbove []
-                (text ("Hue: " ++ String.fromInt model.hue))
-        , min = 0
-        , max = 360
-        , step = Just 1
-        , value = toFloat model.hue
-        , thumb =
-            Input.defaultThumb
-        }
-
-
-colorsRecordString model =
-    ", hue = "
-        ++ String.fromInt model.hue
-        ++ ", saturation = "
-        ++ String.fromFloat model.saturation
-        ++ ", colors = {header = "
-        ++ String.fromFloat model.colors.header
-        ++ ", footer = "
-        ++ String.fromFloat model.colors.footer
-        ++ ", quoteBlock1 = "
-        ++ String.fromFloat model.colors.quoteBlock1
-        ++ ", quoteBlock2 = "
-        ++ String.fromFloat model.colors.quoteBlock2
-        ++ ", inlineTitleBar = "
-        ++ String.fromFloat model.colors.inlineTitleBar
-        ++ "}"
-
-
-colorsRecordTextBox model =
+paletteRecordTextBox : Model -> Element Msg
+paletteRecordTextBox model =
     Input.text []
-        { text = colorsRecordString model
+        { text = paletteRecordString model
         , label = Input.labelAbove [] (text "Color Record: ")
         , placeholder = Nothing
         , onChange = \new -> AttemptedTextBoxChange
@@ -980,11 +752,6 @@ cPlusPlusLogo list =
 
 
 {- /////////////////////        Resources: Colors        //////////////////// -}
-
-
-getColor : Model -> Float -> Color
-getColor model val =
-    hsv model.hue model.saturation val
 
 
 colorLeftBlock : Color
