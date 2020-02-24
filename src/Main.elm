@@ -39,6 +39,9 @@ update msg model =
         AttemptedTextBoxChange ->
             model
 
+        SliderMoved new ->
+            model
+
 
 view : Model -> Html.Html Msg
 view model =
@@ -78,7 +81,7 @@ type Colors
     = FavoriteColor
 
 
-type Hsv
+type ColorProperty
     = Hue
     | Saturation
     | Value
@@ -95,6 +98,7 @@ type Page
 type Msg
     = NavBarButtonClicked Model
     | AttemptedTextBoxChange
+    | SliderMoved Float
 
 
 
@@ -665,6 +669,74 @@ sliderBlock model =
         ]
         [ paletteRecordTextBox model
         ]
+
+
+type alias SliderConfiguration =
+    { text : String, color : HsvRecord, colorProperty : ColorProperty }
+
+
+sliderPropertyRecord :
+    SliderConfiguration
+    ->
+        { label : Input.Label msg
+        , max : Float
+        , min : Float
+        , onChange : Float -> Msg
+        , step : Maybe Float
+        , thumb : Input.Thumb
+        , value : Float
+        }
+sliderPropertyRecord sliderConfiguration =
+    let
+        sliderRecord =
+            { onChange = \new -> SliderMoved new
+            , label =
+                Input.labelAbove []
+                    (text sliderConfiguration.text)
+            , min = 0
+            , max = 359
+            , step = Just 1
+            , value = toFloat sliderConfiguration.color.hue
+            , thumb =
+                Input.defaultThumb
+            }
+    in
+    case sliderConfiguration.colorProperty of
+        Hue ->
+            sliderRecord
+
+        Saturation ->
+            { sliderRecord
+                | max = 1
+                , step = Just 0.01
+                , value = sliderConfiguration.color.saturation
+            }
+
+        Value ->
+            { sliderRecord
+                | max = 1
+                , step = Just 0.01
+                , value = sliderConfiguration.color.value
+            }
+
+
+dynamicSlider sliderConfiguration =
+    Input.slider
+        [ Element.height (Element.px 30)
+        , Element.behindContent
+            (Element.el
+                [ Element.width Element.fill
+                , Element.height (Element.px 2)
+                , Element.centerY
+                , Background.color <| hsvRecordToColor sliderConfiguration.color
+                , Border.rounded 2
+                ]
+                Element.none
+            )
+        ]
+        (sliderPropertyRecord
+            sliderConfiguration
+        )
 
 
 paletteRecordString model =
