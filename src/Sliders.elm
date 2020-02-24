@@ -33,7 +33,7 @@ chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
             { onChange = \new -> NewSliderMoved { currentColorRecord | hue = round new } colorToUpdate
             , label =
                 Input.labelAbove []
-                    (text "Hue: ")
+                    (text <| "Hue: " ++ String.fromInt currentColorRecord.hue)
             , min = 0
             , max = 359
             , step = Just 1
@@ -46,7 +46,7 @@ chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
             { onChange = \new -> NewSliderMoved { currentColorRecord | saturation = new } colorToUpdate
             , label =
                 Input.labelAbove []
-                    (text "Saturation: ")
+                    (text <| "Saturation: " ++ String.fromFloat currentColorRecord.saturation)
             , min = 0
             , max = 1
             , step = Just 0.01
@@ -59,7 +59,7 @@ chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
             { onChange = \new -> NewSliderMoved { currentColorRecord | value = new } colorToUpdate
             , label =
                 Input.labelAbove []
-                    (text "Value: ")
+                    (text <| "Value: " ++ String.fromFloat currentColorRecord.value)
             , min = 0
             , max = 1
             , step = Just 0.01
@@ -110,7 +110,21 @@ dynamicSliders label colorToUpdate currentColorRecord =
             [ width fill
             , spacing 20
             ]
-            [ dynamicSlider colorToUpdate currentColorRecord Hue
+            [ Element.el
+                [ height
+                    (fill
+                        |> maximum 50
+                        |> minimum 50
+                    )
+                , width
+                    (fill
+                        |> maximum 100
+                        |> minimum 100
+                    )
+                , Background.color <| hsvRecordToColor currentColorRecord
+                ]
+                (text "")
+            , dynamicSlider colorToUpdate currentColorRecord Hue
             , dynamicSlider colorToUpdate currentColorRecord Saturation
             , dynamicSlider colorToUpdate currentColorRecord Value
             ]
