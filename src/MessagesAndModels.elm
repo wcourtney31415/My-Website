@@ -19,7 +19,11 @@ type alias HsvRecord =
 
 
 type Colors
-    = FavoriteColor
+    = Header
+    | QuoteBlock1
+    | QuoteBlock2
+    | InlineTitleBar
+    | Footer
 
 
 type ColorProperty
@@ -40,3 +44,4 @@ type Msg
     = NavBarButtonClicked Model
     | AttemptedTextBoxChange
     | SliderMoved Model
+    | NewSliderMoved HsvRecord Colors

@@ -44,6 +44,23 @@ update msg model =
         SliderMoved newModel ->
             newModel
 
+        NewSliderMoved hsvRecord colorToBeUpdated ->
+            case colorToBeUpdated of
+                Header ->
+                    { model | header = hsvRecord }
+
+                QuoteBlock1 ->
+                    { model | quoteBlock1 = hsvRecord }
+
+                QuoteBlock2 ->
+                    { model | quoteBlock2 = hsvRecord }
+
+                InlineTitleBar ->
+                    { model | inlineTitleBar = hsvRecord }
+
+                Footer ->
+                    { model | footer = hsvRecord }
+
 
 view : Model -> Html.Html Msg
 view model =
@@ -59,7 +76,6 @@ hsvRecordToColor hsvRecord =
 
 
 
-{- /////////////////////        Model and Messages       //////////////////// -}
 {- /////////////////////        Visual Components        //////////////////// -}
 {- /////////////////////        Website Itself           //////////////////// -}
 
@@ -632,7 +648,77 @@ sliderBlock model =
         , inlineTitleBarSliders model
         , footerSliders model
         , paletteRecordTextBox model
+        , dynamicSlider Footer model.footer Saturation
         ]
+
+
+
+-----------------------------------------------------------------
+
+
+chooseRecord colorToUpdate colorRecord colorProperty =
+    case colorProperty of
+        Hue ->
+            { onChange = \new -> NewSliderMoved { colorRecord | hue = round new } colorToUpdate
+            , label =
+                Input.labelAbove []
+                    (text "Hue: ")
+            , min = 0
+            , max = 359
+            , step = Just 1
+            , value = toFloat colorRecord.hue
+            , thumb =
+                Input.defaultThumb
+            }
+
+        Saturation ->
+            { onChange = \new -> NewSliderMoved { colorRecord | saturation = new } colorToUpdate
+            , label =
+                Input.labelAbove []
+                    (text "Saturation: ")
+            , min = 0
+            , max = 1
+            , step = Just 0.01
+            , value = colorRecord.saturation
+            , thumb =
+                Input.defaultThumb
+            }
+
+        Value ->
+            { onChange = \new -> NewSliderMoved { colorRecord | value = new } colorToUpdate
+            , label =
+                Input.labelAbove []
+                    (text "Value: ")
+            , min = 0
+            , max = 1
+            , step = Just 0.01
+            , value = colorRecord.value
+            , thumb =
+                Input.defaultThumb
+            }
+
+
+dynamicSlider : Colors -> HsvRecord -> ColorProperty -> Element Msg
+dynamicSlider colorToUpdate colorRecord colorProperty =
+    Input.slider
+        [ Element.height (Element.px 30)
+        , Element.behindContent
+            (Element.el
+                [ Element.width Element.fill
+                , Element.height (Element.px 2)
+                , Element.centerY
+                , Background.color <| hsvRecordToColor colorRecord
+                , Border.rounded 2
+                ]
+                Element.none
+            )
+        ]
+    <|
+        chooseRecord colorToUpdate colorRecord colorProperty
+
+
+
+-----------------------------------------------------------------
 
 
 paletteRecordString model =
