@@ -4406,14 +4406,14 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
-var $author$project$MessagesAndModels$Welcome = {$: 'Welcome'};
+var $author$project$MessagesAndModels$ColorSelection = {$: 'ColorSelection'};
 var $author$project$Main$init = {
 	footer: {hue: 194, saturation: 0.73, value: 0.91},
 	header: {hue: 194, saturation: 0.73, value: 0.76},
 	inlineTitleBar: {hue: 194, saturation: 0.73, value: 0.91},
 	quoteBlock1: {hue: 194, saturation: 0.73, value: 1},
 	quoteBlock2: {hue: 194, saturation: 0.73, value: 0.73},
-	selectedPage: $author$project$MessagesAndModels$Welcome
+	selectedPage: $author$project$MessagesAndModels$ColorSelection
 };
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
@@ -5233,9 +5233,34 @@ var $author$project$Main$update = F2(
 				return myModel;
 			case 'AttemptedTextBoxChange':
 				return model;
-			default:
+			case 'SliderMoved':
 				var newModel = msg.a;
 				return newModel;
+			default:
+				var hsvRecord = msg.a;
+				var colorToBeUpdated = msg.b;
+				switch (colorToBeUpdated.$) {
+					case 'Header':
+						return _Utils_update(
+							model,
+							{header: hsvRecord});
+					case 'QuoteBlock1':
+						return _Utils_update(
+							model,
+							{quoteBlock1: hsvRecord});
+					case 'QuoteBlock2':
+						return _Utils_update(
+							model,
+							{quoteBlock2: hsvRecord});
+					case 'InlineTitleBar':
+						return _Utils_update(
+							model,
+							{inlineTitleBar: hsvRecord});
+					default:
+						return _Utils_update(
+							model,
+							{footer: hsvRecord});
+				}
 		}
 	});
 var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
@@ -11954,7 +11979,6 @@ var $author$project$Main$arduinoLogo = function (list) {
 		list,
 		{description: 'Arduino Logo', src: './Images/ArduinoLogo.png'});
 };
-var $author$project$MessagesAndModels$ColorSelection = {$: 'ColorSelection'};
 var $author$project$Main$obviousBlue = A3($mdgriffith$elm_ui$Element$rgb255, 0, 0, 255);
 var $author$project$Main$colorSelectionLink = function (model) {
 	return A2(
@@ -12254,9 +12278,14 @@ var $author$project$Main$rightBlock = F3(
 						img
 					])));
 	});
-var $author$project$MessagesAndModels$SliderMoved = function (a) {
-	return {$: 'SliderMoved', a: a};
-};
+var $author$project$MessagesAndModels$Footer = {$: 'Footer'};
+var $author$project$MessagesAndModels$Header = {$: 'Header'};
+var $author$project$MessagesAndModels$InlineTitleBar = {$: 'InlineTitleBar'};
+var $author$project$MessagesAndModels$QuoteBlock1 = {$: 'QuoteBlock1'};
+var $author$project$MessagesAndModels$QuoteBlock2 = {$: 'QuoteBlock2'};
+var $author$project$MessagesAndModels$Hue = {$: 'Hue'};
+var $author$project$MessagesAndModels$Saturation = {$: 'Saturation'};
+var $author$project$MessagesAndModels$Value = {$: 'Value'};
 var $mdgriffith$elm_ui$Internal$Model$Behind = {$: 'Behind'};
 var $mdgriffith$elm_ui$Internal$Model$Nearby = F2(
 	function (a, b) {
@@ -12278,6 +12307,10 @@ var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
 };
 var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
 var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
+var $author$project$MessagesAndModels$NewSliderMoved = F2(
+	function (a, b) {
+		return {$: 'NewSliderMoved', a: a, b: b};
+	});
 var $mdgriffith$elm_ui$Element$Input$Thumb = function (a) {
 	return {$: 'Thumb', a: a};
 };
@@ -12314,15 +12347,82 @@ var $mdgriffith$elm_ui$Element$Input$defaultThumb = $mdgriffith$elm_ui$Element$I
 			$mdgriffith$elm_ui$Element$Background$color(
 			A3($mdgriffith$elm_ui$Element$rgb, 1, 1, 1))
 		]));
-var $author$project$Sliders$hsvRecordToColor = function (hsvRecord) {
-	return A3($author$project$HsvToRgb$hsv, hsvRecord.hue, hsvRecord.saturation, hsvRecord.value);
-};
 var $mdgriffith$elm_ui$Element$Input$Above = {$: 'Above'};
 var $mdgriffith$elm_ui$Element$Input$Label = F3(
 	function (a, b, c) {
 		return {$: 'Label', a: a, b: b, c: c};
 	});
 var $mdgriffith$elm_ui$Element$Input$labelAbove = $mdgriffith$elm_ui$Element$Input$Label($mdgriffith$elm_ui$Element$Input$Above);
+var $author$project$Sliders$chooseRecord = F3(
+	function (colorToUpdate, currentColorRecord, propertyToUpdate) {
+		switch (propertyToUpdate.$) {
+			case 'Hue':
+				return {
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_Nil,
+						$mdgriffith$elm_ui$Element$text('Hue: ')),
+					max: 359,
+					min: 0,
+					onChange: function (_new) {
+						return A2(
+							$author$project$MessagesAndModels$NewSliderMoved,
+							_Utils_update(
+								currentColorRecord,
+								{
+									hue: $elm$core$Basics$round(_new)
+								}),
+							colorToUpdate);
+					},
+					step: $elm$core$Maybe$Just(1),
+					thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
+					value: currentColorRecord.hue
+				};
+			case 'Saturation':
+				return {
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_Nil,
+						$mdgriffith$elm_ui$Element$text('Saturation: ')),
+					max: 1,
+					min: 0,
+					onChange: function (_new) {
+						return A2(
+							$author$project$MessagesAndModels$NewSliderMoved,
+							_Utils_update(
+								currentColorRecord,
+								{saturation: _new}),
+							colorToUpdate);
+					},
+					step: $elm$core$Maybe$Just(0.01),
+					thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
+					value: currentColorRecord.saturation
+				};
+			default:
+				return {
+					label: A2(
+						$mdgriffith$elm_ui$Element$Input$labelAbove,
+						_List_Nil,
+						$mdgriffith$elm_ui$Element$text('Value: ')),
+					max: 1,
+					min: 0,
+					onChange: function (_new) {
+						return A2(
+							$author$project$MessagesAndModels$NewSliderMoved,
+							_Utils_update(
+								currentColorRecord,
+								{value: _new}),
+							colorToUpdate);
+					},
+					step: $elm$core$Maybe$Just(0.01),
+					thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
+					value: currentColorRecord.value
+				};
+		}
+	});
+var $author$project$Sliders$hsvRecordToColor = function (hsvRecord) {
+	return A3($author$project$HsvToRgb$hsv, hsvRecord.hue, hsvRecord.saturation, hsvRecord.value);
+};
 var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
 var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
 var $mdgriffith$elm_ui$Internal$Flag$active = $mdgriffith$elm_ui$Internal$Flag$flag(32);
@@ -12934,517 +13034,66 @@ var $mdgriffith$elm_ui$Element$Input$slider = F2(
 						$mdgriffith$elm_ui$Element$none)
 					])));
 	});
-var $author$project$Sliders$footerHueSlider = function (model) {
-	var myColor = model.footer;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Hue: ' + $elm$core$String$fromInt(myColor.hue))),
-			max: 359,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{
-						hue: $elm$core$Basics$round(_new)
-					});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{footer: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(1),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.footer.hue
-		});
-};
-var $author$project$Sliders$footerSaturationSlider = function (model) {
-	var myColor = model.footer;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Saturation: ' + $elm$core$String$fromFloat(myColor.saturation))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{saturation: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{footer: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.footer.saturation
-		});
-};
-var $author$project$Sliders$footerValueSlider = function (model) {
-	var myColor = model.footer;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Value: ' + $elm$core$String$fromFloat(myColor.value))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{value: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{footer: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.footer.value
-		});
-};
+var $author$project$Sliders$dynamicSlider = F3(
+	function (colorToUpdate, currentColorRecord, propertyToUpdate) {
+		return A2(
+			$mdgriffith$elm_ui$Element$Input$slider,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$height(
+					$mdgriffith$elm_ui$Element$px(30)),
+					$mdgriffith$elm_ui$Element$behindContent(
+					A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+								$mdgriffith$elm_ui$Element$height(
+								$mdgriffith$elm_ui$Element$px(2)),
+								$mdgriffith$elm_ui$Element$centerY,
+								$mdgriffith$elm_ui$Element$Background$color(
+								$author$project$Sliders$hsvRecordToColor(currentColorRecord)),
+								$mdgriffith$elm_ui$Element$Border$rounded(2)
+							]),
+						$mdgriffith$elm_ui$Element$none))
+				]),
+			A3($author$project$Sliders$chooseRecord, colorToUpdate, currentColorRecord, propertyToUpdate));
+	});
 var $author$project$Sliders$lightGrey = A3($author$project$HsvToRgb$hsv, 1, 0, 0.92);
-var $author$project$Sliders$footerSliders = function (model) {
-	return A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$spacing(10),
-				$mdgriffith$elm_ui$Element$Border$rounded(2),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Sliders$lightGrey),
-				$mdgriffith$elm_ui$Element$padding(10)
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[$mdgriffith$elm_ui$Element$Font$bold, $mdgriffith$elm_ui$Element$centerX]),
-				$mdgriffith$elm_ui$Element$text('footer')),
-				A2(
-				$mdgriffith$elm_ui$Element$row,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$spacing(20)
-					]),
-				_List_fromArray(
-					[
-						$author$project$Sliders$footerHueSlider(model),
-						$author$project$Sliders$footerSaturationSlider(model),
-						$author$project$Sliders$footerValueSlider(model)
-					]))
-			]));
-};
-var $author$project$Sliders$headerHueSlider = function (model) {
-	var myColor = model.header;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
+var $author$project$Sliders$dynamicSliders = F3(
+	function (label, colorToUpdate, currentColorRecord) {
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$spacing(10),
+					$mdgriffith$elm_ui$Element$Border$rounded(2),
+					$mdgriffith$elm_ui$Element$Background$color($author$project$Sliders$lightGrey),
+					$mdgriffith$elm_ui$Element$padding(10)
+				]),
+			_List_fromArray(
+				[
+					A2(
 					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$Font$bold, $mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text(label)),
+					A2(
+					$mdgriffith$elm_ui$Element$row,
 					_List_fromArray(
 						[
 							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
+							$mdgriffith$elm_ui$Element$spacing(20)
 						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Hue: ' + $elm$core$String$fromInt(myColor.hue))),
-			max: 359,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{
-						hue: $elm$core$Basics$round(_new)
-					});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{header: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(1),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.header.hue
-		});
-};
-var $author$project$Sliders$headerSaturationSlider = function (model) {
-	var myColor = model.header;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Saturation: ' + $elm$core$String$fromFloat(myColor.saturation))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{saturation: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{header: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.header.saturation
-		});
-};
-var $author$project$Sliders$headerValueSlider = function (model) {
-	var myColor = model.header;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Value: ' + $elm$core$String$fromFloat(myColor.value))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{value: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{header: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.header.value
-		});
-};
-var $author$project$Sliders$headerSliders = function (model) {
-	return A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$spacing(10),
-				$mdgriffith$elm_ui$Element$Border$rounded(2),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Sliders$lightGrey),
-				$mdgriffith$elm_ui$Element$padding(10)
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[$mdgriffith$elm_ui$Element$Font$bold, $mdgriffith$elm_ui$Element$centerX]),
-				$mdgriffith$elm_ui$Element$text('Header')),
-				A2(
-				$mdgriffith$elm_ui$Element$row,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$spacing(20)
-					]),
-				_List_fromArray(
-					[
-						$author$project$Sliders$headerHueSlider(model),
-						$author$project$Sliders$headerSaturationSlider(model),
-						$author$project$Sliders$headerValueSlider(model)
-					]))
-			]));
-};
-var $author$project$Sliders$inlineTitleBarHueSlider = function (model) {
-	var myColor = model.inlineTitleBar;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Hue: ' + $elm$core$String$fromInt(myColor.hue))),
-			max: 359,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{
-						hue: $elm$core$Basics$round(_new)
-					});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{inlineTitleBar: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(1),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.inlineTitleBar.hue
-		});
-};
-var $author$project$Sliders$inlineTitleBarSaturationSlider = function (model) {
-	var myColor = model.inlineTitleBar;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Saturation: ' + $elm$core$String$fromFloat(myColor.saturation))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{saturation: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{inlineTitleBar: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.inlineTitleBar.saturation
-		});
-};
-var $author$project$Sliders$inlineTitleBarValueSlider = function (model) {
-	var myColor = model.inlineTitleBar;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Value: ' + $elm$core$String$fromFloat(myColor.value))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{value: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{inlineTitleBar: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.inlineTitleBar.value
-		});
-};
-var $author$project$Sliders$inlineTitleBarSliders = function (model) {
-	return A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$spacing(10),
-				$mdgriffith$elm_ui$Element$Border$rounded(2),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Sliders$lightGrey),
-				$mdgriffith$elm_ui$Element$padding(10)
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[$mdgriffith$elm_ui$Element$Font$bold, $mdgriffith$elm_ui$Element$centerX]),
-				$mdgriffith$elm_ui$Element$text('inlineTitleBar')),
-				A2(
-				$mdgriffith$elm_ui$Element$row,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$spacing(20)
-					]),
-				_List_fromArray(
-					[
-						$author$project$Sliders$inlineTitleBarHueSlider(model),
-						$author$project$Sliders$inlineTitleBarSaturationSlider(model),
-						$author$project$Sliders$inlineTitleBarValueSlider(model)
-					]))
-			]));
-};
+							A3($author$project$Sliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$MessagesAndModels$Hue),
+							A3($author$project$Sliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$MessagesAndModels$Saturation),
+							A3($author$project$Sliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$MessagesAndModels$Value)
+						]))
+				]));
+	});
 var $author$project$MessagesAndModels$AttemptedTextBoxChange = {$: 'AttemptedTextBoxChange'};
 var $author$project$Main$paletteRecordString = function (model) {
 	return 'Output record goes here.';
@@ -14150,346 +13799,6 @@ var $author$project$Main$paletteRecordTextBox = function (model) {
 			text: $author$project$Main$paletteRecordString(model)
 		});
 };
-var $author$project$Sliders$quoteBlock1HueSlider = function (model) {
-	var myColor = model.quoteBlock1;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Hue: ' + $elm$core$String$fromInt(myColor.hue))),
-			max: 359,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{
-						hue: $elm$core$Basics$round(_new)
-					});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{quoteBlock1: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(1),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.quoteBlock1.hue
-		});
-};
-var $author$project$Sliders$quoteBlock1SaturationSlider = function (model) {
-	var myColor = model.quoteBlock1;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Saturation: ' + $elm$core$String$fromFloat(myColor.saturation))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{saturation: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{quoteBlock1: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.quoteBlock1.saturation
-		});
-};
-var $author$project$Sliders$quoteBlock1ValueSlider = function (model) {
-	var myColor = model.quoteBlock1;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Value: ' + $elm$core$String$fromFloat(myColor.value))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{value: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{quoteBlock1: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.quoteBlock1.value
-		});
-};
-var $author$project$Sliders$quoteBlock1Sliders = function (model) {
-	return A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$spacing(10),
-				$mdgriffith$elm_ui$Element$Border$rounded(2),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Sliders$lightGrey),
-				$mdgriffith$elm_ui$Element$padding(10)
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[$mdgriffith$elm_ui$Element$Font$bold, $mdgriffith$elm_ui$Element$centerX]),
-				$mdgriffith$elm_ui$Element$text('quoteBlock1')),
-				A2(
-				$mdgriffith$elm_ui$Element$row,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$spacing(20)
-					]),
-				_List_fromArray(
-					[
-						$author$project$Sliders$quoteBlock1HueSlider(model),
-						$author$project$Sliders$quoteBlock1SaturationSlider(model),
-						$author$project$Sliders$quoteBlock1ValueSlider(model)
-					]))
-			]));
-};
-var $author$project$Sliders$quoteBlock2HueSlider = function (model) {
-	var myColor = model.quoteBlock2;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Hue: ' + $elm$core$String$fromInt(myColor.hue))),
-			max: 359,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{
-						hue: $elm$core$Basics$round(_new)
-					});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{quoteBlock2: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(1),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.quoteBlock2.hue
-		});
-};
-var $author$project$Sliders$quoteBlock2SaturationSlider = function (model) {
-	var myColor = model.quoteBlock2;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Saturation: ' + $elm$core$String$fromFloat(myColor.saturation))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{saturation: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{quoteBlock2: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.quoteBlock2.saturation
-		});
-};
-var $author$project$Sliders$quoteBlock2ValueSlider = function (model) {
-	var myColor = model.quoteBlock2;
-	return A2(
-		$mdgriffith$elm_ui$Element$Input$slider,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$height(
-				$mdgriffith$elm_ui$Element$px(30)),
-				$mdgriffith$elm_ui$Element$behindContent(
-				A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$height(
-							$mdgriffith$elm_ui$Element$px(2)),
-							$mdgriffith$elm_ui$Element$centerY,
-							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(myColor)),
-							$mdgriffith$elm_ui$Element$Border$rounded(2)
-						]),
-					$mdgriffith$elm_ui$Element$none))
-			]),
-		{
-			label: A2(
-				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text(
-					'Value: ' + $elm$core$String$fromFloat(myColor.value))),
-			max: 1,
-			min: 0,
-			onChange: function (_new) {
-				var updatedColor = _Utils_update(
-					myColor,
-					{value: _new});
-				return $author$project$MessagesAndModels$SliderMoved(
-					_Utils_update(
-						model,
-						{quoteBlock2: updatedColor}));
-			},
-			step: $elm$core$Maybe$Just(0.01),
-			thumb: $mdgriffith$elm_ui$Element$Input$defaultThumb,
-			value: model.quoteBlock2.value
-		});
-};
-var $author$project$Sliders$quoteBlock2Sliders = function (model) {
-	return A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$spacing(10),
-				$mdgriffith$elm_ui$Element$Border$rounded(2),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Sliders$lightGrey),
-				$mdgriffith$elm_ui$Element$padding(10)
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[$mdgriffith$elm_ui$Element$Font$bold, $mdgriffith$elm_ui$Element$centerX]),
-				$mdgriffith$elm_ui$Element$text('quoteBlock2')),
-				A2(
-				$mdgriffith$elm_ui$Element$row,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$spacing(20)
-					]),
-				_List_fromArray(
-					[
-						$author$project$Sliders$quoteBlock2HueSlider(model),
-						$author$project$Sliders$quoteBlock2SaturationSlider(model),
-						$author$project$Sliders$quoteBlock2ValueSlider(model)
-					]))
-			]));
-};
 var $author$project$Main$sliderBlock = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
@@ -14504,11 +13813,11 @@ var $author$project$Main$sliderBlock = function (model) {
 			]),
 		_List_fromArray(
 			[
-				$author$project$Sliders$headerSliders(model),
-				$author$project$Sliders$quoteBlock1Sliders(model),
-				$author$project$Sliders$quoteBlock2Sliders(model),
-				$author$project$Sliders$inlineTitleBarSliders(model),
-				$author$project$Sliders$footerSliders(model),
+				A3($author$project$Sliders$dynamicSliders, 'Header: ', $author$project$MessagesAndModels$Header, model.header),
+				A3($author$project$Sliders$dynamicSliders, 'Quote Block 1: ', $author$project$MessagesAndModels$QuoteBlock1, model.quoteBlock1),
+				A3($author$project$Sliders$dynamicSliders, 'Quote Block 2: ', $author$project$MessagesAndModels$QuoteBlock2, model.quoteBlock2),
+				A3($author$project$Sliders$dynamicSliders, 'Inline Title Bar: ', $author$project$MessagesAndModels$InlineTitleBar, model.inlineTitleBar),
+				A3($author$project$Sliders$dynamicSliders, 'Footer: ', $author$project$MessagesAndModels$Footer, model.footer),
 				$author$project$Main$paletteRecordTextBox(model)
 			]));
 };
