@@ -642,83 +642,13 @@ sliderBlock model =
         , padding 100
         , spacing 5
         ]
-        [ headerSliders model
-        , quoteBlock1Sliders model
-        , quoteBlock2Sliders model
-        , inlineTitleBarSliders model
-        , footerSliders model
+        [ dynamicSliders "Header: " Header model.header
+        , dynamicSliders "Quote Block 1: " QuoteBlock1 model.quoteBlock1
+        , dynamicSliders "Quote Block 2: " QuoteBlock2 model.quoteBlock2
+        , dynamicSliders "Inline Title Bar: " InlineTitleBar model.inlineTitleBar
+        , dynamicSliders "Footer: " Footer model.footer
         , paletteRecordTextBox model
-        , dynamicSlider Footer model.footer Saturation
         ]
-
-
-
------------------------------------------------------------------
-
-
-chooseRecord colorToUpdate colorRecord colorProperty =
-    case colorProperty of
-        Hue ->
-            { onChange = \new -> NewSliderMoved { colorRecord | hue = round new } colorToUpdate
-            , label =
-                Input.labelAbove []
-                    (text "Hue: ")
-            , min = 0
-            , max = 359
-            , step = Just 1
-            , value = toFloat colorRecord.hue
-            , thumb =
-                Input.defaultThumb
-            }
-
-        Saturation ->
-            { onChange = \new -> NewSliderMoved { colorRecord | saturation = new } colorToUpdate
-            , label =
-                Input.labelAbove []
-                    (text "Saturation: ")
-            , min = 0
-            , max = 1
-            , step = Just 0.01
-            , value = colorRecord.saturation
-            , thumb =
-                Input.defaultThumb
-            }
-
-        Value ->
-            { onChange = \new -> NewSliderMoved { colorRecord | value = new } colorToUpdate
-            , label =
-                Input.labelAbove []
-                    (text "Value: ")
-            , min = 0
-            , max = 1
-            , step = Just 0.01
-            , value = colorRecord.value
-            , thumb =
-                Input.defaultThumb
-            }
-
-
-dynamicSlider : Colors -> HsvRecord -> ColorProperty -> Element Msg
-dynamicSlider colorToUpdate colorRecord colorProperty =
-    Input.slider
-        [ Element.height (Element.px 30)
-        , Element.behindContent
-            (Element.el
-                [ Element.width Element.fill
-                , Element.height (Element.px 2)
-                , Element.centerY
-                , Background.color <| hsvRecordToColor colorRecord
-                , Border.rounded 2
-                ]
-                Element.none
-            )
-        ]
-    <|
-        chooseRecord colorToUpdate colorRecord colorProperty
-
-
-
------------------------------------------------------------------
 
 
 paletteRecordString model =
