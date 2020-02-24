@@ -8,6 +8,8 @@ import Element.Font as Font
 import Element.Input as Input
 import HsvToRgb exposing (..)
 import Html
+import MessagesAndModels exposing (..)
+import Sliders exposing (..)
 
 
 main : Program () Model Msg
@@ -21,7 +23,7 @@ main =
 
 init : Model
 init =
-    { selectedPage = Welcome
+    { selectedPage = ColorSelection
     , header = { hue = 194, saturation = 0.73, value = 0.76 }
     , footer = { hue = 194, saturation = 0.73, value = 0.91 }
     , quoteBlock1 = { hue = 194, saturation = 0.73, value = 1 }
@@ -39,8 +41,8 @@ update msg model =
         AttemptedTextBoxChange ->
             model
 
-        SliderMoved new ->
-            model
+        SliderMoved newModel ->
+            newModel
 
 
 view : Model -> Html.Html Msg
@@ -58,50 +60,6 @@ hsvRecordToColor hsvRecord =
 
 
 {- /////////////////////        Model and Messages       //////////////////// -}
-
-
-type alias Model =
-    { selectedPage : Page
-    , header : HsvRecord
-    , footer : HsvRecord
-    , quoteBlock1 : HsvRecord
-    , quoteBlock2 : HsvRecord
-    , inlineTitleBar : HsvRecord
-    }
-
-
-type alias HsvRecord =
-    { hue : Int
-    , saturation : Float
-    , value : Float
-    }
-
-
-type Colors
-    = FavoriteColor
-
-
-type ColorProperty
-    = Hue
-    | Saturation
-    | Value
-
-
-type Page
-    = LanguagePreferences
-    | MyStory
-    | HireMe
-    | ColorSelection
-    | Welcome
-
-
-type Msg
-    = NavBarButtonClicked Model
-    | AttemptedTextBoxChange
-    | SliderMoved Float
-
-
-
 {- /////////////////////        Visual Components        //////////////////// -}
 {- /////////////////////        Website Itself           //////////////////// -}
 
@@ -666,77 +624,15 @@ sliderBlock model =
         , centerX
         , width (fill |> maximum 1200)
         , padding 100
+        , spacing 5
         ]
-        [ paletteRecordTextBox model
+        [ headerSliders model
+        , quoteBlock1Sliders model
+        , quoteBlock2Sliders model
+        , inlineTitleBarSliders model
+        , footerSliders model
+        , paletteRecordTextBox model
         ]
-
-
-type alias SliderConfiguration =
-    { text : String, color : HsvRecord, colorProperty : ColorProperty }
-
-
-sliderPropertyRecord :
-    SliderConfiguration
-    ->
-        { label : Input.Label msg
-        , max : Float
-        , min : Float
-        , onChange : Float -> Msg
-        , step : Maybe Float
-        , thumb : Input.Thumb
-        , value : Float
-        }
-sliderPropertyRecord sliderConfiguration =
-    let
-        sliderRecord =
-            { onChange = \new -> SliderMoved new
-            , label =
-                Input.labelAbove []
-                    (text sliderConfiguration.text)
-            , min = 0
-            , max = 359
-            , step = Just 1
-            , value = toFloat sliderConfiguration.color.hue
-            , thumb =
-                Input.defaultThumb
-            }
-    in
-    case sliderConfiguration.colorProperty of
-        Hue ->
-            sliderRecord
-
-        Saturation ->
-            { sliderRecord
-                | max = 1
-                , step = Just 0.01
-                , value = sliderConfiguration.color.saturation
-            }
-
-        Value ->
-            { sliderRecord
-                | max = 1
-                , step = Just 0.01
-                , value = sliderConfiguration.color.value
-            }
-
-
-dynamicSlider sliderConfiguration =
-    Input.slider
-        [ Element.height (Element.px 30)
-        , Element.behindContent
-            (Element.el
-                [ Element.width Element.fill
-                , Element.height (Element.px 2)
-                , Element.centerY
-                , Background.color <| hsvRecordToColor sliderConfiguration.color
-                , Border.rounded 2
-                ]
-                Element.none
-            )
-        ]
-        (sliderPropertyRecord
-            sliderConfiguration
-        )
 
 
 paletteRecordString model =
