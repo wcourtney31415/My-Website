@@ -94,38 +94,43 @@ dynamicSlider colorToUpdate currentColorRecord propertyToUpdate =
 
 dynamicSliders : String -> Colors -> HsvRecord -> Element Msg
 dynamicSliders label colorToUpdate currentColorRecord =
-    Element.column
-        [ width fill
-        , spacing 10
-        , Border.rounded 2
-        , Background.color lightGrey
-        , padding 10
-        ]
+    let
+        roundAmount =
+            15
+    in
+    Element.row [ width fill ]
         [ Element.el
-            [ Font.bold
-            , centerX
+            [ height fill
+            , width
+                (fill
+                    |> maximum 100
+                    |> minimum 100
+                )
+            , Background.color <| hsvRecordToColor currentColorRecord
             ]
-            (text label)
-        , Element.row
+            (text "")
+        , Element.column
             [ width fill
-            , spacing 20
+            , spacing 10
+            , Border.roundEach { topRight = roundAmount, bottomRight = roundAmount, topLeft = 0, bottomLeft = 0 }
+            , paddingEach { top = 10, left = 0, right = 0, bottom = 0 }
+            , Background.color <| hsv 1 0 0.9
             ]
             [ Element.el
-                [ height
-                    (fill
-                        |> maximum 50
-                        |> minimum 50
-                    )
-                , width
-                    (fill
-                        |> maximum 100
-                        |> minimum 100
-                    )
-                , Background.color <| hsvRecordToColor currentColorRecord
+                [ Font.bold
+                , centerX
                 ]
-                (text "")
-            , dynamicSlider colorToUpdate currentColorRecord Hue
-            , dynamicSlider colorToUpdate currentColorRecord Saturation
-            , dynamicSlider colorToUpdate currentColorRecord Value
+                (text label)
+            , Element.row
+                [ width fill
+                , spacing 20
+                , Background.color <| hsv 1 0 0.95
+                , padding 6
+                , Border.roundEach { topRight = 0, bottomRight = roundAmount, topLeft = 0, bottomLeft = 0 }
+                ]
+                [ dynamicSlider colorToUpdate currentColorRecord Hue
+                , dynamicSlider colorToUpdate currentColorRecord Saturation
+                , dynamicSlider colorToUpdate currentColorRecord Value
+                ]
             ]
         ]
