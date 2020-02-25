@@ -642,11 +642,11 @@ sliderBlock model =
         , padding 100
         , spacing 5
         ]
-        [ dynamicSliders "Header: " Header model.header
-        , dynamicSliders "Quote Block 1: " QuoteBlock1 model.quoteBlock1
-        , dynamicSliders "Quote Block 2: " QuoteBlock2 model.quoteBlock2
-        , dynamicSliders "Inline Title Bar: " InlineTitleBar model.inlineTitleBar
-        , dynamicSliders "Footer: " Footer model.footer
+        [ dynamicSliders "Header " Header model.header
+        , dynamicSliders "Quote Block 1 " QuoteBlock1 model.quoteBlock1
+        , dynamicSliders "Quote Block 2 " QuoteBlock2 model.quoteBlock2
+        , dynamicSliders "Inline Title Bar " InlineTitleBar model.inlineTitleBar
+        , dynamicSliders "Footer " Footer model.footer
         , paletteRecordTextBox model
         ]
 
@@ -813,6 +813,10 @@ quoteElement model =
 
 elmLangPrefText =
     "Elm is relatively new to me, however it has quickly become my favorite language for front end application development. It has also been my first real introduction to purely functional programming, which has me very interested in switching to the functional paradigm whenever possible/appropriate. This entire website is actually written in elm. During it's creation I was struggling to choose a color scheme for the site. To remedy this, I coded up a page for adjusting the colors on the fly. "
+
+
+javaLangPrefText =
+    ""
 
 
 colorSelectionLink model =
