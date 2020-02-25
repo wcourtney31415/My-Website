@@ -10944,11 +10944,6 @@ var $author$project$HsvToRgb$given = F3(
 	function (myH, myS, myV) {
 		return {b: 0, bPrime: 0, c: 0, g: 0, gPrime: 0, h: myH, m: 0, r: 0, rPrime: 0, s: myS, v: myV, x: 0};
 	});
-var $elm$core$Debug$log = _Debug_log;
-var $author$project$HsvToRgb$print = F2(
-	function (label, data) {
-		return A2($elm$core$Debug$log, label, data);
-	});
 var $author$project$HsvToRgb$solveC = function (data) {
 	return _Utils_update(
 		data,
@@ -11001,26 +10996,11 @@ var $author$project$HsvToRgb$solveX = function (data) {
 var $author$project$HsvToRgb$hsv = F3(
 	function (h, s, v) {
 		return $author$project$HsvToRgb$solveRGB(
-			A2(
-				$author$project$HsvToRgb$print,
-				'Calculated Range: ',
-				$author$project$HsvToRgb$calcRange(
-					A2(
-						$author$project$HsvToRgb$print,
-						'solved M:',
-						$author$project$HsvToRgb$solveM(
-							A2(
-								$author$project$HsvToRgb$print,
-								'Solved X: ',
-								$author$project$HsvToRgb$solveX(
-									A2(
-										$author$project$HsvToRgb$print,
-										'Solved C: ',
-										$author$project$HsvToRgb$solveC(
-											A2(
-												$author$project$HsvToRgb$print,
-												'Loaded Data: ',
-												A3($author$project$HsvToRgb$given, h, s, v)))))))))));
+			$author$project$HsvToRgb$calcRange(
+				$author$project$HsvToRgb$solveM(
+					$author$project$HsvToRgb$solveX(
+						$author$project$HsvToRgb$solveC(
+							A3($author$project$HsvToRgb$given, h, s, v))))));
 	});
 var $author$project$Main$hsvRecordToColor = function (hsvRecord) {
 	return A3($author$project$HsvToRgb$hsv, hsvRecord.hue, hsvRecord.saturation, hsvRecord.value);
@@ -13860,11 +13840,11 @@ var $author$project$Main$sliderBlock = function (model) {
 			]),
 		_List_fromArray(
 			[
-				A3($author$project$Sliders$dynamicSliders, 'Header: ', $author$project$MessagesAndModels$Header, model.header),
-				A3($author$project$Sliders$dynamicSliders, 'Quote Block 1: ', $author$project$MessagesAndModels$QuoteBlock1, model.quoteBlock1),
-				A3($author$project$Sliders$dynamicSliders, 'Quote Block 2: ', $author$project$MessagesAndModels$QuoteBlock2, model.quoteBlock2),
-				A3($author$project$Sliders$dynamicSliders, 'Inline Title Bar: ', $author$project$MessagesAndModels$InlineTitleBar, model.inlineTitleBar),
-				A3($author$project$Sliders$dynamicSliders, 'Footer: ', $author$project$MessagesAndModels$Footer, model.footer),
+				A3($author$project$Sliders$dynamicSliders, 'Header ', $author$project$MessagesAndModels$Header, model.header),
+				A3($author$project$Sliders$dynamicSliders, 'Quote Block 1 ', $author$project$MessagesAndModels$QuoteBlock1, model.quoteBlock1),
+				A3($author$project$Sliders$dynamicSliders, 'Quote Block 2 ', $author$project$MessagesAndModels$QuoteBlock2, model.quoteBlock2),
+				A3($author$project$Sliders$dynamicSliders, 'Inline Title Bar ', $author$project$MessagesAndModels$InlineTitleBar, model.inlineTitleBar),
+				A3($author$project$Sliders$dynamicSliders, 'Footer ', $author$project$MessagesAndModels$Footer, model.footer),
 				$author$project$Main$paletteRecordTextBox(model)
 			]));
 };
