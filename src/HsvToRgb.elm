@@ -38,12 +38,13 @@ given myH myS myV =
 
 hsv : Int -> Float -> Float -> Color
 hsv h s v =
-    given h s v |> print "Loaded Data: " |> solveC |> print "Solved C: " |> solveX |> print "Solved X: " |> solveM |> print "solved M:" |> calcRange |> print "Calculated Range: " |> solveRGB
+    given h s v |> solveC |> solveX |> solveM |> calcRange |> solveRGB
 
 
-print : String -> Data -> Data
-print label data =
-    Debug.log label data
+
+--print : String -> Data -> Data
+--print label data =
+--    Debug.log label data
 
 
 solveC : Data -> Data
