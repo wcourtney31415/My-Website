@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Browser
+import Colors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -24,11 +25,7 @@ main =
 init : Model
 init =
     { selectedPage = ColorSelection
-    , header = { hue = 194, saturation = 0.73, value = 0.76 }
-    , footer = { hue = 194, saturation = 0.73, value = 0.91 }
-    , quoteBlock1 = { hue = 194, saturation = 0.73, value = 1 }
-    , quoteBlock2 = { hue = 194, saturation = 0.73, value = 0.73 }
-    , inlineTitleBar = { hue = 194, saturation = 0.73, value = 0.91 }
+    , colorList = colorList
     }
 
 
@@ -45,21 +42,31 @@ update msg model =
             newModel
 
         NewSliderMoved hsvRecord colorToBeUpdated ->
+            let
+                colorList =
+                    model.colorList
+            in
             case colorToBeUpdated of
                 Header ->
-                    { model | header = hsvRecord }
+                    { model | colorList = { colorList | header = hsvRecord } }
 
                 QuoteBlock1 ->
-                    { model | quoteBlock1 = hsvRecord }
+                    { model | colorList = { colorList | quoteBlock1 = hsvRecord } }
 
                 QuoteBlock2 ->
-                    { model | quoteBlock2 = hsvRecord }
+                    { model | colorList = { colorList | quoteBlock2 = hsvRecord } }
 
                 InlineTitleBar ->
-                    { model | inlineTitleBar = hsvRecord }
+                    { model | colorList = { colorList | inlineTitleBar = hsvRecord } }
 
                 Footer ->
-                    { model | footer = hsvRecord }
+                    { model | colorList = { colorList | footer = hsvRecord } }
+
+                LeftBlock ->
+                    { model | colorList = { colorList | leftBlock = hsvRecord } }
+
+                RightBlock ->
+                    { model | colorList = { colorList | rightBlock = hsvRecord } }
 
 
 view : Model -> Html.Html Msg
@@ -119,7 +126,7 @@ header : Model -> Element Msg
 header model =
     Element.wrappedRow
         [ Background.color <|
-            hsvRecordToColor model.header
+            hsvRecordToColor model.colorList.header
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -134,7 +141,7 @@ footer : Model -> Element Msg
 footer model =
     Element.wrappedRow
         [ Background.color <|
-            hsvRecordToColor model.footer
+            hsvRecordToColor model.colorList.footer
         , spacing 20
         , paddingXY 25 40
         , width fill
@@ -220,8 +227,8 @@ quoteBlock model =
         [ Background.gradient
             { angle = pi
             , steps =
-                [ hsvRecordToColor model.quoteBlock1
-                , hsvRecordToColor model.quoteBlock2
+                [ hsvRecordToColor model.colorList.quoteBlock1
+                , hsvRecordToColor model.colorList.quoteBlock2
                 ]
             }
         , padding 65
@@ -236,7 +243,7 @@ quoteBlock model =
 
 leftBlock : Model -> Element Msg -> String -> Element Msg
 leftBlock model img txt =
-    backgroundWrapper colorLeftBlock model <|
+    backgroundWrapper (hsvRecordToColor model.colorList.leftBlock) model <|
         Element.wrappedRow
             [ paddingXY 40 40
             , spacing 20
@@ -258,7 +265,7 @@ leftBlock model img txt =
 
 rightBlock : Model -> Element Msg -> Element Msg -> Element Msg
 rightBlock model img txtElement =
-    backgroundWrapper colorRightBlock model <|
+    backgroundWrapper (hsvRecordToColor model.colorList.rightBlock) model <|
         Element.wrappedRow
             [ paddingXY 40 40
             , spacing 20
@@ -329,7 +336,7 @@ pageLanguagePreferences model =
         [ quoteBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , inlineTitleBar model
-            (hsvRecordToColor model.inlineTitleBar)
+            (hsvRecordToColor model.colorList.inlineTitleBar)
             "Language Preferences"
         , rightBlock model (elmLogo []) (elmLangPrefElement model)
         , leftBlock model (javaLogo []) firstParagraphText
@@ -349,7 +356,7 @@ pageMyStory model =
         , centerX
         ]
         [ inlineTitleBar model
-            (hsvRecordToColor model.inlineTitleBar)
+            (hsvRecordToColor model.colorList.inlineTitleBar)
             "Story"
         , myStoryTextBody
         ]
@@ -389,7 +396,7 @@ pageHireMe model =
         , centerX
         ]
         [ inlineTitleBar model
-            (hsvRecordToColor model.inlineTitleBar)
+            (hsvRecordToColor model.colorList.inlineTitleBar)
             "Story"
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , myStoryTextBody
@@ -624,7 +631,7 @@ pageColorSelection model =
         , sliderBlock model
         , leftBlock model (pictureOfMe []) langPrefIntroText
         , inlineTitleBar model
-            (hsvRecordToColor model.inlineTitleBar)
+            (hsvRecordToColor model.colorList.inlineTitleBar)
             "Language Preferences"
         , rightBlock model (elmLogo []) (elmLangPrefElement model)
         , leftBlock model (javaLogo []) firstParagraphText
@@ -642,11 +649,13 @@ sliderBlock model =
         , padding 100
         , spacing 5
         ]
-        [ dynamicSliders "Header " Header model.header
-        , dynamicSliders "Quote Block 1 " QuoteBlock1 model.quoteBlock1
-        , dynamicSliders "Quote Block 2 " QuoteBlock2 model.quoteBlock2
-        , dynamicSliders "Inline Title Bar " InlineTitleBar model.inlineTitleBar
-        , dynamicSliders "Footer " Footer model.footer
+        [ dynamicSliders "Header " Header model.colorList.header
+        , dynamicSliders "Quote Block 1 " QuoteBlock1 model.colorList.quoteBlock1
+        , dynamicSliders "Quote Block 2 " QuoteBlock2 model.colorList.quoteBlock2
+        , dynamicSliders "Inline Title Bar " InlineTitleBar model.colorList.inlineTitleBar
+        , dynamicSliders "Footer " Footer model.colorList.footer
+        , dynamicSliders "Left Block " LeftBlock model.colorList.leftBlock
+        , dynamicSliders "Right Block" RightBlock model.colorList.rightBlock
         , paletteRecordTextBox model
         ]
 

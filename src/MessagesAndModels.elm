@@ -1,14 +1,22 @@
 module MessagesAndModels exposing (..)
 
 
-type alias Model =
-    { selectedPage : Page
-    , header : HsvRecord
-    , footer : HsvRecord
-    , quoteBlock1 : HsvRecord
-    , quoteBlock2 : HsvRecord
-    , inlineTitleBar : HsvRecord
-    }
+type Page
+    = LanguagePreferences
+    | MyStory
+    | HireMe
+    | ColorSelection
+    | Welcome
+
+
+type Colors
+    = Header
+    | QuoteBlock1
+    | QuoteBlock2
+    | InlineTitleBar
+    | Footer
+    | LeftBlock
+    | RightBlock
 
 
 type alias HsvRecord =
@@ -18,26 +26,10 @@ type alias HsvRecord =
     }
 
 
-type Colors
-    = Header
-    | QuoteBlock1
-    | QuoteBlock2
-    | InlineTitleBar
-    | Footer
-
-
-type ColorProperty
-    = Hue
-    | Saturation
-    | Value
-
-
-type Page
-    = LanguagePreferences
-    | MyStory
-    | HireMe
-    | ColorSelection
-    | Welcome
+type alias Model =
+    { selectedPage : Page
+    , colorList : ColorList
+    }
 
 
 type Msg
@@ -45,3 +37,14 @@ type Msg
     | AttemptedTextBoxChange
     | SliderMoved Model
     | NewSliderMoved HsvRecord Colors
+
+
+type alias ColorList =
+    { header : HsvRecord
+    , footer : HsvRecord
+    , quoteBlock1 : HsvRecord
+    , quoteBlock2 : HsvRecord
+    , inlineTitleBar : HsvRecord
+    , leftBlock : HsvRecord
+    , rightBlock : HsvRecord
+    }

@@ -1,6 +1,7 @@
 module Sliders exposing (..)
 
 import Browser
+import Colors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
