@@ -4406,8 +4406,10 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
-var $author$project$MessagesAndModels$ColorSelection = {$: 'ColorSelection'};
-var $author$project$Colors$colorList = {
+var $author$project$MessagesAndModels$Welcome = {$: 'Welcome'};
+var $author$project$ResourceColors$colorList = {
+	fontA: {hue: 0, saturation: 0, value: 0.93},
+	fontB: {hue: 0, saturation: 0, value: 0.93},
 	footer: {hue: 194, saturation: 0.73, value: 0.91},
 	header: {hue: 194, saturation: 0.73, value: 0.76},
 	inlineTitleBar: {hue: 194, saturation: 0.73, value: 0.91},
@@ -4416,7 +4418,7 @@ var $author$project$Colors$colorList = {
 	quoteBlock2: {hue: 194, saturation: 0.73, value: 0.73},
 	rightBlock: {hue: 0, saturation: 0, value: 0.93}
 };
-var $author$project$Main$init = {colorList: $author$project$Colors$colorList, selectedPage: $author$project$MessagesAndModels$ColorSelection};
+var $author$project$Main$init = {colorList: $author$project$ResourceColors$colorList, selectedPage: $author$project$MessagesAndModels$Welcome};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5227,6 +5229,84 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			view: impl.view
 		});
 };
+var $author$project$UiComponentSliders$handleSliderMovement = F3(
+	function (model, hsvRecord, colorToBeUpdated) {
+		var colorList = model.colorList;
+		switch (colorToBeUpdated.$) {
+			case 'Header':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{header: hsvRecord})
+					});
+			case 'QuoteBlock1':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{quoteBlock1: hsvRecord})
+					});
+			case 'QuoteBlock2':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{quoteBlock2: hsvRecord})
+					});
+			case 'InlineTitleBar':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{inlineTitleBar: hsvRecord})
+					});
+			case 'Footer':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{footer: hsvRecord})
+					});
+			case 'LeftBlock':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{leftBlock: hsvRecord})
+					});
+			case 'RightBlock':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{rightBlock: hsvRecord})
+					});
+			case 'FontA':
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{fontA: hsvRecord})
+					});
+			default:
+				return _Utils_update(
+					model,
+					{
+						colorList: _Utils_update(
+							colorList,
+							{fontB: hsvRecord})
+					});
+		}
+	});
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -5235,71 +5315,10 @@ var $author$project$Main$update = F2(
 				return myModel;
 			case 'AttemptedTextBoxChange':
 				return model;
-			case 'SliderMoved':
-				var newModel = msg.a;
-				return newModel;
 			default:
 				var hsvRecord = msg.a;
 				var colorToBeUpdated = msg.b;
-				var colorList = model.colorList;
-				switch (colorToBeUpdated.$) {
-					case 'Header':
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{header: hsvRecord})
-							});
-					case 'QuoteBlock1':
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{quoteBlock1: hsvRecord})
-							});
-					case 'QuoteBlock2':
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{quoteBlock2: hsvRecord})
-							});
-					case 'InlineTitleBar':
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{inlineTitleBar: hsvRecord})
-							});
-					case 'Footer':
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{footer: hsvRecord})
-							});
-					case 'LeftBlock':
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{leftBlock: hsvRecord})
-							});
-					default:
-						return _Utils_update(
-							model,
-							{
-								colorList: _Utils_update(
-									colorList,
-									{rightBlock: hsvRecord})
-							});
-				}
+				return A3($author$project$UiComponentSliders$handleSliderMovement, model, hsvRecord, colorToBeUpdated);
 		}
 	});
 var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
@@ -10923,7 +10942,7 @@ var $mdgriffith$elm_ui$Element$rgb255 = F3(
 	function (red, green, blue) {
 		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, red / 255, green / 255, blue / 255, 1);
 	});
-var $author$project$Main$black = A3($mdgriffith$elm_ui$Element$rgb255, 0, 0, 0);
+var $author$project$ResourceColors$black = A3($mdgriffith$elm_ui$Element$rgb255, 0, 0, 0);
 var $mdgriffith$elm_ui$Internal$Model$formatTextShadow = function (shadow) {
 	return A2(
 		$elm$core$String$join,
@@ -10958,10 +10977,10 @@ var $mdgriffith$elm_ui$Element$Font$shadow = function (shade) {
 			'text-shadow',
 			$mdgriffith$elm_ui$Internal$Model$formatTextShadow(shade)));
 };
-var $author$project$Main$fontShadows = $mdgriffith$elm_ui$Element$Font$shadow(
+var $author$project$UiComponentGlobal$fontShadows = $mdgriffith$elm_ui$Element$Font$shadow(
 	{
 		blur: 4,
-		color: $author$project$Main$black,
+		color: $author$project$ResourceColors$black,
 		offset: _Utils_Tuple2(3, 3)
 	});
 var $author$project$HsvToRgb$calcRange = function (data) {
@@ -11041,7 +11060,7 @@ var $author$project$HsvToRgb$hsv = F3(
 						$author$project$HsvToRgb$solveC(
 							A3($author$project$HsvToRgb$given, h, s, v))))));
 	});
-var $author$project$Main$hsvRecordToColor = function (hsvRecord) {
+var $author$project$ResourceColors$hsvRecordToColor = function (hsvRecord) {
 	return A3($author$project$HsvToRgb$hsv, hsvRecord.hue, hsvRecord.saturation, hsvRecord.value);
 };
 var $author$project$MessagesAndModels$HireMe = {$: 'HireMe'};
@@ -11258,7 +11277,7 @@ var $mdgriffith$elm_ui$Internal$Model$Text = function (a) {
 var $mdgriffith$elm_ui$Element$text = function (content) {
 	return $mdgriffith$elm_ui$Internal$Model$Text(content);
 };
-var $author$project$Main$white = A3($mdgriffith$elm_ui$Element$rgb255, 255, 255, 255);
+var $author$project$ResourceColors$white = A3($mdgriffith$elm_ui$Element$rgb255, 255, 255, 255);
 var $mdgriffith$elm_ui$Internal$Model$BorderWidth = F5(
 	function (a, b, c, d, e) {
 		return {$: 'BorderWidth', a: a, b: b, c: c, d: d, e: e};
@@ -11304,7 +11323,7 @@ var $mdgriffith$elm_ui$Element$Border$widthEach = function (_v0) {
 			bottom,
 			left));
 };
-var $author$project$Main$navBarButton = F3(
+var $author$project$UiComponentGlobal$navBarButton = F3(
 	function (model, label, page) {
 		var underline = _Utils_eq(model.selectedPage, page) ? _List_fromArray(
 			[
@@ -11317,8 +11336,8 @@ var $author$project$Main$navBarButton = F3(
 				_List_fromArray(
 					[
 						$mdgriffith$elm_ui$Element$alignRight,
-						$mdgriffith$elm_ui$Element$Font$color($author$project$Main$white),
-						$mdgriffith$elm_ui$Element$Border$color($author$project$Main$white),
+						$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white),
+						$mdgriffith$elm_ui$Element$Border$color($author$project$ResourceColors$white),
 						A2($mdgriffith$elm_ui$Element$paddingXY, 0, 4)
 					]),
 				underline),
@@ -11368,27 +11387,27 @@ var $mdgriffith$elm_ui$Element$link = F2(
 				_List_fromArray(
 					[label])));
 	});
-var $author$project$Main$navBarLink = F3(
+var $author$project$UiComponentGlobal$navBarLink = F3(
 	function (model, label, url) {
 		return A2(
 			$mdgriffith$elm_ui$Element$link,
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$alignRight,
-					$mdgriffith$elm_ui$Element$Font$color($author$project$Main$white)
+					$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white)
 				]),
 			{
 				label: $mdgriffith$elm_ui$Element$text(label),
 				url: url
 			});
 	});
-var $author$project$Main$navLinks = function (model) {
+var $author$project$UiComponentGlobal$navLinks = function (model) {
 	return _List_fromArray(
 		[
-			A3($author$project$Main$navBarButton, model, 'Hire Me', $author$project$MessagesAndModels$HireMe),
-			A3($author$project$Main$navBarButton, model, 'Language Preferences', $author$project$MessagesAndModels$LanguagePreferences),
-			A3($author$project$Main$navBarButton, model, 'My Story', $author$project$MessagesAndModels$MyStory),
-			A3($author$project$Main$navBarLink, model, 'Site Source Code', 'https://github.com/wcourtney31415')
+			A3($author$project$UiComponentGlobal$navBarButton, model, 'Hire Me', $author$project$MessagesAndModels$HireMe),
+			A3($author$project$UiComponentGlobal$navBarButton, model, 'Language Preferences', $author$project$MessagesAndModels$LanguagePreferences),
+			A3($author$project$UiComponentGlobal$navBarButton, model, 'My Story', $author$project$MessagesAndModels$MyStory),
+			A3($author$project$UiComponentGlobal$navBarLink, model, 'Site Source Code', 'https://github.com/wcourtney31415')
 		]);
 };
 var $mdgriffith$elm_ui$Internal$Model$SpacingStyle = F3(
@@ -11611,20 +11630,20 @@ var $mdgriffith$elm_ui$Element$wrappedRow = F2(
 			}
 		}
 	});
-var $author$project$Main$footer = function (model) {
+var $author$project$UiComponentGlobal$footer = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$wrappedRow,
 		_List_fromArray(
 			[
 				$mdgriffith$elm_ui$Element$Background$color(
-				$author$project$Main$hsvRecordToColor(model.colorList.footer)),
+				$author$project$ResourceColors$hsvRecordToColor(model.colorList.footer)),
 				$mdgriffith$elm_ui$Element$spacing(20),
 				A2($mdgriffith$elm_ui$Element$paddingXY, 25, 40),
 				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$author$project$Main$fontShadows,
+				$author$project$UiComponentGlobal$fontShadows,
 				$mdgriffith$elm_ui$Element$centerX
 			]),
-		$author$project$Main$navLinks(model));
+		$author$project$UiComponentGlobal$navLinks(model));
 };
 var $mdgriffith$elm_ui$Internal$Model$Left = {$: 'Left'};
 var $mdgriffith$elm_ui$Element$alignLeft = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Left);
@@ -11657,37 +11676,37 @@ var $mdgriffith$elm_ui$Element$Font$size = function (i) {
 		$mdgriffith$elm_ui$Internal$Flag$fontSize,
 		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
 };
-var $author$project$Main$myName = function (model) {
+var $author$project$UiComponentGlobal$myName = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$el,
 		_List_fromArray(
 			[
 				$mdgriffith$elm_ui$Element$alignLeft,
-				$mdgriffith$elm_ui$Element$Font$color($author$project$Main$white),
+				$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white),
 				$mdgriffith$elm_ui$Element$Font$size(25),
 				$mdgriffith$elm_ui$Element$Font$bold,
-				$author$project$Main$fontShadows
+				$author$project$UiComponentGlobal$fontShadows
 			]),
 		$mdgriffith$elm_ui$Element$text('Wesley Courtney'));
 };
-var $author$project$Main$header = function (model) {
+var $author$project$UiComponentGlobal$header = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$wrappedRow,
 		_List_fromArray(
 			[
 				$mdgriffith$elm_ui$Element$Background$color(
-				$author$project$Main$hsvRecordToColor(model.colorList.header)),
+				$author$project$ResourceColors$hsvRecordToColor(model.colorList.header)),
 				$mdgriffith$elm_ui$Element$spacing(20),
 				A2($mdgriffith$elm_ui$Element$paddingXY, 25, 40),
 				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$author$project$Main$fontShadows
+				$author$project$UiComponentGlobal$fontShadows
 			]),
 		_Utils_ap(
 			_List_fromArray(
 				[
-					$author$project$Main$myName(model)
+					$author$project$UiComponentGlobal$myName(model)
 				]),
-			$author$project$Main$navLinks(model)));
+			$author$project$UiComponentGlobal$navLinks(model)));
 };
 var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
 	function (a, b) {
@@ -11992,19 +12011,20 @@ var $mdgriffith$elm_ui$Element$image = F2(
 						$mdgriffith$elm_ui$Internal$Model$Unkeyed(_List_Nil))
 					])));
 	});
-var $author$project$Main$arduinoLogo = function (list) {
+var $author$project$ResourceImages$arduinoLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
 		{description: 'Arduino Logo', src: './Images/ArduinoLogo.png'});
 };
-var $author$project$Main$obviousBlue = A3($mdgriffith$elm_ui$Element$rgb255, 0, 0, 255);
-var $author$project$Main$colorSelectionLink = function (model) {
+var $author$project$MessagesAndModels$ColorSelection = {$: 'ColorSelection'};
+var $author$project$ResourceColors$obviousBlue = A3($mdgriffith$elm_ui$Element$rgb255, 0, 0, 255);
+var $author$project$ResourceTexts$colorSelectionLink = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$Input$button,
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$Font$color($author$project$Main$obviousBlue)
+				$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$obviousBlue)
 			]),
 		{
 			label: $mdgriffith$elm_ui$Element$text('Click here to modify the site theme!'),
@@ -12015,7 +12035,7 @@ var $author$project$Main$colorSelectionLink = function (model) {
 						{selectedPage: $author$project$MessagesAndModels$ColorSelection})))
 		});
 };
-var $author$project$Main$elmLangPrefText = 'Elm is relatively new to me, however it has quickly become my favorite language for front end application development. It has also been my first real introduction to purely functional programming, which has me very interested in switching to the functional paradigm whenever possible/appropriate. This entire website is actually written in elm. During it\'s creation I was struggling to choose a color scheme for the site. To remedy this, I coded up a page for adjusting the colors on the fly. ';
+var $author$project$ResourceTexts$elmLangPrefText = 'Elm is relatively new to me, however it has quickly become my favorite language for front end application development. It has also been my first real introduction to purely functional programming, which has me very interested in switching to the functional paradigm whenever possible/appropriate. This entire website is actually written in elm. During it\'s creation I was struggling to choose a color scheme for the site. To remedy this, I coded up a page for adjusting the colors on the fly. ';
 var $mdgriffith$elm_ui$Internal$Model$Paragraph = {$: 'Paragraph'};
 var $mdgriffith$elm_ui$Element$paragraph = F2(
 	function (attrs, children) {
@@ -12035,24 +12055,24 @@ var $mdgriffith$elm_ui$Element$paragraph = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $author$project$Main$elmLangPrefElement = function (model) {
+var $author$project$ResourceTexts$elmLangPrefElement = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$paragraph,
 		_List_Nil,
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$text($author$project$Main$elmLangPrefText),
-				$author$project$Main$colorSelectionLink(model)
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$elmLangPrefText),
+				$author$project$ResourceTexts$colorSelectionLink(model)
 			]));
 };
-var $author$project$Main$elmLogo = function (list) {
+var $author$project$ResourceImages$elmLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
 		{description: 'Elm  Logo', src: './Images/ElmLogo.png'});
 };
-var $author$project$Main$declarationOfIndependence = 'We hold these truths to be self-evident, that all men are created equal, that they are endowed by their creator with certain unalienable rights, that among these are life, liberty and the pursuit of happiness. That to secure these rights, Governments are instituted among men, deriving their just powers from the consent of the governed. That whenever any form of government becomes destructive of these ends, it is the right of the people to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their safety and happiness.';
-var $author$project$Main$firstParagraphText = $author$project$Main$declarationOfIndependence;
+var $author$project$ResourceTexts$declarationOfIndependence = 'We hold these truths to be self-evident, that all men are created equal, that they are endowed by their creator with certain unalienable rights, that among these are life, liberty and the pursuit of happiness. That to secure these rights, Governments are instituted among men, deriving their just powers from the consent of the governed. That whenever any form of government becomes destructive of these ends, it is the right of the people to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their safety and happiness.';
+var $author$project$ResourceTexts$firstParagraphText = $author$project$ResourceTexts$declarationOfIndependence;
 var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
 var $mdgriffith$elm_ui$Element$Font$center = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.textCenter);
 var $mdgriffith$elm_ui$Element$padding = function (x) {
@@ -12067,7 +12087,7 @@ var $mdgriffith$elm_ui$Element$padding = function (x) {
 			x,
 			x));
 };
-var $author$project$Main$inlineTitleBar = F3(
+var $author$project$UiComponentGlobal$inlineTitleBar = F3(
 	function (model, color, str) {
 		return A2(
 			$mdgriffith$elm_ui$Element$paragraph,
@@ -12076,8 +12096,8 @@ var $author$project$Main$inlineTitleBar = F3(
 					$mdgriffith$elm_ui$Element$Background$color(color),
 					$mdgriffith$elm_ui$Element$padding(30),
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-					$author$project$Main$fontShadows,
-					$mdgriffith$elm_ui$Element$Font$color($author$project$Main$white),
+					$author$project$UiComponentGlobal$fontShadows,
+					$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white),
 					$mdgriffith$elm_ui$Element$Font$center,
 					$mdgriffith$elm_ui$Element$Font$size(30),
 					$mdgriffith$elm_ui$Element$Font$bold
@@ -12087,14 +12107,14 @@ var $author$project$Main$inlineTitleBar = F3(
 					$mdgriffith$elm_ui$Element$text(str)
 				]));
 	});
-var $author$project$Main$javaLogo = function (list) {
+var $author$project$ResourceImages$javaLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
 		{description: 'Java  Logo', src: './Images/JavaLogo.png'});
 };
-var $author$project$Main$langPrefIntroText = $author$project$Main$declarationOfIndependence;
-var $author$project$Main$backgroundWrapper = F3(
+var $author$project$ResourceTexts$langPrefIntroText = $author$project$ResourceTexts$declarationOfIndependence;
+var $author$project$UiComponentGlobal$backgroundWrapper = F3(
 	function (color, model, el) {
 		return A2(
 			$mdgriffith$elm_ui$Element$el,
@@ -12139,11 +12159,11 @@ var $mdgriffith$elm_ui$Element$textColumn = F2(
 				attrs),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $author$project$Main$leftBlock = F3(
+var $author$project$UiComponentGlobal$leftBlock = F3(
 	function (model, img, txt) {
 		return A3(
-			$author$project$Main$backgroundWrapper,
-			$author$project$Main$hsvRecordToColor(model.colorList.leftBlock),
+			$author$project$UiComponentGlobal$backgroundWrapper,
+			$author$project$ResourceColors$hsvRecordToColor(model.colorList.leftBlock),
 			model,
 			A2(
 				$mdgriffith$elm_ui$Element$wrappedRow,
@@ -12178,7 +12198,7 @@ var $author$project$Main$leftBlock = F3(
 							]))
 					])));
 	});
-var $author$project$Main$pictureOfMe = function (list) {
+var $author$project$ResourceImages$pictureOfMe = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
@@ -12226,14 +12246,14 @@ var $mdgriffith$elm_ui$Element$Background$gradient = function (_v0) {
 	}
 };
 var $elm$core$Basics$pi = _Basics_pi;
-var $author$project$Main$quoteText = '\"Any fool can write code that a computer can understand. Good programmers write code that humans can understand.\"― Martin Fowler';
-var $author$project$Main$quoteElement = function (model) {
+var $author$project$UiComponentGlobal$quoteText = '\"Any fool can write code that a computer can understand. Good programmers write code that humans can understand.\"― Martin Fowler';
+var $author$project$UiComponentGlobal$quoteElement = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$el,
 		_List_Nil,
-		$mdgriffith$elm_ui$Element$text($author$project$Main$quoteText));
+		$mdgriffith$elm_ui$Element$text($author$project$UiComponentGlobal$quoteText));
 };
-var $author$project$Main$quoteBlock = function (model) {
+var $author$project$UiComponentGlobal$quoteBlock = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$paragraph,
 		_List_fromArray(
@@ -12243,26 +12263,26 @@ var $author$project$Main$quoteBlock = function (model) {
 					angle: $elm$core$Basics$pi,
 					steps: _List_fromArray(
 						[
-							$author$project$Main$hsvRecordToColor(model.colorList.quoteBlock1),
-							$author$project$Main$hsvRecordToColor(model.colorList.quoteBlock2)
+							$author$project$ResourceColors$hsvRecordToColor(model.colorList.quoteBlock1),
+							$author$project$ResourceColors$hsvRecordToColor(model.colorList.quoteBlock2)
 						])
 				}),
 				$mdgriffith$elm_ui$Element$padding(65),
 				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$author$project$Main$fontShadows,
-				$mdgriffith$elm_ui$Element$Font$color($author$project$Main$white),
+				$author$project$UiComponentGlobal$fontShadows,
+				$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white),
 				$mdgriffith$elm_ui$Element$Font$center
 			]),
 		_List_fromArray(
 			[
-				$author$project$Main$quoteElement(model)
+				$author$project$UiComponentGlobal$quoteElement(model)
 			]));
 };
-var $author$project$Main$rightBlock = F3(
+var $author$project$UiComponentGlobal$rightBlock = F3(
 	function (model, img, txtElement) {
 		return A3(
-			$author$project$Main$backgroundWrapper,
-			$author$project$Main$hsvRecordToColor(model.colorList.rightBlock),
+			$author$project$UiComponentGlobal$backgroundWrapper,
+			$author$project$ResourceColors$hsvRecordToColor(model.colorList.rightBlock),
 			model,
 			A2(
 				$mdgriffith$elm_ui$Element$wrappedRow,
@@ -12295,6 +12315,8 @@ var $author$project$Main$rightBlock = F3(
 						img
 					])));
 	});
+var $author$project$MessagesAndModels$FontA = {$: 'FontA'};
+var $author$project$MessagesAndModels$FontB = {$: 'FontB'};
 var $author$project$MessagesAndModels$Footer = {$: 'Footer'};
 var $author$project$MessagesAndModels$Header = {$: 'Header'};
 var $author$project$MessagesAndModels$InlineTitleBar = {$: 'InlineTitleBar'};
@@ -12302,9 +12324,9 @@ var $author$project$MessagesAndModels$LeftBlock = {$: 'LeftBlock'};
 var $author$project$MessagesAndModels$QuoteBlock1 = {$: 'QuoteBlock1'};
 var $author$project$MessagesAndModels$QuoteBlock2 = {$: 'QuoteBlock2'};
 var $author$project$MessagesAndModels$RightBlock = {$: 'RightBlock'};
-var $author$project$Colors$Hue = {$: 'Hue'};
-var $author$project$Colors$Saturation = {$: 'Saturation'};
-var $author$project$Colors$Value = {$: 'Value'};
+var $author$project$ResourceColors$Hue = {$: 'Hue'};
+var $author$project$ResourceColors$Saturation = {$: 'Saturation'};
+var $author$project$ResourceColors$Value = {$: 'Value'};
 var $mdgriffith$elm_ui$Internal$Model$Behind = {$: 'Behind'};
 var $mdgriffith$elm_ui$Internal$Model$Nearby = F2(
 	function (a, b) {
@@ -12326,9 +12348,9 @@ var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
 };
 var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
 var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
-var $author$project$MessagesAndModels$NewSliderMoved = F2(
+var $author$project$MessagesAndModels$SliderMoved = F2(
 	function (a, b) {
-		return {$: 'NewSliderMoved', a: a, b: b};
+		return {$: 'SliderMoved', a: a, b: b};
 	});
 var $mdgriffith$elm_ui$Element$Input$Thumb = function (a) {
 	return {$: 'Thumb', a: a};
@@ -12372,7 +12394,7 @@ var $mdgriffith$elm_ui$Element$Input$Label = F3(
 		return {$: 'Label', a: a, b: b, c: c};
 	});
 var $mdgriffith$elm_ui$Element$Input$labelAbove = $mdgriffith$elm_ui$Element$Input$Label($mdgriffith$elm_ui$Element$Input$Above);
-var $author$project$Sliders$chooseRecord = F3(
+var $author$project$UiComponentSliders$chooseRecord = F3(
 	function (colorToUpdate, currentColorRecord, propertyToUpdate) {
 		switch (propertyToUpdate.$) {
 			case 'Hue':
@@ -12386,7 +12408,7 @@ var $author$project$Sliders$chooseRecord = F3(
 					min: 0,
 					onChange: function (_new) {
 						return A2(
-							$author$project$MessagesAndModels$NewSliderMoved,
+							$author$project$MessagesAndModels$SliderMoved,
 							_Utils_update(
 								currentColorRecord,
 								{
@@ -12409,7 +12431,7 @@ var $author$project$Sliders$chooseRecord = F3(
 					min: 0,
 					onChange: function (_new) {
 						return A2(
-							$author$project$MessagesAndModels$NewSliderMoved,
+							$author$project$MessagesAndModels$SliderMoved,
 							_Utils_update(
 								currentColorRecord,
 								{saturation: _new}),
@@ -12430,7 +12452,7 @@ var $author$project$Sliders$chooseRecord = F3(
 					min: 0,
 					onChange: function (_new) {
 						return A2(
-							$author$project$MessagesAndModels$NewSliderMoved,
+							$author$project$MessagesAndModels$SliderMoved,
 							_Utils_update(
 								currentColorRecord,
 								{value: _new}),
@@ -12442,9 +12464,6 @@ var $author$project$Sliders$chooseRecord = F3(
 				};
 		}
 	});
-var $author$project$Sliders$hsvRecordToColor = function (hsvRecord) {
-	return A3($author$project$HsvToRgb$hsv, hsvRecord.hue, hsvRecord.saturation, hsvRecord.value);
-};
 var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
 var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
 var $mdgriffith$elm_ui$Internal$Flag$active = $mdgriffith$elm_ui$Internal$Flag$flag(32);
@@ -13056,7 +13075,7 @@ var $mdgriffith$elm_ui$Element$Input$slider = F2(
 						$mdgriffith$elm_ui$Element$none)
 					])));
 	});
-var $author$project$Sliders$dynamicSlider = F3(
+var $author$project$UiComponentSliders$dynamicSlider = F3(
 	function (colorToUpdate, currentColorRecord, propertyToUpdate) {
 		return A2(
 			$mdgriffith$elm_ui$Element$Input$slider,
@@ -13074,13 +13093,15 @@ var $author$project$Sliders$dynamicSlider = F3(
 								$mdgriffith$elm_ui$Element$px(2)),
 								$mdgriffith$elm_ui$Element$centerY,
 								$mdgriffith$elm_ui$Element$Background$color(
-								$author$project$Sliders$hsvRecordToColor(currentColorRecord)),
+								$author$project$ResourceColors$hsvRecordToColor(currentColorRecord)),
 								$mdgriffith$elm_ui$Element$Border$rounded(2)
 							]),
 						$mdgriffith$elm_ui$Element$none))
 				]),
-			A3($author$project$Sliders$chooseRecord, colorToUpdate, currentColorRecord, propertyToUpdate));
+			A3($author$project$UiComponentSliders$chooseRecord, colorToUpdate, currentColorRecord, propertyToUpdate));
 	});
+var $author$project$ResourceColors$dynamicSliderBody = A3($author$project$HsvToRgb$hsv, 1, 0, 0.95);
+var $author$project$ResourceColors$dynamicSliderHeader = A3($author$project$HsvToRgb$hsv, 1, 0, 0.9);
 var $mdgriffith$elm_ui$Element$Border$roundEach = function (_v0) {
 	var topLeft = _v0.topLeft;
 	var topRight = _v0.topRight;
@@ -13095,7 +13116,7 @@ var $mdgriffith$elm_ui$Element$Border$roundEach = function (_v0) {
 			'border-radius',
 			$elm$core$String$fromInt(topLeft) + ('px ' + ($elm$core$String$fromInt(topRight) + ('px ' + ($elm$core$String$fromInt(bottomRight) + ('px ' + ($elm$core$String$fromInt(bottomLeft) + 'px'))))))));
 };
-var $author$project$Sliders$dynamicSliders = F3(
+var $author$project$UiComponentSliders$dynamicSliders = F3(
 	function (label, colorToUpdate, currentColorRecord) {
 		return A2(
 			$mdgriffith$elm_ui$Element$row,
@@ -13116,7 +13137,7 @@ var $author$project$Sliders$dynamicSliders = F3(
 								100,
 								A2($mdgriffith$elm_ui$Element$maximum, 100, $mdgriffith$elm_ui$Element$fill))),
 							$mdgriffith$elm_ui$Element$Background$color(
-							$author$project$Sliders$hsvRecordToColor(currentColorRecord))
+							$author$project$ResourceColors$hsvRecordToColor(currentColorRecord))
 						]),
 					$mdgriffith$elm_ui$Element$text('')),
 					A2(
@@ -13129,8 +13150,7 @@ var $author$project$Sliders$dynamicSliders = F3(
 							{bottomLeft: 0, bottomRight: 5, topLeft: 0, topRight: 15}),
 							$mdgriffith$elm_ui$Element$paddingEach(
 							{bottom: 0, left: 0, right: 0, top: 10}),
-							$mdgriffith$elm_ui$Element$Background$color(
-							A3($author$project$HsvToRgb$hsv, 1, 0, 0.9))
+							$mdgriffith$elm_ui$Element$Background$color($author$project$ResourceColors$dynamicSliderHeader)
 						]),
 					_List_fromArray(
 						[
@@ -13145,23 +13165,22 @@ var $author$project$Sliders$dynamicSliders = F3(
 								[
 									$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 									$mdgriffith$elm_ui$Element$spacing(20),
-									$mdgriffith$elm_ui$Element$Background$color(
-									A3($author$project$HsvToRgb$hsv, 1, 0, 0.95)),
+									$mdgriffith$elm_ui$Element$Background$color($author$project$ResourceColors$dynamicSliderBody),
 									$mdgriffith$elm_ui$Element$padding(6),
 									$mdgriffith$elm_ui$Element$Border$roundEach(
 									{bottomLeft: 0, bottomRight: 5, topLeft: 0, topRight: 0})
 								]),
 							_List_fromArray(
 								[
-									A3($author$project$Sliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$Colors$Hue),
-									A3($author$project$Sliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$Colors$Saturation),
-									A3($author$project$Sliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$Colors$Value)
+									A3($author$project$UiComponentSliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$ResourceColors$Hue),
+									A3($author$project$UiComponentSliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$ResourceColors$Saturation),
+									A3($author$project$UiComponentSliders$dynamicSlider, colorToUpdate, currentColorRecord, $author$project$ResourceColors$Value)
 								]))
 						]))
 				]));
 	});
 var $author$project$MessagesAndModels$AttemptedTextBoxChange = {$: 'AttemptedTextBoxChange'};
-var $author$project$Main$paletteRecordString = function (model) {
+var $author$project$PageColorSelection$paletteRecordString = function (model) {
 	return 'Output record goes here.';
 };
 var $mdgriffith$elm_ui$Element$Input$TextInputNode = function (a) {
@@ -13849,7 +13868,7 @@ var $mdgriffith$elm_ui$Element$Input$text = $mdgriffith$elm_ui$Element$Input$tex
 		spellchecked: false,
 		type_: $mdgriffith$elm_ui$Element$Input$TextInputNode('text')
 	});
-var $author$project$Main$paletteRecordTextBox = function (model) {
+var $author$project$PageColorSelection$paletteRecordTextBox = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$Input$text,
 		_List_Nil,
@@ -13862,10 +13881,10 @@ var $author$project$Main$paletteRecordTextBox = function (model) {
 				return $author$project$MessagesAndModels$AttemptedTextBoxChange;
 			},
 			placeholder: $elm$core$Maybe$Nothing,
-			text: $author$project$Main$paletteRecordString(model)
+			text: $author$project$PageColorSelection$paletteRecordString(model)
 		});
 };
-var $author$project$Main$sliderBlock = function (model) {
+var $author$project$PageColorSelection$sliderBlock = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
@@ -13879,23 +13898,25 @@ var $author$project$Main$sliderBlock = function (model) {
 			]),
 		_List_fromArray(
 			[
-				A3($author$project$Sliders$dynamicSliders, 'Header ', $author$project$MessagesAndModels$Header, model.colorList.header),
-				A3($author$project$Sliders$dynamicSliders, 'Quote Block 1 ', $author$project$MessagesAndModels$QuoteBlock1, model.colorList.quoteBlock1),
-				A3($author$project$Sliders$dynamicSliders, 'Quote Block 2 ', $author$project$MessagesAndModels$QuoteBlock2, model.colorList.quoteBlock2),
-				A3($author$project$Sliders$dynamicSliders, 'Inline Title Bar ', $author$project$MessagesAndModels$InlineTitleBar, model.colorList.inlineTitleBar),
-				A3($author$project$Sliders$dynamicSliders, 'Footer ', $author$project$MessagesAndModels$Footer, model.colorList.footer),
-				A3($author$project$Sliders$dynamicSliders, 'Left Block ', $author$project$MessagesAndModels$LeftBlock, model.colorList.leftBlock),
-				A3($author$project$Sliders$dynamicSliders, 'Right Block', $author$project$MessagesAndModels$RightBlock, model.colorList.rightBlock),
-				$author$project$Main$paletteRecordTextBox(model)
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Header ', $author$project$MessagesAndModels$Header, model.colorList.header),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Quote Block 1 ', $author$project$MessagesAndModels$QuoteBlock1, model.colorList.quoteBlock1),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Quote Block 2 ', $author$project$MessagesAndModels$QuoteBlock2, model.colorList.quoteBlock2),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Inline Title Bar ', $author$project$MessagesAndModels$InlineTitleBar, model.colorList.inlineTitleBar),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Footer ', $author$project$MessagesAndModels$Footer, model.colorList.footer),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Left Block ', $author$project$MessagesAndModels$LeftBlock, model.colorList.leftBlock),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Right Block', $author$project$MessagesAndModels$RightBlock, model.colorList.rightBlock),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Font A', $author$project$MessagesAndModels$FontA, model.colorList.fontA),
+				A3($author$project$UiComponentSliders$dynamicSliders, 'Font B', $author$project$MessagesAndModels$FontB, model.colorList.fontB),
+				$author$project$PageColorSelection$paletteRecordTextBox(model)
 			]));
 };
-var $author$project$Main$visualStudioLogo = function (list) {
+var $author$project$ResourceImages$visualStudioLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
 		{description: 'Visual Studio  Logo', src: './Images/VSLogo.png'});
 };
-var $author$project$Main$pageColorSelection = function (model) {
+var $author$project$PageColorSelection$pageColorSelection = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
@@ -13905,53 +13926,53 @@ var $author$project$Main$pageColorSelection = function (model) {
 			]),
 		_List_fromArray(
 			[
-				$author$project$Main$quoteBlock(model),
-				$author$project$Main$sliderBlock(model),
+				$author$project$UiComponentGlobal$quoteBlock(model),
+				$author$project$PageColorSelection$sliderBlock(model),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$pictureOfMe(_List_Nil),
-				$author$project$Main$langPrefIntroText),
+				$author$project$ResourceImages$pictureOfMe(_List_Nil),
+				$author$project$ResourceTexts$langPrefIntroText),
 				A3(
-				$author$project$Main$inlineTitleBar,
+				$author$project$UiComponentGlobal$inlineTitleBar,
 				model,
-				$author$project$Main$hsvRecordToColor(model.colorList.inlineTitleBar),
+				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Language Preferences'),
 				A3(
-				$author$project$Main$rightBlock,
+				$author$project$UiComponentGlobal$rightBlock,
 				model,
-				$author$project$Main$elmLogo(_List_Nil),
-				$author$project$Main$elmLangPrefElement(model)),
+				$author$project$ResourceImages$elmLogo(_List_Nil),
+				$author$project$ResourceTexts$elmLangPrefElement(model)),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$javaLogo(_List_Nil),
-				$author$project$Main$firstParagraphText),
+				$author$project$ResourceImages$javaLogo(_List_Nil),
+				$author$project$ResourceTexts$firstParagraphText),
 				A3(
-				$author$project$Main$rightBlock,
+				$author$project$UiComponentGlobal$rightBlock,
 				model,
-				$author$project$Main$visualStudioLogo(_List_Nil),
-				$author$project$Main$elmLangPrefElement(model)),
+				$author$project$ResourceImages$visualStudioLogo(_List_Nil),
+				$author$project$ResourceTexts$elmLangPrefElement(model)),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$arduinoLogo(_List_Nil),
-				$author$project$Main$firstParagraphText)
+				$author$project$ResourceImages$arduinoLogo(_List_Nil),
+				$author$project$ResourceTexts$firstParagraphText)
 			]));
 };
-var $author$project$Main$cPlusPlusLogo = function (list) {
+var $author$project$ResourceImages$cPlusPlusLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
 		{description: 'C++ Logo', src: './Images/CPlusPlusLogo.png'});
 };
-var $author$project$Main$gameMakerLogo = function (list) {
+var $author$project$ResourceImages$gameMakerLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
 		{description: 'Game Maker Logo', src: './Images/GameMakerLogo.png'});
 };
-var $author$project$Main$ivyTechLogo = function (list) {
+var $author$project$ResourceImages$ivyTechLogo = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
 		list,
@@ -13981,7 +14002,7 @@ var $mdgriffith$elm_ui$Element$Border$shadow = function (almostShade) {
 			'box-shadow',
 			$mdgriffith$elm_ui$Internal$Model$formatBoxShadow(shade)));
 };
-var $author$project$Main$myStoryTextBody = A2(
+var $author$project$UiComponentGlobal$myStoryTextBody = A2(
 	$mdgriffith$elm_ui$Element$textColumn,
 	_List_fromArray(
 		[
@@ -13993,7 +14014,7 @@ var $author$project$Main$myStoryTextBody = A2(
 		]),
 	_List_fromArray(
 		[
-			$author$project$Main$gameMakerLogo(
+			$author$project$ResourceImages$gameMakerLogo(
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$alignLeft,
@@ -14004,16 +14025,16 @@ var $author$project$Main$myStoryTextBody = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$text($author$project$Main$declarationOfIndependence)
+					$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$declarationOfIndependence)
 				])),
 			A2(
 			$mdgriffith$elm_ui$Element$paragraph,
 			_List_Nil,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$text($author$project$Main$declarationOfIndependence)
+					$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$declarationOfIndependence)
 				])),
-			$author$project$Main$cPlusPlusLogo(
+			$author$project$ResourceImages$cPlusPlusLogo(
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$alignRight,
@@ -14024,16 +14045,16 @@ var $author$project$Main$myStoryTextBody = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$text($author$project$Main$declarationOfIndependence)
+					$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$declarationOfIndependence)
 				])),
 			A2(
 			$mdgriffith$elm_ui$Element$paragraph,
 			_List_Nil,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$text($author$project$Main$declarationOfIndependence)
+					$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$declarationOfIndependence)
 				])),
-			$author$project$Main$ivyTechLogo(
+			$author$project$ResourceImages$ivyTechLogo(
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$alignLeft,
@@ -14041,7 +14062,7 @@ var $author$project$Main$myStoryTextBody = A2(
 					$mdgriffith$elm_ui$Element$Border$shadow(
 					{
 						blur: 4,
-						color: $author$project$Main$black,
+						color: $author$project$ResourceColors$black,
 						offset: _Utils_Tuple2(3, 3),
 						size: 2
 					})
@@ -14051,10 +14072,10 @@ var $author$project$Main$myStoryTextBody = A2(
 			_List_Nil,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$text($author$project$Main$declarationOfIndependence)
+					$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$declarationOfIndependence)
 				]))
 		]));
-var $author$project$Main$pageHireMe = function (model) {
+var $author$project$PageHireMe$pageHireMe = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
@@ -14065,19 +14086,19 @@ var $author$project$Main$pageHireMe = function (model) {
 		_List_fromArray(
 			[
 				A3(
-				$author$project$Main$inlineTitleBar,
+				$author$project$UiComponentGlobal$inlineTitleBar,
 				model,
-				$author$project$Main$hsvRecordToColor(model.colorList.inlineTitleBar),
+				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Story'),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$pictureOfMe(_List_Nil),
-				$author$project$Main$langPrefIntroText),
-				$author$project$Main$myStoryTextBody
+				$author$project$ResourceImages$pictureOfMe(_List_Nil),
+				$author$project$ResourceTexts$langPrefIntroText),
+				$author$project$UiComponentGlobal$myStoryTextBody
 			]));
 };
-var $author$project$Main$pageLanguagePreferences = function (model) {
+var $author$project$PageLanguage$pageLanguagePreferences = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
@@ -14087,40 +14108,40 @@ var $author$project$Main$pageLanguagePreferences = function (model) {
 			]),
 		_List_fromArray(
 			[
-				$author$project$Main$quoteBlock(model),
+				$author$project$UiComponentGlobal$quoteBlock(model),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$pictureOfMe(_List_Nil),
-				$author$project$Main$langPrefIntroText),
+				$author$project$ResourceImages$pictureOfMe(_List_Nil),
+				$author$project$ResourceTexts$langPrefIntroText),
 				A3(
-				$author$project$Main$inlineTitleBar,
+				$author$project$UiComponentGlobal$inlineTitleBar,
 				model,
-				$author$project$Main$hsvRecordToColor(model.colorList.inlineTitleBar),
+				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Language Preferences'),
 				A3(
-				$author$project$Main$rightBlock,
+				$author$project$UiComponentGlobal$rightBlock,
 				model,
-				$author$project$Main$elmLogo(_List_Nil),
-				$author$project$Main$elmLangPrefElement(model)),
+				$author$project$ResourceImages$elmLogo(_List_Nil),
+				$author$project$ResourceTexts$elmLangPrefElement(model)),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$javaLogo(_List_Nil),
-				$author$project$Main$firstParagraphText),
+				$author$project$ResourceImages$javaLogo(_List_Nil),
+				$author$project$ResourceTexts$firstParagraphText),
 				A3(
-				$author$project$Main$rightBlock,
+				$author$project$UiComponentGlobal$rightBlock,
 				model,
-				$author$project$Main$visualStudioLogo(_List_Nil),
-				$author$project$Main$elmLangPrefElement(model)),
+				$author$project$ResourceImages$visualStudioLogo(_List_Nil),
+				$author$project$ResourceTexts$elmLangPrefElement(model)),
 				A3(
-				$author$project$Main$leftBlock,
+				$author$project$UiComponentGlobal$leftBlock,
 				model,
-				$author$project$Main$arduinoLogo(_List_Nil),
-				$author$project$Main$firstParagraphText)
+				$author$project$ResourceImages$arduinoLogo(_List_Nil),
+				$author$project$ResourceTexts$firstParagraphText)
 			]));
 };
-var $author$project$Main$pageMyStory = function (model) {
+var $author$project$PageMyStory$pageMyStory = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
@@ -14131,14 +14152,24 @@ var $author$project$Main$pageMyStory = function (model) {
 		_List_fromArray(
 			[
 				A3(
-				$author$project$Main$inlineTitleBar,
+				$author$project$UiComponentGlobal$inlineTitleBar,
 				model,
-				$author$project$Main$hsvRecordToColor(model.colorList.inlineTitleBar),
+				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Story'),
-				$author$project$Main$myStoryTextBody
+				$author$project$UiComponentGlobal$myStoryTextBody
 			]));
 };
-var $author$project$Main$anchorTexts1 = A2(
+var $author$project$ResourceColors$anchorTexts1Gradient = $mdgriffith$elm_ui$Element$Background$gradient(
+	{
+		angle: $elm$core$Basics$pi,
+		steps: _List_fromArray(
+			[
+				A3($author$project$HsvToRgb$hsv, 136, 0, 1),
+				A3($author$project$HsvToRgb$hsv, 136, 0, 0.95),
+				A3($author$project$HsvToRgb$hsv, 136, 0, 0.97)
+			])
+	});
+var $author$project$PageWelcome$anchorTexts1 = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -14147,16 +14178,7 @@ var $author$project$Main$anchorTexts1 = A2(
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$paddingEach(
 			{bottom: 150, left: 40, right: 40, top: 150}),
-			$mdgriffith$elm_ui$Element$Background$gradient(
-			{
-				angle: $elm$core$Basics$pi,
-				steps: _List_fromArray(
-					[
-						A3($author$project$HsvToRgb$hsv, 136, 0, 1),
-						A3($author$project$HsvToRgb$hsv, 136, 0, 0.95),
-						A3($author$project$HsvToRgb$hsv, 136, 0, 0.97)
-					])
-			})
+			$author$project$ResourceColors$anchorTexts1Gradient
 		]),
 	_List_fromArray(
 		[
@@ -14186,7 +14208,17 @@ var $author$project$Main$anchorTexts1 = A2(
 				]))
 		]));
 var $mdgriffith$elm_ui$Element$Font$alignRight = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.textRight);
-var $author$project$Main$anchorTexts2 = A2(
+var $author$project$ResourceColors$anchorTexts2Gradient = $mdgriffith$elm_ui$Element$Background$gradient(
+	{
+		angle: $elm$core$Basics$pi,
+		steps: _List_fromArray(
+			[
+				A3($author$project$HsvToRgb$hsv, 136, 0, 1),
+				A3($author$project$HsvToRgb$hsv, 136, 0, 0.95),
+				A3($author$project$HsvToRgb$hsv, 136, 0, 0.97)
+			])
+	});
+var $author$project$PageWelcome$anchorTexts2 = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -14195,16 +14227,7 @@ var $author$project$Main$anchorTexts2 = A2(
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$paddingEach(
 			{bottom: 150, left: 40, right: 40, top: 150}),
-			$mdgriffith$elm_ui$Element$Background$gradient(
-			{
-				angle: $elm$core$Basics$pi,
-				steps: _List_fromArray(
-					[
-						A3($author$project$HsvToRgb$hsv, 136, 0, 1),
-						A3($author$project$HsvToRgb$hsv, 136, 0, 0.95),
-						A3($author$project$HsvToRgb$hsv, 136, 0, 0.97)
-					])
-			})
+			$author$project$ResourceColors$anchorTexts2Gradient
 		]),
 	_List_fromArray(
 		[
@@ -14235,7 +14258,7 @@ var $author$project$Main$anchorTexts2 = A2(
 					$mdgriffith$elm_ui$Element$text('And here\'s why it matters!')
 				]))
 		]));
-var $author$project$Main$quadBlock = A2(
+var $author$project$PageWelcome$quadBlock = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -14269,7 +14292,7 @@ var $author$project$Main$quadBlock = A2(
 			$mdgriffith$elm_ui$Element$text('Detail 2'),
 			$mdgriffith$elm_ui$Element$text('Detail 3')
 		]));
-var $author$project$Main$quadGroup = A2(
+var $author$project$PageWelcome$quadGroup = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -14298,7 +14321,7 @@ var $author$project$Main$quadGroup = A2(
 							$mdgriffith$elm_ui$Element$centerX
 						]),
 					_List_fromArray(
-						[$author$project$Main$quadBlock])),
+						[$author$project$PageWelcome$quadBlock])),
 					A2(
 					$mdgriffith$elm_ui$Element$column,
 					_List_fromArray(
@@ -14307,7 +14330,7 @@ var $author$project$Main$quadGroup = A2(
 							$mdgriffith$elm_ui$Element$centerX
 						]),
 					_List_fromArray(
-						[$author$project$Main$quadBlock]))
+						[$author$project$PageWelcome$quadBlock]))
 				])),
 			A2(
 			$mdgriffith$elm_ui$Element$row,
@@ -14326,7 +14349,7 @@ var $author$project$Main$quadGroup = A2(
 							$mdgriffith$elm_ui$Element$centerX
 						]),
 					_List_fromArray(
-						[$author$project$Main$quadBlock])),
+						[$author$project$PageWelcome$quadBlock])),
 					A2(
 					$mdgriffith$elm_ui$Element$column,
 					_List_fromArray(
@@ -14335,12 +14358,13 @@ var $author$project$Main$quadGroup = A2(
 							$mdgriffith$elm_ui$Element$centerX
 						]),
 					_List_fromArray(
-						[$author$project$Main$quadBlock]))
+						[$author$project$PageWelcome$quadBlock]))
 				]))
 		]));
+var $author$project$ResourceColors$obviousOrange = A3($author$project$HsvToRgb$hsv, 30, 0.91, 0.99);
 var $mdgriffith$elm_ui$Internal$Model$Top = {$: 'Top'};
 var $mdgriffith$elm_ui$Element$alignTop = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$Top);
-var $author$project$Main$slide = A2(
+var $author$project$PageWelcome$slide = A2(
 	$mdgriffith$elm_ui$Element$row,
 	_List_fromArray(
 		[
@@ -14349,7 +14373,7 @@ var $author$project$Main$slide = A2(
 		]),
 	_List_fromArray(
 		[
-			$author$project$Main$elmLogo(_List_Nil),
+			$author$project$ResourceImages$elmLogo(_List_Nil),
 			A2(
 			$mdgriffith$elm_ui$Element$column,
 			_List_fromArray(
@@ -14395,90 +14419,90 @@ var $author$project$Main$slide = A2(
 						]))
 				]))
 		]));
-var $author$project$Main$slideShow = function () {
+var $author$project$ResourceColors$slideShowGradient = function () {
 	var col3 = A3($author$project$HsvToRgb$hsv, 136, 0, 0.8);
 	var col2 = A3($author$project$HsvToRgb$hsv, 136, 0, 0.9);
 	var col1 = A3($author$project$HsvToRgb$hsv, 136, 0, 0.98);
-	return A2(
-		$mdgriffith$elm_ui$Element$row,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$centerX,
-				$mdgriffith$elm_ui$Element$width(
-				A2($mdgriffith$elm_ui$Element$maximum, 1200, $mdgriffith$elm_ui$Element$fill)),
-				$mdgriffith$elm_ui$Element$height(
-				A2($mdgriffith$elm_ui$Element$minimum, 300, $mdgriffith$elm_ui$Element$fill)),
-				$mdgriffith$elm_ui$Element$Background$gradient(
-				{
-					angle: $elm$core$Basics$pi,
-					steps: _List_fromArray(
-						[col1, col2, col2, col2, col2, col2, col2, col3])
-				})
-			]),
-		_List_fromArray(
-			[
-				A2(
-				$mdgriffith$elm_ui$Element$column,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$paddingEach(
-						{bottom: 0, left: 20, right: 20, top: 0}),
-						$mdgriffith$elm_ui$Element$Background$color(
-						A3($author$project$HsvToRgb$hsv, 136, 0, 0.84)),
-						$mdgriffith$elm_ui$Element$alpha(0.08),
-						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$alignLeft,
-						$mdgriffith$elm_ui$Element$width(
-						A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
-						$mdgriffith$elm_ui$Element$Border$shadow(
-						{
-							blur: 15,
-							color: A3($author$project$HsvToRgb$hsv, 270, 0, 0),
-							offset: _Utils_Tuple2(3, 0),
-							size: 0
-						})
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$mdgriffith$elm_ui$Element$el,
-						_List_fromArray(
-							[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
-						$mdgriffith$elm_ui$Element$text('«'))
-					])),
-				$author$project$Main$slide,
-				A2(
-				$mdgriffith$elm_ui$Element$column,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$paddingEach(
-						{bottom: 0, left: 20, right: 20, top: 0}),
-						$mdgriffith$elm_ui$Element$Background$color(
-						A3($author$project$HsvToRgb$hsv, 136, 0, 0.84)),
-						$mdgriffith$elm_ui$Element$alpha(0.08),
-						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$alignLeft,
-						$mdgriffith$elm_ui$Element$width(
-						A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
-						$mdgriffith$elm_ui$Element$Border$shadow(
-						{
-							blur: 15,
-							color: A3($author$project$HsvToRgb$hsv, 270, 0, 0),
-							offset: _Utils_Tuple2(-3, 0),
-							size: 0
-						})
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$mdgriffith$elm_ui$Element$el,
-						_List_fromArray(
-							[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
-						$mdgriffith$elm_ui$Element$text('»'))
-					]))
-			]));
+	return $mdgriffith$elm_ui$Element$Background$gradient(
+		{
+			angle: $elm$core$Basics$pi,
+			steps: _List_fromArray(
+				[col1, col2, col2, col2, col2, col2, col2, col3])
+		});
 }();
-var $author$project$Main$pageWelcome = function (model) {
+var $author$project$PageWelcome$slideShow = A2(
+	$mdgriffith$elm_ui$Element$row,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$centerX,
+			$mdgriffith$elm_ui$Element$width(
+			A2($mdgriffith$elm_ui$Element$maximum, 1200, $mdgriffith$elm_ui$Element$fill)),
+			$mdgriffith$elm_ui$Element$height(
+			A2($mdgriffith$elm_ui$Element$minimum, 300, $mdgriffith$elm_ui$Element$fill)),
+			$author$project$ResourceColors$slideShowGradient
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$paddingEach(
+					{bottom: 0, left: 20, right: 20, top: 0}),
+					$mdgriffith$elm_ui$Element$Background$color($author$project$ResourceColors$obviousOrange),
+					$mdgriffith$elm_ui$Element$alpha(0.08),
+					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$alignLeft,
+					$mdgriffith$elm_ui$Element$width(
+					A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
+					$mdgriffith$elm_ui$Element$Border$shadow(
+					{
+						blur: 15,
+						color: A3($author$project$HsvToRgb$hsv, 270, 0, 0),
+						offset: _Utils_Tuple2(3, 0),
+						size: 0
+					})
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text('«'))
+				])),
+			$author$project$PageWelcome$slide,
+			A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$paddingEach(
+					{bottom: 0, left: 20, right: 20, top: 0}),
+					$mdgriffith$elm_ui$Element$Background$color(
+					A3($author$project$HsvToRgb$hsv, 136, 0, 0.84)),
+					$mdgriffith$elm_ui$Element$alpha(0.08),
+					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$alignLeft,
+					$mdgriffith$elm_ui$Element$width(
+					A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
+					$mdgriffith$elm_ui$Element$Border$shadow(
+					{
+						blur: 15,
+						color: A3($author$project$HsvToRgb$hsv, 270, 0, 0),
+						offset: _Utils_Tuple2(-3, 0),
+						size: 0
+					})
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text('»'))
+				]))
+		]));
+var $author$project$PageWelcome$pageWelcome = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$column,
 		_List_fromArray(
@@ -14488,30 +14512,30 @@ var $author$project$Main$pageWelcome = function (model) {
 			]),
 		_List_fromArray(
 			[
-				$author$project$Main$slideShow,
-				$author$project$Main$quadGroup,
-				$author$project$Main$quoteBlock(model),
-				$author$project$Main$anchorTexts1,
-				$author$project$Main$anchorTexts2,
-				$author$project$Main$anchorTexts1
+				$author$project$PageWelcome$slideShow,
+				$author$project$PageWelcome$quadGroup,
+				$author$project$UiComponentGlobal$quoteBlock(model),
+				$author$project$PageWelcome$anchorTexts1,
+				$author$project$PageWelcome$anchorTexts2,
+				$author$project$PageWelcome$anchorTexts1
 			]));
 };
-var $author$project$Main$selectedPage = function (model) {
+var $author$project$WebsiteController$selectedPage = function (model) {
 	var _v0 = model.selectedPage;
 	switch (_v0.$) {
 		case 'LanguagePreferences':
-			return $author$project$Main$pageLanguagePreferences(model);
+			return $author$project$PageLanguage$pageLanguagePreferences(model);
 		case 'MyStory':
-			return $author$project$Main$pageMyStory(model);
+			return $author$project$PageMyStory$pageMyStory(model);
 		case 'HireMe':
-			return $author$project$Main$pageHireMe(model);
+			return $author$project$PageHireMe$pageHireMe(model);
 		case 'ColorSelection':
-			return $author$project$Main$pageColorSelection(model);
+			return $author$project$PageColorSelection$pageColorSelection(model);
 		default:
-			return $author$project$Main$pageWelcome(model);
+			return $author$project$PageWelcome$pageWelcome(model);
 	}
 };
-var $author$project$Main$website = function (model) {
+var $author$project$WebsiteController$website = function (model) {
 	return A2(
 		$mdgriffith$elm_ui$Element$layout,
 		_List_Nil,
@@ -14519,7 +14543,7 @@ var $author$project$Main$website = function (model) {
 			$mdgriffith$elm_ui$Element$column,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$Background$color($author$project$Main$white),
+					$mdgriffith$elm_ui$Element$Background$color($author$project$ResourceColors$white),
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 0),
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
@@ -14527,13 +14551,13 @@ var $author$project$Main$website = function (model) {
 				]),
 			_List_fromArray(
 				[
-					$author$project$Main$header(model),
-					$author$project$Main$selectedPage(model),
-					$author$project$Main$footer(model)
+					$author$project$UiComponentGlobal$header(model),
+					$author$project$WebsiteController$selectedPage(model),
+					$author$project$UiComponentGlobal$footer(model)
 				])));
 };
 var $author$project$Main$view = function (model) {
-	return $author$project$Main$website(model);
+	return $author$project$WebsiteController$website(model);
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
 	{init: $author$project$Main$init, update: $author$project$Main$update, view: $author$project$Main$view});
