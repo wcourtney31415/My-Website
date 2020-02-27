@@ -37,8 +37,7 @@ type alias Model =
 type Msg
     = NavBarButtonClicked Model
     | AttemptedTextBoxChange
-    | SliderMoved Model
-    | NewSliderMoved HsvRecord Colors
+    | SliderMoved HsvRecord Colors
 
 
 type alias ColorList =

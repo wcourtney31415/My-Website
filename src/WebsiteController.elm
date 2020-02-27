@@ -19,10 +19,6 @@ import ResourceTexts exposing (..)
 import WelcomePage exposing (..)
 
 
-
-{- /////////////////////        Website Itself           //////////////////// -}
-
-
 website : Model -> Html.Html Msg
 website model =
     Element.layout
@@ -39,10 +35,6 @@ website model =
             , selectedPage model
             , footer model
             ]
-
-
-
-{- /////////////////////           Webpages           /////////////////////// -}
 
 
 selectedPage : Model -> Element Msg

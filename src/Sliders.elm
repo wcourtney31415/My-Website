@@ -50,7 +50,7 @@ handleSliderMovement model hsvRecord colorToBeUpdated =
 chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
     case propertyToUpdate of
         Hue ->
-            { onChange = \new -> NewSliderMoved { currentColorRecord | hue = round new } colorToUpdate
+            { onChange = \new -> SliderMoved { currentColorRecord | hue = round new } colorToUpdate
             , label =
                 Input.labelAbove []
                     (text <| "Hue: " ++ String.fromInt currentColorRecord.hue)
@@ -63,7 +63,7 @@ chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
             }
 
         Saturation ->
-            { onChange = \new -> NewSliderMoved { currentColorRecord | saturation = new } colorToUpdate
+            { onChange = \new -> SliderMoved { currentColorRecord | saturation = new } colorToUpdate
             , label =
                 Input.labelAbove []
                     (text <| "Saturation: " ++ String.fromFloat currentColorRecord.saturation)
@@ -76,7 +76,7 @@ chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
             }
 
         Value ->
-            { onChange = \new -> NewSliderMoved { currentColorRecord | value = new } colorToUpdate
+            { onChange = \new -> SliderMoved { currentColorRecord | value = new } colorToUpdate
             , label =
                 Input.labelAbove []
                     (text <| "Value: " ++ String.fromFloat currentColorRecord.value)

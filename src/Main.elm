@@ -42,10 +42,7 @@ update msg model =
         AttemptedTextBoxChange ->
             model
 
-        SliderMoved newModel ->
-            newModel
-
-        NewSliderMoved hsvRecord colorToBeUpdated ->
+        SliderMoved hsvRecord colorToBeUpdated ->
             handleSliderMovement model hsvRecord colorToBeUpdated
 
 
