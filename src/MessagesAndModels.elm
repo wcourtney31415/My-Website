@@ -17,6 +17,8 @@ type Colors
     | Footer
     | LeftBlock
     | RightBlock
+    | FontA
+    | FontB
 
 
 type alias HsvRecord =
@@ -47,4 +49,6 @@ type alias ColorList =
     , inlineTitleBar : HsvRecord
     , leftBlock : HsvRecord
     , rightBlock : HsvRecord
+    , fontA : HsvRecord
+    , fontB : HsvRecord
     }

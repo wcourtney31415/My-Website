@@ -12,20 +12,39 @@ import Html
 import MessagesAndModels exposing (..)
 
 
-hsvRecordToColor : HsvRecord -> Color
-hsvRecordToColor hsvRecord =
-    hsv
-        hsvRecord.hue
-        hsvRecord.saturation
-        hsvRecord.value
+handleSliderMovement : Model -> HsvRecord -> Colors -> Model
+handleSliderMovement model hsvRecord colorToBeUpdated =
+    let
+        colorList =
+            model.colorList
+    in
+    case colorToBeUpdated of
+        Header ->
+            { model | colorList = { colorList | header = hsvRecord } }
 
+        QuoteBlock1 ->
+            { model | colorList = { colorList | quoteBlock1 = hsvRecord } }
 
-lightGrey =
-    hsv 1 0 0.92
+        QuoteBlock2 ->
+            { model | colorList = { colorList | quoteBlock2 = hsvRecord } }
 
+        InlineTitleBar ->
+            { model | colorList = { colorList | inlineTitleBar = hsvRecord } }
 
+        Footer ->
+            { model | colorList = { colorList | footer = hsvRecord } }
 
------------------------------------------------------------------
+        LeftBlock ->
+            { model | colorList = { colorList | leftBlock = hsvRecord } }
+
+        RightBlock ->
+            { model | colorList = { colorList | rightBlock = hsvRecord } }
+
+        FontA ->
+            { model | colorList = { colorList | fontA = hsvRecord } }
+
+        FontB ->
+            { model | colorList = { colorList | fontB = hsvRecord } }
 
 
 chooseRecord colorToUpdate currentColorRecord propertyToUpdate =
