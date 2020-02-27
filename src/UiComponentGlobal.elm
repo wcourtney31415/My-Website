@@ -1,7 +1,6 @@
-module GlobalUIComponents exposing (..)
+module UiComponentGlobal exposing (..)
 
 import Browser
-import Colors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -10,6 +9,7 @@ import Element.Input as Input
 import HsvToRgb exposing (..)
 import Html
 import MessagesAndModels exposing (..)
+import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
 

@@ -1,17 +1,17 @@
 module WebsiteController exposing (..)
 
 import Browser
-import ColorSelectionPage exposing (..)
-import Colors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
-import GlobalUIComponents exposing (..)
-import HireMePage exposing (..)
 import Html
-import LanguagePage exposing (..)
 import MessagesAndModels exposing (..)
-import MyStoryPage exposing (..)
-import WelcomePage exposing (..)
+import PageColorSelection exposing (..)
+import PageHireMe exposing (..)
+import PageLanguage exposing (..)
+import PageMyStory exposing (..)
+import PageWelcome exposing (..)
+import ResourceColors exposing (..)
+import UiComponentGlobal exposing (..)
 
 
 website : Model -> Html.Html Msg

@@ -1,10 +1,10 @@
 module Main exposing (..)
 
 import Browser
-import Colors exposing (..)
 import Html
 import MessagesAndModels exposing (..)
-import Sliders exposing (..)
+import ResourceColors exposing (..)
+import UiComponentSliders exposing (..)
 import WebsiteController exposing (..)
 
 

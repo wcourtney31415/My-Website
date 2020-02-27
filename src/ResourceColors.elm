@@ -1,4 +1,4 @@
-module Colors exposing (..)
+module ResourceColors exposing (..)
 
 import Element exposing (..)
 import HsvToRgb exposing (..)
