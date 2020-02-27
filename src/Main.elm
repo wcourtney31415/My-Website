@@ -19,7 +19,7 @@ main =
 
 init : Model
 init =
-    { selectedPage = ColorSelection
+    { selectedPage = Welcome
     , colorList = colorList
     }
 

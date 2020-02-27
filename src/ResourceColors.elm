@@ -1,6 +1,7 @@
 module ResourceColors exposing (..)
 
 import Element exposing (..)
+import Element.Background as Background
 import HsvToRgb exposing (..)
 import MessagesAndModels exposing (..)
 
@@ -31,6 +32,57 @@ colorList =
     , fontA = { hue = 0, saturation = 0, value = 0.93 }
     , fontB = { hue = 0, saturation = 0, value = 0.93 }
     }
+
+
+slideShowGradient : Attribute Msg
+slideShowGradient =
+    let
+        col1 =
+            hsv 136 0 0.98
+
+        col2 =
+            hsv 136 0 0.9
+
+        col3 =
+            hsv 136 0 0.8
+    in
+    Background.gradient
+        { angle = pi
+        , steps =
+            [ col1
+            , col2
+            , col2
+            , col2
+            , col2
+            , col2
+            , col2
+            , col3
+            ]
+        }
+
+
+anchorTexts1Gradient : Attribute Msg
+anchorTexts1Gradient =
+    Background.gradient
+        { angle = pi
+        , steps =
+            [ hsv 136 0 1
+            , hsv 136 0 0.95
+            , hsv 136 0 0.97
+            ]
+        }
+
+
+anchorTexts2Gradient : Attribute Msg
+anchorTexts2Gradient =
+    Background.gradient
+        { angle = pi
+        , steps =
+            [ hsv 136 0 1
+            , hsv 136 0 0.95
+            , hsv 136 0 0.97
+            ]
+        }
 
 
 colorLeftBlock : Color
@@ -80,3 +132,13 @@ obviousPurple =
 obviousOrange : Color
 obviousOrange =
     hsv 30 0.91 0.99
+
+
+dynamicSliderHeader : Color
+dynamicSliderHeader =
+    hsv 1 0 0.9
+
+
+dynamicSliderBody : Color
+dynamicSliderBody =
+    hsv 1 0 0.95

@@ -34,20 +34,23 @@ anchorTexts1 =
     Element.column
         [ width (fill |> maximum 1200)
         , centerX
-        , paddingEach { top = 150, bottom = 150, right = 40, left = 40 }
-        , Background.gradient
-            { angle = pi
-            , steps =
-                [ hsv 136 0 1
-                , hsv 136 0 0.95
-                , hsv 136 0 0.97
-                ]
+        , paddingEach
+            { top = 150
+            , bottom = 150
+            , right = 40
+            , left = 40
             }
+        , anchorTexts1Gradient
         ]
         [ Element.paragraph
             [ Font.bold
             , Font.size 30
-            , paddingEach { top = 0, bottom = 20, left = 0, right = 0 }
+            , paddingEach
+                { top = 0
+                , bottom = 20
+                , left = 0
+                , right = 0
+                }
             ]
             [ text "Clean Code" ]
         , Element.paragraph
@@ -62,20 +65,23 @@ anchorTexts2 =
     Element.column
         [ width (fill |> maximum 1200)
         , centerX
-        , paddingEach { top = 150, bottom = 150, right = 40, left = 40 }
-        , Background.gradient
-            { angle = pi
-            , steps =
-                [ hsv 136 0 1
-                , hsv 136 0 0.95
-                , hsv 136 0 0.97
-                ]
+        , paddingEach
+            { top = 150
+            , bottom = 150
+            , right = 40
+            , left = 40
             }
+        , anchorTexts2Gradient
         ]
         [ Element.paragraph
             [ Font.bold
             , Font.size 30
-            , paddingEach { top = 0, bottom = 20, left = 0, right = 0 }
+            , paddingEach
+                { top = 0
+                , bottom = 20
+                , left = 0
+                , right = 0
+                }
             , Font.alignRight
             ]
             [ text "Clean Code" ]
@@ -94,7 +100,12 @@ slide =
         [ elmLogo []
         , Element.column
             [ alignTop
-            , paddingEach { right = 0, left = 40, top = 30, bottom = 0 }
+            , paddingEach
+                { right = 0
+                , left = 40
+                , top = 30
+                , bottom = 0
+                }
             , width fill
             , spacing 15
             ]
@@ -117,56 +128,52 @@ slide =
 
 slideShow : Element Msg
 slideShow =
-    let
-        col1 =
-            hsv 136 0 0.98
-
-        col2 =
-            hsv 136 0 0.9
-
-        col3 =
-            hsv 136 0 0.8
-    in
     Element.row
         [ centerX
         , width (fill |> maximum 1200)
         , height
-            (fill
-                |> minimum 300
-            )
-        , Background.gradient
-            { angle = pi
-            , steps =
-                [ col1
-                , col2
-                , col2
-                , col2
-                , col2
-                , col2
-                , col2
-                , col3
-                ]
-            }
+            (fill |> minimum 300)
+        , slideShowGradient
         ]
         [ Element.column
-            [ paddingEach { left = 20, right = 20, bottom = 0, top = 0 }
-            , Background.color (hsv 136 0 0.84)
+            [ paddingEach
+                { left = 20
+                , right = 20
+                , bottom = 0
+                , top = 0
+                }
+            , Background.color obviousOrange
             , alpha 0.08
             , height fill
             , alignLeft
             , width (fill |> maximum 30)
-            , Border.shadow { blur = 15, color = hsv 270 0 0, offset = ( 3, 0 ), size = 0 }
+            , Border.shadow
+                { blur = 15
+                , color = hsv 270 0 0
+                , offset = ( 3, 0 )
+                , size = 0
+                }
             ]
             [ Element.el [ centerY, centerX ] (text "«") ]
         , slide
         , Element.column
-            [ paddingEach { left = 20, right = 20, bottom = 0, top = 0 }
+            [ paddingEach
+                { left = 20
+                , right = 20
+                , bottom = 0
+                , top = 0
+                }
             , Background.color (hsv 136 0 0.84)
             , alpha 0.08
             , height fill
             , alignLeft
             , width (fill |> maximum 30)
-            , Border.shadow { blur = 15, color = hsv 270 0 0, offset = ( -3, 0 ), size = 0 }
+            , Border.shadow
+                { blur = 15
+                , color = hsv 270 0 0
+                , offset = ( -3, 0 )
+                , size = 0
+                }
             ]
             [ Element.el [ centerY, centerX ] (text "»") ]
         ]
