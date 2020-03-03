@@ -13,6 +13,7 @@ import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
 import UiComponentGlobal exposing (..)
+import UiComponentSlideShow exposing (..)
 
 
 pageWelcome : Model -> Element Msg
@@ -91,91 +92,6 @@ anchorTexts2 =
             , Font.alignRight
             ]
             [ text "And here's why it matters!" ]
-        ]
-
-
-slide =
-    Element.row
-        [ width fill, padding 20 ]
-        [ elmLogo []
-        , Element.column
-            [ alignTop
-            , paddingEach
-                { right = 0
-                , left = 40
-                , top = 30
-                , bottom = 0
-                }
-            , width fill
-            , spacing 15
-            ]
-            [ Element.paragraph
-                [ Font.bold
-                , Font.size 23
-                ]
-                [ text "Lets put some text here and see what exactly this looks like." ]
-            , Element.paragraph
-                [ Font.size 20
-                ]
-                [ text "Maybe some subtext?" ]
-            , Element.paragraph
-                [ Font.size 18
-                ]
-                [ text "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here." ]
-            ]
-        ]
-
-
-slideShow : Element Msg
-slideShow =
-    Element.row
-        [ centerX
-        , width (fill |> maximum 1200)
-        , height
-            (fill |> minimum 300)
-        , slideShowGradient
-        ]
-        [ Element.column
-            [ paddingEach
-                { left = 20
-                , right = 20
-                , bottom = 0
-                , top = 0
-                }
-            , Background.color obviousOrange
-            , alpha 0.08
-            , height fill
-            , alignLeft
-            , width (fill |> maximum 30)
-            , Border.shadow
-                { blur = 15
-                , color = hsv 270 0 0
-                , offset = ( 3, 0 )
-                , size = 0
-                }
-            ]
-            [ Element.el [ centerY, centerX ] (text "«") ]
-        , slide
-        , Element.column
-            [ paddingEach
-                { left = 20
-                , right = 20
-                , bottom = 0
-                , top = 0
-                }
-            , Background.color (hsv 136 0 0.84)
-            , alpha 0.08
-            , height fill
-            , alignLeft
-            , width (fill |> maximum 30)
-            , Border.shadow
-                { blur = 15
-                , color = hsv 270 0 0
-                , offset = ( -3, 0 )
-                , size = 0
-                }
-            ]
-            [ Element.el [ centerY, centerX ] (text "»") ]
         ]
 
 
