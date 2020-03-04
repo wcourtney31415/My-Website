@@ -21,6 +21,7 @@ init : Model
 init =
     { selectedPage = Welcome
     , colorList = colorList
+    , activeSlide = Slide1
     }
 
 

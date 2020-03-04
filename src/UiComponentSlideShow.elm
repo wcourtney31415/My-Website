@@ -15,8 +15,17 @@ import ResourceTexts exposing (..)
 import UiComponentGlobal exposing (..)
 
 
-slideShow : Element Msg
-slideShow =
+slideShow : ActiveSlide -> Element Msg
+slideShow activeSlide =
+    let
+        slide =
+            case activeSlide of
+                Slide1 ->
+                    slide1
+
+                Slide2 ->
+                    slide2
+    in
     Element.row
         [ centerX
         , width (fill |> maximum 1200)
@@ -76,7 +85,17 @@ rightArrow =
         [ Element.el [ centerY, centerX ] (text "»") ]
 
 
-slide =
+slide1 =
+    let
+        textA =
+            "Lets put some text here and see what exactly this looks like."
+
+        textB =
+            "Maybe some subtext?"
+
+        textC =
+            "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here."
+    in
     Element.row
         [ width fill, padding 20 ]
         [ elmLogo []
@@ -95,14 +114,56 @@ slide =
                 [ Font.bold
                 , Font.size 23
                 ]
-                [ text "Lets put some text here and see what exactly this looks like." ]
+                [ text textA ]
             , Element.paragraph
                 [ Font.size 20
                 ]
-                [ text "Maybe some subtext?" ]
+                [ text textB ]
             , Element.paragraph
                 [ Font.size 18
                 ]
-                [ text "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here." ]
+                [ text textC ]
+            ]
+        ]
+
+
+slide2 =
+    let
+        textA =
+            "This is Slide 2!"
+
+        textB =
+            "Here's some subtext for Slide 2."
+
+        textC =
+            "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here."
+    in
+    Element.row
+        [ width fill, padding 20 ]
+        [ elmLogo []
+        , Element.column
+            [ alignTop
+            , paddingEach
+                { right = 0
+                , left = 40
+                , top = 30
+                , bottom = 0
+                }
+            , width fill
+            , spacing 15
+            ]
+            [ Element.paragraph
+                [ Font.bold
+                , Font.size 23
+                ]
+                [ text textA ]
+            , Element.paragraph
+                [ Font.size 20
+                ]
+                [ text textB ]
+            , Element.paragraph
+                [ Font.size 18
+                ]
+                [ text textC ]
             ]
         ]

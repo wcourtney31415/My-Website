@@ -22,7 +22,7 @@ pageWelcome model =
         [ width fill
         , centerX
         ]
-        [ slideShow
+        [ slideShow model.activeSlide
         , quadGroup
         , quoteBlock model
         , anchorTexts1

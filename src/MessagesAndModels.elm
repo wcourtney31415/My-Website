@@ -9,6 +9,11 @@ type Page
     | Welcome
 
 
+type ActiveSlide
+    = Slide1
+    | Slide2
+
+
 type Colors
     = Header
     | QuoteBlock1
@@ -30,6 +35,7 @@ type alias HsvRecord =
 
 type alias Model =
     { selectedPage : Page
+    , activeSlide : ActiveSlide
     , colorList : ColorList
     }
 
