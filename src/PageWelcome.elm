@@ -13,6 +13,7 @@ import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
 import UiComponentGlobal exposing (..)
+import UiComponentParagraphBlock exposing (..)
 import UiComponentSlideShow exposing (..)
 
 
@@ -38,128 +39,6 @@ pageWelcome model =
             "Functional Programming"
             "I have just taken my first few steps into the world of functional programming, and it has quickly become one of my new favorite coding styles. Purely functional languages use very strict rules that enforce good coding habits. Additionally they are based around immutability, meaning that the state of a “Variable” never changes, you simply return a modified copy of that value. I personally have grown to love this, because between these two principles it significantly reduces unexpected side effects. Learning to use functional programming has, in a way, rewired the way I think about the code, and I’m eager to continue exploring that avenue."
         ]
-
-
-paragraphBlock : LeftOrRight -> String -> String -> Element Msg
-paragraphBlock leftOrRight title paragraph =
-    let
-        titlePaddingAmmount =
-            40
-
-        settings =
-            case leftOrRight of
-                Left ->
-                    { alignment = alignLeft
-                    , padding =
-                        paddingEach
-                            { top = 0
-                            , bottom = 0
-                            , left = titlePaddingAmmount
-                            , right = 0
-                            }
-                    }
-
-                Right ->
-                    { alignment = alignRight
-                    , padding =
-                        paddingEach
-                            { top = 0
-                            , bottom = 0
-                            , left = 0
-                            , right = titlePaddingAmmount
-                            }
-                    }
-    in
-    Element.column
-        [ width (fill |> maximum 1200)
-        , centerX
-        , paddingEach
-            { top = 150
-            , bottom = 150
-            , right = 40
-            , left = 40
-            }
-        , anchorTexts1Gradient
-
-        --, Background.color obviousOrange
-        ]
-        [ Element.paragraph
-            [ Font.bold
-            , Font.size 30
-            , paddingEach
-                { top = 0
-                , bottom = 20
-                , left = 0
-                , right = 0
-                }
-
-            --, Background.color obviousPurple
-            ]
-            [ Element.el
-                [ settings.alignment
-
-                --, Background.color obviousBlue
-                , settings.padding
-                ]
-              <|
-                text title
-            ]
-        , Element.paragraph
-            [ Font.size 20
-            , Font.color <| rgb255 50 50 50
-            , width
-                (fill
-                    |> maximum 900
-                )
-            , settings.alignment
-
-            --, Background.color obviousGreen
-            ]
-            [ Element.paragraph
-                [ settings.alignment
-                , spacing 12
-                ]
-              <|
-                [ text paragraph
-                ]
-            ]
-        ]
-
-
-
-{- Original
-   paragraphBlock title paragraph =
-       Element.column
-           [ width (fill |> maximum 1200)
-           , centerX
-           , paddingEach
-               { top = 150
-               , bottom = 150
-               , right = 40
-               , left = 40
-               }
-           , paragraphBlockGradient
-           ]
-           [ Element.paragraph
-               [ Font.bold
-               , Font.size 30
-               , paddingEach
-                   { top = 0
-                   , bottom = 20
-                   , left = 0
-                   , right = 0
-                   }
-               , Font.alignRight
-               ]
-               [ text title ]
-           , Element.paragraph
-               [ Font.bold
-               , Font.size 20
-               , Font.alignRight
-               ]
-               [ text paragraph ]
-           ]
--}
 
 
 quadBlock =
