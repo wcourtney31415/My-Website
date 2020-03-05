@@ -41,12 +41,6 @@ hsv h s v =
     given h s v |> solveC |> solveX |> solveM |> calcRange |> solveRGB
 
 
-
---print : String -> Data -> Data
---print label data =
---    Debug.log label data
-
-
 solveC : Data -> Data
 solveC data =
     { data | c = data.v * data.s }
