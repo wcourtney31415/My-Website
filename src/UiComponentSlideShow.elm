@@ -88,13 +88,13 @@ rightArrow =
 slide1 =
     let
         textA =
-            "Lets put some text here and see what exactly this looks like."
+            "Welcome to my website"
 
         textB =
-            "Maybe some subtext?"
+            "Here you can learn about the practices and preferences I value in my day to day coding. I will also be providing a few simple examples of my work, this website itself being one of them. I developed it myself in a functional language I’m currently learning (and strongly recommend) called Elm."
 
         textC =
-            "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here."
+            "Please contact me at " ++ emailAddress ++ " with any professional inquiries. I look forward to hearing from you."
     in
     Element.row
         [ width fill, padding 20 ]
@@ -108,7 +108,7 @@ slide1 =
                 , bottom = 0
                 }
             , width fill
-            , spacing 15
+            , spacing 20
             ]
             [ Element.paragraph
                 [ Font.bold
@@ -120,7 +120,7 @@ slide1 =
                 ]
                 [ text textB ]
             , Element.paragraph
-                [ Font.size 18
+                [ Font.size 17
                 ]
                 [ text textC ]
             ]
