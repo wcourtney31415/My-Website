@@ -11,6 +11,8 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
+import SlideshowSlide1 exposing (..)
+import SlideshowSlide2 exposing (..)
 import UiComponentGlobal exposing (..)
 
 
@@ -73,87 +75,3 @@ slideshowArrow leftOrRight =
             }
         ]
         [ Element.el [ centerY, centerX ] (text settings.symbol) ]
-
-
-slide1 =
-    let
-        textA =
-            "Welcome to my website"
-
-        textB =
-            "Here you can learn about the practices and preferences I value in my day to day coding. I will also be providing a few simple examples of my work, this website itself being one of them. I developed it myself in a functional language I’m currently learning (and strongly recommend) called Elm."
-
-        textC =
-            "Please contact me at " ++ emailAddress ++ " with any professional inquiries. I look forward to hearing from you."
-    in
-    Element.row
-        [ width fill, padding 20 ]
-        [ elmLogo []
-        , Element.column
-            [ alignTop
-            , paddingEach
-                { right = 0
-                , left = 40
-                , top = 30
-                , bottom = 0
-                }
-            , width fill
-            , spacing 20
-            ]
-            [ Element.paragraph
-                [ Font.bold
-                , Font.size 23
-                ]
-                [ text textA ]
-            , Element.paragraph
-                [ Font.size 20
-                ]
-                [ text textB ]
-            , Element.paragraph
-                [ Font.size 17
-                ]
-                [ text textC ]
-            ]
-        ]
-
-
-slide2 =
-    let
-        textA =
-            "This is Slide 2!"
-
-        textB =
-            "Here's some subtext for Slide 2."
-
-        textC =
-            "Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here."
-    in
-    Element.row
-        [ width fill, padding 20 ]
-        [ elmLogo []
-        , Element.column
-            [ alignTop
-            , paddingEach
-                { right = 0
-                , left = 40
-                , top = 30
-                , bottom = 0
-                }
-            , width fill
-            , spacing 15
-            ]
-            [ Element.paragraph
-                [ Font.bold
-                , Font.size 23
-                ]
-                [ text textA ]
-            , Element.paragraph
-                [ Font.size 20
-                ]
-                [ text textB ]
-            , Element.paragraph
-                [ Font.size 18
-                ]
-                [ text textC ]
-            ]
-        ]
