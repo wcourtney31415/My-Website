@@ -6,7 +6,6 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import HsvToRgb exposing (..)
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
@@ -47,14 +46,14 @@ leftArrow =
             , bottom = 0
             , top = 0
             }
-        , Background.color (hsv 136 0 0.84)
+        , Background.color colorSlideShowArrow
         , alpha 0.08
         , height fill
         , alignLeft
         , width (fill |> maximum 30)
         , Border.shadow
             { blur = 15
-            , color = hsv 270 0 0
+            , color = colorSlideShowArrowShadow
             , offset = ( 3, 0 )
             , size = 0
             }
@@ -70,14 +69,14 @@ rightArrow =
             , bottom = 0
             , top = 0
             }
-        , Background.color (hsv 136 0 0.84)
+        , Background.color colorSlideShowArrow
         , alpha 0.08
         , height fill
         , alignLeft
         , width (fill |> maximum 30)
         , Border.shadow
             { blur = 15
-            , color = hsv 270 0 0
+            , color = colorSlideShowArrowShadow
             , offset = ( -3, 0 )
             , size = 0
             }

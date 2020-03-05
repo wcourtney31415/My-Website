@@ -34,6 +34,16 @@ colorList =
     }
 
 
+colorSlideShowArrow : Color
+colorSlideShowArrow =
+    hsv 136 0 0.84
+
+
+colorSlideShowArrowShadow : Color
+colorSlideShowArrowShadow =
+    hsv 270 0 0
+
+
 slideShowGradient : Attribute Msg
 slideShowGradient =
     let
