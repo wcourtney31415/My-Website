@@ -26,6 +26,11 @@ type Colors
     | FontB
 
 
+type LeftOrRight
+    = Left
+    | Right
+
+
 type alias HsvRecord =
     { hue : Int
     , saturation : Float
