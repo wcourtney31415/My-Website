@@ -23,14 +23,22 @@ pageColorSelection model =
         ]
         [ quoteBlock model
         , sliderBlock model
-        , leftBlock model (pictureOfMe []) langPrefIntroText
+        , imgAndTextBlock Left model (pictureOfMe []) (text firstParagraphText)
         , inlineTitleBar model
             (hsvRecordToColor model.colorList.inlineTitleBar)
             "Language Preferences"
-        , rightBlock model (elmLogo []) (elmLangPrefElement model)
-        , leftBlock model (javaLogo []) firstParagraphText
-        , rightBlock model (visualStudioLogo []) (elmLangPrefElement model)
-        , leftBlock model (arduinoLogo []) firstParagraphText
+        , imgAndTextBlock
+            Right
+            model
+            (elmLogo [])
+            (elmLangPrefElement model)
+        , imgAndTextBlock Left model (javaLogo []) (text firstParagraphText)
+        , imgAndTextBlock
+            Right
+            model
+            (visualStudioLogo [])
+            (elmLangPrefElement model)
+        , imgAndTextBlock Left model (arduinoLogo []) (text firstParagraphText)
         ]
 
 

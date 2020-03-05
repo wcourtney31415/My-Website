@@ -173,48 +173,51 @@ quoteBlock model =
         ]
 
 
-leftBlock : Model -> Element Msg -> String -> Element Msg
-leftBlock model img txt =
-    backgroundWrapper (hsvRecordToColor model.colorList.leftBlock) model <|
+imgAndTextBlock : LeftOrRight -> Model -> Element Msg -> Element Msg -> Element Msg
+imgAndTextBlock leftOrRight model img txtElement =
+    let
+        settings =
+            case leftOrRight of
+                Left ->
+                    { color = model.colorList.leftBlock
+                    , paragraph =
+                        [ img ]
+                            ++ [ Element.textColumn
+                                    [ spacing 15
+                                    , padding 20
+                                    , alignLeft
+                                    ]
+                                    [ Element.paragraph []
+                                        [ txtElement
+                                        ]
+                                    ]
+                               ]
+                    }
+
+                Right ->
+                    { color = model.colorList.rightBlock
+                    , paragraph =
+                        [ Element.textColumn
+                            [ spacing 15
+                            , padding 20
+                            , alignLeft
+                            ]
+                            [ Element.paragraph []
+                                [ txtElement
+                                ]
+                            ]
+                        ]
+                            ++ [ img ]
+                    }
+    in
+    backgroundWrapper (hsvRecordToColor settings.color) model <|
         Element.wrappedRow
             [ paddingXY 40 40
             , spacing 20
             , centerX
             , width (fill |> maximum 1200)
             ]
-            [ img
-            , Element.textColumn
-                [ spacing 15
-                , padding 20
-                , alignLeft
-                ]
-                [ Element.paragraph []
-                    [ text txt
-                    ]
-                ]
-            ]
-
-
-rightBlock : Model -> Element Msg -> Element Msg -> Element Msg
-rightBlock model img txtElement =
-    backgroundWrapper (hsvRecordToColor model.colorList.rightBlock) model <|
-        Element.wrappedRow
-            [ paddingXY 40 40
-            , spacing 20
-            , centerX
-            , width (fill |> maximum 1200)
-            ]
-            [ Element.textColumn
-                [ spacing 15
-                , padding 20
-                , alignLeft
-                ]
-                [ Element.paragraph []
-                    [ txtElement
-                    ]
-                ]
-            , img
-            ]
+            settings.paragraph
 
 
 

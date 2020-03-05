@@ -23,6 +23,6 @@ pageHireMe model =
         [ inlineTitleBar model
             (hsvRecordToColor model.colorList.inlineTitleBar)
             "Story"
-        , leftBlock model (pictureOfMe []) langPrefIntroText
+        , imgAndTextBlock Left model (pictureOfMe []) (text firstParagraphText)
         , myStoryTextBody
         ]
