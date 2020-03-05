@@ -85,6 +85,16 @@ anchorTexts2Gradient =
         }
 
 
+colorQuadBlockBackground : Color
+colorQuadBlockBackground =
+    hsv 136 0 0.94
+
+
+colorQuadBlockShadow : Color
+colorQuadBlockShadow =
+    hsv 136 0 0.75
+
+
 colorLeftBlock : Color
 colorLeftBlock =
     hsv 0 0 0.93

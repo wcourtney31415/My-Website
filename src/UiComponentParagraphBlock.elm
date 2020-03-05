@@ -6,12 +6,9 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import HsvToRgb exposing (..)
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
-import ResourceImages exposing (..)
-import ResourceTexts exposing (..)
 import UiComponentGlobal exposing (..)
 import UiComponentSlideShow exposing (..)
 
