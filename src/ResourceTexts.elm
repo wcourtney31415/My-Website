@@ -50,6 +50,11 @@ textStoryBody =
     lotsOfText
 
 
+emailAddress : String
+emailAddress =
+    "wcourtney31415@gmail.com"
+
+
 
 --Below are some placeholder texts until I finish the site layout.
 

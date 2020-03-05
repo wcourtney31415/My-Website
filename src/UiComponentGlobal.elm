@@ -67,18 +67,23 @@ header model =
 
 footer : Model -> Element Msg
 footer model =
-    Element.wrappedRow
+    Element.column
         [ Background.color <|
             hsvRecordToColor model.colorList.footer
-        , spacing 20
+        , spacing 5
         , paddingXY 25 40
         , width fill
-        , fontShadows
         , centerX
+        , Font.size 20
+        , Font.color white
+        , Font.shadow
+            { offset = ( 3, 3 )
+            , blur = 20
+            , color = black
+            }
         ]
     <|
-        navLinks
-            model
+        [ Element.el [ centerX ] (text "For additional contact info, and qualifications"), Element.el [ centerX ] (text <| "Email me at: " ++ emailAddress) ]
 
 
 inlineTitleBar : Model -> Color -> String -> Element msg

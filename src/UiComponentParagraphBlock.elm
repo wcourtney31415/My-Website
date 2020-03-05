@@ -16,9 +16,6 @@ import UiComponentSlideShow exposing (..)
 paragraphBlock : LeftOrRight -> String -> String -> Element Msg
 paragraphBlock leftOrRight title paragraph =
     let
-        titlePaddingAmmount =
-            40
-
         settings =
             case leftOrRight of
                 Left ->
@@ -27,7 +24,7 @@ paragraphBlock leftOrRight title paragraph =
                         paddingEach
                             { top = 0
                             , bottom = 0
-                            , left = titlePaddingAmmount
+                            , left = 40
                             , right = 0
                             }
                     }
@@ -39,7 +36,7 @@ paragraphBlock leftOrRight title paragraph =
                             { top = 0
                             , bottom = 0
                             , left = 0
-                            , right = titlePaddingAmmount
+                            , right = 70
                             }
                     }
     in
