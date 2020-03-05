@@ -11981,6 +11981,8 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 	});
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
+var $author$project$MessagesAndModels$Left = {$: 'Left'};
+var $author$project$MessagesAndModels$Right = {$: 'Right'};
 var $elm$html$Html$Attributes$alt = $elm$html$Html$Attributes$stringProperty('alt');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -12094,47 +12096,6 @@ var $author$project$ResourceImages$elmLogo = function (list) {
 };
 var $author$project$ResourceTexts$declarationOfIndependence = 'We hold these truths to be self-evident, that all men are created equal, that they are endowed by their creator with certain unalienable rights, that among these are life, liberty and the pursuit of happiness. That to secure these rights, Governments are instituted among men, deriving their just powers from the consent of the governed. That whenever any form of government becomes destructive of these ends, it is the right of the people to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their safety and happiness.';
 var $author$project$ResourceTexts$firstParagraphText = $author$project$ResourceTexts$declarationOfIndependence;
-var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
-var $mdgriffith$elm_ui$Element$Font$center = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.textCenter);
-var $mdgriffith$elm_ui$Element$padding = function (x) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$padding,
-		A5(
-			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-			'p-' + $elm$core$String$fromInt(x),
-			x,
-			x,
-			x,
-			x));
-};
-var $author$project$UiComponentGlobal$inlineTitleBar = F3(
-	function (model, color, str) {
-		return A2(
-			$mdgriffith$elm_ui$Element$paragraph,
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$Background$color(color),
-					$mdgriffith$elm_ui$Element$padding(30),
-					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-					$author$project$UiComponentGlobal$fontShadows,
-					$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white),
-					$mdgriffith$elm_ui$Element$Font$center,
-					$mdgriffith$elm_ui$Element$Font$size(30),
-					$mdgriffith$elm_ui$Element$Font$bold
-				]),
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$text(str)
-				]));
-	});
-var $author$project$ResourceImages$javaLogo = function (list) {
-	return A2(
-		$mdgriffith$elm_ui$Element$image,
-		list,
-		{description: 'Java  Logo', src: './Images/JavaLogo.png'});
-};
-var $author$project$ResourceTexts$langPrefIntroText = $author$project$ResourceTexts$declarationOfIndependence;
 var $author$project$UiComponentGlobal$backgroundWrapper = F3(
 	function (color, model, el) {
 		return A2(
@@ -12154,6 +12115,18 @@ var $mdgriffith$elm_ui$Element$maximum = F2(
 	function (i, l) {
 		return A2($mdgriffith$elm_ui$Internal$Model$Max, i, l);
 	});
+var $mdgriffith$elm_ui$Element$padding = function (x) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			'p-' + $elm$core$String$fromInt(x),
+			x,
+			x,
+			x,
+			x));
+};
 var $mdgriffith$elm_ui$Internal$Model$AsTextColumn = {$: 'AsTextColumn'};
 var $mdgriffith$elm_ui$Internal$Model$asTextColumn = $mdgriffith$elm_ui$Internal$Model$AsTextColumn;
 var $mdgriffith$elm_ui$Internal$Model$Min = F2(
@@ -12180,11 +12153,66 @@ var $mdgriffith$elm_ui$Element$textColumn = F2(
 				attrs),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $author$project$UiComponentGlobal$leftBlock = F3(
-	function (model, img, txt) {
+var $author$project$UiComponentGlobal$imgAndTextBlock = F4(
+	function (leftOrRight, model, img, txtElement) {
+		var settings = function () {
+			if (leftOrRight.$ === 'Left') {
+				return {
+					color: model.colorList.leftBlock,
+					paragraph: _Utils_ap(
+						_List_fromArray(
+							[img]),
+						_List_fromArray(
+							[
+								A2(
+								$mdgriffith$elm_ui$Element$textColumn,
+								_List_fromArray(
+									[
+										$mdgriffith$elm_ui$Element$spacing(15),
+										$mdgriffith$elm_ui$Element$padding(20),
+										$mdgriffith$elm_ui$Element$alignLeft
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$mdgriffith$elm_ui$Element$paragraph,
+										_List_Nil,
+										_List_fromArray(
+											[txtElement]))
+									]))
+							]))
+				};
+			} else {
+				return {
+					color: model.colorList.rightBlock,
+					paragraph: _Utils_ap(
+						_List_fromArray(
+							[
+								A2(
+								$mdgriffith$elm_ui$Element$textColumn,
+								_List_fromArray(
+									[
+										$mdgriffith$elm_ui$Element$spacing(15),
+										$mdgriffith$elm_ui$Element$padding(20),
+										$mdgriffith$elm_ui$Element$alignLeft
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$mdgriffith$elm_ui$Element$paragraph,
+										_List_Nil,
+										_List_fromArray(
+											[txtElement]))
+									]))
+							]),
+						_List_fromArray(
+							[img]))
+				};
+			}
+		}();
 		return A3(
 			$author$project$UiComponentGlobal$backgroundWrapper,
-			$author$project$ResourceColors$hsvRecordToColor(model.colorList.leftBlock),
+			$author$project$ResourceColors$hsvRecordToColor(settings.color),
 			model,
 			A2(
 				$mdgriffith$elm_ui$Element$wrappedRow,
@@ -12196,29 +12224,36 @@ var $author$project$UiComponentGlobal$leftBlock = F3(
 						$mdgriffith$elm_ui$Element$width(
 						A2($mdgriffith$elm_ui$Element$maximum, 1200, $mdgriffith$elm_ui$Element$fill))
 					]),
-				_List_fromArray(
-					[
-						img,
-						A2(
-						$mdgriffith$elm_ui$Element$textColumn,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$spacing(15),
-								$mdgriffith$elm_ui$Element$padding(20),
-								$mdgriffith$elm_ui$Element$alignLeft
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$mdgriffith$elm_ui$Element$paragraph,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$mdgriffith$elm_ui$Element$text(txt)
-									]))
-							]))
-					])));
+				settings.paragraph));
 	});
+var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
+var $mdgriffith$elm_ui$Element$Font$center = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.textCenter);
+var $author$project$UiComponentGlobal$inlineTitleBar = F3(
+	function (model, color, str) {
+		return A2(
+			$mdgriffith$elm_ui$Element$paragraph,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Background$color(color),
+					$mdgriffith$elm_ui$Element$padding(30),
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					$author$project$UiComponentGlobal$fontShadows,
+					$mdgriffith$elm_ui$Element$Font$color($author$project$ResourceColors$white),
+					$mdgriffith$elm_ui$Element$Font$center,
+					$mdgriffith$elm_ui$Element$Font$size(30),
+					$mdgriffith$elm_ui$Element$Font$bold
+				]),
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$text(str)
+				]));
+	});
+var $author$project$ResourceImages$javaLogo = function (list) {
+	return A2(
+		$mdgriffith$elm_ui$Element$image,
+		list,
+		{description: 'Java  Logo', src: './Images/JavaLogo.png'});
+};
 var $author$project$ResourceImages$pictureOfMe = function (list) {
 	return A2(
 		$mdgriffith$elm_ui$Element$image,
@@ -12299,43 +12334,6 @@ var $author$project$UiComponentGlobal$quoteBlock = function (model) {
 				$author$project$UiComponentGlobal$quoteElement(model)
 			]));
 };
-var $author$project$UiComponentGlobal$rightBlock = F3(
-	function (model, img, txtElement) {
-		return A3(
-			$author$project$UiComponentGlobal$backgroundWrapper,
-			$author$project$ResourceColors$hsvRecordToColor(model.colorList.rightBlock),
-			model,
-			A2(
-				$mdgriffith$elm_ui$Element$wrappedRow,
-				_List_fromArray(
-					[
-						A2($mdgriffith$elm_ui$Element$paddingXY, 40, 40),
-						$mdgriffith$elm_ui$Element$spacing(20),
-						$mdgriffith$elm_ui$Element$centerX,
-						$mdgriffith$elm_ui$Element$width(
-						A2($mdgriffith$elm_ui$Element$maximum, 1200, $mdgriffith$elm_ui$Element$fill))
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$mdgriffith$elm_ui$Element$textColumn,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$spacing(15),
-								$mdgriffith$elm_ui$Element$padding(20),
-								$mdgriffith$elm_ui$Element$alignLeft
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$mdgriffith$elm_ui$Element$paragraph,
-								_List_Nil,
-								_List_fromArray(
-									[txtElement]))
-							])),
-						img
-					])));
-	});
 var $author$project$MessagesAndModels$FontA = {$: 'FontA'};
 var $author$project$MessagesAndModels$FontB = {$: 'FontB'};
 var $author$project$MessagesAndModels$Footer = {$: 'Footer'};
@@ -13949,36 +13947,41 @@ var $author$project$PageColorSelection$pageColorSelection = function (model) {
 			[
 				$author$project$UiComponentGlobal$quoteBlock(model),
 				$author$project$PageColorSelection$sliderBlock(model),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$pictureOfMe(_List_Nil),
-				$author$project$ResourceTexts$langPrefIntroText),
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText)),
 				A3(
 				$author$project$UiComponentGlobal$inlineTitleBar,
 				model,
 				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Language Preferences'),
-				A3(
-				$author$project$UiComponentGlobal$rightBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Right,
 				model,
 				$author$project$ResourceImages$elmLogo(_List_Nil),
 				$author$project$ResourceTexts$elmLangPrefElement(model)),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$javaLogo(_List_Nil),
-				$author$project$ResourceTexts$firstParagraphText),
-				A3(
-				$author$project$UiComponentGlobal$rightBlock,
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText)),
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Right,
 				model,
 				$author$project$ResourceImages$visualStudioLogo(_List_Nil),
 				$author$project$ResourceTexts$elmLangPrefElement(model)),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$arduinoLogo(_List_Nil),
-				$author$project$ResourceTexts$firstParagraphText)
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText))
 			]));
 };
 var $author$project$ResourceImages$cPlusPlusLogo = function (list) {
@@ -14111,11 +14114,12 @@ var $author$project$PageHireMe$pageHireMe = function (model) {
 				model,
 				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Story'),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$pictureOfMe(_List_Nil),
-				$author$project$ResourceTexts$langPrefIntroText),
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText)),
 				$author$project$UiComponentGlobal$myStoryTextBody
 			]));
 };
@@ -14130,36 +14134,41 @@ var $author$project$PageLanguage$pageLanguagePreferences = function (model) {
 		_List_fromArray(
 			[
 				$author$project$UiComponentGlobal$quoteBlock(model),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$pictureOfMe(_List_Nil),
-				$author$project$ResourceTexts$langPrefIntroText),
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText)),
 				A3(
 				$author$project$UiComponentGlobal$inlineTitleBar,
 				model,
 				$author$project$ResourceColors$hsvRecordToColor(model.colorList.inlineTitleBar),
 				'Language Preferences'),
-				A3(
-				$author$project$UiComponentGlobal$rightBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Right,
 				model,
 				$author$project$ResourceImages$elmLogo(_List_Nil),
 				$author$project$ResourceTexts$elmLangPrefElement(model)),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$javaLogo(_List_Nil),
-				$author$project$ResourceTexts$firstParagraphText),
-				A3(
-				$author$project$UiComponentGlobal$rightBlock,
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText)),
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Right,
 				model,
 				$author$project$ResourceImages$visualStudioLogo(_List_Nil),
 				$author$project$ResourceTexts$elmLangPrefElement(model)),
-				A3(
-				$author$project$UiComponentGlobal$leftBlock,
+				A4(
+				$author$project$UiComponentGlobal$imgAndTextBlock,
+				$author$project$MessagesAndModels$Left,
 				model,
 				$author$project$ResourceImages$arduinoLogo(_List_Nil),
-				$author$project$ResourceTexts$firstParagraphText)
+				$mdgriffith$elm_ui$Element$text($author$project$ResourceTexts$firstParagraphText))
 			]));
 };
 var $author$project$PageMyStory$pageMyStory = function (model) {
@@ -14180,7 +14189,6 @@ var $author$project$PageMyStory$pageMyStory = function (model) {
 				$author$project$UiComponentGlobal$myStoryTextBody
 			]));
 };
-var $author$project$MessagesAndModels$Right = {$: 'Right'};
 var $author$project$ResourceColors$anchorTexts1Gradient = $mdgriffith$elm_ui$Element$Background$gradient(
 	{
 		angle: $elm$core$Basics$pi,
@@ -14266,7 +14274,6 @@ var $author$project$UiComponentParagraphBlock$paragraphBlock = F3(
 				]));
 	});
 var $author$project$PageWelcome$exampleParagraphBlock = A3($author$project$UiComponentParagraphBlock$paragraphBlock, $author$project$MessagesAndModels$Right, 'Functional Programming', 'I have just taken my first few steps into the world of functional programming, and it has quickly become one of my new favorite coding styles. Purely functional languages use very strict rules that enforce good coding habits. Additionally they are based around immutability, meaning that the state of a “Variable” never changes, you simply return a modified copy of that value. I personally have grown to love this, because between these two principles it significantly reduces unexpected side effects. Learning to use functional programming has, in a way, rewired the way I think about the code, and I’m eager to continue exploring that avenue.');
-var $author$project$MessagesAndModels$Left = {$: 'Left'};
 var $author$project$PageWelcome$functionalParagraphBlock = A3($author$project$UiComponentParagraphBlock$paragraphBlock, $author$project$MessagesAndModels$Left, 'Functional Programming', 'I have just taken my first few steps into the world of functional programming, and it has quickly become one of my new favorite coding styles. Purely functional languages use very strict rules that enforce good coding habits. Additionally they are based around immutability, meaning that the state of a “Variable” never changes, you simply return a modified copy of that value. I personally have grown to love this, because between these two principles it significantly reduces unexpected side effects. Learning to use functional programming has, in a way, rewired the way I think about the code, and I’m eager to continue exploring that avenue.');
 var $author$project$ResourceColors$colorQuadBlockBackground = A3($author$project$HsvToRgb$hsv, 136, 0, 0.94);
 var $author$project$ResourceColors$colorQuadBlockShadow = A3($author$project$HsvToRgb$hsv, 136, 0, 0.75);
@@ -14372,70 +14379,12 @@ var $author$project$UiComponentQuadBlock$quadGroup = A2(
 						[$author$project$UiComponentQuadBlock$quadBlock]))
 				]))
 		]));
-var $author$project$UiComponentSlideShow$leftArrow = A2(
-	$mdgriffith$elm_ui$Element$column,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$paddingEach(
-			{bottom: 0, left: 20, right: 20, top: 0}),
-			$mdgriffith$elm_ui$Element$Background$color(
-			A3($author$project$HsvToRgb$hsv, 136, 0, 0.84)),
-			$mdgriffith$elm_ui$Element$alpha(0.08),
-			$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-			$mdgriffith$elm_ui$Element$alignLeft,
-			$mdgriffith$elm_ui$Element$width(
-			A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
-			$mdgriffith$elm_ui$Element$Border$shadow(
-			{
-				blur: 15,
-				color: A3($author$project$HsvToRgb$hsv, 270, 0, 0),
-				offset: _Utils_Tuple2(3, 0),
-				size: 0
-			})
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_fromArray(
-				[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
-			$mdgriffith$elm_ui$Element$text('«'))
-		]));
-var $author$project$UiComponentSlideShow$rightArrow = A2(
-	$mdgriffith$elm_ui$Element$column,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$paddingEach(
-			{bottom: 0, left: 20, right: 20, top: 0}),
-			$mdgriffith$elm_ui$Element$Background$color(
-			A3($author$project$HsvToRgb$hsv, 136, 0, 0.84)),
-			$mdgriffith$elm_ui$Element$alpha(0.08),
-			$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-			$mdgriffith$elm_ui$Element$alignLeft,
-			$mdgriffith$elm_ui$Element$width(
-			A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
-			$mdgriffith$elm_ui$Element$Border$shadow(
-			{
-				blur: 15,
-				color: A3($author$project$HsvToRgb$hsv, 270, 0, 0),
-				offset: _Utils_Tuple2(-3, 0),
-				size: 0
-			})
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_fromArray(
-				[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
-			$mdgriffith$elm_ui$Element$text('»'))
-		]));
 var $mdgriffith$elm_ui$Internal$Model$Top = {$: 'Top'};
 var $mdgriffith$elm_ui$Element$alignTop = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$Top);
-var $author$project$UiComponentSlideShow$slide1 = function () {
-	var textC = 'Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here.';
-	var textB = 'Maybe some subtext?';
-	var textA = 'Lets put some text here and see what exactly this looks like.';
+var $author$project$SlideshowSlide1$slide1 = function () {
+	var textC = 'Please contact me at ' + ($author$project$ResourceTexts$emailAddress + ' with any professional inquiries. I look forward to hearing from you.');
+	var textB = 'Here you can learn about the practices and preferences I value in my day to day coding. I will also be providing a few simple examples of my work, this website itself being one of them. I developed it myself in a functional language I’m currently learning (and strongly recommend) called Elm.';
+	var textA = 'Welcome to my website';
 	return A2(
 		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
@@ -14454,7 +14403,7 @@ var $author$project$UiComponentSlideShow$slide1 = function () {
 						$mdgriffith$elm_ui$Element$paddingEach(
 						{bottom: 0, left: 40, right: 0, top: 30}),
 						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						$mdgriffith$elm_ui$Element$spacing(15)
+						$mdgriffith$elm_ui$Element$spacing(20)
 					]),
 				_List_fromArray(
 					[
@@ -14483,7 +14432,7 @@ var $author$project$UiComponentSlideShow$slide1 = function () {
 						$mdgriffith$elm_ui$Element$paragraph,
 						_List_fromArray(
 							[
-								$mdgriffith$elm_ui$Element$Font$size(18)
+								$mdgriffith$elm_ui$Element$Font$size(17)
 							]),
 						_List_fromArray(
 							[
@@ -14492,7 +14441,7 @@ var $author$project$UiComponentSlideShow$slide1 = function () {
 					]))
 			]));
 }();
-var $author$project$UiComponentSlideShow$slide2 = function () {
+var $author$project$SlideshowSlide2$slide2 = function () {
 	var textC = 'Definitely subtext! It looks like this would be a decent place for a short informative paragraph. Yeah, the paragraph looks right right here.';
 	var textB = 'Here\'s some subtext for Slide 2.';
 	var textA = 'This is Slide 2!';
@@ -14563,12 +14512,51 @@ var $author$project$ResourceColors$slideShowGradient = function () {
 				[col1, col2, col2, col2, col2, col2, col2, col3])
 		});
 }();
+var $author$project$ResourceColors$colorSlideShowArrow = A3($author$project$HsvToRgb$hsv, 136, 0, 0.84);
+var $author$project$ResourceColors$colorSlideShowArrowShadow = A3($author$project$HsvToRgb$hsv, 270, 0, 0);
+var $author$project$UiComponentSlideShow$slideshowArrow = function (leftOrRight) {
+	var settings = function () {
+		if (leftOrRight.$ === 'Left') {
+			return {horizontalOffset: 3, symbol: '«'};
+		} else {
+			return {horizontalOffset: -3, symbol: '»'};
+		}
+	}();
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$paddingEach(
+				{bottom: 0, left: 20, right: 20, top: 0}),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$ResourceColors$colorSlideShowArrow),
+				$mdgriffith$elm_ui$Element$alpha(0.08),
+				$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$alignLeft,
+				$mdgriffith$elm_ui$Element$width(
+				A2($mdgriffith$elm_ui$Element$maximum, 30, $mdgriffith$elm_ui$Element$fill)),
+				$mdgriffith$elm_ui$Element$Border$shadow(
+				{
+					blur: 15,
+					color: $author$project$ResourceColors$colorSlideShowArrowShadow,
+					offset: _Utils_Tuple2(settings.horizontalOffset, 0),
+					size: 0
+				})
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$centerY, $mdgriffith$elm_ui$Element$centerX]),
+				$mdgriffith$elm_ui$Element$text(settings.symbol))
+			]));
+};
 var $author$project$UiComponentSlideShow$slideShow = function (activeSlide) {
 	var slide = function () {
 		if (activeSlide.$ === 'Slide1') {
-			return $author$project$UiComponentSlideShow$slide1;
+			return $author$project$SlideshowSlide1$slide1;
 		} else {
-			return $author$project$UiComponentSlideShow$slide2;
+			return $author$project$SlideshowSlide2$slide2;
 		}
 	}();
 	return A2(
@@ -14583,7 +14571,11 @@ var $author$project$UiComponentSlideShow$slideShow = function (activeSlide) {
 				$author$project$ResourceColors$slideShowGradient
 			]),
 		_List_fromArray(
-			[$author$project$UiComponentSlideShow$leftArrow, slide, $author$project$UiComponentSlideShow$rightArrow]));
+			[
+				$author$project$UiComponentSlideShow$slideshowArrow($author$project$MessagesAndModels$Left),
+				slide,
+				$author$project$UiComponentSlideShow$slideshowArrow($author$project$MessagesAndModels$Right)
+			]));
 };
 var $author$project$PageWelcome$pageWelcome = function (model) {
 	return A2(
