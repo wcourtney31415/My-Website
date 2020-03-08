@@ -2,6 +2,7 @@ module ResourceColors exposing (..)
 
 import Element exposing (..)
 import Element.Background as Background
+import Element.Font as Font
 import HsvToRgb exposing (..)
 import MessagesAndModels exposing (..)
 
@@ -162,3 +163,12 @@ dynamicSliderHeader =
 dynamicSliderBody : Color
 dynamicSliderBody =
     hsv 1 0 0.95
+
+
+fontShadows : Attr decorative msg
+fontShadows =
+    Font.shadow
+        { offset = ( 3, 3 )
+        , blur = 4
+        , color = black
+        }

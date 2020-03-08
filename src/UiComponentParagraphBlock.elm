@@ -9,7 +9,6 @@ import Element.Input as Input
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
-import UiComponentGlobal exposing (..)
 import UiComponentSlideShow exposing (..)
 
 

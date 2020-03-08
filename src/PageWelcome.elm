@@ -8,9 +8,9 @@ import Element.Font as Font
 import Element.Input as Input
 import Html
 import MessagesAndModels exposing (..)
-import UiComponentGlobal exposing (..)
 import UiComponentParagraphBlock exposing (..)
 import UiComponentQuadBlock exposing (..)
+import UiComponentQuoteBlock exposing (..)
 import UiComponentSlideShow exposing (..)
 
 

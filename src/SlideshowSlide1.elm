@@ -11,7 +11,7 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentGlobal exposing (..)
+import UiComponentInlineTitleBar exposing (..)
 
 
 slide1 =

@@ -11,7 +11,9 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentGlobal exposing (..)
+import UiComponentImgAndTextBlock exposing (..)
+import UiComponentInlineTitleBar exposing (..)
+import UiComponentQuoteBlock exposing (..)
 
 
 pageLanguagePreferences : Model -> Element Msg

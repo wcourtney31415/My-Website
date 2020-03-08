@@ -11,7 +11,8 @@ import PageLanguage exposing (..)
 import PageMyStory exposing (..)
 import PageWelcome exposing (..)
 import ResourceColors exposing (..)
-import UiComponentGlobal exposing (..)
+import UiComponentFooter exposing (..)
+import UiComponentHeader exposing (..)
 
 
 website : Model -> Html.Html Msg

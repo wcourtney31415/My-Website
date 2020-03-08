@@ -11,7 +11,7 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentGlobal exposing (..)
+import UiComponentInlineTitleBar exposing (..)
 
 
 pageMyStory : Model -> Element Msg
@@ -24,4 +24,27 @@ pageMyStory model =
             (hsvRecordToColor model.colorList.inlineTitleBar)
             "Story"
         , myStoryTextBody
+        ]
+
+
+myStoryTextBody : Element Msg
+myStoryTextBody =
+    Element.textColumn [ spacing 50, padding 30, width (fill |> maximum 1200), centerX ]
+        [ gameMakerLogo [ alignLeft, paddingXY 20 10 ]
+        , paragraph [] [ text declarationOfIndependence ]
+        , paragraph [] [ text declarationOfIndependence ]
+        , cPlusPlusLogo [ alignRight, paddingXY 20 10 ]
+        , paragraph [] [ text declarationOfIndependence ]
+        , paragraph [] [ text declarationOfIndependence ]
+        , ivyTechLogo
+            [ alignLeft
+            , paddingXY 20 10
+            , Border.shadow
+                { offset = ( 3, 3 )
+                , size = 2
+                , blur = 4
+                , color = black
+                }
+            ]
+        , paragraph [] [ text declarationOfIndependence ]
         ]

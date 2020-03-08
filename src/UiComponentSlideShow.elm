@@ -13,7 +13,6 @@ import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
 import SlideshowSlide1 exposing (..)
 import SlideshowSlide2 exposing (..)
-import UiComponentGlobal exposing (..)
 
 
 slideShow : ActiveSlide -> Element Msg

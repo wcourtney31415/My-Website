@@ -7,9 +7,6 @@ import Element.Font as Font
 import Element.Input as Input
 import Html
 import ResourceColors exposing (..)
-import UiComponentGlobal exposing (..)
-import UiComponentParagraphBlock exposing (..)
-import UiComponentSlideShow exposing (..)
 
 
 quadBlock =
