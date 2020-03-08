@@ -8,6 +8,7 @@ import Element.Input as Input
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
+import ResourceTexts exposing (..)
 
 
 navBar : Model -> List (Element Msg)
@@ -15,7 +16,7 @@ navBar model =
     [ navBarButton model "Hire Me" HireMe
     , navBarButton model "Language Preferences" LanguagePreferences
     , navBarButton model "My Story" MyStory
-    , navBarLink model "Site Source Code" "https://github.com/wcourtney31415"
+    , navBarLink model "Site Source Code" myGitHub
     ]
 
 

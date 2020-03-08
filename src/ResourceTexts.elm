@@ -50,9 +50,19 @@ textStoryBody =
     lotsOfText
 
 
+myNameAsString : String
+myNameAsString =
+    "Wesley Courtney"
+
+
 emailAddress : String
 emailAddress =
     "wcourtney31415@gmail.com"
+
+
+myGitHub : String
+myGitHub =
+    "https://github.com/wcourtney31415/Elm-Professional-Website"
 
 
 

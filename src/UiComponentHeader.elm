@@ -8,6 +8,7 @@ import Element.Input as Input
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
+import ResourceTexts exposing (..)
 import UiComponentNavBar exposing (..)
 
 
@@ -36,4 +37,4 @@ myName model =
         , fontShadows
         ]
     <|
-        text "Wesley Courtney"
+        text myNameAsString
