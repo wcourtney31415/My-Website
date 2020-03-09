@@ -29,12 +29,16 @@ header model =
 
 myName : Model -> Element Msg
 myName model =
-    el
-        [ alignLeft
-        , Font.color white
-        , Font.size 25
-        , Font.bold
-        , fontShadows
-        ]
-    <|
-        text myNameAsString
+    Input.button []
+        { label =
+            el
+                [ alignLeft
+                , Font.color white
+                , Font.size 25
+                , Font.bold
+                , fontShadows
+                ]
+            <|
+                text myNameAsString
+        , onPress = Just (NavBarButtonClicked { model | selectedPage = Welcome })
+        }
