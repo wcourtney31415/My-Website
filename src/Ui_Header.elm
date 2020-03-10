@@ -1,4 +1,4 @@
-module UiComponentHeader exposing (..)
+module Ui_Header exposing (..)
 
 import Element exposing (..)
 import Element.Background as Background
@@ -9,7 +9,7 @@ import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentNavBar exposing (..)
+import Ui_NavBar exposing (..)
 
 
 header : Model -> Element Msg

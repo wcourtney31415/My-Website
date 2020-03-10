@@ -1,4 +1,4 @@
-module UiComponentParagraphBlock exposing (..)
+module Ui_ParagraphBlock exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -9,7 +9,6 @@ import Element.Input as Input
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
-import UiComponentSlideShow exposing (..)
 
 
 paragraphBlock : LeftOrRight -> String -> String -> Element Msg

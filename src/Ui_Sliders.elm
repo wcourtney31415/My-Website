@@ -1,4 +1,4 @@
-module UiComponentSliders exposing (..)
+module Ui_Sliders exposing (..)
 
 import Browser
 import Element exposing (..)

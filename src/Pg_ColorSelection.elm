@@ -1,4 +1,4 @@
-module PageColorSelection exposing (..)
+module Pg_ColorSelection exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -11,10 +11,10 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentImgAndTextBlock exposing (..)
-import UiComponentInlineTitleBar exposing (..)
-import UiComponentQuoteBlock exposing (..)
-import UiComponentSliders exposing (..)
+import Ui_ImgAndTextBlock exposing (..)
+import Ui_InlineTitleBar exposing (..)
+import Ui_QuoteBlock exposing (..)
+import Ui_Sliders exposing (..)
 
 
 pageColorSelection : Model -> Element Msg

@@ -1,4 +1,4 @@
-module UiComponentQuadBlock exposing (..)
+module Ui_QuadBlock exposing (..)
 
 import Element exposing (..)
 import Element.Background as Background

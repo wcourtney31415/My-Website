@@ -1,4 +1,4 @@
-module UiComponentSlideShow exposing (..)
+module Ui_SlideShow exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -11,8 +11,8 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import SlideshowSlide1 exposing (..)
-import SlideshowSlide2 exposing (..)
+import Sl_One exposing (..)
+import Sl_Two exposing (..)
 
 
 slideShow : ActiveSlide -> Element Msg

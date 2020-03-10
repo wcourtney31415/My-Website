@@ -1,4 +1,4 @@
-module UiComponentInlineTitleBar exposing (..)
+module Ui_InlineTitleBar exposing (..)
 
 import Browser
 import Element exposing (..)

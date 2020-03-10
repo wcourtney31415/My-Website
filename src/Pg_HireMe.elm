@@ -1,4 +1,4 @@
-module PageHireMe exposing (..)
+module Pg_HireMe exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -11,8 +11,8 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentImgAndTextBlock exposing (..)
-import UiComponentInlineTitleBar exposing (..)
+import Ui_ImgAndTextBlock exposing (..)
+import Ui_InlineTitleBar exposing (..)
 
 
 pageHireMe : Model -> Element Msg

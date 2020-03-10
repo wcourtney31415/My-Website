@@ -1,4 +1,4 @@
-module SlideshowSlide2 exposing (..)
+module Sl_Two exposing (..)
 
 import Browser
 import Element exposing (..)

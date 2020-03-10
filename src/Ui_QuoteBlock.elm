@@ -1,4 +1,4 @@
-module UiComponentQuoteBlock exposing (..)
+module Ui_QuoteBlock exposing (..)
 
 import Browser
 import Element exposing (..)

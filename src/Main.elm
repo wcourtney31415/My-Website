@@ -4,7 +4,7 @@ import Browser
 import Html
 import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
-import UiComponentSliders exposing (..)
+import Ui_Sliders exposing (..)
 import WebsiteController exposing (..)
 
 

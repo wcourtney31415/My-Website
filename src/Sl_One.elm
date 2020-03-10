@@ -1,4 +1,4 @@
-module SlideshowSlide1 exposing (..)
+module Sl_One exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -11,7 +11,6 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentInlineTitleBar exposing (..)
 
 
 slide1 =

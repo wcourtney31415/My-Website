@@ -1,4 +1,4 @@
-module UiComponentNavBar exposing (..)
+module Ui_NavBar exposing (..)
 
 import Element exposing (..)
 import Element.Background as Background

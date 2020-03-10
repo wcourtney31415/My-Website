@@ -1,4 +1,4 @@
-module UiComponentFooter exposing (..)
+module Ui_Footer exposing (..)
 
 import Element exposing (..)
 import Element.Background as Background

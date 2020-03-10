@@ -1,4 +1,4 @@
-module UiComponentImgAndTextBlock exposing (..)
+module Ui_ImgAndTextBlock exposing (..)
 
 import Browser
 import Element exposing (..)

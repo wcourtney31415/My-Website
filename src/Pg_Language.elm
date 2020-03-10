@@ -1,4 +1,4 @@
-module PageLanguage exposing (..)
+module Pg_Language exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -11,9 +11,9 @@ import MessagesAndModels exposing (..)
 import ResourceColors exposing (..)
 import ResourceImages exposing (..)
 import ResourceTexts exposing (..)
-import UiComponentImgAndTextBlock exposing (..)
-import UiComponentInlineTitleBar exposing (..)
-import UiComponentQuoteBlock exposing (..)
+import Ui_ImgAndTextBlock exposing (..)
+import Ui_InlineTitleBar exposing (..)
+import Ui_QuoteBlock exposing (..)
 
 
 pageLanguagePreferences : Model -> Element Msg

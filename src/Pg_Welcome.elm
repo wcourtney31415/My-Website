@@ -1,4 +1,4 @@
-module PageWelcome exposing (..)
+module Pg_Welcome exposing (..)
 
 import Browser
 import Element exposing (..)
@@ -8,10 +8,10 @@ import Element.Font as Font
 import Element.Input as Input
 import Html
 import MessagesAndModels exposing (..)
-import UiComponentParagraphBlock exposing (..)
-import UiComponentQuadBlock exposing (..)
-import UiComponentQuoteBlock exposing (..)
-import UiComponentSlideShow exposing (..)
+import Ui_ParagraphBlock exposing (..)
+import Ui_QuadBlock exposing (..)
+import Ui_QuoteBlock exposing (..)
+import Ui_SlideShow exposing (..)
 
 
 pageWelcome : Model -> Element Msg

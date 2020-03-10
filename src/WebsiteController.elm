@@ -5,14 +5,14 @@ import Element exposing (..)
 import Element.Background as Background
 import Html
 import MessagesAndModels exposing (..)
-import PageColorSelection exposing (..)
-import PageHireMe exposing (..)
-import PageLanguage exposing (..)
-import PageMyStory exposing (..)
-import PageWelcome exposing (..)
+import Pg_ColorSelection exposing (..)
+import Pg_HireMe exposing (..)
+import Pg_Language exposing (..)
+import Pg_MyStory exposing (..)
+import Pg_Welcome exposing (..)
 import ResourceColors exposing (..)
-import UiComponentFooter exposing (..)
-import UiComponentHeader exposing (..)
+import Ui_Footer exposing (..)
+import Ui_Header exposing (..)
 
 
 website : Model -> Html.Html Msg
