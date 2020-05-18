@@ -10,12 +10,19 @@ import Element.Region as Region
 import HelperFunctions exposing (..)
 
 
+main : Program () Model Msg
 main =
-    Browser.sandbox
+    Browser.document
         { init = init
-        , view = view
+        , subscriptions = subscriptions
         , update = update
+        , view = view
         }
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ =
+    Sub.none
 
 
 type OpenOrClosed
@@ -32,14 +39,21 @@ type Msg
     = Update Model
 
 
-init =
-    { contactDropdown = Closed }
+init : () -> ( Model, Cmd Msg )
+init _ =
+    let
+        initialModel : Model
+        initialModel =
+            { contactDropdown = Closed }
+    in
+    ( initialModel, Cmd.none )
 
 
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         Update new ->
-            new
+            ( new, Cmd.none )
 
 
 myFocusStyle : FocusStyle
@@ -50,22 +64,30 @@ myFocusStyle =
     }
 
 
+view : Model -> Browser.Document Msg
 view model =
-    Element.layoutWith
-        { options = [ focusStyle myFocusStyle ] }
-        [ Background.image "./Images/background.jpg"
-        ]
-    <|
-        Element.column
-            [ width fill
-            , height fill
-            , spacing 40
-            ]
-            [ navBar model
-            , homepageItems
-            ]
+    let
+        myView =
+            Element.layoutWith
+                { options = [ focusStyle myFocusStyle ] }
+                [ Background.image "./Images/background.jpg"
+                ]
+            <|
+                Element.column
+                    [ width fill
+                    , height fill
+                    , spacing 40
+                    ]
+                    [ navBar model
+                    , homepageItems
+                    ]
+    in
+    { title = "Wesley Courtney"
+    , body = [ myView ]
+    }
 
 
+dropNav : Element Msg
 dropNav =
     Element.column
         [ Background.color fortyTwo
@@ -81,10 +103,12 @@ dropNav =
         ]
 
 
+flip : OpenOrClosed -> OpenOrClosed
 flip a =
     speedIf (a == Open) Closed Open
 
 
+navBar : Model -> Element Msg
 navBar model =
     Element.row
         [ alignRight
@@ -116,6 +140,7 @@ navBar model =
         ]
 
 
+speedIf : Bool -> a -> a -> a
 speedIf condition result elseResult =
     if condition then
         result
@@ -124,6 +149,7 @@ speedIf condition result elseResult =
         elseResult
 
 
+titleBox : Element Msg
 titleBox =
     Element.column
         [ centerX
@@ -157,6 +183,7 @@ titleBox =
         ]
 
 
+frontPageParagraph : Element Msg
 frontPageParagraph =
     let
         frontPageText =
@@ -183,6 +210,7 @@ frontPageParagraph =
         [ text frontPageText ]
 
 
+homepageItems : Element Msg
 homepageItems =
     Element.column
         [ centerX
@@ -192,9 +220,11 @@ homepageItems =
         [ titleBox, frontPageParagraph ]
 
 
+white : Color
 white =
     rgb255 255 255 255
 
 
+fortyTwo : Color
 fortyTwo =
     rgb255 42 42 42
