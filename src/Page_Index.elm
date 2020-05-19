@@ -9,18 +9,10 @@ import Element.Border as Border
 import Element.Font as Font
 import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
-import NavBar exposing (..)
 
 
 homepage model =
-    Element.column
-        [ width fill
-        , height fill
-        , spacing 40
-        ]
-        [ navBar model
-        , homepageItems
-        ]
+    homepageItems
 
 
 homepageItems : Element Msg

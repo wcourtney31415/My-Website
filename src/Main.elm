@@ -5,6 +5,7 @@ import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import MessagesAndModels exposing (..)
+import NavBar exposing (..)
 import Page_Index exposing (..)
 
 
@@ -56,7 +57,14 @@ view model =
                 [ Background.image backgroundPath
                 ]
             <|
-                homepage model
+                Element.column
+                    [ width fill
+                    , height fill
+                    , spacing 40
+                    ]
+                    [ navBar model
+                    , homepage model
+                    ]
     in
     { title = myName
     , body = [ myView ]
