@@ -1,11 +1,11 @@
 module Main exposing (..)
 
 import Browser
+import Comp_NavBar exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import MessagesAndModels exposing (..)
-import NavBar exposing (..)
 import Page_Index exposing (..)
 
 

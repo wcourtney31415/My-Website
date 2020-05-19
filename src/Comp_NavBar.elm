@@ -1,4 +1,4 @@
-module NavBar exposing (..)
+module Comp_NavBar exposing (..)
 
 import Colors exposing (..)
 import Data exposing (..)
