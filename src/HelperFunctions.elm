@@ -1,6 +1,7 @@
 module HelperFunctions exposing (..)
 
 import Element exposing (..)
+import MessagesAndModels exposing (..)
 
 
 bkgAttributes : List (Attribute msg) -> Attribute msg
@@ -14,3 +15,17 @@ bkgAttributes attr =
                 attr
     in
     Element.behindContent <| Element.el attributes (text "")
+
+
+speedIf : Bool -> a -> a -> a
+speedIf condition result elseResult =
+    if condition then
+        result
+
+    else
+        elseResult
+
+
+flip : OpenOrClosed -> OpenOrClosed
+flip a =
+    speedIf (a == Open) Closed Open
