@@ -1,6 +1,7 @@
 module NavBar exposing (..)
 
 import Colors exposing (..)
+import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -36,7 +37,7 @@ navBar model =
             { onPress = Just <| Update { model | contactDropdown = flip model.contactDropdown }, label = text "Contact" }
         , text "About Me"
         , newTabLink []
-            { url = "https://github.com/wcourtney31415"
+            { url = gitHub
             , label = text "GitHub"
             }
         ]

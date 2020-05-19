@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Browser
+import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import MessagesAndModels exposing (..)
@@ -52,11 +53,11 @@ view model =
         myView =
             Element.layoutWith
                 { options = [ focusStyle myFocusStyle ] }
-                [ Background.image "./Images/background.jpg"
+                [ Background.image backgroundPath
                 ]
             <|
                 homepage model
     in
-    { title = "Wesley Courtney"
+    { title = myName
     , body = [ myView ]
     }

@@ -2,6 +2,7 @@ module Page_Index exposing (homepage)
 
 import Browser
 import Colors exposing (..)
+import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
@@ -62,7 +63,7 @@ titleBox =
             [ Font.size 20
             , centerX
             ]
-            (text "Wesley Courtney")
+            (text myName)
         ]
 
 
@@ -70,7 +71,7 @@ frontPageParagraph : Element Msg
 frontPageParagraph =
     let
         frontPageText =
-            "For professional inqueries, please contact me at wcourtney31415@gmail.com and I will get back to you as soon as possible. I look forward to speaking with you."
+            "For professional inqueries, please contact me at " ++ myEmail ++ " and I will get back to you as soon as possible. I look forward to speaking with you."
     in
     Element.paragraph
         [ centerX
