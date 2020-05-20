@@ -31,7 +31,9 @@ init _ =
     let
         initialModel : Model
         initialModel =
-            { contactDropdown = Closed }
+            { contactDropdown = Closed
+            , selectedPage = Home
+            }
     in
     ( initialModel, Cmd.none )
 
@@ -68,10 +70,16 @@ view model =
                     , spacing 40
                     ]
                     [ navBar model
-
-                    --, homepage model
-                    , aboutPage model
+                    , selectedPage
                     ]
+
+        selectedPage =
+            case model.selectedPage of
+                Home ->
+                    homepage model
+
+                AboutMe ->
+                    aboutPage model
     in
     { title = myName
     , body = [ myView ]
