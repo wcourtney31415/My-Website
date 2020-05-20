@@ -46,14 +46,15 @@ navBar model =
 dropNav : Element Msg
 dropNav =
     Element.column
-        [ Background.color fortyTwo
+        [ Background.color dropNavColor
         , moveDown 15
         , padding 15
-        , alpha 0.6
+
+        --, alpha 0.6
         , Border.rounded 10
         , centerX
         , spacing 10
         ]
-        [ text "Email using Client"
+        [ Element.link [] { url = "mailto:" ++ myEmail, label = text "Email using Client" }
         , Input.button [] { onPress = Just <| CopyToClipboard myEmail, label = text "Copy Email to Clipboard" }
         ]
