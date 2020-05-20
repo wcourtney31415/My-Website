@@ -54,9 +54,12 @@ gitHubLink =
         }
 
 
-aboutMe : Element Msg
-aboutMe =
-    Element.el [ hovered ] (text "About Me")
+aboutMe : Model -> Element Msg
+aboutMe model =
+    Input.button [ hovered ]
+        { onPress = Just <| Update { model | selectedPage = AboutMe }
+        , label = text "About Me"
+        }
 
 
 navBar : Model -> Element Msg
@@ -83,7 +86,7 @@ navBar model =
         , bkgAttr
         ]
         [ contactButton model
-        , aboutMe
+        , aboutMe model
         , gitHubLink
         ]
 
