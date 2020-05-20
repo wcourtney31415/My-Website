@@ -11534,6 +11534,44 @@ var $mdgriffith$elm_ui$Element$Input$button = F2(
 var $author$project$MessagesAndModels$CopyToClipboard = function (a) {
 	return {$: 'CopyToClipboard', a: a};
 };
+var $author$project$Colors$dropNavColor = A3($mdgriffith$elm_ui$Element$rgb255, 105, 108, 112);
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
+var $mdgriffith$elm_ui$Element$link = F2(
+	function (attrs, _v0) {
+		var url = _v0.url;
+		var label = _v0.label;
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asEl,
+			$mdgriffith$elm_ui$Internal$Model$NodeName('a'),
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Internal$Model$Attr(
+					$elm$html$Html$Attributes$href(url)),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Internal$Model$Attr(
+						$elm$html$Html$Attributes$rel('noopener noreferrer')),
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+						A2(
+							$elm$core$List$cons,
+							$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+							A2(
+								$elm$core$List$cons,
+								$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentCenterX + (' ' + ($mdgriffith$elm_ui$Internal$Style$classes.contentCenterY + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.link)))),
+								attrs))))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
+				_List_fromArray(
+					[label])));
+	});
 var $mdgriffith$elm_ui$Element$moveDown = function (y) {
 	return A2(
 		$mdgriffith$elm_ui$Internal$Model$TransformComponent,
@@ -11544,17 +11582,22 @@ var $author$project$Comp_NavBar$dropNav = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
-			$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$fortyTwo),
+			$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$dropNavColor),
 			$mdgriffith$elm_ui$Element$moveDown(15),
 			$mdgriffith$elm_ui$Element$padding(15),
-			$mdgriffith$elm_ui$Element$alpha(0.6),
 			$mdgriffith$elm_ui$Element$Border$rounded(10),
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$spacing(10)
 		]),
 	_List_fromArray(
 		[
-			$mdgriffith$elm_ui$Element$text('Email using Client'),
+			A2(
+			$mdgriffith$elm_ui$Element$link,
+			_List_Nil,
+			{
+				label: $mdgriffith$elm_ui$Element$text('Email using Client'),
+				url: 'mailto:' + $author$project$Data$myEmail
+			}),
 			A2(
 			$mdgriffith$elm_ui$Element$Input$button,
 			_List_Nil,
@@ -11577,13 +11620,6 @@ var $author$project$HelperFunctions$flip = function (a) {
 		$author$project$MessagesAndModels$Open);
 };
 var $author$project$Data$gitHub = 'https://github.com/wcourtney31415';
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
-var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $mdgriffith$elm_ui$Element$newTabLink = F2(
 	function (attrs, _v0) {
