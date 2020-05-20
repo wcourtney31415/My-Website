@@ -5182,10 +5182,11 @@ var $elm$core$Task$perform = F2(
 	});
 var $elm$browser$Browser$document = _Browser_document;
 var $author$project$MessagesAndModels$Closed = {$: 'Closed'};
+var $author$project$MessagesAndModels$Home = {$: 'Home'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
-	var initialModel = {contactDropdown: $author$project$MessagesAndModels$Closed};
+	var initialModel = {contactDropdown: $author$project$MessagesAndModels$Closed, selectedPage: $author$project$MessagesAndModels$Home};
 	return _Utils_Tuple2(initialModel, $elm$core$Platform$Cmd$none);
 };
 var $elm$core$Platform$Sub$batch = _Platform_batch;
@@ -5207,7 +5208,16 @@ var $author$project$Main$update = F2(
 				$author$project$Clipboard$copyToClipboard(str));
 		}
 	});
-var $author$project$Data$backgroundPath = './Images/background.jpg';
+var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
+	return {$: 'AlignX', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
+var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
+var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
+	return {$: 'AlignY', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
+var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
 };
@@ -10785,24 +10795,6 @@ var $mdgriffith$elm_ui$Element$column = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
-	return {$: 'Fill', a: a};
-};
-var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
-var $mdgriffith$elm_ui$Internal$Model$FocusStyleOption = function (a) {
-	return {$: 'FocusStyleOption', a: a};
-};
-var $mdgriffith$elm_ui$Element$focusStyle = $mdgriffith$elm_ui$Internal$Model$FocusStyleOption;
-var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
-	return {$: 'AlignX', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$CenterX = {$: 'CenterX'};
-var $mdgriffith$elm_ui$Element$centerX = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$CenterX);
-var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
-	return {$: 'AlignY', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
-var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
 var $mdgriffith$elm_ui$Internal$Model$StyleClass = F2(
 	function (a, b) {
 		return {$: 'StyleClass', a: a, b: b};
@@ -10862,6 +10854,10 @@ var $mdgriffith$elm_ui$Element$el = F2(
 				_List_fromArray(
 					[child])));
 	});
+var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
+	return {$: 'Fill', a: a};
+};
+var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $mdgriffith$elm_ui$Internal$Model$Text = function (a) {
 	return {$: 'Text', a: a};
 };
@@ -11014,7 +11010,7 @@ var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
 			$elm$core$String$fromInt(radius) + 'px'));
 };
 var $author$project$Colors$white = A3($mdgriffith$elm_ui$Element$rgb255, 255, 255, 255);
-var $author$project$Page_Index$frontPageParagraph = function () {
+var $author$project$Page_About$frontPageParagraph = function () {
 	var frontPageText = 'For professional inqueries, please contact me at ' + ($author$project$Data$myEmail + ' and I will get back to you as soon as possible. I look forward to speaking with you.');
 	return A2(
 		$mdgriffith$elm_ui$Element$paragraph,
@@ -11025,7 +11021,7 @@ var $author$project$Page_Index$frontPageParagraph = function () {
 				$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$white),
 				$mdgriffith$elm_ui$Element$padding(25),
 				$mdgriffith$elm_ui$Element$width(
-				$mdgriffith$elm_ui$Element$px(800)),
+				$mdgriffith$elm_ui$Element$px(1050)),
 				$author$project$HelperFunctions$bkgAttributes(
 				_List_fromArray(
 					[
@@ -11061,7 +11057,6 @@ var $mdgriffith$elm_ui$Internal$Model$Class = F2(
 	});
 var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
 var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.bold);
-var $author$project$Data$myName = 'Wesley Courtney';
 var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
 	return {$: 'FontSize', a: a};
 };
@@ -11072,6 +11067,83 @@ var $mdgriffith$elm_ui$Element$Font$size = function (i) {
 		$mdgriffith$elm_ui$Internal$Flag$fontSize,
 		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
 };
+var $author$project$Page_About$titleBox = A2(
+	$mdgriffith$elm_ui$Element$column,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$centerX,
+			$mdgriffith$elm_ui$Element$centerY,
+			$mdgriffith$elm_ui$Element$padding(10),
+			$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$white),
+			$mdgriffith$elm_ui$Element$spacing(10),
+			$mdgriffith$elm_ui$Element$Font$bold,
+			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+			$author$project$HelperFunctions$bkgAttributes(
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$fortyTwo),
+					$mdgriffith$elm_ui$Element$alpha(0.75),
+					$mdgriffith$elm_ui$Element$Border$roundEach(
+					{bottomLeft: 0, bottomRight: 0, topLeft: 10, topRight: 10})
+				]))
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$mdgriffith$elm_ui$Element$el,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Font$size(40),
+					$mdgriffith$elm_ui$Element$centerX
+				]),
+			$mdgriffith$elm_ui$Element$text('About Me'))
+		]));
+var $author$project$Page_About$homepageItems = A2(
+	$mdgriffith$elm_ui$Element$column,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$centerX,
+			$mdgriffith$elm_ui$Element$centerY,
+			$mdgriffith$elm_ui$Element$moveUp(100)
+		]),
+	_List_fromArray(
+		[$author$project$Page_About$titleBox, $author$project$Page_About$frontPageParagraph]));
+var $author$project$Page_About$aboutPage = function (model) {
+	return $author$project$Page_About$homepageItems;
+};
+var $author$project$Data$backgroundPath = './Images/background.jpg';
+var $mdgriffith$elm_ui$Internal$Model$FocusStyleOption = function (a) {
+	return {$: 'FocusStyleOption', a: a};
+};
+var $mdgriffith$elm_ui$Element$focusStyle = $mdgriffith$elm_ui$Internal$Model$FocusStyleOption;
+var $author$project$Page_Index$frontPageParagraph = function () {
+	var frontPageText = 'For professional inqueries, please contact me at ' + ($author$project$Data$myEmail + ' and I will get back to you as soon as possible. I look forward to speaking with you.');
+	return A2(
+		$mdgriffith$elm_ui$Element$paragraph,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$centerY,
+				$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$white),
+				$mdgriffith$elm_ui$Element$padding(25),
+				$mdgriffith$elm_ui$Element$width(
+				$mdgriffith$elm_ui$Element$px(800)),
+				$author$project$HelperFunctions$bkgAttributes(
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$fortyTwo),
+						$mdgriffith$elm_ui$Element$alpha(0.6),
+						$mdgriffith$elm_ui$Element$Border$rounded(10),
+						$mdgriffith$elm_ui$Element$Border$roundEach(
+						{bottomLeft: 10, bottomRight: 10, topLeft: 0, topRight: 0})
+					]))
+			]),
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$text(frontPageText)
+			]));
+}();
+var $author$project$Data$myName = 'Wesley Courtney';
 var $author$project$Page_Index$titleBox = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
@@ -11379,14 +11451,9 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 				_Utils_ap($mdgriffith$elm_ui$Internal$Model$rootStyle, attrs)),
 			child);
 	});
+var $author$project$MessagesAndModels$AboutMe = {$: 'AboutMe'};
 var $author$project$MessagesAndModels$Update = function (a) {
 	return {$: 'Update', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$Right = {$: 'Right'};
-var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Right);
-var $mdgriffith$elm_ui$Internal$Model$Below = {$: 'Below'};
-var $mdgriffith$elm_ui$Element$below = function (element) {
-	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$Below, element);
 };
 var $mdgriffith$elm_ui$Internal$Model$Button = {$: 'Button'};
 var $elm$json$Json$Encode$bool = _Json_wrap;
@@ -11531,6 +11598,201 @@ var $mdgriffith$elm_ui$Element$Input$button = F2(
 				_List_fromArray(
 					[label])));
 	});
+var $mdgriffith$elm_ui$Internal$Model$formatTextShadow = function (shadow) {
+	return A2(
+		$elm$core$String$join,
+		' ',
+		_List_fromArray(
+			[
+				$elm$core$String$fromFloat(shadow.offset.a) + 'px',
+				$elm$core$String$fromFloat(shadow.offset.b) + 'px',
+				$elm$core$String$fromFloat(shadow.blur) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$formatColor(shadow.color)
+			]));
+};
+var $mdgriffith$elm_ui$Internal$Model$textShadowClass = function (shadow) {
+	return $elm$core$String$concat(
+		_List_fromArray(
+			[
+				'txt',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.offset.a) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.offset.b) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.blur) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$formatColorClass(shadow.color)
+			]));
+};
+var $mdgriffith$elm_ui$Internal$Flag$txtShadows = $mdgriffith$elm_ui$Internal$Flag$flag(18);
+var $mdgriffith$elm_ui$Element$Font$glow = F2(
+	function (clr, i) {
+		var shade = {
+			blur: i * 2,
+			color: clr,
+			offset: _Utils_Tuple2(0, 0)
+		};
+		return A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$txtShadows,
+			A3(
+				$mdgriffith$elm_ui$Internal$Model$Single,
+				$mdgriffith$elm_ui$Internal$Model$textShadowClass(shade),
+				'text-shadow',
+				$mdgriffith$elm_ui$Internal$Model$formatTextShadow(shade)));
+	});
+var $mdgriffith$elm_ui$Internal$Model$Hover = {$: 'Hover'};
+var $mdgriffith$elm_ui$Internal$Model$PseudoSelector = F2(
+	function (a, b) {
+		return {$: 'PseudoSelector', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$hover = $mdgriffith$elm_ui$Internal$Flag$flag(33);
+var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
+var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
+var $mdgriffith$elm_ui$Internal$Model$map = F2(
+	function (fn, el) {
+		switch (el.$) {
+			case 'Styled':
+				var styled = el.a;
+				return $mdgriffith$elm_ui$Internal$Model$Styled(
+					{
+						html: F2(
+							function (add, context) {
+								return A2(
+									$elm$virtual_dom$VirtualDom$map,
+									fn,
+									A2(styled.html, add, context));
+							}),
+						styles: styled.styles
+					});
+			case 'Unstyled':
+				var html = el.a;
+				return $mdgriffith$elm_ui$Internal$Model$Unstyled(
+					A2(
+						$elm$core$Basics$composeL,
+						$elm$virtual_dom$VirtualDom$map(fn),
+						html));
+			case 'Text':
+				var str = el.a;
+				return $mdgriffith$elm_ui$Internal$Model$Text(str);
+			default:
+				return $mdgriffith$elm_ui$Internal$Model$Empty;
+		}
+	});
+var $elm$virtual_dom$VirtualDom$mapAttribute = _VirtualDom_mapAttribute;
+var $mdgriffith$elm_ui$Internal$Model$mapAttrFromStyle = F2(
+	function (fn, attr) {
+		switch (attr.$) {
+			case 'NoAttribute':
+				return $mdgriffith$elm_ui$Internal$Model$NoAttribute;
+			case 'Describe':
+				var description = attr.a;
+				return $mdgriffith$elm_ui$Internal$Model$Describe(description);
+			case 'AlignX':
+				var x = attr.a;
+				return $mdgriffith$elm_ui$Internal$Model$AlignX(x);
+			case 'AlignY':
+				var y = attr.a;
+				return $mdgriffith$elm_ui$Internal$Model$AlignY(y);
+			case 'Width':
+				var x = attr.a;
+				return $mdgriffith$elm_ui$Internal$Model$Width(x);
+			case 'Height':
+				var x = attr.a;
+				return $mdgriffith$elm_ui$Internal$Model$Height(x);
+			case 'Class':
+				var x = attr.a;
+				var y = attr.b;
+				return A2($mdgriffith$elm_ui$Internal$Model$Class, x, y);
+			case 'StyleClass':
+				var flag = attr.a;
+				var style = attr.b;
+				return A2($mdgriffith$elm_ui$Internal$Model$StyleClass, flag, style);
+			case 'Nearby':
+				var location = attr.a;
+				var elem = attr.b;
+				return A2(
+					$mdgriffith$elm_ui$Internal$Model$Nearby,
+					location,
+					A2($mdgriffith$elm_ui$Internal$Model$map, fn, elem));
+			case 'Attr':
+				var htmlAttr = attr.a;
+				return $mdgriffith$elm_ui$Internal$Model$Attr(
+					A2($elm$virtual_dom$VirtualDom$mapAttribute, fn, htmlAttr));
+			default:
+				var fl = attr.a;
+				var trans = attr.b;
+				return A2($mdgriffith$elm_ui$Internal$Model$TransformComponent, fl, trans);
+		}
+	});
+var $mdgriffith$elm_ui$Internal$Model$removeNever = function (style) {
+	return A2($mdgriffith$elm_ui$Internal$Model$mapAttrFromStyle, $elm$core$Basics$never, style);
+};
+var $mdgriffith$elm_ui$Internal$Model$unwrapDecsHelper = F2(
+	function (attr, _v0) {
+		var styles = _v0.a;
+		var trans = _v0.b;
+		var _v1 = $mdgriffith$elm_ui$Internal$Model$removeNever(attr);
+		switch (_v1.$) {
+			case 'StyleClass':
+				var style = _v1.b;
+				return _Utils_Tuple2(
+					A2($elm$core$List$cons, style, styles),
+					trans);
+			case 'TransformComponent':
+				var flag = _v1.a;
+				var component = _v1.b;
+				return _Utils_Tuple2(
+					styles,
+					A2($mdgriffith$elm_ui$Internal$Model$composeTransformation, trans, component));
+			default:
+				return _Utils_Tuple2(styles, trans);
+		}
+	});
+var $mdgriffith$elm_ui$Internal$Model$unwrapDecorations = function (attrs) {
+	var _v0 = A3(
+		$elm$core$List$foldl,
+		$mdgriffith$elm_ui$Internal$Model$unwrapDecsHelper,
+		_Utils_Tuple2(_List_Nil, $mdgriffith$elm_ui$Internal$Model$Untransformed),
+		attrs);
+	var styles = _v0.a;
+	var transform = _v0.b;
+	return A2(
+		$elm$core$List$cons,
+		$mdgriffith$elm_ui$Internal$Model$Transform(transform),
+		styles);
+};
+var $mdgriffith$elm_ui$Element$mouseOver = function (decs) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$hover,
+		A2(
+			$mdgriffith$elm_ui$Internal$Model$PseudoSelector,
+			$mdgriffith$elm_ui$Internal$Model$Hover,
+			$mdgriffith$elm_ui$Internal$Model$unwrapDecorations(decs)));
+};
+var $author$project$Comp_NavBar$hovered = $mdgriffith$elm_ui$Element$mouseOver(
+	_List_fromArray(
+		[
+			A2($mdgriffith$elm_ui$Element$Font$glow, $author$project$Colors$white, 3.5)
+		]));
+var $author$project$Comp_NavBar$aboutMe = function (model) {
+	return A2(
+		$mdgriffith$elm_ui$Element$Input$button,
+		_List_fromArray(
+			[$author$project$Comp_NavBar$hovered]),
+		{
+			label: $mdgriffith$elm_ui$Element$text('About Me'),
+			onPress: $elm$core$Maybe$Just(
+				$author$project$MessagesAndModels$Update(
+					_Utils_update(
+						model,
+						{selectedPage: $author$project$MessagesAndModels$AboutMe})))
+		});
+};
+var $mdgriffith$elm_ui$Internal$Model$Right = {$: 'Right'};
+var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Right);
+var $mdgriffith$elm_ui$Internal$Model$Below = {$: 'Below'};
+var $mdgriffith$elm_ui$Element$below = function (element) {
+	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$Below, element);
+};
 var $author$project$MessagesAndModels$CopyToClipboard = function (a) {
 	return {$: 'CopyToClipboard', a: a};
 };
@@ -11587,20 +11849,23 @@ var $author$project$Comp_NavBar$dropNav = A2(
 			$mdgriffith$elm_ui$Element$padding(15),
 			$mdgriffith$elm_ui$Element$Border$rounded(10),
 			$mdgriffith$elm_ui$Element$centerX,
-			$mdgriffith$elm_ui$Element$spacing(10)
+			$mdgriffith$elm_ui$Element$spacing(10),
+			A2($mdgriffith$elm_ui$Element$Font$glow, $author$project$Colors$white, 0)
 		]),
 	_List_fromArray(
 		[
 			A2(
 			$mdgriffith$elm_ui$Element$link,
-			_List_Nil,
+			_List_fromArray(
+				[$author$project$Comp_NavBar$hovered]),
 			{
 				label: $mdgriffith$elm_ui$Element$text('Email using Client'),
 				url: 'mailto:' + $author$project$Data$myEmail
 			}),
 			A2(
 			$mdgriffith$elm_ui$Element$Input$button,
-			_List_Nil,
+			_List_fromArray(
+				[$author$project$Comp_NavBar$hovered]),
 			{
 				label: $mdgriffith$elm_ui$Element$text('Copy Email to Clipboard'),
 				onPress: $elm$core$Maybe$Just(
@@ -11618,6 +11883,32 @@ var $author$project$HelperFunctions$flip = function (a) {
 		_Utils_eq(a, $author$project$MessagesAndModels$Open),
 		$author$project$MessagesAndModels$Closed,
 		$author$project$MessagesAndModels$Open);
+};
+var $author$project$Comp_NavBar$contactButton = function (model) {
+	var flippedState = $author$project$HelperFunctions$flip(model.contactDropdown);
+	var toggledModel = _Utils_update(
+		model,
+		{contactDropdown: flippedState});
+	var dropNavIfOpen = A3(
+		$author$project$HelperFunctions$speedIf,
+		_Utils_eq(model.contactDropdown, $author$project$MessagesAndModels$Closed),
+		_List_Nil,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$below($author$project$Comp_NavBar$dropNav),
+				A2($mdgriffith$elm_ui$Element$Font$glow, $author$project$Colors$white, 3.5)
+			]));
+	return A2(
+		$mdgriffith$elm_ui$Element$Input$button,
+		_Utils_ap(
+			_List_fromArray(
+				[$author$project$Comp_NavBar$hovered]),
+			dropNavIfOpen),
+		{
+			label: $mdgriffith$elm_ui$Element$text('Contact'),
+			onPress: $elm$core$Maybe$Just(
+				$author$project$MessagesAndModels$Update(toggledModel))
+		});
 };
 var $author$project$Data$gitHub = 'https://github.com/wcourtney31415';
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
@@ -11655,6 +11946,14 @@ var $mdgriffith$elm_ui$Element$newTabLink = F2(
 				_List_fromArray(
 					[label])));
 	});
+var $author$project$Comp_NavBar$gitHubLink = A2(
+	$mdgriffith$elm_ui$Element$newTabLink,
+	_List_fromArray(
+		[$author$project$Comp_NavBar$hovered]),
+	{
+		label: $mdgriffith$elm_ui$Element$text('GitHub'),
+		url: $author$project$Data$gitHub
+	});
 var $mdgriffith$elm_ui$Internal$Model$AsRow = {$: 'AsRow'};
 var $mdgriffith$elm_ui$Internal$Model$asRow = $mdgriffith$elm_ui$Internal$Model$AsRow;
 var $mdgriffith$elm_ui$Element$row = F2(
@@ -11676,6 +11975,14 @@ var $mdgriffith$elm_ui$Element$row = F2(
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
 var $author$project$Comp_NavBar$navBar = function (model) {
+	var bkgAttr = $author$project$HelperFunctions$bkgAttributes(
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$fortyTwo),
+				$mdgriffith$elm_ui$Element$alpha(0.6),
+				$mdgriffith$elm_ui$Element$Border$roundEach(
+				{bottomLeft: 10, bottomRight: 0, topLeft: 0, topRight: 0})
+			]));
 	return A2(
 		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
@@ -11684,51 +11991,24 @@ var $author$project$Comp_NavBar$navBar = function (model) {
 				$mdgriffith$elm_ui$Element$padding(10),
 				$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$white),
 				$mdgriffith$elm_ui$Element$spacing(20),
-				$author$project$HelperFunctions$bkgAttributes(
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$fortyTwo),
-						$mdgriffith$elm_ui$Element$alpha(0.6),
-						$mdgriffith$elm_ui$Element$Border$roundEach(
-						{bottomLeft: 10, bottomRight: 0, topLeft: 0, topRight: 0})
-					]))
+				bkgAttr
 			]),
 		_List_fromArray(
 			[
-				A2(
-				$mdgriffith$elm_ui$Element$Input$button,
-				A2(
-					$elm$core$List$append,
-					_List_Nil,
-					A3(
-						$author$project$HelperFunctions$speedIf,
-						_Utils_eq(model.contactDropdown, $author$project$MessagesAndModels$Closed),
-						_List_Nil,
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$below($author$project$Comp_NavBar$dropNav)
-							]))),
-				{
-					label: $mdgriffith$elm_ui$Element$text('Contact'),
-					onPress: $elm$core$Maybe$Just(
-						$author$project$MessagesAndModels$Update(
-							_Utils_update(
-								model,
-								{
-									contactDropdown: $author$project$HelperFunctions$flip(model.contactDropdown)
-								})))
-				}),
-				$mdgriffith$elm_ui$Element$text('About Me'),
-				A2(
-				$mdgriffith$elm_ui$Element$newTabLink,
-				_List_Nil,
-				{
-					label: $mdgriffith$elm_ui$Element$text('GitHub'),
-					url: $author$project$Data$gitHub
-				})
+				$author$project$Comp_NavBar$contactButton(model),
+				$author$project$Comp_NavBar$aboutMe(model),
+				$author$project$Comp_NavBar$gitHubLink
 			]));
 };
 var $author$project$Main$view = function (model) {
+	var selectedPage = function () {
+		var _v0 = model.selectedPage;
+		if (_v0.$ === 'Home') {
+			return $author$project$Page_Index$homepage(model);
+		} else {
+			return $author$project$Page_About$aboutPage(model);
+		}
+	}();
 	var myFocusStyle = {backgroundColor: $elm$core$Maybe$Nothing, borderColor: $elm$core$Maybe$Nothing, shadow: $elm$core$Maybe$Nothing};
 	var myView = A3(
 		$mdgriffith$elm_ui$Element$layoutWith,
@@ -11753,7 +12033,7 @@ var $author$project$Main$view = function (model) {
 			_List_fromArray(
 				[
 					$author$project$Comp_NavBar$navBar(model),
-					$author$project$Page_Index$homepage(model)
+					selectedPage
 				])));
 	return {
 		body: _List_fromArray(
