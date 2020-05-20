@@ -7,6 +7,7 @@ import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import MessagesAndModels exposing (..)
+import Page_About exposing (..)
 import Page_Index exposing (..)
 
 
@@ -67,7 +68,9 @@ view model =
                     , spacing 40
                     ]
                     [ navBar model
-                    , homepage model
+
+                    --, homepage model
+                    , aboutPage model
                     ]
     in
     { title = myName
