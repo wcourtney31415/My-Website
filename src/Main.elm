@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Browser
+import Clipboard exposing (..)
 import Comp_NavBar exposing (..)
 import Data exposing (..)
 import Element exposing (..)
@@ -39,6 +40,9 @@ update msg model =
     case msg of
         Update new ->
             ( new, Cmd.none )
+
+        CopyToClipboard str ->
+            ( model, copyToClipboard str )
 
 
 view : Model -> Browser.Document Msg

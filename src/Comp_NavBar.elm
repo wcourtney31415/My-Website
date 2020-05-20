@@ -55,5 +55,5 @@ dropNav =
         , spacing 10
         ]
         [ text "Email using Client"
-        , text "Copy Email to Clipboard"
+        , Input.button [] { onPress = Just <| CopyToClipboard myEmail, label = text "Copy Email to Clipboard" }
         ]

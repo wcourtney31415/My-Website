@@ -8,6 +8,7 @@ type alias Model =
 
 type Msg
     = Update Model
+    | CopyToClipboard String
 
 
 type OpenOrClosed

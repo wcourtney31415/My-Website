@@ -1,0 +1,7 @@
+{
+  "commands": [
+    "src/** : bash build.sh",
+    "assets/Images/** : bash cleanImages.sh",
+    "assets/** : bash build.sh"
+  ]
+}
