@@ -24,13 +24,16 @@ contactButton model =
 
         dropNavIfOpen : List (Attribute Msg)
         dropNavIfOpen =
+            --Also glows Contact if dropNav open
             speedIf
                 (model.contactDropdown == Closed)
                 []
-                [ Element.below dropNav ]
+                [ Element.below dropNav
+                , Font.glow white 3.5
+                ]
     in
     Input.button
-        ([]
+        ([ hovered ]
             ++ dropNavIfOpen
         )
         { onPress = Just <| Update toggledModel
@@ -38,12 +41,22 @@ contactButton model =
         }
 
 
+hovered =
+    mouseOver [ Font.glow white 3.5 ]
+
+
 gitHubLink : Element Msg
 gitHubLink =
-    newTabLink []
+    newTabLink
+        [ hovered ]
         { url = gitHub
         , label = text "GitHub"
         }
+
+
+aboutMe : Element Msg
+aboutMe =
+    Element.el [ hovered ] (text "About Me")
 
 
 navBar : Model -> Element Msg
@@ -70,7 +83,7 @@ navBar model =
         , bkgAttr
         ]
         [ contactButton model
-        , text "About Me"
+        , aboutMe
         , gitHubLink
         ]
 
@@ -84,12 +97,13 @@ dropNav =
         , Border.rounded 10
         , centerX
         , spacing 10
+        , Font.glow white 0 --override contactButton glow
         ]
-        [ Element.link []
+        [ Element.link [ hovered ]
             { url = "mailto:" ++ myEmail
             , label = text "Email using Client"
             }
-        , Input.button []
+        , Input.button [ hovered ]
             { onPress = Just <| CopyToClipboard myEmail
             , label = text "Copy Email to Clipboard"
             }
