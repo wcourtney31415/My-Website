@@ -1,4 +1,4 @@
-module Comp_NavBar exposing (..)
+module Comp_NavBar exposing (navBar)
 
 import Colors exposing (..)
 import Data exposing (..)
@@ -11,35 +11,67 @@ import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
 
 
+contactButton : Model -> Element Msg
+contactButton model =
+    let
+        flippedState : OpenOrClosed
+        flippedState =
+            flip model.contactDropdown
+
+        toggledModel : Model
+        toggledModel =
+            { model | contactDropdown = flippedState }
+
+        dropNavIfOpen : List (Attribute Msg)
+        dropNavIfOpen =
+            speedIf
+                (model.contactDropdown == Closed)
+                []
+                [ Element.below dropNav ]
+    in
+    Input.button
+        ([]
+            ++ dropNavIfOpen
+        )
+        { onPress = Just <| Update toggledModel
+        , label = text "Contact"
+        }
+
+
+gitHubLink : Element Msg
+gitHubLink =
+    newTabLink []
+        { url = gitHub
+        , label = text "GitHub"
+        }
+
+
 navBar : Model -> Element Msg
 navBar model =
+    let
+        bkgAttr : Attribute Msg
+        bkgAttr =
+            bkgAttributes
+                [ Background.color fortyTwo
+                , alpha 0.6
+                , Border.roundEach
+                    { topLeft = 0
+                    , topRight = 0
+                    , bottomLeft = 10
+                    , bottomRight = 0
+                    }
+                ]
+    in
     Element.row
         [ alignRight
         , padding 10
         , Font.color white
         , spacing 20
-        , bkgAttributes
-            [ Background.color fortyTwo
-            , alpha 0.6
-            , Border.roundEach
-                { topLeft = 0
-                , topRight = 0
-                , bottomLeft = 10
-                , bottomRight = 0
-                }
-            ]
+        , bkgAttr
         ]
-        [ Input.button
-            (List.append
-                []
-                (speedIf (model.contactDropdown == Closed) [] [ Element.below dropNav ])
-            )
-            { onPress = Just <| Update { model | contactDropdown = flip model.contactDropdown }, label = text "Contact" }
+        [ contactButton model
         , text "About Me"
-        , newTabLink []
-            { url = gitHub
-            , label = text "GitHub"
-            }
+        , gitHubLink
         ]
 
 
@@ -49,12 +81,16 @@ dropNav =
         [ Background.color dropNavColor
         , moveDown 15
         , padding 15
-
-        --, alpha 0.6
         , Border.rounded 10
         , centerX
         , spacing 10
         ]
-        [ Element.link [] { url = "mailto:" ++ myEmail, label = text "Email using Client" }
-        , Input.button [] { onPress = Just <| CopyToClipboard myEmail, label = text "Copy Email to Clipboard" }
+        [ Element.link []
+            { url = "mailto:" ++ myEmail
+            , label = text "Email using Client"
+            }
+        , Input.button []
+            { onPress = Just <| CopyToClipboard myEmail
+            , label = text "Copy Email to Clipboard"
+            }
         ]
