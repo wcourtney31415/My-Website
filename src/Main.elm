@@ -63,7 +63,8 @@ view model =
             Element.layoutWith
                 { options = [ focusStyle myFocusStyle ] }
                 [ Background.image backgroundPath
-                , customFont
+
+                --, customFont
                 ]
             <|
                 Element.column
