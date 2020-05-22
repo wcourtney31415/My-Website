@@ -1,4 +1,3 @@
 {
-  "browser" : "chrome"
-  , "root" : "target"
+   "root" : "target"
 }
