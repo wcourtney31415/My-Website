@@ -6,6 +6,7 @@ import Comp_NavBar exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
+import Font exposing (..)
 import MessagesAndModels exposing (..)
 import Page_About exposing (..)
 import Page_Index exposing (..)
@@ -62,6 +63,8 @@ view model =
             Element.layoutWith
                 { options = [ focusStyle myFocusStyle ] }
                 [ Background.image backgroundPath
+
+                --, customFont
                 ]
             <|
                 Element.column
