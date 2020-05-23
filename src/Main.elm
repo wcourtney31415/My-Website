@@ -12,7 +12,7 @@ import Page_About exposing (..)
 import Page_Index exposing (..)
 
 
-main : Program () Model Msg
+main : Program Flags Model Msg
 main =
     Browser.document
         { init = init
@@ -27,12 +27,14 @@ subscriptions _ =
     Sub.none
 
 
-init : () -> ( Model, Cmd Msg )
-init _ =
+init : Flags -> ( Model, Cmd Msg )
+init flags =
     let
         initialModel : Model
         initialModel =
-            { contactDropdown = Closed
+            { windowWidth = flags.windowWidth
+            , windowHeight = flags.windowHeight
+            , contactDropdown = Closed
             , selectedPage = Home
             }
     in

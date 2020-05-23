@@ -2,7 +2,9 @@ module MessagesAndModels exposing (..)
 
 
 type alias Model =
-    { contactDropdown : OpenOrClosed
+    { windowWidth : Int
+    , windowHeight : Int
+    , contactDropdown : OpenOrClosed
     , selectedPage : Page
     }
 
@@ -20,3 +22,7 @@ type Msg
 type OpenOrClosed
     = Open
     | Closed
+
+
+type alias Flags =
+    { windowWidth : Int, windowHeight : Int }

@@ -13,6 +13,7 @@
     // initialize the elm app
     var elmApp = Elm.Main.init({
       node: document.getElementById('app'),
+      flags: {windowWidth : window.innerWidth, windowHeight : window.innerHeight},
     });
     addClipboardPorts(elmApp);
 
