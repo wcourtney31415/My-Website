@@ -51,6 +51,15 @@ update msg model =
             ( model, copyToClipboard str )
 
 
+windowResElement : Model -> Element Msg
+windowResElement model =
+    Element.el
+        [ centerX
+        , centerY
+        ]
+        (text <| "Width: " ++ String.fromInt model.windowWidth ++ " Height: " ++ String.fromInt model.windowHeight)
+
+
 view : Model -> Browser.Document Msg
 view model =
     let
@@ -76,6 +85,7 @@ view model =
                     ]
                     [ navBar model
                     , selectedPage
+                    , windowResElement model
                     ]
 
         selectedPage =
