@@ -7,7 +7,8 @@ import Comp_NavBar exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
-import Font exposing (..)
+import Element.Font as Font
+import Fonts exposing (..)
 import MessagesAndModels exposing (..)
 import Page_About exposing (..)
 import Page_Index exposing (..)
@@ -52,7 +53,14 @@ update msg model =
             ( model, copyToClipboard str )
 
         GotNewResolution width height ->
-            ( { model | windowWidth = width, windowHeight = height }, Cmd.none )
+            let
+                modifiedModel =
+                    { model
+                        | windowWidth = width
+                        , windowHeight = height
+                    }
+            in
+            ( modifiedModel, Cmd.none )
 
 
 windowResElement : Model -> Element Msg
@@ -60,8 +68,14 @@ windowResElement model =
     Element.el
         [ centerX
         , centerY
+        , Font.size 60
         ]
-        (text <| "Width: " ++ String.fromInt model.windowWidth ++ " Height: " ++ String.fromInt model.windowHeight)
+        (text <|
+            "Width: "
+                ++ String.fromInt model.windowWidth
+                ++ " Height: "
+                ++ String.fromInt model.windowHeight
+        )
 
 
 view : Model -> Browser.Document Msg
