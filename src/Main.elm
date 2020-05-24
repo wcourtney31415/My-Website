@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Browser
+import Browser.Events as Events
 import Clipboard exposing (..)
 import Comp_NavBar exposing (..)
 import Data exposing (..)
@@ -24,7 +25,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.none
+    Events.onResize (\w h -> GotNewResolution w h)
 
 
 init : Flags -> ( Model, Cmd Msg )
@@ -49,6 +50,9 @@ update msg model =
 
         CopyToClipboard str ->
             ( model, copyToClipboard str )
+
+        GotNewResolution width height ->
+            ( { model | windowWidth = width, windowHeight = height }, Cmd.none )
 
 
 windowResElement : Model -> Element Msg

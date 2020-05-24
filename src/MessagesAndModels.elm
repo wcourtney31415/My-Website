@@ -17,6 +17,7 @@ type Page
 type Msg
     = Update Model
     | CopyToClipboard String
+    | GotNewResolution Int Int
 
 
 type OpenOrClosed
