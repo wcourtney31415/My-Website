@@ -12,6 +12,7 @@ import Fonts exposing (..)
 import MessagesAndModels exposing (..)
 import Page_About exposing (..)
 import Page_Index exposing (..)
+import Views exposing (..)
 
 
 main : Program Flags Model Msg
@@ -32,10 +33,23 @@ subscriptions _ =
 init : Flags -> ( Model, Cmd Msg )
 init flags =
     let
+        windowWidth =
+            flags.windowWidth
+
+        windowHeight =
+            flags.windowHeight
+
+        device =
+            classifyDevice
+                { width = windowWidth
+                , height = windowHeight
+                }
+
         initialModel : Model
         initialModel =
-            { windowWidth = flags.windowWidth
-            , windowHeight = flags.windowHeight
+            { windowWidth = windowWidth
+            , windowHeight = windowHeight
+            , device = device
             , contactDropdown = Closed
             , selectedPage = Home
             }
@@ -54,66 +68,24 @@ update msg model =
 
         GotNewResolution width height ->
             let
+                device =
+                    classifyDevice
+                        { width = width
+                        , height = height
+                        }
+
                 modifiedModel =
                     { model
                         | windowWidth = width
                         , windowHeight = height
+                        , device = device
                     }
             in
             ( modifiedModel, Cmd.none )
 
 
-windowResElement : Model -> Element Msg
-windowResElement model =
-    Element.el
-        [ centerX
-        , centerY
-        , Font.size 60
-        ]
-        (text <|
-            "Width: "
-                ++ String.fromInt model.windowWidth
-                ++ " Height: "
-                ++ String.fromInt model.windowHeight
-        )
-
-
 view : Model -> Browser.Document Msg
 view model =
-    let
-        myFocusStyle : FocusStyle
-        myFocusStyle =
-            { borderColor = Nothing
-            , backgroundColor = Nothing
-            , shadow = Nothing
-            }
-
-        myView =
-            Element.layoutWith
-                { options = [ focusStyle myFocusStyle ] }
-                [ Background.image backgroundPath
-
-                --, customFont
-                ]
-            <|
-                Element.column
-                    [ width fill
-                    , height fill
-                    , spacing 40
-                    ]
-                    [ navBar model
-                    , selectedPage
-                    , windowResElement model
-                    ]
-
-        selectedPage =
-            case model.selectedPage of
-                Home ->
-                    homepage model
-
-                AboutMe ->
-                    aboutPage model
-    in
     { title = myName
-    , body = [ myView ]
+    , body = [ siteView model ]
     }

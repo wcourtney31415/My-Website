@@ -1,9 +1,16 @@
 module MessagesAndModels exposing (..)
 
+import Browser
+import Browser.Events as Events
+import Element exposing (..)
+import Element.Background as Background
+import Element.Font as Font
+
 
 type alias Model =
     { windowWidth : Int
     , windowHeight : Int
+    , device : Device
     , contactDropdown : OpenOrClosed
     , selectedPage : Page
     }
