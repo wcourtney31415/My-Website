@@ -12,6 +12,7 @@ import Fonts exposing (..)
 import MessagesAndModels exposing (..)
 import Page_About exposing (..)
 import Page_Index exposing (..)
+import Responsive
 import Views exposing (..)
 
 
@@ -27,7 +28,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Events.onResize (\w h -> GotNewResolution w h)
+    Responsive.onResize (\w h -> GotNewResolution w h)
 
 
 init : Flags -> ( Model, Cmd Msg )
