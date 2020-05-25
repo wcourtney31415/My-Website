@@ -1,18 +1,22 @@
 module Main exposing (..)
 
 import Browser
+import Browser.Events as Events
 import Clipboard exposing (..)
 import Comp_NavBar exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
-import Font exposing (..)
+import Element.Font as Font
+import Fonts exposing (..)
 import MessagesAndModels exposing (..)
 import Page_About exposing (..)
 import Page_Index exposing (..)
+import Responsive
+import Views exposing (..)
 
 
-main : Program () Model Msg
+main : Program Flags Model Msg
 main =
     Browser.document
         { init = init
@@ -24,15 +28,31 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.none
+    Responsive.onResize (\w h -> GotNewResolution w h)
 
 
-init : () -> ( Model, Cmd Msg )
-init _ =
+init : Flags -> ( Model, Cmd Msg )
+init flags =
     let
+        windowWidth =
+            flags.windowWidth
+
+        windowHeight =
+            flags.windowHeight
+
+        device =
+            classifyDevice
+                { width = windowWidth
+                , height = windowHeight
+                }
+
         initialModel : Model
         initialModel =
-            { contactDropdown = Closed
+            { windowWidth = windowWidth
+            , windowHeight = windowHeight
+            , device = device
+            , responsive = True
+            , contactDropdown = Closed
             , selectedPage = Home
             }
     in
@@ -48,42 +68,26 @@ update msg model =
         CopyToClipboard str ->
             ( model, copyToClipboard str )
 
+        GotNewResolution width height ->
+            let
+                device =
+                    classifyDevice
+                        { width = width
+                        , height = height
+                        }
+
+                modifiedModel =
+                    { model
+                        | windowWidth = width
+                        , windowHeight = height
+                        , device = device
+                    }
+            in
+            ( modifiedModel, Cmd.none )
+
 
 view : Model -> Browser.Document Msg
 view model =
-    let
-        myFocusStyle : FocusStyle
-        myFocusStyle =
-            { borderColor = Nothing
-            , backgroundColor = Nothing
-            , shadow = Nothing
-            }
-
-        myView =
-            Element.layoutWith
-                { options = [ focusStyle myFocusStyle ] }
-                [ Background.image backgroundPath
-
-                --, customFont
-                ]
-            <|
-                Element.column
-                    [ width fill
-                    , height fill
-                    , spacing 40
-                    ]
-                    [ navBar model
-                    , selectedPage
-                    ]
-
-        selectedPage =
-            case model.selectedPage of
-                Home ->
-                    homepage model
-
-                AboutMe ->
-                    aboutPage model
-    in
     { title = myName
-    , body = [ myView ]
+    , body = [ siteView model ]
     }

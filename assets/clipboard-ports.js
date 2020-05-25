@@ -5,7 +5,5 @@ function addClipboardPorts(elmApp) {
 }
 
 function copyToClipboard(str) {
-  navigator.clipboard.writeText(str).then(function() {
-  }, function() {
-  });
+  navigator.clipboard.writeText(str);
 }

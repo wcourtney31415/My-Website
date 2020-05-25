@@ -1,8 +1,18 @@
 module MessagesAndModels exposing (..)
 
+import Browser
+import Browser.Events as Events
+import Element exposing (..)
+import Element.Background as Background
+import Element.Font as Font
+
 
 type alias Model =
-    { contactDropdown : OpenOrClosed
+    { windowWidth : Int
+    , windowHeight : Int
+    , device : Device
+    , responsive : Bool
+    , contactDropdown : OpenOrClosed
     , selectedPage : Page
     }
 
@@ -15,8 +25,13 @@ type Page
 type Msg
     = Update Model
     | CopyToClipboard String
+    | GotNewResolution Int Int
 
 
 type OpenOrClosed
     = Open
     | Closed
+
+
+type alias Flags =
+    { windowWidth : Int, windowHeight : Int }

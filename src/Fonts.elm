@@ -1,4 +1,4 @@
-module Font exposing (..)
+module Fonts exposing (..)
 
 import Element.Font as Font
 
