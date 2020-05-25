@@ -54,7 +54,7 @@ windowResElement model =
         ]
 
 
-siteView model =
+desktopView model =
     let
         myFocusStyle : FocusStyle
         myFocusStyle =
@@ -87,3 +87,30 @@ siteView model =
             , selectedPage
             , windowResElement model
             ]
+
+
+tabletView model =
+    Element.layout [] (text "Tablet view!")
+
+
+phoneView model =
+    Element.layout [] (text "Phone view!")
+
+
+siteView model =
+    let
+        deviceClass =
+            model.device.class
+    in
+    case deviceClass of
+        Phone ->
+            phoneView model
+
+        Tablet ->
+            tabletView model
+
+        Desktop ->
+            desktopView model
+
+        BigDesktop ->
+            desktopView model
