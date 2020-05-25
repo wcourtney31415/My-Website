@@ -11,6 +11,7 @@ type alias Model =
     { windowWidth : Int
     , windowHeight : Int
     , device : Device
+    , responsive : Bool
     , contactDropdown : OpenOrClosed
     , selectedPage : Page
     }

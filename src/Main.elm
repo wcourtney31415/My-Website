@@ -51,6 +51,7 @@ init flags =
             { windowWidth = windowWidth
             , windowHeight = windowHeight
             , device = device
+            , responsive = True
             , contactDropdown = Closed
             , selectedPage = Home
             }

@@ -101,16 +101,26 @@ siteView model =
     let
         deviceClass =
             model.device.class
+
+        responsiveView =
+            case deviceClass of
+                Phone ->
+                    phoneView model
+
+                Tablet ->
+                    tabletView model
+
+                Desktop ->
+                    desktopView model
+
+                BigDesktop ->
+                    desktopView model
+
+        myView =
+            if model.responsive then
+                responsiveView
+
+            else
+                desktopView model
     in
-    case deviceClass of
-        Phone ->
-            phoneView model
-
-        Tablet ->
-            tabletView model
-
-        Desktop ->
-            desktopView model
-
-        BigDesktop ->
-            desktopView model
+    myView
