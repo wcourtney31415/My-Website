@@ -123,27 +123,6 @@ phoneView model =
                     (text "Wesley Courtney")
                 ]
 
-        contact =
-            Element.el
-                [ Font.size 80
-                , Font.bold
-                ]
-                (text "Contact")
-
-        aboutMe =
-            Element.el
-                [ Font.size 80
-                , Font.bold
-                ]
-                (text "About Me")
-
-        gitHub =
-            Element.el
-                [ Font.size 80
-                , Font.bold
-                ]
-                (text "Github")
-
         gitHubParagraph =
             Element.column [ spacing 60 ]
                 [ Element.paragraph
