@@ -24,3 +24,23 @@ gray =
 
 red =
     rgb255 255 0 0
+
+
+mobileGray =
+    rgb255 109 112 115
+
+
+blue =
+    rgb255 0 0 255
+
+
+twoThirtyFour =
+    rgb255 234 234 234
+
+
+customBlueSdev =
+    rgb255 90 145 199
+
+
+customBlueEmail =
+    rgb255 81 124 167
