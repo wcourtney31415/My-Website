@@ -16,3 +16,11 @@ fortyTwo =
 dropNavColor : Color
 dropNavColor =
     rgb255 105 108 112
+
+
+gray =
+    rgb255 200 200 200
+
+
+red =
+    rgb255 255 0 0
