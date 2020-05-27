@@ -21,19 +21,36 @@ phoneView model =
             35
     in
     Element.layout
-        [ paddingEach { top = 0, bottom = 180, left = 0, right = 0 } ]
+        [ Background.color <| rgb255 194 194 194
+        ]
         (Element.column
             [ centerX
             ]
             [ heading
             , Element.column
-                [ paddingEach { right = 0, left = 0, top = 0, bottom = 0 }
+                [ paddingEach
+                    { right = 0
+                    , left = 0
+                    , top = 0
+                    , bottom = 0
+                    }
                 ]
                 [ block "Contact"
                     []
                     [ emailComponent ]
-                , block "About Me" [] [ Element.el [ Font.size 50 ] (text "about me text") ]
-                , block "Github" [] [ gitHubParagraph ]
+                , block "About Me"
+                    []
+                    [ Element.el [ Font.size 50 ] (text "about me text")
+                    ]
+                , block "Github"
+                    [ paddingEach
+                        { top = 30
+                        , left = 20
+                        , right = 20
+                        , bottom = 200
+                        }
+                    ]
+                    [ gitHubParagraph ]
                 ]
             ]
         )
@@ -45,10 +62,18 @@ heading =
             Element.row
                 [ Font.bold
                 , Font.size 95
-                , Background.color mobileGray
+
+                --, Background.color mobileGray
+                , Background.color anotherBlue
                 , centerX
                 , width fill
                 , padding 35
+                , Border.roundEach
+                    { topLeft = 0
+                    , topRight = 0
+                    , bottomLeft = 50
+                    , bottomRight = 50
+                    }
                 ]
                 [ Element.el
                     [ centerX
@@ -58,19 +83,36 @@ heading =
                 ]
 
         titleName =
+            let
+                x =
+                    234
+
+                y =
+                    x - 20
+
+                z =
+                    y - 20
+            in
             Element.row
                 [ centerX
                 , Font.size 90
                 , Background.gradient
                     { angle = 0
                     , steps =
-                        [ twoThirtyFour ]
-                            ++ List.repeat 1 twoSeventeen
-                            ++ List.repeat 3 gray
+                        List.repeat 1 (rgb255 x x x)
+                            ++ List.repeat 1 (rgb255 y y y)
+                            ++ List.repeat 1 (rgb255 z z z)
                     }
+                , Font.bold
+                , Font.color <| rgb255 52 89 127
                 , width fill
                 , padding 20
-                , paddingEach { top = 20, bottom = 70, right = 20, left = 20 }
+                , paddingEach
+                    { top = 20
+                    , bottom = 70
+                    , right = 20
+                    , left = 20
+                    }
                 ]
                 [ Element.el
                     [ centerX
@@ -95,7 +137,7 @@ gitHubParagraph =
             [ text "Check out my github profile to see what projects I've been working on lately." ]
         , gitHubLink
         , Element.paragraph
-            [ Font.size 45
+            [ Font.size 55
             ]
             [ text "(You can also find the source code for this site there.)" ]
         ]
@@ -118,7 +160,9 @@ emailComponent =
         [ centerX
         , centerY
         , spacing 35
-        , Background.color mobileGray
+
+        --, Background.color mobileGray
+        , Background.color anotherBlue
         , padding 40
         , Border.rounded 32
         , centerY
@@ -164,7 +208,12 @@ block title attributes contents =
          , width fill
          , Background.gradient { angle = 0, steps = [ white, twoThirtyFour ] }
          , spacing 40
-         , paddingEach { left = 30, right = 30, top = 30, bottom = 30 }
+         , paddingEach
+            { left = 30
+            , right = 30
+            , top = 30
+            , bottom = 30
+            }
          ]
             ++ attributes
         )

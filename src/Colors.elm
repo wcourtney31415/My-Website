@@ -48,3 +48,7 @@ customBlueSdev =
 
 customBlueEmail =
     rgb255 81 124 167
+
+
+anotherBlue =
+    rgb255 101 147 193
