@@ -61,8 +61,11 @@ titleBox =
 frontPageParagraph : Element Msg
 frontPageParagraph =
     let
-        frontPageText =
-            "For professional inqueries, please contact me at " ++ myEmail ++ " and I will get back to you as soon as possible. I look forward to speaking with you."
+        preLink =
+            "For professional inqueries, please contact me at "
+
+        postLink =
+            " and I will get back to you as soon as possible. I look forward to speaking with you."
     in
     Element.paragraph
         [ centerX
@@ -82,4 +85,10 @@ frontPageParagraph =
                 }
             ]
         ]
-        [ text frontPageText ]
+        [ text preLink
+        , Element.link []
+            { url = "mailto:" ++ myEmail
+            , label = text myEmail
+            }
+        , text postLink
+        ]
