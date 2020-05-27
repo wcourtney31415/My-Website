@@ -18,6 +18,14 @@ dropNavColor =
     rgb255 105 108 112
 
 
+twoThirtyFour =
+    rgb255 234 234 234
+
+
+twoSeventeen =
+    rgb255 217 217 217
+
+
 gray =
     rgb255 200 200 200
 
@@ -32,10 +40,6 @@ mobileGray =
 
 blue =
     rgb255 0 0 255
-
-
-twoThirtyFour =
-    rgb255 234 234 234
 
 
 customBlueSdev =

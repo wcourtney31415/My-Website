@@ -61,9 +61,16 @@ heading =
             Element.row
                 [ centerX
                 , Font.size 90
-                , Background.color gray
+                , Background.gradient
+                    { angle = 0
+                    , steps =
+                        [ twoThirtyFour ]
+                            ++ List.repeat 1 twoSeventeen
+                            ++ List.repeat 3 gray
+                    }
                 , width fill
                 , padding 20
+                , paddingEach { top = 20, bottom = 70, right = 20, left = 20 }
                 ]
                 [ Element.el
                     [ centerX
@@ -73,6 +80,7 @@ heading =
     in
     Element.column
         [ width fill
+        , height fill
         ]
         [ titleSdev
         , titleName
