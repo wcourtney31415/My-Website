@@ -1,4 +1,4 @@
-module View_Desktop exposing (..)
+module View_Desktop exposing (desktopView)
 
 import Comp_NavBar exposing (..)
 import DView_About exposing (..)

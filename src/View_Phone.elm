@@ -1,4 +1,4 @@
-module View_Phone exposing (..)
+module View_Phone exposing (phoneView)
 
 import Colors exposing (..)
 import Element exposing (..)
@@ -19,19 +19,16 @@ phoneView model =
             35
     in
     Element.layout
-        []
+        [ paddingEach { top = 0, bottom = 180, left = 0, right = 0 } ]
         (Element.column
             [ centerX
-
-            --, spacing 65
             ]
             [ heading
             , Element.column
                 [ paddingEach { right = 0, left = 0, top = 0, bottom = 0 }
                 ]
                 [ block "Contact"
-                    [--Background.gradient { angle = 0, steps = [ white, white ] }
-                    ]
+                    []
                     [ emailComponent ]
                 , block "About Me" [] [ Element.el [ Font.size 50 ] (text "about me text") ]
                 , block "Github" [] [ gitHubParagraph ]
@@ -149,7 +146,7 @@ emailComponent =
 block : String -> List (Attribute Msg) -> List (Element Msg) -> Element Msg
 block title attributes contents =
     Element.column
-        ([ height <| px 500 -- Needs changed to minimum height
+        ([ height (fill |> minimum 500)
          , width fill
          , Background.gradient { angle = 0, steps = [ white, twoThirtyFour ] }
          , spacing 40

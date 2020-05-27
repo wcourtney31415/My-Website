@@ -6,7 +6,7 @@ import Data exposing (..)
 import Element exposing (..)
 import MessagesAndModels exposing (..)
 import Responsive
-import Views exposing (..)
+import View_Controller exposing (..)
 
 
 main : Program Flags Model Msg

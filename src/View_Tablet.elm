@@ -1,4 +1,4 @@
-module View_Tablet exposing (..)
+module View_Tablet exposing (tabletView)
 
 import Element exposing (..)
 import Element.Background as Background

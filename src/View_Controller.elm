@@ -1,4 +1,4 @@
-module Views exposing (..)
+module View_Controller exposing (siteView)
 
 import Element exposing (..)
 import Element.Background as Background
@@ -25,32 +25,6 @@ classString device =
 
         BigDesktop ->
             "Big Desktop"
-
-
-windowResElement : Model -> Element Msg
-windowResElement model =
-    let
-        device =
-            model.device
-
-        orientationString =
-            case device.orientation of
-                Portrait ->
-                    "Portrait"
-
-                Landscape ->
-                    "Landscape"
-    in
-    Element.column
-        [ centerX
-        , centerY
-        , Font.size 60
-        ]
-        [ text <| "Width: " ++ String.fromInt model.windowWidth
-        , text <| " Height: " ++ String.fromInt model.windowHeight
-        , text <| " Class: " ++ classString device
-        , text <| "Orientation: " ++ orientationString
-        ]
 
 
 siteView : Model -> Html Msg
