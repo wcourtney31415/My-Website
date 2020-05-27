@@ -1,17 +1,10 @@
 module Main exposing (..)
 
 import Browser
-import Browser.Events as Events
 import Clipboard exposing (..)
-import Comp_NavBar exposing (..)
 import Data exposing (..)
 import Element exposing (..)
-import Element.Background as Background
-import Element.Font as Font
-import Fonts exposing (..)
 import MessagesAndModels exposing (..)
-import Page_About exposing (..)
-import Page_Index exposing (..)
 import Responsive
 import Views exposing (..)
 

@@ -1,20 +1,12 @@
 module View_Phone exposing (..)
 
-import Browser
-import Browser.Events as Events
-import Clipboard exposing (..)
 import Colors exposing (..)
-import Comp_NavBar exposing (..)
-import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import Fonts exposing (..)
 import Html exposing (Html)
 import MessagesAndModels exposing (..)
-import Page_About exposing (..)
-import Page_Index exposing (..)
 
 
 phoneView : Model -> Html.Html Msg

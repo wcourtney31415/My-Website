@@ -1,6 +1,5 @@
-module Page_About exposing (aboutPage)
+module DView_Index exposing (homepage)
 
-import Browser
 import Colors exposing (..)
 import Data exposing (..)
 import Element exposing (..)
@@ -11,7 +10,7 @@ import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
 
 
-aboutPage model =
+homepage model =
     homepageItems
 
 
@@ -50,7 +49,12 @@ titleBox =
             [ Font.size 40
             , centerX
             ]
-            (text "About Me")
+            (text "Software Developer")
+        , Element.el
+            [ Font.size 20
+            , centerX
+            ]
+            (text myName)
         ]
 
 
@@ -65,7 +69,7 @@ frontPageParagraph =
         , centerY
         , Font.color white
         , padding 25
-        , width <| px 1050
+        , width <| px 800
         , bkgAttributes
             [ Background.color fortyTwo
             , alpha 0.6
