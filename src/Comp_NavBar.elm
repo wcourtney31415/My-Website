@@ -93,6 +93,19 @@ navBar model =
 
 dropNav : Element Msg
 dropNav =
+    let
+        emailClientLnk =
+            Element.link [ hovered ]
+                { url = "mailto:" ++ myEmail
+                , label = text "Email using Client"
+                }
+
+        emailClipboardLnk =
+            Input.button [ hovered ]
+                { onPress = Just <| CopyToClipboard myEmail
+                , label = text "Copy Email to Clipboard"
+                }
+    in
     Element.column
         [ Background.color dropNavColor
         , moveDown 15
@@ -102,12 +115,6 @@ dropNav =
         , spacing 10
         , Font.glow white 0 --override contactButton glow
         ]
-        [ Element.link [ hovered ]
-            { url = "mailto:" ++ myEmail
-            , label = text "Email using Client"
-            }
-        , Input.button [ hovered ]
-            { onPress = Just <| CopyToClipboard myEmail
-            , label = text "Copy Email to Clipboard"
-            }
+        [ emailClientLnk
+        , emailClipboardLnk
         ]

@@ -33,8 +33,6 @@ desktopView model =
     Element.layoutWith
         { options = [ focusStyle myFocusStyle ] }
         [ Background.image backgroundPath
-
-        --, customFont
         ]
     <|
         Element.column
@@ -44,6 +42,4 @@ desktopView model =
             ]
             [ navBar model
             , selectedPage
-
-            --, windowResElement model
             ]

@@ -1,10 +1,12 @@
 module View_Phone exposing (phoneView)
 
 import Colors exposing (..)
+import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
+import Element.Input as Input
 import Html exposing (Html)
 import MessagesAndModels exposing (..)
 
@@ -92,7 +94,7 @@ gitHubParagraph =
 
 
 gitHubLink =
-    Element.el
+    newTabLink
         [ Font.size 60
         , padding 10
         , Background.color gray
@@ -100,7 +102,7 @@ gitHubLink =
         , centerX
         , Border.rounded 18
         ]
-        (text "My Github")
+        { url = gitHub, label = text "My Github" }
 
 
 emailComponent =
@@ -124,21 +126,25 @@ emailComponent =
             [ spacing 45
             , centerX
             ]
-            [ Element.el
+            [ Element.link
                 [ Font.size 60
                 , padding 30
                 , Background.color gray
                 , Border.rounded 18
                 ]
-                (text "Email Now")
-            , Element.el
+                { url = "mailto:" ++ myEmail
+                , label = text "Email Now"
+                }
+            , Input.button
                 [ Font.size 60
                 , padding 10
                 , Background.color gray
                 , padding 30
                 , Border.rounded 18
                 ]
-                (text "To Clipboard")
+                { onPress = Just <| CopyToClipboard myEmail
+                , label = text "To Clipboard"
+                }
             ]
         ]
 
@@ -164,8 +170,6 @@ block title attributes contents =
             [ width fill
             , height fill
             , paddingEach { left = 20, right = 20, top = 0, bottom = 0 }
-
-            --, Background.color blue
             ]
             contents
         ]
