@@ -38,6 +38,10 @@ mobileGray =
     rgb255 109 112 115
 
 
+lighterMobileGray =
+    rgb255 129 132 135
+
+
 blue =
     rgb255 0 0 255
 

@@ -156,29 +156,59 @@ gitHubLink =
 
 
 emailComponent =
-    Element.column
-        [ centerX
-        , centerY
-        , spacing 35
+    let
+        title =
+            Element.el
+                [ Font.size 70
+                , Font.bold
+                , Font.color white
+                , Background.color mobileGray
+                , width fill
+                , paddingEach
+                    { top = 30
+                    , left = 30
+                    , right = 30
+                    , bottom = 18
+                    }
+                , Border.roundEach
+                    { topLeft = 18
+                    , topRight = 18
+                    , bottomLeft = 0
+                    , bottomRight = 0
+                    }
+                ]
+                (Element.el
+                    [ centerX
+                    ]
+                 <|
+                    text "Email"
+                )
 
-        --, Background.color mobileGray
-        , Background.color anotherBlue
-        , padding 40
-        , Border.rounded 32
-        , centerY
-        ]
-        [ Element.el
-            [ Font.size 70
-            , centerX
-            , Font.bold
-            , Font.color white
-            ]
-            (text "Email")
-        , Element.row
-            [ spacing 45
-            , centerX
-            ]
-            [ Element.link
+        buttons =
+            Element.row
+                [ spacing 45
+                , centerX
+                , Background.color lighterMobileGray
+                , width fill
+                , paddingEach
+                    { top = 18
+                    , left = 30
+                    , right = 30
+                    , bottom = 30
+                    }
+                , Border.roundEach
+                    { topLeft = 0
+                    , topRight = 0
+                    , bottomLeft = 18
+                    , bottomRight = 18
+                    }
+                ]
+                [ emailNow
+                , emailClipboard
+                ]
+
+        emailNow =
+            Element.link
                 [ Font.size 60
                 , padding 30
                 , Background.color gray
@@ -187,7 +217,9 @@ emailComponent =
                 { url = "mailto:" ++ myEmail
                 , label = text "Email Now"
                 }
-            , Input.button
+
+        emailClipboard =
+            Input.button
                 [ Font.size 60
                 , padding 10
                 , Background.color gray
@@ -197,7 +229,16 @@ emailComponent =
                 { onPress = Just <| CopyToClipboard myEmail
                 , label = text "To Clipboard"
                 }
-            ]
+    in
+    Element.column
+        [ centerX
+        , centerY
+        , Background.color mobileGray
+        , Border.rounded 32
+        , centerY
+        ]
+        [ title
+        , buttons
         ]
 
 
