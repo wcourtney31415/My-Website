@@ -162,7 +162,7 @@ emailComponent =
                 [ Font.size 70
                 , Font.bold
                 , Font.color white
-                , Background.color mobileGray
+                , Background.color <| rgb255 65 115 164
                 , width fill
                 , paddingEach
                     { top = 30
@@ -188,7 +188,7 @@ emailComponent =
             Element.row
                 [ spacing 45
                 , centerX
-                , Background.color lighterMobileGray
+                , Background.color <| rgb255 102 148 194
                 , width fill
                 , paddingEach
                     { top = 18
