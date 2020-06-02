@@ -236,6 +236,7 @@ emailComponent =
         , Background.color mobileGray
         , Border.rounded 32
         , centerY
+        , Border.shadow { offset = ( 10, 10 ), size = 1, blur = 20, color = rgb255 90 90 90 }
         ]
         [ title
         , buttons
