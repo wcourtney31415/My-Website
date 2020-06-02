@@ -142,34 +142,34 @@ gitHubParagraph =
 
 gitHubComponent =
     let
+        linkAttributes =
+            [ Font.size 60
+            , padding 10
+            , Background.color gray
+            , padding 30
+            , centerX
+            , Border.rounded 18
+            ]
+
         gitHubLink =
             newTabLink
-                [ Font.size 60
-                , padding 10
-                , Background.color gray
-                , padding 30
-                , centerX
-                , Border.rounded 18
-                ]
-                { url = gitHub, label = text "My Github" }
+                linkAttributes
+                { url = gitHub
+                , label = text "My Github"
+                }
 
         siteSourceLink =
             newTabLink
-                [ Font.size 60
-                , padding 10
-                , Background.color gray
-                , padding 30
-                , centerX
-                , Border.rounded 18
-                ]
-                { url = siteSource, label = text "Site Source" }
+                linkAttributes
+                { url = siteSource
+                , label = text "Site Source"
+                }
 
         buttons =
             Element.row
                 [ spacing 45
-                , centerX
-                , Background.color <| rgb255 102 148 194
-                , width fill
+                , Background.color <|
+                    rgb255 102 148 194
                 , padding 30
                 , Border.rounded 25
                 ]
@@ -179,11 +179,14 @@ gitHubComponent =
     in
     Element.column
         [ centerX
-        , centerY
-        , Background.color mobileGray
         , Border.rounded 32
         , centerY
-        , Border.shadow { offset = ( 10, 10 ), size = 1, blur = 20, color = rgb255 90 90 90 }
+        , Border.shadow
+            { offset = ( 10, 10 )
+            , size = 1
+            , blur = 20
+            , color = rgb255 90 90 90
+            }
         ]
         [ buttons
         ]
