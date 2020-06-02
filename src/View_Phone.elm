@@ -50,7 +50,8 @@ phoneView model =
                         , bottom = 200
                         }
                     ]
-                    [ gitHubParagraph ]
+                    [ gitHubParagraph
+                    ]
                 ]
             ]
         )
@@ -135,24 +136,57 @@ gitHubParagraph =
             [ Font.size 65
             ]
             [ text "Check out my github profile to see what projects I've been working on lately." ]
-        , gitHubLink
-        , Element.paragraph
-            [ Font.size 55
-            ]
-            [ text "(You can also find the source code for this site there.)" ]
+        , gitHubComponent
         ]
 
 
-gitHubLink =
-    newTabLink
-        [ Font.size 60
-        , padding 10
-        , Background.color gray
-        , padding 30
-        , centerX
-        , Border.rounded 18
+gitHubComponent =
+    let
+        gitHubLink =
+            newTabLink
+                [ Font.size 60
+                , padding 10
+                , Background.color gray
+                , padding 30
+                , centerX
+                , Border.rounded 18
+                ]
+                { url = gitHub, label = text "My Github" }
+
+        siteSourceLink =
+            newTabLink
+                [ Font.size 60
+                , padding 10
+                , Background.color gray
+                , padding 30
+                , centerX
+                , Border.rounded 18
+                ]
+                { url = siteSource, label = text "Site Source" }
+
+        buttons =
+            Element.row
+                [ spacing 45
+                , centerX
+                , Background.color <| rgb255 102 148 194
+                , width fill
+                , padding 30
+                , Border.rounded 25
+                ]
+                [ gitHubLink
+                , siteSourceLink
+                ]
+    in
+    Element.column
+        [ centerX
+        , centerY
+        , Background.color mobileGray
+        , Border.rounded 32
+        , centerY
+        , Border.shadow { offset = ( 10, 10 ), size = 1, blur = 20, color = rgb255 90 90 90 }
         ]
-        { url = gitHub, label = text "My Github" }
+        [ buttons
+        ]
 
 
 emailComponent =
