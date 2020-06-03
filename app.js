@@ -80,271 +80,6 @@ function A9(fun, a, b, c, d, e, f, g, h, i) {
 console.warn('Compiled in DEV mode. Follow the advice at https://elm-lang.org/0.19.1/optimize for better performance and smaller assets.');
 
 
-// EQUALITY
-
-function _Utils_eq(x, y)
-{
-	for (
-		var pair, stack = [], isEqual = _Utils_eqHelp(x, y, 0, stack);
-		isEqual && (pair = stack.pop());
-		isEqual = _Utils_eqHelp(pair.a, pair.b, 0, stack)
-		)
-	{}
-
-	return isEqual;
-}
-
-function _Utils_eqHelp(x, y, depth, stack)
-{
-	if (x === y)
-	{
-		return true;
-	}
-
-	if (typeof x !== 'object' || x === null || y === null)
-	{
-		typeof x === 'function' && _Debug_crash(5);
-		return false;
-	}
-
-	if (depth > 100)
-	{
-		stack.push(_Utils_Tuple2(x,y));
-		return true;
-	}
-
-	/**/
-	if (x.$ === 'Set_elm_builtin')
-	{
-		x = $elm$core$Set$toList(x);
-		y = $elm$core$Set$toList(y);
-	}
-	if (x.$ === 'RBNode_elm_builtin' || x.$ === 'RBEmpty_elm_builtin')
-	{
-		x = $elm$core$Dict$toList(x);
-		y = $elm$core$Dict$toList(y);
-	}
-	//*/
-
-	/**_UNUSED/
-	if (x.$ < 0)
-	{
-		x = $elm$core$Dict$toList(x);
-		y = $elm$core$Dict$toList(y);
-	}
-	//*/
-
-	for (var key in x)
-	{
-		if (!_Utils_eqHelp(x[key], y[key], depth + 1, stack))
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
-var _Utils_equal = F2(_Utils_eq);
-var _Utils_notEqual = F2(function(a, b) { return !_Utils_eq(a,b); });
-
-
-
-// COMPARISONS
-
-// Code in Generate/JavaScript.hs, Basics.js, and List.js depends on
-// the particular integer values assigned to LT, EQ, and GT.
-
-function _Utils_cmp(x, y, ord)
-{
-	if (typeof x !== 'object')
-	{
-		return x === y ? /*EQ*/ 0 : x < y ? /*LT*/ -1 : /*GT*/ 1;
-	}
-
-	/**/
-	if (x instanceof String)
-	{
-		var a = x.valueOf();
-		var b = y.valueOf();
-		return a === b ? 0 : a < b ? -1 : 1;
-	}
-	//*/
-
-	/**_UNUSED/
-	if (typeof x.$ === 'undefined')
-	//*/
-	/**/
-	if (x.$[0] === '#')
-	//*/
-	{
-		return (ord = _Utils_cmp(x.a, y.a))
-			? ord
-			: (ord = _Utils_cmp(x.b, y.b))
-				? ord
-				: _Utils_cmp(x.c, y.c);
-	}
-
-	// traverse conses until end of a list or a mismatch
-	for (; x.b && y.b && !(ord = _Utils_cmp(x.a, y.a)); x = x.b, y = y.b) {} // WHILE_CONSES
-	return ord || (x.b ? /*GT*/ 1 : y.b ? /*LT*/ -1 : /*EQ*/ 0);
-}
-
-var _Utils_lt = F2(function(a, b) { return _Utils_cmp(a, b) < 0; });
-var _Utils_le = F2(function(a, b) { return _Utils_cmp(a, b) < 1; });
-var _Utils_gt = F2(function(a, b) { return _Utils_cmp(a, b) > 0; });
-var _Utils_ge = F2(function(a, b) { return _Utils_cmp(a, b) >= 0; });
-
-var _Utils_compare = F2(function(x, y)
-{
-	var n = _Utils_cmp(x, y);
-	return n < 0 ? $elm$core$Basics$LT : n ? $elm$core$Basics$GT : $elm$core$Basics$EQ;
-});
-
-
-// COMMON VALUES
-
-var _Utils_Tuple0_UNUSED = 0;
-var _Utils_Tuple0 = { $: '#0' };
-
-function _Utils_Tuple2_UNUSED(a, b) { return { a: a, b: b }; }
-function _Utils_Tuple2(a, b) { return { $: '#2', a: a, b: b }; }
-
-function _Utils_Tuple3_UNUSED(a, b, c) { return { a: a, b: b, c: c }; }
-function _Utils_Tuple3(a, b, c) { return { $: '#3', a: a, b: b, c: c }; }
-
-function _Utils_chr_UNUSED(c) { return c; }
-function _Utils_chr(c) { return new String(c); }
-
-
-// RECORDS
-
-function _Utils_update(oldRecord, updatedFields)
-{
-	var newRecord = {};
-
-	for (var key in oldRecord)
-	{
-		newRecord[key] = oldRecord[key];
-	}
-
-	for (var key in updatedFields)
-	{
-		newRecord[key] = updatedFields[key];
-	}
-
-	return newRecord;
-}
-
-
-// APPEND
-
-var _Utils_append = F2(_Utils_ap);
-
-function _Utils_ap(xs, ys)
-{
-	// append Strings
-	if (typeof xs === 'string')
-	{
-		return xs + ys;
-	}
-
-	// append Lists
-	if (!xs.b)
-	{
-		return ys;
-	}
-	var root = _List_Cons(xs.a, ys);
-	xs = xs.b
-	for (var curr = root; xs.b; xs = xs.b) // WHILE_CONS
-	{
-		curr = curr.b = _List_Cons(xs.a, ys);
-	}
-	return root;
-}
-
-
-
-var _List_Nil_UNUSED = { $: 0 };
-var _List_Nil = { $: '[]' };
-
-function _List_Cons_UNUSED(hd, tl) { return { $: 1, a: hd, b: tl }; }
-function _List_Cons(hd, tl) { return { $: '::', a: hd, b: tl }; }
-
-
-var _List_cons = F2(_List_Cons);
-
-function _List_fromArray(arr)
-{
-	var out = _List_Nil;
-	for (var i = arr.length; i--; )
-	{
-		out = _List_Cons(arr[i], out);
-	}
-	return out;
-}
-
-function _List_toArray(xs)
-{
-	for (var out = []; xs.b; xs = xs.b) // WHILE_CONS
-	{
-		out.push(xs.a);
-	}
-	return out;
-}
-
-var _List_map2 = F3(function(f, xs, ys)
-{
-	for (var arr = []; xs.b && ys.b; xs = xs.b, ys = ys.b) // WHILE_CONSES
-	{
-		arr.push(A2(f, xs.a, ys.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_map3 = F4(function(f, xs, ys, zs)
-{
-	for (var arr = []; xs.b && ys.b && zs.b; xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
-	{
-		arr.push(A3(f, xs.a, ys.a, zs.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_map4 = F5(function(f, ws, xs, ys, zs)
-{
-	for (var arr = []; ws.b && xs.b && ys.b && zs.b; ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
-	{
-		arr.push(A4(f, ws.a, xs.a, ys.a, zs.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_map5 = F6(function(f, vs, ws, xs, ys, zs)
-{
-	for (var arr = []; vs.b && ws.b && xs.b && ys.b && zs.b; vs = vs.b, ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
-	{
-		arr.push(A5(f, vs.a, ws.a, xs.a, ys.a, zs.a));
-	}
-	return _List_fromArray(arr);
-});
-
-var _List_sortBy = F2(function(f, xs)
-{
-	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
-		return _Utils_cmp(f(a), f(b));
-	}));
-});
-
-var _List_sortWith = F2(function(f, xs)
-{
-	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
-		var ord = A2(f, a, b);
-		return ord === $elm$core$Basics$EQ ? 0 : ord === $elm$core$Basics$LT ? -1 : 1;
-	}));
-});
-
-
-
 var _JsArray_empty = [];
 
 function _JsArray_singleton(value)
@@ -790,6 +525,271 @@ function _Debug_regionToString(region)
 	}
 	return 'on lines ' + region.start.line + ' through ' + region.end.line;
 }
+
+
+
+// EQUALITY
+
+function _Utils_eq(x, y)
+{
+	for (
+		var pair, stack = [], isEqual = _Utils_eqHelp(x, y, 0, stack);
+		isEqual && (pair = stack.pop());
+		isEqual = _Utils_eqHelp(pair.a, pair.b, 0, stack)
+		)
+	{}
+
+	return isEqual;
+}
+
+function _Utils_eqHelp(x, y, depth, stack)
+{
+	if (x === y)
+	{
+		return true;
+	}
+
+	if (typeof x !== 'object' || x === null || y === null)
+	{
+		typeof x === 'function' && _Debug_crash(5);
+		return false;
+	}
+
+	if (depth > 100)
+	{
+		stack.push(_Utils_Tuple2(x,y));
+		return true;
+	}
+
+	/**/
+	if (x.$ === 'Set_elm_builtin')
+	{
+		x = $elm$core$Set$toList(x);
+		y = $elm$core$Set$toList(y);
+	}
+	if (x.$ === 'RBNode_elm_builtin' || x.$ === 'RBEmpty_elm_builtin')
+	{
+		x = $elm$core$Dict$toList(x);
+		y = $elm$core$Dict$toList(y);
+	}
+	//*/
+
+	/**_UNUSED/
+	if (x.$ < 0)
+	{
+		x = $elm$core$Dict$toList(x);
+		y = $elm$core$Dict$toList(y);
+	}
+	//*/
+
+	for (var key in x)
+	{
+		if (!_Utils_eqHelp(x[key], y[key], depth + 1, stack))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+var _Utils_equal = F2(_Utils_eq);
+var _Utils_notEqual = F2(function(a, b) { return !_Utils_eq(a,b); });
+
+
+
+// COMPARISONS
+
+// Code in Generate/JavaScript.hs, Basics.js, and List.js depends on
+// the particular integer values assigned to LT, EQ, and GT.
+
+function _Utils_cmp(x, y, ord)
+{
+	if (typeof x !== 'object')
+	{
+		return x === y ? /*EQ*/ 0 : x < y ? /*LT*/ -1 : /*GT*/ 1;
+	}
+
+	/**/
+	if (x instanceof String)
+	{
+		var a = x.valueOf();
+		var b = y.valueOf();
+		return a === b ? 0 : a < b ? -1 : 1;
+	}
+	//*/
+
+	/**_UNUSED/
+	if (typeof x.$ === 'undefined')
+	//*/
+	/**/
+	if (x.$[0] === '#')
+	//*/
+	{
+		return (ord = _Utils_cmp(x.a, y.a))
+			? ord
+			: (ord = _Utils_cmp(x.b, y.b))
+				? ord
+				: _Utils_cmp(x.c, y.c);
+	}
+
+	// traverse conses until end of a list or a mismatch
+	for (; x.b && y.b && !(ord = _Utils_cmp(x.a, y.a)); x = x.b, y = y.b) {} // WHILE_CONSES
+	return ord || (x.b ? /*GT*/ 1 : y.b ? /*LT*/ -1 : /*EQ*/ 0);
+}
+
+var _Utils_lt = F2(function(a, b) { return _Utils_cmp(a, b) < 0; });
+var _Utils_le = F2(function(a, b) { return _Utils_cmp(a, b) < 1; });
+var _Utils_gt = F2(function(a, b) { return _Utils_cmp(a, b) > 0; });
+var _Utils_ge = F2(function(a, b) { return _Utils_cmp(a, b) >= 0; });
+
+var _Utils_compare = F2(function(x, y)
+{
+	var n = _Utils_cmp(x, y);
+	return n < 0 ? $elm$core$Basics$LT : n ? $elm$core$Basics$GT : $elm$core$Basics$EQ;
+});
+
+
+// COMMON VALUES
+
+var _Utils_Tuple0_UNUSED = 0;
+var _Utils_Tuple0 = { $: '#0' };
+
+function _Utils_Tuple2_UNUSED(a, b) { return { a: a, b: b }; }
+function _Utils_Tuple2(a, b) { return { $: '#2', a: a, b: b }; }
+
+function _Utils_Tuple3_UNUSED(a, b, c) { return { a: a, b: b, c: c }; }
+function _Utils_Tuple3(a, b, c) { return { $: '#3', a: a, b: b, c: c }; }
+
+function _Utils_chr_UNUSED(c) { return c; }
+function _Utils_chr(c) { return new String(c); }
+
+
+// RECORDS
+
+function _Utils_update(oldRecord, updatedFields)
+{
+	var newRecord = {};
+
+	for (var key in oldRecord)
+	{
+		newRecord[key] = oldRecord[key];
+	}
+
+	for (var key in updatedFields)
+	{
+		newRecord[key] = updatedFields[key];
+	}
+
+	return newRecord;
+}
+
+
+// APPEND
+
+var _Utils_append = F2(_Utils_ap);
+
+function _Utils_ap(xs, ys)
+{
+	// append Strings
+	if (typeof xs === 'string')
+	{
+		return xs + ys;
+	}
+
+	// append Lists
+	if (!xs.b)
+	{
+		return ys;
+	}
+	var root = _List_Cons(xs.a, ys);
+	xs = xs.b
+	for (var curr = root; xs.b; xs = xs.b) // WHILE_CONS
+	{
+		curr = curr.b = _List_Cons(xs.a, ys);
+	}
+	return root;
+}
+
+
+
+var _List_Nil_UNUSED = { $: 0 };
+var _List_Nil = { $: '[]' };
+
+function _List_Cons_UNUSED(hd, tl) { return { $: 1, a: hd, b: tl }; }
+function _List_Cons(hd, tl) { return { $: '::', a: hd, b: tl }; }
+
+
+var _List_cons = F2(_List_Cons);
+
+function _List_fromArray(arr)
+{
+	var out = _List_Nil;
+	for (var i = arr.length; i--; )
+	{
+		out = _List_Cons(arr[i], out);
+	}
+	return out;
+}
+
+function _List_toArray(xs)
+{
+	for (var out = []; xs.b; xs = xs.b) // WHILE_CONS
+	{
+		out.push(xs.a);
+	}
+	return out;
+}
+
+var _List_map2 = F3(function(f, xs, ys)
+{
+	for (var arr = []; xs.b && ys.b; xs = xs.b, ys = ys.b) // WHILE_CONSES
+	{
+		arr.push(A2(f, xs.a, ys.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_map3 = F4(function(f, xs, ys, zs)
+{
+	for (var arr = []; xs.b && ys.b && zs.b; xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
+	{
+		arr.push(A3(f, xs.a, ys.a, zs.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_map4 = F5(function(f, ws, xs, ys, zs)
+{
+	for (var arr = []; ws.b && xs.b && ys.b && zs.b; ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
+	{
+		arr.push(A4(f, ws.a, xs.a, ys.a, zs.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_map5 = F6(function(f, vs, ws, xs, ys, zs)
+{
+	for (var arr = []; vs.b && ws.b && xs.b && ys.b && zs.b; vs = vs.b, ws = ws.b, xs = xs.b, ys = ys.b, zs = zs.b) // WHILE_CONSES
+	{
+		arr.push(A5(f, vs.a, ws.a, xs.a, ys.a, zs.a));
+	}
+	return _List_fromArray(arr);
+});
+
+var _List_sortBy = F2(function(f, xs)
+{
+	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
+		return _Utils_cmp(f(a), f(b));
+	}));
+});
+
+var _List_sortWith = F2(function(f, xs)
+{
+	return _List_fromArray(_List_toArray(xs).sort(function(a, b) {
+		var ord = A2(f, a, b);
+		return ord === $elm$core$Basics$EQ ? 0 : ord === $elm$core$Basics$LT ? -1 : 1;
+	}));
+});
 
 
 
@@ -4392,10 +4392,31 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
-var $elm$core$Basics$EQ = {$: 'EQ'};
-var $elm$core$Basics$GT = {$: 'GT'};
-var $elm$core$Basics$LT = {$: 'LT'};
 var $elm$core$List$cons = _List_cons;
+var $elm$core$Elm$JsArray$foldr = _JsArray_foldr;
+var $elm$core$Array$foldr = F3(
+	function (func, baseCase, _v0) {
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var helper = F2(
+			function (node, acc) {
+				if (node.$ === 'SubTree') {
+					var subTree = node.a;
+					return A3($elm$core$Elm$JsArray$foldr, helper, acc, subTree);
+				} else {
+					var values = node.a;
+					return A3($elm$core$Elm$JsArray$foldr, func, acc, values);
+				}
+			});
+		return A3(
+			$elm$core$Elm$JsArray$foldr,
+			helper,
+			A3($elm$core$Elm$JsArray$foldr, func, baseCase, tail),
+			tree);
+	});
+var $elm$core$Array$toList = function (array) {
+	return A3($elm$core$Array$foldr, $elm$core$List$cons, _List_Nil, array);
+};
 var $elm$core$Dict$foldr = F3(
 	function (func, acc, t) {
 		foldr:
@@ -4448,30 +4469,9 @@ var $elm$core$Set$toList = function (_v0) {
 	var dict = _v0.a;
 	return $elm$core$Dict$keys(dict);
 };
-var $elm$core$Elm$JsArray$foldr = _JsArray_foldr;
-var $elm$core$Array$foldr = F3(
-	function (func, baseCase, _v0) {
-		var tree = _v0.c;
-		var tail = _v0.d;
-		var helper = F2(
-			function (node, acc) {
-				if (node.$ === 'SubTree') {
-					var subTree = node.a;
-					return A3($elm$core$Elm$JsArray$foldr, helper, acc, subTree);
-				} else {
-					var values = node.a;
-					return A3($elm$core$Elm$JsArray$foldr, func, acc, values);
-				}
-			});
-		return A3(
-			$elm$core$Elm$JsArray$foldr,
-			helper,
-			A3($elm$core$Elm$JsArray$foldr, func, baseCase, tail),
-			tree);
-	});
-var $elm$core$Array$toList = function (array) {
-	return A3($elm$core$Array$foldr, $elm$core$List$cons, _List_Nil, array);
-};
+var $elm$core$Basics$EQ = {$: 'EQ'};
+var $elm$core$Basics$GT = {$: 'GT'};
+var $elm$core$Basics$LT = {$: 'LT'};
 var $elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -4867,6 +4867,7 @@ var $elm$core$Result$isOk = function (result) {
 		return false;
 	}
 };
+var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $elm$json$Json$Decode$map = _Json_map1;
 var $elm$json$Json$Decode$map2 = _Json_map2;
 var $elm$json$Json$Decode$succeed = _Json_succeed;
@@ -5181,33 +5182,96 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$document = _Browser_document;
+var $elm$json$Json$Decode$field = _Json_decodeField;
 var $author$project$MessagesAndModels$Closed = {$: 'Closed'};
 var $author$project$MessagesAndModels$Home = {$: 'Home'};
+var $mdgriffith$elm_ui$Element$BigDesktop = {$: 'BigDesktop'};
+var $mdgriffith$elm_ui$Element$Desktop = {$: 'Desktop'};
+var $mdgriffith$elm_ui$Element$Landscape = {$: 'Landscape'};
+var $mdgriffith$elm_ui$Element$Phone = {$: 'Phone'};
+var $mdgriffith$elm_ui$Element$Portrait = {$: 'Portrait'};
+var $mdgriffith$elm_ui$Element$Tablet = {$: 'Tablet'};
+var $elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
+	});
+var $mdgriffith$elm_ui$Element$classifyDevice = function (window) {
+	return {
+		_class: function () {
+			var shortSide = A2($elm$core$Basics$min, window.width, window.height);
+			var longSide = A2($elm$core$Basics$max, window.width, window.height);
+			return (shortSide < 600) ? $mdgriffith$elm_ui$Element$Phone : ((longSide <= 1200) ? $mdgriffith$elm_ui$Element$Tablet : (((longSide > 1200) && (longSide <= 1920)) ? $mdgriffith$elm_ui$Element$Desktop : $mdgriffith$elm_ui$Element$BigDesktop));
+		}(),
+		orientation: (_Utils_cmp(window.width, window.height) < 0) ? $mdgriffith$elm_ui$Element$Portrait : $mdgriffith$elm_ui$Element$Landscape
+	};
+};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$init = function (_v0) {
-	var initialModel = {contactDropdown: $author$project$MessagesAndModels$Closed, selectedPage: $author$project$MessagesAndModels$Home};
+var $author$project$Main$init = function (flags) {
+	var windowWidth = flags.windowWidth;
+	var windowHeight = flags.windowHeight;
+	var device = $mdgriffith$elm_ui$Element$classifyDevice(
+		{height: windowHeight, width: windowWidth});
+	var initialModel = {contactDropdown: $author$project$MessagesAndModels$Closed, device: device, responsive: true, selectedPage: $author$project$MessagesAndModels$Home, windowHeight: windowHeight, windowWidth: windowWidth};
 	return _Utils_Tuple2(initialModel, $elm$core$Platform$Cmd$none);
 };
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $author$project$MessagesAndModels$GotNewResolution = F2(
+	function (a, b) {
+		return {$: 'GotNewResolution', a: a, b: b};
+	});
+var $author$project$Responsive$onResizePort = _Platform_incomingPort(
+	'onResizePort',
+	A2(
+		$elm$json$Json$Decode$andThen,
+		function (width) {
+			return A2(
+				$elm$json$Json$Decode$andThen,
+				function (height) {
+					return $elm$json$Json$Decode$succeed(
+						{height: height, width: width});
+				},
+				A2($elm$json$Json$Decode$field, 'height', $elm$json$Json$Decode$int));
+		},
+		A2($elm$json$Json$Decode$field, 'width', $elm$json$Json$Decode$int)));
+var $author$project$Responsive$onResize = function (intListener) {
+	var sizeListener = function (size) {
+		return A2(intListener, size.width, size.height);
+	};
+	return $author$project$Responsive$onResizePort(sizeListener);
+};
 var $author$project$Main$subscriptions = function (_v0) {
-	return $elm$core$Platform$Sub$none;
+	return $author$project$Responsive$onResize(
+		F2(
+			function (w, h) {
+				return A2($author$project$MessagesAndModels$GotNewResolution, w, h);
+			}));
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $author$project$Clipboard$copyToClipboard = _Platform_outgoingPort('copyToClipboard', $elm$json$Json$Encode$string);
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'Update') {
-			var _new = msg.a;
-			return _Utils_Tuple2(_new, $elm$core$Platform$Cmd$none);
-		} else {
-			var str = msg.a;
-			return _Utils_Tuple2(
-				model,
-				$author$project$Clipboard$copyToClipboard(str));
+		switch (msg.$) {
+			case 'Update':
+				var _new = msg.a;
+				return _Utils_Tuple2(_new, $elm$core$Platform$Cmd$none);
+			case 'CopyToClipboard':
+				var str = msg.a;
+				return _Utils_Tuple2(
+					model,
+					$author$project$Clipboard$copyToClipboard(str));
+			default:
+				var width = msg.a;
+				var height = msg.b;
+				var device = $mdgriffith$elm_ui$Element$classifyDevice(
+					{height: height, width: width});
+				var modifiedModel = _Utils_update(
+					model,
+					{device: device, windowHeight: height, windowWidth: width});
+				return _Utils_Tuple2(modifiedModel, $elm$core$Platform$Cmd$none);
 		}
 	});
+var $author$project$Data$myName = 'Wesley Courtney';
 var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
 	return {$: 'AlignX', a: a};
 };
@@ -7974,10 +8038,6 @@ var $mdgriffith$elm_ui$Internal$Model$hasSmallCaps = function (typeface) {
 		return false;
 	}
 };
-var $elm$core$Basics$min = F2(
-	function (x, y) {
-		return (_Utils_cmp(x, y) < 0) ? x : y;
-	});
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -11010,7 +11070,7 @@ var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
 			$elm$core$String$fromInt(radius) + 'px'));
 };
 var $author$project$Colors$white = A3($mdgriffith$elm_ui$Element$rgb255, 255, 255, 255);
-var $author$project$Page_About$frontPageParagraph = function () {
+var $author$project$DView_About$frontPageParagraph = function () {
 	var frontPageText = 'For professional inqueries, please contact me at ' + ($author$project$Data$myEmail + ' and I will get back to you as soon as possible. I look forward to speaking with you.');
 	return A2(
 		$mdgriffith$elm_ui$Element$paragraph,
@@ -11067,7 +11127,7 @@ var $mdgriffith$elm_ui$Element$Font$size = function (i) {
 		$mdgriffith$elm_ui$Internal$Flag$fontSize,
 		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
 };
-var $author$project$Page_About$titleBox = A2(
+var $author$project$DView_About$titleBox = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -11098,7 +11158,7 @@ var $author$project$Page_About$titleBox = A2(
 				]),
 			$mdgriffith$elm_ui$Element$text('About Me'))
 		]));
-var $author$project$Page_About$homepageItems = A2(
+var $author$project$DView_About$homepageItems = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -11107,17 +11167,55 @@ var $author$project$Page_About$homepageItems = A2(
 			$mdgriffith$elm_ui$Element$moveUp(100)
 		]),
 	_List_fromArray(
-		[$author$project$Page_About$titleBox, $author$project$Page_About$frontPageParagraph]));
-var $author$project$Page_About$aboutPage = function (model) {
-	return $author$project$Page_About$homepageItems;
+		[$author$project$DView_About$titleBox, $author$project$DView_About$frontPageParagraph]));
+var $author$project$DView_About$aboutPage = function (model) {
+	return $author$project$DView_About$homepageItems;
 };
 var $author$project$Data$backgroundPath = './Images/background.jpg';
 var $mdgriffith$elm_ui$Internal$Model$FocusStyleOption = function (a) {
 	return {$: 'FocusStyleOption', a: a};
 };
 var $mdgriffith$elm_ui$Element$focusStyle = $mdgriffith$elm_ui$Internal$Model$FocusStyleOption;
-var $author$project$Page_Index$frontPageParagraph = function () {
-	var frontPageText = 'For professional inqueries, please contact me at ' + ($author$project$Data$myEmail + ' and I will get back to you as soon as possible. I look forward to speaking with you.');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
+var $mdgriffith$elm_ui$Element$link = F2(
+	function (attrs, _v0) {
+		var url = _v0.url;
+		var label = _v0.label;
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asEl,
+			$mdgriffith$elm_ui$Internal$Model$NodeName('a'),
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Internal$Model$Attr(
+					$elm$html$Html$Attributes$href(url)),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Internal$Model$Attr(
+						$elm$html$Html$Attributes$rel('noopener noreferrer')),
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+						A2(
+							$elm$core$List$cons,
+							$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+							A2(
+								$elm$core$List$cons,
+								$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentCenterX + (' ' + ($mdgriffith$elm_ui$Internal$Style$classes.contentCenterY + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.link)))),
+								attrs))))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
+				_List_fromArray(
+					[label])));
+	});
+var $author$project$DView_Index$frontPageParagraph = function () {
+	var preLink = 'For professional inqueries, please contact me at ';
+	var postLink = ' and I will get back to you as soon as possible. I look forward to speaking with you.';
 	return A2(
 		$mdgriffith$elm_ui$Element$paragraph,
 		_List_fromArray(
@@ -11140,11 +11238,18 @@ var $author$project$Page_Index$frontPageParagraph = function () {
 			]),
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$text(frontPageText)
+				$mdgriffith$elm_ui$Element$text(preLink),
+				A2(
+				$mdgriffith$elm_ui$Element$link,
+				_List_Nil,
+				{
+					label: $mdgriffith$elm_ui$Element$text($author$project$Data$myEmail),
+					url: 'mailto:' + $author$project$Data$myEmail
+				}),
+				$mdgriffith$elm_ui$Element$text(postLink)
 			]));
 }();
-var $author$project$Data$myName = 'Wesley Courtney';
-var $author$project$Page_Index$titleBox = A2(
+var $author$project$DView_Index$titleBox = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -11183,7 +11288,7 @@ var $author$project$Page_Index$titleBox = A2(
 				]),
 			$mdgriffith$elm_ui$Element$text($author$project$Data$myName))
 		]));
-var $author$project$Page_Index$homepageItems = A2(
+var $author$project$DView_Index$homepageItems = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -11192,9 +11297,9 @@ var $author$project$Page_Index$homepageItems = A2(
 			$mdgriffith$elm_ui$Element$moveUp(100)
 		]),
 	_List_fromArray(
-		[$author$project$Page_Index$titleBox, $author$project$Page_Index$frontPageParagraph]));
-var $author$project$Page_Index$homepage = function (model) {
-	return $author$project$Page_Index$homepageItems;
+		[$author$project$DView_Index$titleBox, $author$project$DView_Index$frontPageParagraph]));
+var $author$project$DView_Index$homepage = function (model) {
+	return $author$project$DView_Index$homepageItems;
 };
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $mdgriffith$elm_ui$Element$Background$image = function (src) {
@@ -11501,9 +11606,7 @@ var $elm$html$Html$Events$onClick = function (msg) {
 };
 var $mdgriffith$elm_ui$Element$Events$onClick = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Attr, $elm$html$Html$Events$onClick);
 var $mdgriffith$elm_ui$Element$Input$enter = 'Enter';
-var $elm$json$Json$Decode$andThen = _Json_andThen;
 var $elm$json$Json$Decode$fail = _Json_fail;
-var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
 	return {$: 'MayPreventDefault', a: a};
 };
@@ -11797,81 +11900,45 @@ var $author$project$MessagesAndModels$CopyToClipboard = function (a) {
 	return {$: 'CopyToClipboard', a: a};
 };
 var $author$project$Colors$dropNavColor = A3($mdgriffith$elm_ui$Element$rgb255, 105, 108, 112);
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
-var $elm$html$Html$Attributes$rel = _VirtualDom_attribute('rel');
-var $mdgriffith$elm_ui$Element$link = F2(
-	function (attrs, _v0) {
-		var url = _v0.url;
-		var label = _v0.label;
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asEl,
-			$mdgriffith$elm_ui$Internal$Model$NodeName('a'),
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Internal$Model$Attr(
-					$elm$html$Html$Attributes$href(url)),
-				A2(
-					$elm$core$List$cons,
-					$mdgriffith$elm_ui$Internal$Model$Attr(
-						$elm$html$Html$Attributes$rel('noopener noreferrer')),
-					A2(
-						$elm$core$List$cons,
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
-						A2(
-							$elm$core$List$cons,
-							$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-							A2(
-								$elm$core$List$cons,
-								$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentCenterX + (' ' + ($mdgriffith$elm_ui$Internal$Style$classes.contentCenterY + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.link)))),
-								attrs))))),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
-				_List_fromArray(
-					[label])));
-	});
 var $mdgriffith$elm_ui$Element$moveDown = function (y) {
 	return A2(
 		$mdgriffith$elm_ui$Internal$Model$TransformComponent,
 		$mdgriffith$elm_ui$Internal$Flag$moveY,
 		$mdgriffith$elm_ui$Internal$Model$MoveY(y));
 };
-var $author$project$Comp_NavBar$dropNav = A2(
-	$mdgriffith$elm_ui$Element$column,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$dropNavColor),
-			$mdgriffith$elm_ui$Element$moveDown(15),
-			$mdgriffith$elm_ui$Element$padding(15),
-			$mdgriffith$elm_ui$Element$Border$rounded(10),
-			$mdgriffith$elm_ui$Element$centerX,
-			$mdgriffith$elm_ui$Element$spacing(10),
-			A2($mdgriffith$elm_ui$Element$Font$glow, $author$project$Colors$white, 0)
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$mdgriffith$elm_ui$Element$link,
-			_List_fromArray(
-				[$author$project$Comp_NavBar$hovered]),
-			{
-				label: $mdgriffith$elm_ui$Element$text('Email using Client'),
-				url: 'mailto:' + $author$project$Data$myEmail
-			}),
-			A2(
-			$mdgriffith$elm_ui$Element$Input$button,
-			_List_fromArray(
-				[$author$project$Comp_NavBar$hovered]),
-			{
-				label: $mdgriffith$elm_ui$Element$text('Copy Email to Clipboard'),
-				onPress: $elm$core$Maybe$Just(
-					$author$project$MessagesAndModels$CopyToClipboard($author$project$Data$myEmail))
-			})
-		]));
+var $author$project$Comp_NavBar$dropNav = function () {
+	var emailClipboardLnk = A2(
+		$mdgriffith$elm_ui$Element$Input$button,
+		_List_fromArray(
+			[$author$project$Comp_NavBar$hovered]),
+		{
+			label: $mdgriffith$elm_ui$Element$text('Copy Email to Clipboard'),
+			onPress: $elm$core$Maybe$Just(
+				$author$project$MessagesAndModels$CopyToClipboard($author$project$Data$myEmail))
+		});
+	var emailClientLnk = A2(
+		$mdgriffith$elm_ui$Element$link,
+		_List_fromArray(
+			[$author$project$Comp_NavBar$hovered]),
+		{
+			label: $mdgriffith$elm_ui$Element$text('Email using Client'),
+			url: 'mailto:' + $author$project$Data$myEmail
+		});
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$dropNavColor),
+				$mdgriffith$elm_ui$Element$moveDown(15),
+				$mdgriffith$elm_ui$Element$padding(15),
+				$mdgriffith$elm_ui$Element$Border$rounded(10),
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$spacing(10),
+				A2($mdgriffith$elm_ui$Element$Font$glow, $author$project$Colors$white, 0)
+			]),
+		_List_fromArray(
+			[emailClientLnk, emailClipboardLnk]));
+}();
 var $author$project$MessagesAndModels$Open = {$: 'Open'};
 var $author$project$HelperFunctions$speedIf = F3(
 	function (condition, result, elseResult) {
@@ -12000,17 +12067,17 @@ var $author$project$Comp_NavBar$navBar = function (model) {
 				$author$project$Comp_NavBar$gitHubLink
 			]));
 };
-var $author$project$Main$view = function (model) {
+var $author$project$View_Desktop$desktopView = function (model) {
 	var selectedPage = function () {
 		var _v0 = model.selectedPage;
 		if (_v0.$ === 'Home') {
-			return $author$project$Page_Index$homepage(model);
+			return $author$project$DView_Index$homepage(model);
 		} else {
-			return $author$project$Page_About$aboutPage(model);
+			return $author$project$DView_About$aboutPage(model);
 		}
 	}();
 	var myFocusStyle = {backgroundColor: $elm$core$Maybe$Nothing, borderColor: $elm$core$Maybe$Nothing, shadow: $elm$core$Maybe$Nothing};
-	var myView = A3(
+	return A3(
 		$mdgriffith$elm_ui$Element$layoutWith,
 		{
 			options: _List_fromArray(
@@ -12035,13 +12102,523 @@ var $author$project$Main$view = function (model) {
 					$author$project$Comp_NavBar$navBar(model),
 					selectedPage
 				])));
+};
+var $mdgriffith$elm_ui$Internal$Flag$bgGradient = $mdgriffith$elm_ui$Internal$Flag$flag(10);
+var $mdgriffith$elm_ui$Element$Background$gradient = function (_v0) {
+	var angle = _v0.angle;
+	var steps = _v0.steps;
+	if (!steps.b) {
+		return $mdgriffith$elm_ui$Internal$Model$NoAttribute;
+	} else {
+		if (!steps.b.b) {
+			var clr = steps.a;
+			return A2(
+				$mdgriffith$elm_ui$Internal$Model$StyleClass,
+				$mdgriffith$elm_ui$Internal$Flag$bgColor,
+				A3(
+					$mdgriffith$elm_ui$Internal$Model$Colored,
+					'bg-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
+					'background-color',
+					clr));
+		} else {
+			return A2(
+				$mdgriffith$elm_ui$Internal$Model$StyleClass,
+				$mdgriffith$elm_ui$Internal$Flag$bgGradient,
+				A3(
+					$mdgriffith$elm_ui$Internal$Model$Single,
+					'bg-grad-' + A2(
+						$elm$core$String$join,
+						'-',
+						A2(
+							$elm$core$List$cons,
+							$mdgriffith$elm_ui$Internal$Model$floatClass(angle),
+							A2($elm$core$List$map, $mdgriffith$elm_ui$Internal$Model$formatColorClass, steps))),
+					'background-image',
+					'linear-gradient(' + (A2(
+						$elm$core$String$join,
+						', ',
+						A2(
+							$elm$core$List$cons,
+							$elm$core$String$fromFloat(angle) + 'rad',
+							A2($elm$core$List$map, $mdgriffith$elm_ui$Internal$Model$formatColor, steps))) + ')')));
+		}
+	}
+};
+var $mdgriffith$elm_ui$Internal$Model$Min = F2(
+	function (a, b) {
+		return {$: 'Min', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$minimum = F2(
+	function (i, l) {
+		return A2($mdgriffith$elm_ui$Internal$Model$Min, i, l);
+	});
+var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
+	function (top, right, bottom, left) {
+		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));
+	});
+var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
+	var top = _v0.top;
+	var right = _v0.right;
+	var bottom = _v0.bottom;
+	var left = _v0.left;
+	return (_Utils_eq(top, right) && (_Utils_eq(top, bottom) && _Utils_eq(top, left))) ? A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			'p-' + $elm$core$String$fromInt(top),
+			top,
+			top,
+			top,
+			top)) : A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			A4($mdgriffith$elm_ui$Internal$Model$paddingName, top, right, bottom, left),
+			top,
+			right,
+			bottom,
+			left));
+};
+var $author$project$Colors$twoThirtyFour = A3($mdgriffith$elm_ui$Element$rgb255, 234, 234, 234);
+var $author$project$View_Phone$block = F3(
+	function (title, attributes, contents) {
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			_Utils_ap(
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$height(
+						A2($mdgriffith$elm_ui$Element$minimum, 500, $mdgriffith$elm_ui$Element$fill)),
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+						$mdgriffith$elm_ui$Element$Background$gradient(
+						{
+							angle: 0,
+							steps: _List_fromArray(
+								[$author$project$Colors$white, $author$project$Colors$twoThirtyFour])
+						}),
+						$mdgriffith$elm_ui$Element$spacing(40),
+						$mdgriffith$elm_ui$Element$paddingEach(
+						{bottom: 30, left: 30, right: 30, top: 30})
+					]),
+				attributes),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$size(80),
+							$mdgriffith$elm_ui$Element$Font$bold
+						]),
+					$mdgriffith$elm_ui$Element$text(title)),
+					A2(
+					$mdgriffith$elm_ui$Element$column,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+							$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
+							$mdgriffith$elm_ui$Element$paddingEach(
+							{bottom: 0, left: 20, right: 20, top: 0})
+						]),
+					contents)
+				]));
+	});
+var $author$project$Colors$gray = A3($mdgriffith$elm_ui$Element$rgb255, 200, 200, 200);
+var $author$project$Colors$mobileGray = A3($mdgriffith$elm_ui$Element$rgb255, 109, 112, 115);
+var $mdgriffith$elm_ui$Internal$Model$boxShadowClass = function (shadow) {
+	return $elm$core$String$concat(
+		_List_fromArray(
+			[
+				shadow.inset ? 'box-inset' : 'box-',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.offset.a) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.offset.b) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.blur) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$floatClass(shadow.size) + 'px',
+				$mdgriffith$elm_ui$Internal$Model$formatColorClass(shadow.color)
+			]));
+};
+var $mdgriffith$elm_ui$Internal$Flag$shadows = $mdgriffith$elm_ui$Internal$Flag$flag(19);
+var $mdgriffith$elm_ui$Element$Border$shadow = function (almostShade) {
+	var shade = {blur: almostShade.blur, color: almostShade.color, inset: false, offset: almostShade.offset, size: almostShade.size};
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$shadows,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Single,
+			$mdgriffith$elm_ui$Internal$Model$boxShadowClass(shade),
+			'box-shadow',
+			$mdgriffith$elm_ui$Internal$Model$formatBoxShadow(shade)));
+};
+var $author$project$View_Phone$emailComponent = function () {
+	var title = A2(
+		$mdgriffith$elm_ui$Element$el,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(70),
+				$mdgriffith$elm_ui$Element$Font$bold,
+				$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$white),
+				$mdgriffith$elm_ui$Element$Background$color(
+				A3($mdgriffith$elm_ui$Element$rgb255, 65, 115, 164)),
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$paddingEach(
+				{bottom: 18, left: 30, right: 30, top: 30}),
+				$mdgriffith$elm_ui$Element$Border$roundEach(
+				{bottomLeft: 0, bottomRight: 0, topLeft: 18, topRight: 18})
+			]),
+		A2(
+			$mdgriffith$elm_ui$Element$el,
+			_List_fromArray(
+				[$mdgriffith$elm_ui$Element$centerX]),
+			$mdgriffith$elm_ui$Element$text('Email')));
+	var emailNow = A2(
+		$mdgriffith$elm_ui$Element$link,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(60),
+				$mdgriffith$elm_ui$Element$padding(30),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$gray),
+				$mdgriffith$elm_ui$Element$Border$rounded(18)
+			]),
+		{
+			label: $mdgriffith$elm_ui$Element$text('Email Now'),
+			url: 'mailto:' + $author$project$Data$myEmail
+		});
+	var emailClipboard = A2(
+		$mdgriffith$elm_ui$Element$Input$button,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$size(60),
+				$mdgriffith$elm_ui$Element$padding(10),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$gray),
+				$mdgriffith$elm_ui$Element$padding(30),
+				$mdgriffith$elm_ui$Element$Border$rounded(18)
+			]),
+		{
+			label: $mdgriffith$elm_ui$Element$text('To Clipboard'),
+			onPress: $elm$core$Maybe$Just(
+				$author$project$MessagesAndModels$CopyToClipboard($author$project$Data$myEmail))
+		});
+	var buttons = A2(
+		$mdgriffith$elm_ui$Element$row,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$spacing(45),
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$Background$color(
+				A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194)),
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$paddingEach(
+				{bottom: 30, left: 30, right: 30, top: 18}),
+				$mdgriffith$elm_ui$Element$Border$roundEach(
+				{bottomLeft: 18, bottomRight: 18, topLeft: 0, topRight: 0})
+			]),
+		_List_fromArray(
+			[emailNow, emailClipboard]));
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$centerY,
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$mobileGray),
+				$mdgriffith$elm_ui$Element$Border$rounded(32),
+				$mdgriffith$elm_ui$Element$centerY,
+				$mdgriffith$elm_ui$Element$Border$shadow(
+				{
+					blur: 20,
+					color: A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90),
+					offset: _Utils_Tuple2(10, 10),
+					size: 1
+				})
+			]),
+		_List_fromArray(
+			[title, buttons]));
+}();
+var $author$project$Data$siteSource = 'https://github.com/wcourtney31415/My-Website';
+var $author$project$View_Phone$gitHubComponent = function () {
+	var linkAttributes = _List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(60),
+			$mdgriffith$elm_ui$Element$padding(10),
+			$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$gray),
+			$mdgriffith$elm_ui$Element$padding(30),
+			$mdgriffith$elm_ui$Element$centerX,
+			$mdgriffith$elm_ui$Element$Border$rounded(18)
+		]);
+	var siteSourceLink = A2(
+		$mdgriffith$elm_ui$Element$newTabLink,
+		linkAttributes,
+		{
+			label: $mdgriffith$elm_ui$Element$text('Site Source'),
+			url: $author$project$Data$siteSource
+		});
+	var gitHubLink = A2(
+		$mdgriffith$elm_ui$Element$newTabLink,
+		linkAttributes,
+		{
+			label: $mdgriffith$elm_ui$Element$text('My Github'),
+			url: $author$project$Data$gitHub
+		});
+	var buttons = A2(
+		$mdgriffith$elm_ui$Element$row,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$spacing(45),
+				$mdgriffith$elm_ui$Element$Background$color(
+				A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194)),
+				$mdgriffith$elm_ui$Element$padding(30),
+				$mdgriffith$elm_ui$Element$Border$rounded(25)
+			]),
+		_List_fromArray(
+			[gitHubLink, siteSourceLink]));
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$Border$rounded(32),
+				$mdgriffith$elm_ui$Element$centerY,
+				$mdgriffith$elm_ui$Element$Border$shadow(
+				{
+					blur: 20,
+					color: A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90),
+					offset: _Utils_Tuple2(10, 10),
+					size: 1
+				})
+			]),
+		_List_fromArray(
+			[buttons]));
+}();
+var $author$project$View_Phone$gitHubParagraph = A2(
+	$mdgriffith$elm_ui$Element$column,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$spacing(60)
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$mdgriffith$elm_ui$Element$paragraph,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Font$size(65)
+				]),
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$text('Check out my github profile to see what projects I\'ve been working on lately.')
+				])),
+			$author$project$View_Phone$gitHubComponent
+		]));
+var $author$project$Colors$anotherBlue = A3($mdgriffith$elm_ui$Element$rgb255, 101, 147, 193);
+var $elm$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (n <= 0) {
+				return result;
+			} else {
+				var $temp$result = A2($elm$core$List$cons, value, result),
+					$temp$n = n - 1,
+					$temp$value = value;
+				result = $temp$result;
+				n = $temp$n;
+				value = $temp$value;
+				continue repeatHelp;
+			}
+		}
+	});
+var $elm$core$List$repeat = F2(
+	function (n, value) {
+		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
+	});
+var $author$project$View_Phone$heading = function () {
+	var titleSdev = A2(
+		$mdgriffith$elm_ui$Element$row,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$bold,
+				$mdgriffith$elm_ui$Element$Font$size(95),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Colors$anotherBlue),
+				$mdgriffith$elm_ui$Element$centerX,
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$padding(35),
+				$mdgriffith$elm_ui$Element$Border$roundEach(
+				{bottomLeft: 50, bottomRight: 50, topLeft: 0, topRight: 0})
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$centerX,
+						$mdgriffith$elm_ui$Element$Font$color($author$project$Colors$white)
+					]),
+				$mdgriffith$elm_ui$Element$text('Software Developer'))
+			]));
+	var titleName = function () {
+		var x = 234;
+		var y = x - 20;
+		var z = y - 20;
+		return A2(
+			$mdgriffith$elm_ui$Element$row,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$centerX,
+					$mdgriffith$elm_ui$Element$Font$size(90),
+					$mdgriffith$elm_ui$Element$Background$gradient(
+					{
+						angle: 0,
+						steps: _Utils_ap(
+							A2(
+								$elm$core$List$repeat,
+								1,
+								A3($mdgriffith$elm_ui$Element$rgb255, x, x, x)),
+							_Utils_ap(
+								A2(
+									$elm$core$List$repeat,
+									1,
+									A3($mdgriffith$elm_ui$Element$rgb255, y, y, y)),
+								A2(
+									$elm$core$List$repeat,
+									1,
+									A3($mdgriffith$elm_ui$Element$rgb255, z, z, z))))
+					}),
+					$mdgriffith$elm_ui$Element$Font$bold,
+					$mdgriffith$elm_ui$Element$Font$color(
+					A3($mdgriffith$elm_ui$Element$rgb255, 52, 89, 127)),
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$padding(20),
+					$mdgriffith$elm_ui$Element$paddingEach(
+					{bottom: 70, left: 20, right: 20, top: 20})
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[$mdgriffith$elm_ui$Element$centerX]),
+					$mdgriffith$elm_ui$Element$text('Wesley Courtney'))
+				]));
+	}();
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill)
+			]),
+		_List_fromArray(
+			[titleSdev, titleName]));
+}();
+var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
+	{options: _List_Nil});
+var $author$project$View_Phone$phoneView = function (model) {
+	var vBorderSpacing = 60;
+	var hBorderSpacing = 35;
+	return A2(
+		$mdgriffith$elm_ui$Element$layout,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Background$color(
+				A3($mdgriffith$elm_ui$Element$rgb255, 194, 194, 194))
+			]),
+		A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[$mdgriffith$elm_ui$Element$centerX]),
+			_List_fromArray(
+				[
+					$author$project$View_Phone$heading,
+					A2(
+					$mdgriffith$elm_ui$Element$column,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$paddingEach(
+							{bottom: 0, left: 0, right: 0, top: 0})
+						]),
+					_List_fromArray(
+						[
+							A3(
+							$author$project$View_Phone$block,
+							'Contact',
+							_List_Nil,
+							_List_fromArray(
+								[$author$project$View_Phone$emailComponent])),
+							A3(
+							$author$project$View_Phone$block,
+							'About Me',
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									$mdgriffith$elm_ui$Element$el,
+									_List_fromArray(
+										[
+											$mdgriffith$elm_ui$Element$Font$size(50)
+										]),
+									$mdgriffith$elm_ui$Element$text('about me text'))
+								])),
+							A3(
+							$author$project$View_Phone$block,
+							'Github',
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$paddingEach(
+									{bottom: 200, left: 20, right: 20, top: 30})
+								]),
+							_List_fromArray(
+								[$author$project$View_Phone$gitHubParagraph]))
+						]))
+				])));
+};
+var $author$project$View_Tablet$tabletView = function (model) {
+	return A2(
+		$mdgriffith$elm_ui$Element$layout,
+		_List_Nil,
+		$mdgriffith$elm_ui$Element$text('Tablet view!'));
+};
+var $author$project$View_Controller$siteView = function (model) {
+	var deviceClass = model.device._class;
+	var responsiveView = function () {
+		switch (deviceClass.$) {
+			case 'Phone':
+				return $author$project$View_Phone$phoneView(model);
+			case 'Tablet':
+				return $author$project$View_Tablet$tabletView(model);
+			case 'Desktop':
+				return $author$project$View_Desktop$desktopView(model);
+			default:
+				return $author$project$View_Desktop$desktopView(model);
+		}
+	}();
+	var defaultView = $author$project$View_Desktop$desktopView(model);
+	var myView = model.responsive ? responsiveView : defaultView;
+	return myView;
+};
+var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
-			[myView]),
+			[
+				$author$project$View_Controller$siteView(model)
+			]),
 		title: $author$project$Data$myName
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$document(
 	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
-	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
+	A2(
+		$elm$json$Json$Decode$andThen,
+		function (windowWidth) {
+			return A2(
+				$elm$json$Json$Decode$andThen,
+				function (windowHeight) {
+					return $elm$json$Json$Decode$succeed(
+						{windowHeight: windowHeight, windowWidth: windowWidth});
+				},
+				A2($elm$json$Json$Decode$field, 'windowHeight', $elm$json$Json$Decode$int));
+		},
+		A2($elm$json$Json$Decode$field, 'windowWidth', $elm$json$Json$Decode$int)))(0)}});}(this));
