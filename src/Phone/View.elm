@@ -64,9 +64,7 @@ heading =
             Element.row
                 [ Font.bold
                 , Font.size 95
-
-                --, Background.color mobileGray
-                , Background.color anotherBlue
+                , Background.color lightBlue
                 , centerX
                 , width fill
                 , padding 35
@@ -200,7 +198,7 @@ emailComponent =
                 [ Font.size 70
                 , Font.bold
                 , Font.color white
-                , Background.color <| rgb255 65 115 164
+                , Background.color darkerBlue
                 , width fill
                 , paddingEach
                     { top = 30
@@ -271,7 +269,6 @@ emailComponent =
     Element.column
         [ centerX
         , centerY
-        , Background.color mobileGray
         , Border.rounded 32
         , centerY
         , Border.shadow { offset = ( 10, 10 ), size = 1, blur = 20, color = rgb255 90 90 90 }

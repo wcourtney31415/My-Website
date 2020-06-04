@@ -12,9 +12,9 @@ gray =
     rgb255 200 200 200
 
 
-mobileGray =
-    rgb255 109 112 115
-
-
-anotherBlue =
+lightBlue =
     rgb255 101 147 193
+
+
+darkerBlue =
+    rgb255 65 115 164
