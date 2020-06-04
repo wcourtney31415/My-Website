@@ -1,4 +1,4 @@
-port module Responsive exposing (onResize)
+port module Port_Responsive exposing (onResize)
 
 
 type alias Size =

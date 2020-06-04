@@ -1,11 +1,11 @@
 module Main exposing (..)
 
 import Browser
-import Clipboard exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import MessagesAndModels exposing (..)
-import Responsive
+import Port_Clipboard exposing (..)
+import Port_Responsive
 import View_Controller exposing (..)
 
 
@@ -21,7 +21,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Responsive.onResize (\w h -> GotNewResolution w h)
+    Port_Responsive.onResize (\w h -> GotNewResolution w h)
 
 
 init : Flags -> ( Model, Cmd Msg )
