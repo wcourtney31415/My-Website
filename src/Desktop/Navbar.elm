@@ -114,6 +114,12 @@ dropNav =
         , Border.rounded 10
         , centerX
         , spacing 10
+        , Border.shadow
+            { offset = ( 5, 5 )
+            , size = 1
+            , blur = 10
+            , color = rgb255 90 90 90
+            }
         , Font.glow white 0 --override contactButton glow
         ]
         [ emailClientLnk
