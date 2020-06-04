@@ -4,8 +4,8 @@ import BasicColors exposing (..)
 import Element exposing (..)
 
 
-greyFortyTwo : Color
-greyFortyTwo =
+grayFortyTwo : Color
+grayFortyTwo =
     rgb255 42 42 42
 
 

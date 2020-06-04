@@ -286,7 +286,7 @@ block title attributes contents =
     Element.column
         ([ height (fill |> minimum 500)
          , width fill
-         , Background.gradient { angle = 0, steps = [ white, twoThirtyFour ] }
+         , Background.gradient { angle = 0, steps = [ white, grayThirtyFour ] }
          , spacing 40
          , paddingEach
             { left = 30

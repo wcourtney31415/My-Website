@@ -4,7 +4,7 @@ import BasicColors exposing (..)
 import Element exposing (..)
 
 
-twoThirtyFour =
+grayThirtyFour =
     rgb255 234 234 234
 
 
