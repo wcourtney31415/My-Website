@@ -69,7 +69,7 @@ navBar model =
         bkgAttr : Attribute Msg
         bkgAttr =
             bkgAttributes
-                [ Background.color fortyTwo
+                [ Background.color greyFortyTwo
                 , alpha 0.6
                 , Border.roundEach
                     { topLeft = 0
