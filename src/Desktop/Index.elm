@@ -1,4 +1,4 @@
-module DView_Index exposing (homepage)
+module Desktop.Index exposing (homepage)
 
 import Colors exposing (..)
 import Data exposing (..)

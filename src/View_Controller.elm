@@ -1,14 +1,14 @@
 module View_Controller exposing (siteView)
 
+import Desktop.View exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Html exposing (Html)
 import MessagesAndModels exposing (..)
-import View_Desktop exposing (..)
-import View_Phone exposing (..)
-import View_Tablet exposing (..)
+import Phone.View exposing (..)
+import Tablet.View exposing (..)
 
 
 classString : Device -> String

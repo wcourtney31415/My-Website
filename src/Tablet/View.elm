@@ -1,8 +1,5 @@
-module View_Desktop exposing (desktopView)
+module Tablet.View exposing (tabletView)
 
-import Comp_NavBar exposing (..)
-import DView_About exposing (..)
-import DView_Index exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
@@ -10,10 +7,13 @@ import Element.Border as Border
 import Element.Font as Font
 import Html exposing (Html)
 import MessagesAndModels exposing (..)
+import Tablet.About exposing (..)
+import Tablet.Index exposing (..)
+import Tablet.Navbar exposing (..)
 
 
-desktopView : Model -> Html.Html Msg
-desktopView model =
+tabletView : Model -> Html.Html Msg
+tabletView model =
     let
         myFocusStyle : FocusStyle
         myFocusStyle =

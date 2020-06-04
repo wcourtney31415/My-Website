@@ -1,4 +1,4 @@
-module DView_About exposing (aboutPage)
+module Desktop.About exposing (aboutPage)
 
 import Colors exposing (..)
 import Data exposing (..)

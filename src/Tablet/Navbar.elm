@@ -1,4 +1,4 @@
-module Comp_NavBar exposing (navBar)
+module Tablet.Navbar exposing (navBar)
 
 import Colors exposing (..)
 import Data exposing (..)

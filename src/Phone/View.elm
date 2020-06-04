@@ -1,4 +1,4 @@
-module View_Phone exposing (phoneView)
+module Phone.View exposing (phoneView)
 
 import Colors exposing (..)
 import Data exposing (..)
