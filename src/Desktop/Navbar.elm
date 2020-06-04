@@ -1,7 +1,8 @@
 module Desktop.Navbar exposing (navBar)
 
-import Colors exposing (..)
+import BasicColors exposing (..)
 import Data exposing (..)
+import Desktop.Colors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border

@@ -1,6 +1,6 @@
 module Tablet.Index exposing (homepage)
 
-import Colors exposing (..)
+import BasicColors exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
@@ -8,6 +8,7 @@ import Element.Border as Border
 import Element.Font as Font
 import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
+import Tablet.Colors exposing (..)
 
 
 homepage model =

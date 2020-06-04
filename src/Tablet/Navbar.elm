@@ -1,6 +1,6 @@
 module Tablet.Navbar exposing (navBar)
 
-import Colors exposing (..)
+import BasicColors exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
@@ -9,6 +9,7 @@ import Element.Font as Font
 import Element.Input as Input
 import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
+import Tablet.Colors exposing (..)
 
 
 contactButton : Model -> Element Msg

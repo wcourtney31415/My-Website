@@ -1,6 +1,6 @@
 module Phone.View exposing (phoneView)
 
-import Colors exposing (..)
+import BasicColors exposing (..)
 import Data exposing (..)
 import Element exposing (..)
 import Element.Background as Background
@@ -9,6 +9,7 @@ import Element.Font as Font
 import Element.Input as Input
 import Html exposing (Html)
 import MessagesAndModels exposing (..)
+import Phone.Colors exposing (..)
 
 
 phoneView : Model -> Html.Html Msg
