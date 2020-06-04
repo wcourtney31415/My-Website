@@ -12575,10 +12575,7 @@ var $author$project$View_Phone$phoneView = function (model) {
 				])));
 };
 var $author$project$View_Tablet$tabletView = function (model) {
-	return A2(
-		$mdgriffith$elm_ui$Element$layout,
-		_List_Nil,
-		$mdgriffith$elm_ui$Element$text('Tablet view!'));
+	return $author$project$View_Desktop$desktopView(model);
 };
 var $author$project$View_Controller$siteView = function (model) {
 	var deviceClass = model.device._class;
