@@ -12,6 +12,7 @@ import MessagesAndModels exposing (..)
 import Phone.Colors exposing (..)
 import Phone.EmailComp exposing (..)
 import Phone.GithubComp exposing (..)
+import Phone.HeadingComp exposing (..)
 
 
 phoneView : Model -> Html.Html Msg
@@ -60,83 +61,18 @@ phoneView model =
         )
 
 
-heading =
-    let
-        titleSdev =
-            Element.row
-                [ Font.bold
-                , Font.size 95
-                , Background.color lightBlue
-                , centerX
-                , width fill
-                , padding 35
-                , Border.roundEach
-                    { topLeft = 0
-                    , topRight = 0
-                    , bottomLeft = 50
-                    , bottomRight = 50
-                    }
-                ]
-                [ Element.el
-                    [ centerX
-                    , Font.color white
-                    ]
-                    (text "Software Developer")
-                ]
-
-        titleName =
-            let
-                x =
-                    234
-
-                y =
-                    x - 20
-
-                z =
-                    y - 20
-            in
-            Element.row
-                [ centerX
-                , Font.size 90
-                , Background.gradient
-                    { angle = 0
-                    , steps =
-                        List.repeat 1 (rgb255 x x x)
-                            ++ List.repeat 1 (rgb255 y y y)
-                            ++ List.repeat 1 (rgb255 z z z)
-                    }
-                , Font.bold
-                , Font.color <| rgb255 52 89 127
-                , width fill
-                , padding 20
-                , paddingEach
-                    { top = 20
-                    , bottom = 70
-                    , right = 20
-                    , left = 20
-                    }
-                ]
-                [ Element.el
-                    [ centerX
-                    ]
-                    (text "Wesley Courtney")
-                ]
-    in
-    Element.column
-        [ width fill
-        , height fill
-        ]
-        [ titleSdev
-        , titleName
-        ]
-
-
 block : String -> List (Attribute Msg) -> List (Element Msg) -> Element Msg
 block title attributes contents =
     Element.column
         ([ height (fill |> minimum 500)
          , width fill
-         , Background.gradient { angle = 0, steps = [ white, grayThirtyFour ] }
+         , Background.gradient
+            { angle = 0
+            , steps =
+                [ white
+                , grayThirtyFour
+                ]
+            }
          , spacing 40
          , paddingEach
             { left = 30
@@ -156,7 +92,12 @@ block title attributes contents =
         , Element.column
             [ width fill
             , height fill
-            , paddingEach { left = 20, right = 20, top = 0, bottom = 0 }
+            , paddingEach
+                { left = 20
+                , right = 20
+                , top = 0
+                , bottom = 0
+                }
             ]
             contents
         ]
