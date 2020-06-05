@@ -1,4 +1,4 @@
-port module Port_Responsive exposing (onResize)
+port module Ports.Responsive exposing (onResize)
 
 
 type alias Size =

@@ -4,8 +4,8 @@ import Browser
 import Data exposing (..)
 import Element exposing (..)
 import MessagesAndModels exposing (..)
-import Port_Clipboard exposing (..)
-import Port_Responsive
+import Ports.Clipboard exposing (..)
+import Ports.Responsive as Responsive
 import View_Controller exposing (..)
 
 
@@ -21,7 +21,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Port_Responsive.onResize (\w h -> GotNewResolution w h)
+    Responsive.onResize (\w h -> GotNewResolution w h)
 
 
 init : Flags -> ( Model, Cmd Msg )

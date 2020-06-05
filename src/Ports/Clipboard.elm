@@ -1,4 +1,4 @@
-port module Port_Clipboard exposing (..)
+port module Ports.Clipboard exposing (..)
 
 
 port copyToClipboard : String -> Cmd msg
