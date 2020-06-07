@@ -7,6 +7,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
+import Fonts exposing (..)
 import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
 
@@ -32,6 +33,7 @@ titleBox =
         , centerY
         , padding 10
         , Font.color white
+        , customFont2
         , spacing 10
         , Font.bold
         , width fill
