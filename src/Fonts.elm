@@ -3,23 +3,46 @@ module Fonts exposing (..)
 import Element.Font as Font
 
 
+getUntilDelimeter : String -> String -> String
+getUntilDelimeter accumulator string =
+    let
+        delimeters =
+            "!@#$%^&*()<,>.?/:;[{}]|+=_-"
+
+        isDelimeter : String -> Bool
+        isDelimeter charAsStr =
+            String.contains charAsStr delimeters
+
+        len =
+            String.length string
+
+        first =
+            String.slice 0 1 string
+
+        remainder =
+            String.slice 1 len string
+
+        nextAccumulator =
+            String.append accumulator first
+    in
+    if isDelimeter first then
+        accumulator
+
+    else
+        getUntilDelimeter nextAccumulator remainder
+
+
 remoteGoogleFont url =
     let
         withoutLead =
             String.replace "https://fonts.googleapis.com/css2?family=" "" url
 
-        splitOnColon =
-            Maybe.withDefault "" (List.head <| String.split ":" withoutLead)
-
-        splitOnAnd =
-            Maybe.withDefault "" (List.head <| String.split "&" splitOnColon)
-
-        derivedName =
-            Maybe.withDefault "" (List.head <| String.split "+" splitOnAnd)
+        name =
+            getUntilDelimeter "" withoutLead
     in
     Font.family
         [ Font.external
-            { name = derivedName
+            { name = name
             , url = url
             }
         , Font.sansSerif
