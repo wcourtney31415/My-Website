@@ -32,10 +32,14 @@ getUntilDelimeter accumulator string =
         getUntilDelimeter nextAccumulator remainder
 
 
+removeLeading url =
+    String.replace "https://fonts.googleapis.com/css2?family=" "" url
+
+
 remoteGoogleFont url =
     let
         withoutLead =
-            String.replace "https://fonts.googleapis.com/css2?family=" "" url
+            removeLeading url
 
         name =
             getUntilDelimeter "" withoutLead
