@@ -13,7 +13,7 @@ googleFontParsing1 =
             "https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap"
 
         result =
-            getUntilDelimeter "" <| removeLeading url
+            getUntilDelimeter <| removeLeading url
 
         expected =
             "Lato"
@@ -29,7 +29,7 @@ googleFontParsing2 =
             "https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
 
         result =
-            getUntilDelimeter "" <| removeLeading url
+            getUntilDelimeter <| removeLeading url
 
         expected =
             "Playfair"
