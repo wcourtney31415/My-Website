@@ -29,3 +29,7 @@ speedIf condition result elseResult =
 flip : OpenOrClosed -> OpenOrClosed
 flip a =
     speedIf (a == Open) Closed Open
+
+
+textElement attributes myText =
+    Element.el attributes <| text myText

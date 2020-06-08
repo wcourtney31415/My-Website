@@ -13,6 +13,7 @@ import Phone.Colors exposing (..)
 import Phone.EmailComp exposing (..)
 import Phone.GithubComp exposing (..)
 import Phone.HeadingComp exposing (..)
+import Phone.LanguagesComp exposing (..)
 
 
 phoneView : Model -> Html.Html Msg
@@ -42,6 +43,9 @@ phoneView model =
                 [ block "Contact"
                     []
                     [ emailComponent ]
+                , block "Languages"
+                    []
+                    [ languagesComp ]
                 , block "About Me"
                     []
                     [ Element.el [ Font.size 50 ] (text "about me text")
