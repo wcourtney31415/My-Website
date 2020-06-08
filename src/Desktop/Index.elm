@@ -33,7 +33,7 @@ titleBox =
         , centerY
         , padding 10
         , Font.color white
-        , customFont2
+        , fontDesktopHeader
         , spacing 10
         , Font.bold
         , width fill
