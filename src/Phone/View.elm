@@ -7,6 +7,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
+import HelperFunctions exposing (..)
 import Html exposing (Html)
 import MessagesAndModels exposing (..)
 import Phone.Colors exposing (..)
@@ -48,7 +49,7 @@ phoneView model =
                     [ languagesComp ]
                 , block "About Me"
                     []
-                    [ Element.el [ Font.size 50 ] (text "about me text")
+                    [ textElement [ Font.size 50 ] "about me text"
                     ]
                 , block "Github"
                     [ paddingEach

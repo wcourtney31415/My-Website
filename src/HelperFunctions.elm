@@ -14,7 +14,7 @@ bkgAttributes attr =
                 ]
                 attr
     in
-    Element.behindContent <| Element.el attributes (text "")
+    Element.behindContent <| textElement attributes ""
 
 
 speedIf : Bool -> a -> a -> a

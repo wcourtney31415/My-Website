@@ -46,11 +46,11 @@ titleBox =
                 }
             ]
         ]
-        [ Element.el
+        [ textElement
             [ Font.size 40
             , centerX
             ]
-            (text "Software Developer")
+            "Software Developer"
         , Element.el
             [ Font.size 20
             , centerX

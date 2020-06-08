@@ -7,6 +7,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
+import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
 import Phone.Colors exposing (..)
 
@@ -28,11 +29,11 @@ heading =
                     , bottomRight = 50
                     }
                 ]
-                [ Element.el
+                [ textElement
                     [ centerX
                     , Font.color white
                     ]
-                    (text "Software Developer")
+                    "Software Developer"
                 ]
 
         titleName =
@@ -67,10 +68,10 @@ heading =
                     , left = 20
                     }
                 ]
-                [ Element.el
+                [ textElement
                     [ centerX
                     ]
-                    (text "Wesley Courtney")
+                    "Wesley Courtney"
                 ]
     in
     Element.column

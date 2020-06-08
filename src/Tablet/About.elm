@@ -46,11 +46,11 @@ titleBox =
                 }
             ]
         ]
-        [ Element.el
+        [ textElement
             [ Font.size 40
             , centerX
             ]
-            (text "About Me")
+            "About Me"
         ]
 
 

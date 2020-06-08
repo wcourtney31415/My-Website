@@ -7,6 +7,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
+import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
 import Phone.Colors exposing (..)
 
@@ -33,11 +34,10 @@ emailComponent =
                     , bottomRight = 0
                     }
                 ]
-                (Element.el
+                (textElement
                     [ centerX
                     ]
-                 <|
-                    text "Email"
+                    "Email"
                 )
 
         buttons =
