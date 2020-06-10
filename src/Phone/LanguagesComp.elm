@@ -44,7 +44,7 @@ paradigmBlock attr title languages =
                         , grayThirtyFour
                         ]
                     }
-                , height <| px 100
+                , height <| px 150
                 , width fill
                 ]
                 { url = url
