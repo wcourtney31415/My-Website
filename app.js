@@ -5220,7 +5220,7 @@ var $author$project$MessagesAndModels$GotNewResolution = F2(
 	function (a, b) {
 		return {$: 'GotNewResolution', a: a, b: b};
 	});
-var $author$project$Port_Responsive$onResizePort = _Platform_incomingPort(
+var $author$project$Ports$Responsive$onResizePort = _Platform_incomingPort(
 	'onResizePort',
 	A2(
 		$elm$json$Json$Decode$andThen,
@@ -5234,21 +5234,21 @@ var $author$project$Port_Responsive$onResizePort = _Platform_incomingPort(
 				A2($elm$json$Json$Decode$field, 'height', $elm$json$Json$Decode$int));
 		},
 		A2($elm$json$Json$Decode$field, 'width', $elm$json$Json$Decode$int)));
-var $author$project$Port_Responsive$onResize = function (intListener) {
+var $author$project$Ports$Responsive$onResize = function (intListener) {
 	var sizeListener = function (size) {
 		return A2(intListener, size.width, size.height);
 	};
-	return $author$project$Port_Responsive$onResizePort(sizeListener);
+	return $author$project$Ports$Responsive$onResizePort(sizeListener);
 };
 var $author$project$Main$subscriptions = function (_v0) {
-	return $author$project$Port_Responsive$onResize(
+	return $author$project$Ports$Responsive$onResize(
 		F2(
 			function (w, h) {
 				return A2($author$project$MessagesAndModels$GotNewResolution, w, h);
 			}));
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
-var $author$project$Port_Clipboard$copyToClipboard = _Platform_outgoingPort('copyToClipboard', $elm$json$Json$Encode$string);
+var $author$project$Ports$Clipboard$copyToClipboard = _Platform_outgoingPort('copyToClipboard', $elm$json$Json$Encode$string);
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -5259,7 +5259,7 @@ var $author$project$Main$update = F2(
 				var str = msg.a;
 				return _Utils_Tuple2(
 					model,
-					$author$project$Port_Clipboard$copyToClipboard(str));
+					$author$project$Ports$Clipboard$copyToClipboard(str));
 			default:
 				var width = msg.a;
 				var height = msg.b;
@@ -10897,6 +10897,10 @@ var $mdgriffith$elm_ui$Element$createNearby = F2(
 var $mdgriffith$elm_ui$Element$behindContent = function (element) {
 	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$Behind, element);
 };
+var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
+	return {$: 'Fill', a: a};
+};
+var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $mdgriffith$elm_ui$Element$el = F2(
 	function (attrs, child) {
 		return A4(
@@ -10914,16 +10918,19 @@ var $mdgriffith$elm_ui$Element$el = F2(
 				_List_fromArray(
 					[child])));
 	});
-var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
-	return {$: 'Fill', a: a};
-};
-var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $mdgriffith$elm_ui$Internal$Model$Text = function (a) {
 	return {$: 'Text', a: a};
 };
 var $mdgriffith$elm_ui$Element$text = function (content) {
 	return $mdgriffith$elm_ui$Internal$Model$Text(content);
 };
+var $author$project$HelperFunctions$textElement = F2(
+	function (attributes, myText) {
+		return A2(
+			$mdgriffith$elm_ui$Element$el,
+			attributes,
+			$mdgriffith$elm_ui$Element$text(myText));
+	});
 var $author$project$HelperFunctions$bkgAttributes = function (attr) {
 	var attributes = A2(
 		$elm$core$List$append,
@@ -10934,10 +10941,7 @@ var $author$project$HelperFunctions$bkgAttributes = function (attr) {
 			]),
 		attr);
 	return $mdgriffith$elm_ui$Element$behindContent(
-		A2(
-			$mdgriffith$elm_ui$Element$el,
-			attributes,
-			$mdgriffith$elm_ui$Element$text('')));
+		A2($author$project$HelperFunctions$textElement, attributes, ''));
 };
 var $mdgriffith$elm_ui$Internal$Model$Colored = F3(
 	function (a, b, c) {
@@ -11150,13 +11154,13 @@ var $author$project$Desktop$About$titleBox = A2(
 	_List_fromArray(
 		[
 			A2(
-			$mdgriffith$elm_ui$Element$el,
+			$author$project$HelperFunctions$textElement,
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$Font$size(40),
 					$mdgriffith$elm_ui$Element$centerX
 				]),
-			$mdgriffith$elm_ui$Element$text('About Me'))
+			'About Me')
 		]));
 var $author$project$Desktop$About$homepageItems = A2(
 	$mdgriffith$elm_ui$Element$column,
@@ -11249,6 +11253,123 @@ var $author$project$Desktop$Index$frontPageParagraph = function () {
 				$mdgriffith$elm_ui$Element$text(postLink)
 			]));
 }();
+var $mdgriffith$elm_ui$Internal$Model$ImportFont = F2(
+	function (a, b) {
+		return {$: 'ImportFont', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$Font$external = function (_v0) {
+	var url = _v0.url;
+	var name = _v0.name;
+	return A2($mdgriffith$elm_ui$Internal$Model$ImportFont, name, url);
+};
+var $mdgriffith$elm_ui$Internal$Model$FontFamily = F2(
+	function (a, b) {
+		return {$: 'FontFamily', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$fontFamily = $mdgriffith$elm_ui$Internal$Flag$flag(5);
+var $elm$core$String$toLower = _String_toLower;
+var $elm$core$String$words = _String_words;
+var $mdgriffith$elm_ui$Internal$Model$renderFontClassName = F2(
+	function (font, current) {
+		return _Utils_ap(
+			current,
+			function () {
+				switch (font.$) {
+					case 'Serif':
+						return 'serif';
+					case 'SansSerif':
+						return 'sans-serif';
+					case 'Monospace':
+						return 'monospace';
+					case 'Typeface':
+						var name = font.a;
+						return A2(
+							$elm$core$String$join,
+							'-',
+							$elm$core$String$words(
+								$elm$core$String$toLower(name)));
+					case 'ImportFont':
+						var name = font.a;
+						var url = font.b;
+						return A2(
+							$elm$core$String$join,
+							'-',
+							$elm$core$String$words(
+								$elm$core$String$toLower(name)));
+					default:
+						var name = font.a.name;
+						return A2(
+							$elm$core$String$join,
+							'-',
+							$elm$core$String$words(
+								$elm$core$String$toLower(name)));
+				}
+			}());
+	});
+var $mdgriffith$elm_ui$Element$Font$family = function (families) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontFamily,
+		A2(
+			$mdgriffith$elm_ui$Internal$Model$FontFamily,
+			A3($elm$core$List$foldl, $mdgriffith$elm_ui$Internal$Model$renderFontClassName, 'ff-', families),
+			families));
+};
+var $elm$core$String$append = _String_append;
+var $author$project$FontController$getUntilDelimeter = function (str) {
+	var r_getUntilDelimeter = F2(
+		function (accumulator, string) {
+			r_getUntilDelimeter:
+			while (true) {
+				var len = $elm$core$String$length(string);
+				var remainder = A3($elm$core$String$slice, 1, len, string);
+				var first = A3($elm$core$String$slice, 0, 1, string);
+				var nextAccumulator = A2($elm$core$String$append, accumulator, first);
+				var delimeters = '!@#$%^&*()<,>.?/:;[{}]|=_-';
+				var isDelimeter = function (charAsStr) {
+					return A2($elm$core$String$contains, charAsStr, delimeters);
+				};
+				if (isDelimeter(first)) {
+					return accumulator;
+				} else {
+					var $temp$accumulator = nextAccumulator,
+						$temp$string = remainder;
+					accumulator = $temp$accumulator;
+					string = $temp$string;
+					continue r_getUntilDelimeter;
+				}
+			}
+		});
+	return A2(r_getUntilDelimeter, '', str);
+};
+var $elm$core$String$replace = F3(
+	function (before, after, string) {
+		return A2(
+			$elm$core$String$join,
+			after,
+			A2($elm$core$String$split, before, string));
+	});
+var $author$project$FontController$removeLeading = function (url) {
+	return A3($elm$core$String$replace, 'https://fonts.googleapis.com/css2?family=', '', url);
+};
+var $mdgriffith$elm_ui$Internal$Model$SansSerif = {$: 'SansSerif'};
+var $mdgriffith$elm_ui$Element$Font$sansSerif = $mdgriffith$elm_ui$Internal$Model$SansSerif;
+var $author$project$FontController$remoteGoogleFont = function (url) {
+	var withoutLead = $author$project$FontController$removeLeading(url);
+	var name = A3(
+		$elm$core$String$replace,
+		'+',
+		' ',
+		$author$project$FontController$getUntilDelimeter(withoutLead));
+	return $mdgriffith$elm_ui$Element$Font$family(
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$external(
+				{name: name, url: url}),
+				$mdgriffith$elm_ui$Element$Font$sansSerif
+			]));
+};
+var $author$project$Fonts$fontDesktopHeader = $author$project$FontController$remoteGoogleFont('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap');
 var $author$project$Desktop$Index$titleBox = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
@@ -11257,6 +11378,7 @@ var $author$project$Desktop$Index$titleBox = A2(
 			$mdgriffith$elm_ui$Element$centerY,
 			$mdgriffith$elm_ui$Element$padding(10),
 			$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
+			$author$project$Fonts$fontDesktopHeader,
 			$mdgriffith$elm_ui$Element$spacing(10),
 			$mdgriffith$elm_ui$Element$Font$bold,
 			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
@@ -11272,13 +11394,13 @@ var $author$project$Desktop$Index$titleBox = A2(
 	_List_fromArray(
 		[
 			A2(
-			$mdgriffith$elm_ui$Element$el,
+			$author$project$HelperFunctions$textElement,
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$Font$size(40),
 					$mdgriffith$elm_ui$Element$centerX
 				]),
-			$mdgriffith$elm_ui$Element$text('Software Developer')),
+			'Software Developer'),
 			A2(
 			$mdgriffith$elm_ui$Element$el,
 			_List_fromArray(
@@ -11450,54 +11572,9 @@ var $mdgriffith$elm_ui$Internal$Model$renderRoot = F3(
 					_List_fromArray(
 						[child]))));
 	});
-var $mdgriffith$elm_ui$Internal$Model$FontFamily = F2(
-	function (a, b) {
-		return {$: 'FontFamily', a: a, b: b};
-	});
-var $mdgriffith$elm_ui$Internal$Model$SansSerif = {$: 'SansSerif'};
 var $mdgriffith$elm_ui$Internal$Model$Typeface = function (a) {
 	return {$: 'Typeface', a: a};
 };
-var $mdgriffith$elm_ui$Internal$Flag$fontFamily = $mdgriffith$elm_ui$Internal$Flag$flag(5);
-var $elm$core$String$toLower = _String_toLower;
-var $elm$core$String$words = _String_words;
-var $mdgriffith$elm_ui$Internal$Model$renderFontClassName = F2(
-	function (font, current) {
-		return _Utils_ap(
-			current,
-			function () {
-				switch (font.$) {
-					case 'Serif':
-						return 'serif';
-					case 'SansSerif':
-						return 'sans-serif';
-					case 'Monospace':
-						return 'monospace';
-					case 'Typeface':
-						var name = font.a;
-						return A2(
-							$elm$core$String$join,
-							'-',
-							$elm$core$String$words(
-								$elm$core$String$toLower(name)));
-					case 'ImportFont':
-						var name = font.a;
-						var url = font.b;
-						return A2(
-							$elm$core$String$join,
-							'-',
-							$elm$core$String$words(
-								$elm$core$String$toLower(name)));
-					default:
-						var name = font.a.name;
-						return A2(
-							$elm$core$String$join,
-							'-',
-							$elm$core$String$words(
-								$elm$core$String$toLower(name)));
-				}
-			}());
-	});
 var $mdgriffith$elm_ui$Internal$Model$rootStyle = function () {
 	var families = _List_fromArray(
 		[
@@ -12256,93 +12333,151 @@ var $author$project$Phone$View$block = F3(
 					contents)
 				]));
 	});
-var $author$project$Phone$Colors$darkerBlue = A3($mdgriffith$elm_ui$Element$rgb255, 65, 115, 164);
+var $mdgriffith$elm_ui$Element$rgb = F3(
+	function (r, g, b) {
+		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, r, g, b, 1);
+	});
+var $author$project$BasicColors$black = A3($mdgriffith$elm_ui$Element$rgb, 0, 0, 0);
 var $author$project$Phone$Colors$gray = A3($mdgriffith$elm_ui$Element$rgb255, 200, 200, 200);
-var $author$project$Phone$View$emailComponent = function () {
-	var title = A2(
-		$mdgriffith$elm_ui$Element$el,
+var $author$project$Phone$EmailComp$btnEmailClipboard = A2(
+	$mdgriffith$elm_ui$Element$Input$button,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(60),
+			$mdgriffith$elm_ui$Element$padding(10),
+			$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
+			$mdgriffith$elm_ui$Element$padding(30),
+			$mdgriffith$elm_ui$Element$Border$rounded(18)
+		]),
+	{
+		label: $mdgriffith$elm_ui$Element$text('To Clipboard'),
+		onPress: $elm$core$Maybe$Just(
+			$author$project$MessagesAndModels$CopyToClipboard($author$project$Data$myEmail))
+	});
+var $author$project$Phone$EmailComp$btnEmailNow = A2(
+	$mdgriffith$elm_ui$Element$link,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(60),
+			$mdgriffith$elm_ui$Element$padding(30),
+			$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
+			$mdgriffith$elm_ui$Element$Border$rounded(18)
+		]),
+	{
+		label: $mdgriffith$elm_ui$Element$text('Email Now'),
+		url: 'mailto:' + $author$project$Data$myEmail
+	});
+var $author$project$Phone$EmailComp$buttons = A2(
+	$mdgriffith$elm_ui$Element$row,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$spacing(45),
+			$mdgriffith$elm_ui$Element$centerX
+		]),
+	_List_fromArray(
+		[$author$project$Phone$EmailComp$btnEmailNow, $author$project$Phone$EmailComp$btnEmailClipboard]));
+var $author$project$Phone$Colors$darkerBlue = A3($mdgriffith$elm_ui$Element$rgb255, 65, 115, 164);
+var $author$project$Phone$Colors$lighterBlue = A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194);
+var $author$project$Phone$TitleContentComp$content = function (record) {
+	var myAttr = _Utils_ap(
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$Font$size(70),
-				$mdgriffith$elm_ui$Element$Font$bold,
-				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$darkerBlue),
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$paddingEach(
-				{bottom: 18, left: 30, right: 30, top: 30}),
-				$mdgriffith$elm_ui$Element$Border$roundEach(
-				{bottomLeft: 0, bottomRight: 0, topLeft: 18, topRight: 18})
-			]),
-		A2(
-			$mdgriffith$elm_ui$Element$el,
-			_List_fromArray(
-				[$mdgriffith$elm_ui$Element$centerX]),
-			$mdgriffith$elm_ui$Element$text('Email')));
-	var emailNow = A2(
-		$mdgriffith$elm_ui$Element$link,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$Font$size(60),
-				$mdgriffith$elm_ui$Element$padding(30),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
-				$mdgriffith$elm_ui$Element$Border$rounded(18)
-			]),
-		{
-			label: $mdgriffith$elm_ui$Element$text('Email Now'),
-			url: 'mailto:' + $author$project$Data$myEmail
-		});
-	var emailClipboard = A2(
-		$mdgriffith$elm_ui$Element$Input$button,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$Font$size(60),
-				$mdgriffith$elm_ui$Element$padding(10),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
-				$mdgriffith$elm_ui$Element$padding(30),
-				$mdgriffith$elm_ui$Element$Border$rounded(18)
-			]),
-		{
-			label: $mdgriffith$elm_ui$Element$text('To Clipboard'),
-			onPress: $elm$core$Maybe$Just(
-				$author$project$MessagesAndModels$CopyToClipboard($author$project$Data$myEmail))
-		});
-	var buttons = A2(
-		$mdgriffith$elm_ui$Element$row,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$spacing(45),
 				$mdgriffith$elm_ui$Element$centerX,
-				$mdgriffith$elm_ui$Element$Background$color(
-				A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194)),
 				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 				$mdgriffith$elm_ui$Element$paddingEach(
 				{bottom: 30, left: 30, right: 30, top: 18}),
 				$mdgriffith$elm_ui$Element$Border$roundEach(
 				{bottomLeft: 18, bottomRight: 18, topLeft: 0, topRight: 0})
 			]),
-		_List_fromArray(
-			[emailNow, emailClipboard]));
-	return A2(
-		$mdgriffith$elm_ui$Element$column,
+		record.contentAttr);
+	return A2($mdgriffith$elm_ui$Element$column, myAttr, record.contents);
+};
+var $author$project$Phone$Colors$shadowColor = A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90);
+var $author$project$Phone$Shadow$phoneShadow = $mdgriffith$elm_ui$Element$Border$shadow(
+	{
+		blur: 20,
+		color: $author$project$Phone$Colors$shadowColor,
+		offset: _Utils_Tuple2(10, 10),
+		size: 1
+	});
+var $author$project$Phone$TitleContentComp$title = function (record) {
+	var myAttr = _Utils_ap(
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$centerX,
-				$mdgriffith$elm_ui$Element$centerY,
-				$mdgriffith$elm_ui$Element$Border$rounded(32),
-				$mdgriffith$elm_ui$Element$centerY,
-				$mdgriffith$elm_ui$Element$Border$shadow(
-				{
-					blur: 20,
-					color: A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90),
-					offset: _Utils_Tuple2(10, 10),
-					size: 1
-				})
+				$mdgriffith$elm_ui$Element$Font$size(70),
+				$mdgriffith$elm_ui$Element$Font$bold,
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$paddingEach(
+				{bottom: 18, left: 30, right: 30, top: 30}),
+				$mdgriffith$elm_ui$Element$Border$roundEach(
+				{bottomLeft: 0, bottomRight: 0, topLeft: 18, topRight: 18})
 			]),
-		_List_fromArray(
-			[title, buttons]));
-}();
+		record.titleAttr);
+	return A2(
+		$mdgriffith$elm_ui$Element$el,
+		myAttr,
+		A2(
+			$author$project$HelperFunctions$textElement,
+			_List_fromArray(
+				[$mdgriffith$elm_ui$Element$centerX]),
+			record.title));
+};
+var $author$project$Phone$TitleContentComp$titleContentComp = F2(
+	function (attributes, record) {
+		var myAttributes = _Utils_ap(
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$centerX,
+					$mdgriffith$elm_ui$Element$centerY,
+					$mdgriffith$elm_ui$Element$Border$rounded(32),
+					$author$project$Phone$Shadow$phoneShadow
+				]),
+			attributes);
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			myAttributes,
+			_List_fromArray(
+				[
+					$author$project$Phone$TitleContentComp$title(record),
+					$author$project$Phone$TitleContentComp$content(record)
+				]));
+	});
+var $author$project$Phone$EmailComp$emailComponent = A2(
+	$author$project$Phone$TitleContentComp$titleContentComp,
+	_List_Nil,
+	{
+		contentAttr: _List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$black),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$lighterBlue)
+			]),
+		contents: _List_fromArray(
+			[$author$project$Phone$EmailComp$buttons]),
+		title: 'Email',
+		titleAttr: _List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$darkerBlue)
+			])
+	});
+var $author$project$Phone$ContentComp$contentComp = F2(
+	function (bkgColor, contents) {
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$centerX,
+					$mdgriffith$elm_ui$Element$Border$rounded(32),
+					$mdgriffith$elm_ui$Element$centerY,
+					$author$project$Phone$Shadow$phoneShadow,
+					$mdgriffith$elm_ui$Element$Background$color(bkgColor),
+					$mdgriffith$elm_ui$Element$Border$rounded(25),
+					$mdgriffith$elm_ui$Element$padding(30)
+				]),
+			contents);
+	});
 var $author$project$Data$siteSource = 'https://github.com/wcourtney31415/My-Website';
-var $author$project$Phone$View$gitHubComponent = function () {
+var $author$project$Phone$GithubComp$gitHubContentComp = function () {
 	var linkAttributes = _List_fromArray(
 		[
 			$mdgriffith$elm_ui$Element$Font$size(60),
@@ -12370,33 +12505,17 @@ var $author$project$Phone$View$gitHubComponent = function () {
 		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$spacing(45),
-				$mdgriffith$elm_ui$Element$Background$color(
-				A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194)),
-				$mdgriffith$elm_ui$Element$padding(30),
-				$mdgriffith$elm_ui$Element$Border$rounded(25)
+				$mdgriffith$elm_ui$Element$spacing(45)
 			]),
 		_List_fromArray(
 			[gitHubLink, siteSourceLink]));
 	return A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$centerX,
-				$mdgriffith$elm_ui$Element$Border$rounded(32),
-				$mdgriffith$elm_ui$Element$centerY,
-				$mdgriffith$elm_ui$Element$Border$shadow(
-				{
-					blur: 20,
-					color: A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90),
-					offset: _Utils_Tuple2(10, 10),
-					size: 1
-				})
-			]),
+		$author$project$Phone$ContentComp$contentComp,
+		A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194),
 		_List_fromArray(
 			[buttons]));
 }();
-var $author$project$Phone$View$gitHubParagraph = A2(
+var $author$project$Phone$GithubComp$githubComponent = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
@@ -12414,9 +12533,8 @@ var $author$project$Phone$View$gitHubParagraph = A2(
 				[
 					$mdgriffith$elm_ui$Element$text('Check out my github profile to see what projects I\'ve been working on lately.')
 				])),
-			$author$project$Phone$View$gitHubComponent
+			$author$project$Phone$GithubComp$gitHubContentComp
 		]));
-var $author$project$Phone$Colors$lightBlue = A3($mdgriffith$elm_ui$Element$rgb255, 101, 147, 193);
 var $elm$core$List$repeatHelp = F3(
 	function (result, n, value) {
 		repeatHelp:
@@ -12438,14 +12556,15 @@ var $elm$core$List$repeat = F2(
 	function (n, value) {
 		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
 	});
-var $author$project$Phone$View$heading = function () {
+var $author$project$Phone$Colors$viewHeaderCol = A3($mdgriffith$elm_ui$Element$rgb255, 101, 147, 193);
+var $author$project$Phone$HeadingComp$heading = function () {
 	var titleSdev = A2(
 		$mdgriffith$elm_ui$Element$row,
 		_List_fromArray(
 			[
 				$mdgriffith$elm_ui$Element$Font$bold,
 				$mdgriffith$elm_ui$Element$Font$size(95),
-				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$lightBlue),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$viewHeaderCol),
 				$mdgriffith$elm_ui$Element$centerX,
 				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 				$mdgriffith$elm_ui$Element$padding(35),
@@ -12455,13 +12574,13 @@ var $author$project$Phone$View$heading = function () {
 		_List_fromArray(
 			[
 				A2(
-				$mdgriffith$elm_ui$Element$el,
+				$author$project$HelperFunctions$textElement,
 				_List_fromArray(
 					[
 						$mdgriffith$elm_ui$Element$centerX,
 						$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white)
 					]),
-				$mdgriffith$elm_ui$Element$text('Software Developer'))
+				'Software Developer')
 			]));
 	var titleName = function () {
 		var x = 234;
@@ -12502,10 +12621,10 @@ var $author$project$Phone$View$heading = function () {
 			_List_fromArray(
 				[
 					A2(
-					$mdgriffith$elm_ui$Element$el,
+					$author$project$HelperFunctions$textElement,
 					_List_fromArray(
 						[$mdgriffith$elm_ui$Element$centerX]),
-					$mdgriffith$elm_ui$Element$text('Wesley Courtney'))
+					'Wesley Courtney')
 				]));
 	}();
 	return A2(
@@ -12518,6 +12637,122 @@ var $author$project$Phone$View$heading = function () {
 		_List_fromArray(
 			[titleSdev, titleName]));
 }();
+var $author$project$Phone$Colors$lighterGray = A3($mdgriffith$elm_ui$Element$rgb255, 230, 230, 230);
+var $author$project$Phone$LanguagesComp$paradigmBlock = F3(
+	function (attr, title, languages) {
+		var strToElem = function (_v0) {
+			var label = _v0.a;
+			var url = _v0.b;
+			return A2(
+				$mdgriffith$elm_ui$Element$newTabLink,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(50),
+						$mdgriffith$elm_ui$Element$Font$bold,
+						$mdgriffith$elm_ui$Element$Background$gradient(
+						{
+							angle: 0,
+							steps: _List_fromArray(
+								[
+									A3($mdgriffith$elm_ui$Element$rgb255, 228, 228, 228),
+									$author$project$Phone$Colors$grayThirtyFour
+								])
+						}),
+						$mdgriffith$elm_ui$Element$height(
+						$mdgriffith$elm_ui$Element$px(100)),
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+					]),
+				{
+					label: A2(
+						$author$project$HelperFunctions$textElement,
+						_List_fromArray(
+							[$mdgriffith$elm_ui$Element$centerX]),
+						label),
+					url: url
+				});
+		};
+		var myAttr = _Utils_ap(
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			attr);
+		var langColumn = A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$centerX,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			A2($elm$core$List$map, strToElem, languages));
+		return A2(
+			$author$project$Phone$TitleContentComp$titleContentComp,
+			myAttr,
+			{
+				contentAttr: _List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$color($author$project$Phone$Colors$darkerBlue),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$lighterGray),
+						$mdgriffith$elm_ui$Element$padding(0)
+					]),
+				contents: _List_fromArray(
+					[langColumn]),
+				title: title,
+				titleAttr: _List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
+						$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$lighterBlue)
+					])
+			});
+	});
+var $author$project$Phone$LanguagesComp$declarative = function (attr) {
+	return A3(
+		$author$project$Phone$LanguagesComp$paradigmBlock,
+		attr,
+		'Declarative',
+		_List_fromArray(
+			[
+				_Utils_Tuple2('Haskell', 'https://www.haskell.org/'),
+				_Utils_Tuple2('Elm', 'https://elm-lang.org/')
+			]));
+};
+var $author$project$Phone$LanguagesComp$imperative = function (attr) {
+	return A3(
+		$author$project$Phone$LanguagesComp$paradigmBlock,
+		attr,
+		'Imperative',
+		_List_fromArray(
+			[
+				_Utils_Tuple2('Java', 'https://docs.oracle.com/javase/8/docs/technotes/guides/language/index.html'),
+				_Utils_Tuple2('C#', 'https://docs.microsoft.com/en-us/dotnet/csharp/'),
+				_Utils_Tuple2('C++', 'https://www.cplusplus.com/'),
+				_Utils_Tuple2('Python', 'https://www.python.org/'),
+				_Utils_Tuple2('Typescript', 'https://www.typescriptlang.org/')
+			]));
+};
+var $author$project$Phone$LanguagesComp$languagesComp = A2(
+	$mdgriffith$elm_ui$Element$column,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$spacing(35),
+			$mdgriffith$elm_ui$Element$paddingEach(
+			{bottom: 0, left: 50, right: 50, top: 0})
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$mdgriffith$elm_ui$Element$paragraph,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Font$size(50)
+				]),
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$text('A list of lanuages I have experience with.')
+				])),
+			$author$project$Phone$LanguagesComp$declarative(_List_Nil),
+			$author$project$Phone$LanguagesComp$imperative(_List_Nil)
+		]));
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
 var $author$project$Phone$View$phoneView = function (model) {
@@ -12536,7 +12771,7 @@ var $author$project$Phone$View$phoneView = function (model) {
 				[$mdgriffith$elm_ui$Element$centerX]),
 			_List_fromArray(
 				[
-					$author$project$Phone$View$heading,
+					$author$project$Phone$HeadingComp$heading,
 					A2(
 					$mdgriffith$elm_ui$Element$column,
 					_List_fromArray(
@@ -12551,7 +12786,13 @@ var $author$project$Phone$View$phoneView = function (model) {
 							'Contact',
 							_List_Nil,
 							_List_fromArray(
-								[$author$project$Phone$View$emailComponent])),
+								[$author$project$Phone$EmailComp$emailComponent])),
+							A3(
+							$author$project$Phone$View$block,
+							'Languages',
+							_List_Nil,
+							_List_fromArray(
+								[$author$project$Phone$LanguagesComp$languagesComp])),
 							A3(
 							$author$project$Phone$View$block,
 							'About Me',
@@ -12559,12 +12800,12 @@ var $author$project$Phone$View$phoneView = function (model) {
 							_List_fromArray(
 								[
 									A2(
-									$mdgriffith$elm_ui$Element$el,
+									$author$project$HelperFunctions$textElement,
 									_List_fromArray(
 										[
 											$mdgriffith$elm_ui$Element$Font$size(50)
 										]),
-									$mdgriffith$elm_ui$Element$text('about me text'))
+									'about me text')
 								])),
 							A3(
 							$author$project$Phone$View$block,
@@ -12575,7 +12816,7 @@ var $author$project$Phone$View$phoneView = function (model) {
 									{bottom: 200, left: 20, right: 20, top: 30})
 								]),
 							_List_fromArray(
-								[$author$project$Phone$View$gitHubParagraph]))
+								[$author$project$Phone$GithubComp$githubComponent]))
 						]))
 				])));
 };
@@ -12630,13 +12871,13 @@ var $author$project$Tablet$About$titleBox = A2(
 	_List_fromArray(
 		[
 			A2(
-			$mdgriffith$elm_ui$Element$el,
+			$author$project$HelperFunctions$textElement,
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$Font$size(40),
 					$mdgriffith$elm_ui$Element$centerX
 				]),
-			$mdgriffith$elm_ui$Element$text('About Me'))
+			'About Me')
 		]));
 var $author$project$Tablet$About$homepageItems = A2(
 	$mdgriffith$elm_ui$Element$column,
@@ -12710,13 +12951,13 @@ var $author$project$Tablet$Index$titleBox = A2(
 	_List_fromArray(
 		[
 			A2(
-			$mdgriffith$elm_ui$Element$el,
+			$author$project$HelperFunctions$textElement,
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$Font$size(40),
 					$mdgriffith$elm_ui$Element$centerX
 				]),
-			$mdgriffith$elm_ui$Element$text('Software Developer')),
+			'Software Developer'),
 			A2(
 			$mdgriffith$elm_ui$Element$el,
 			_List_fromArray(
