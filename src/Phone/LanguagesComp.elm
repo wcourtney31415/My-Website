@@ -47,9 +47,7 @@ paradigmBlock title languages =
                     languages
     in
     titleContentComp
-        { headerClr = red
-        , contentClr = blue
-        , title = "Declarative"
+        { title = "Declarative"
         , titleAttr =
             [ Font.color white
             , Background.color darkerBlue

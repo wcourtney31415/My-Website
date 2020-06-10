@@ -11,9 +11,7 @@ import Phone.Shadow exposing (..)
 
 
 titleContentComp :
-    { headerClr : Color
-    , contentClr : Color
-    , title : String
+    { title : String
     , titleAttr : List (Attribute msg)
     , contentAttr : List (Attribute msg)
     , contents : List (Element msg)

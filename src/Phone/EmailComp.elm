@@ -15,9 +15,7 @@ import Phone.TitleContentComp exposing (..)
 
 emailComponent =
     titleContentComp
-        { headerClr = darkerBlue
-        , contentClr = lighterBlue
-        , title = "Email"
+        { title = "Email"
         , titleAttr =
             [ Font.color white
             , Background.color darkerBlue
