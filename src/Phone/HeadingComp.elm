@@ -18,7 +18,7 @@ heading =
             Element.row
                 [ Font.bold
                 , Font.size 95
-                , Background.color lightBlue
+                , Background.color viewHeaderCol
                 , centerX
                 , width fill
                 , padding 35

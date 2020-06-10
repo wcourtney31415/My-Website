@@ -12,9 +12,13 @@ gray =
     rgb255 200 200 200
 
 
-lightBlue =
+viewHeaderCol =
     rgb255 101 147 193
 
 
 darkerBlue =
     rgb255 65 115 164
+
+
+lighterBlue =
+    rgb255 102 148 194
