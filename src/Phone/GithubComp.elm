@@ -28,6 +28,13 @@ gitHubContentComp =
             , padding 30
             , centerX
             , Border.rounded 18
+            , Background.gradient
+                { angle = 0
+                , steps =
+                    [ lightestBlue
+                    , grayThirtyFour
+                    ]
+                }
             ]
 
         gitHubLink =

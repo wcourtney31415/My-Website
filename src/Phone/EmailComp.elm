@@ -39,13 +39,24 @@ buttons =
         ]
 
 
+btnAttributes =
+    [ Font.size 60
+    , padding 30
+    , Background.color gray
+    , Border.rounded 18
+    , Background.gradient
+        { angle = 0
+        , steps =
+            [ lightestBlue
+            , grayThirtyFour
+            ]
+        }
+    ]
+
+
 btnEmailNow =
     Element.link
-        [ Font.size 60
-        , padding 30
-        , Background.color gray
-        , Border.rounded 18
-        ]
+        btnAttributes
         { url = "mailto:" ++ myEmail
         , label = text "Email Now"
         }
@@ -53,12 +64,7 @@ btnEmailNow =
 
 btnEmailClipboard =
     Input.button
-        [ Font.size 60
-        , padding 10
-        , Background.color gray
-        , padding 30
-        , Border.rounded 18
-        ]
+        btnAttributes
         { onPress = Just <| CopyToClipboard myEmail
         , label = text "To Clipboard"
         }

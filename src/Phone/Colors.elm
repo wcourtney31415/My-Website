@@ -34,3 +34,7 @@ darkerGray =
 
 lighterGray =
     rgb255 230 230 230
+
+
+lightestBlue =
+    rgb255 182 205 226
