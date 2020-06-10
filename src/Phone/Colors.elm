@@ -26,3 +26,11 @@ lighterBlue =
 
 shadowColor =
     rgb255 90 90 90
+
+
+darkerGray =
+    rgb255 179 179 179
+
+
+lighterGray =
+    rgb255 217 217 217

@@ -47,14 +47,14 @@ paradigmBlock title languages =
                     languages
     in
     titleContentComp
-        { title = "Declarative"
+        { title = title
         , titleAttr =
-            [ Font.color white
-            , Background.color darkerBlue
+            [ Font.color black
+            , Background.color darkerGray
             ]
         , contentAttr =
             [ Font.color black
-            , Background.color lighterBlue
+            , Background.color lighterGray
             ]
         , contents = [ langColumn ]
         }
