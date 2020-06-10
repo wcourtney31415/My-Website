@@ -10,7 +10,7 @@ import Element.Input as Input
 import HelperFunctions exposing (..)
 import MessagesAndModels exposing (..)
 import Phone.Colors exposing (..)
-import Phone.RoundedBlockComp exposing (..)
+import Phone.TitleContentComp exposing (..)
 
 
 emailComponent =

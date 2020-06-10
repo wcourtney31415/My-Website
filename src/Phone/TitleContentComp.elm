@@ -1,4 +1,4 @@
-module Phone.RoundedBlockComp exposing (roundedBlock)
+module Phone.TitleContentComp exposing (roundedBlock)
 
 import BasicColors exposing (..)
 import Element exposing (..)

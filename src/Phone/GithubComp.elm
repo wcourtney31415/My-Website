@@ -6,6 +6,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Phone.Colors exposing (..)
+import Phone.ContentComp exposing (..)
 
 
 githubComponent =
@@ -14,11 +15,11 @@ githubComponent =
             [ Font.size 65
             ]
             [ text "Check out my github profile to see what projects I've been working on lately." ]
-        , gitHubComponent
+        , gitHubContentComp
         ]
 
 
-gitHubComponent =
+gitHubContentComp =
     let
         linkAttributes =
             [ Font.size 60
@@ -46,25 +47,9 @@ gitHubComponent =
         buttons =
             Element.row
                 [ spacing 45
-                , Background.color <|
-                    rgb255 102 148 194
-                , padding 30
-                , Border.rounded 25
                 ]
                 [ gitHubLink
                 , siteSourceLink
                 ]
     in
-    Element.column
-        [ centerX
-        , Border.rounded 32
-        , centerY
-        , Border.shadow
-            { offset = ( 10, 10 )
-            , size = 1
-            , blur = 20
-            , color = rgb255 90 90 90
-            }
-        ]
-        [ buttons
-        ]
+    contentComp [ buttons ]
