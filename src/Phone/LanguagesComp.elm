@@ -16,34 +16,73 @@ languagesComp =
             [ Font.size 50
             ]
             [ text "A list of lanuages I have experience with." ]
-        , textElement
-            [ centerX
-            , Font.size 60
-            , Font.bold
-            ]
-            "Declarative"
-        , Element.column
-            [ centerX
-            , spacing 35
-            ]
-            [ textElement
-                [ Font.size 50
+        , declarative
+        , imperative
+        ]
+
+
+paradigmBlock : String -> List ( String, String ) -> Element msg
+paradigmBlock title languages =
+    let
+        titleElem =
+            textElement
+                [ Font.size 60
+                , Font.bold
                 ]
-                "Haskell"
-            , textElement
-                [ Font.size 50
+                title
+
+        strToElem : ( String, String ) -> Element msg
+        strToElem ( label, url ) =
+            newTabLink
+                [ Font.size 50 ]
+                { url = url
+                , label = text label
+                }
+
+        langColumn =
+            Element.column
+                [ centerX
+                , spacing 35
                 ]
-                "Elm"
-            ]
-        , textElement [ centerX, Font.size 60, Font.bold ] "Imperative"
-        , Element.column
-            [ centerX
-            , spacing 35
-            ]
-            [ textElement [ Font.size 50 ] "Java"
-            , textElement [ Font.size 50 ] "C#"
-            , textElement [ Font.size 50 ] "C++"
-            , textElement [ Font.size 50 ] "Python"
-            , textElement [ Font.size 50 ] "Typescript"
-            ]
+            <|
+                List.map
+                    strToElem
+                    languages
+    in
+    Element.column [ centerX ]
+        [ titleElem
+        , langColumn
+        ]
+
+
+declarative =
+    paradigmBlock
+        "Declarative"
+        [ ( "Haskell"
+          , "https://www.haskell.org/"
+          )
+        , ( "Elm"
+          , "https://elm-lang.org/"
+          )
+        ]
+
+
+imperative =
+    paradigmBlock
+        "Imperative"
+        [ ( "Java"
+          , "https://docs.oracle.com/javase/8/docs/technotes/guides/language/index.html"
+          )
+        , ( "C#"
+          , "https://docs.microsoft.com/en-us/dotnet/csharp/"
+          )
+        , ( "C++"
+          , "https://www.cplusplus.com/"
+          )
+        , ( "Python"
+          , "https://www.python.org/"
+          )
+        , ( "Typescript"
+          , "https://www.typescriptlang.org/"
+          )
         ]
