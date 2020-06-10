@@ -47,6 +47,7 @@ paradigmBlock title languages =
                     languages
     in
     titleContentComp
+        [ width fill ]
         { title = title
         , titleAttr =
             [ Font.color black

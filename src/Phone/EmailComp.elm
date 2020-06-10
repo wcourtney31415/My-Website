@@ -15,6 +15,7 @@ import Phone.TitleContentComp exposing (..)
 
 emailComponent =
     titleContentComp
+        []
         { title = "Email"
         , titleAttr =
             [ Font.color white

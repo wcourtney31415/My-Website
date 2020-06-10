@@ -11,19 +11,26 @@ import Phone.Shadow exposing (..)
 
 
 titleContentComp :
-    { title : String
-    , titleAttr : List (Attribute msg)
-    , contentAttr : List (Attribute msg)
-    , contents : List (Element msg)
-    }
+    List (Attribute msg)
+    ->
+        { title : String
+        , titleAttr : List (Attribute msg)
+        , contentAttr : List (Attribute msg)
+        , contents : List (Element msg)
+        }
     -> Element msg
-titleContentComp record =
+titleContentComp attributes record =
+    let
+        myAttributes =
+            [ centerX
+            , centerY
+            , Border.rounded 32
+            , phoneShadow
+            ]
+                ++ attributes
+    in
     Element.column
-        [ centerX
-        , centerY
-        , Border.rounded 32
-        , phoneShadow
-        ]
+        myAttributes
         [ title record
         , content record
         ]
