@@ -29,8 +29,8 @@ shadowColor =
 
 
 darkerGray =
-    rgb255 179 179 179
+    rgb255 205 205 205
 
 
 lighterGray =
-    rgb255 217 217 217
+    rgb255 230 230 230

@@ -35,15 +35,28 @@ paradigmBlock attr title languages =
         strToElem : ( String, String ) -> Element msg
         strToElem ( label, url ) =
             newTabLink
-                [ Font.size 50 ]
+                [ Font.size 50
+                , Font.bold
+                , Background.gradient
+                    { angle = 0
+                    , steps =
+                        [ rgb255 228 228 228
+                        , grayThirtyFour
+                        ]
+                    }
+                , height <| px 100
+                , width fill
+                ]
                 { url = url
-                , label = text label
+                , label = textElement [ centerX ] label
                 }
 
         langColumn =
             Element.column
                 [ centerX
-                , spacing 35
+
+                -- , spacing 35
+                , width fill
                 ]
             <|
                 List.map
@@ -54,12 +67,13 @@ paradigmBlock attr title languages =
         myAttr
         { title = title
         , titleAttr =
-            [ Font.color black
-            , Background.color darkerGray
+            [ Font.color white
+            , Background.color lighterBlue
             ]
         , contentAttr =
-            [ Font.color black
+            [ Font.color darkerBlue
             , Background.color lighterGray
+            , padding 0
             ]
         , contents = [ langColumn ]
         }
