@@ -12339,16 +12339,23 @@ var $mdgriffith$elm_ui$Element$rgb = F3(
 	});
 var $author$project$BasicColors$black = A3($mdgriffith$elm_ui$Element$rgb, 0, 0, 0);
 var $author$project$Phone$Colors$gray = A3($mdgriffith$elm_ui$Element$rgb255, 200, 200, 200);
+var $author$project$Phone$Colors$lightestBlue = A3($mdgriffith$elm_ui$Element$rgb255, 182, 205, 226);
+var $author$project$Phone$EmailComp$btnAttributes = _List_fromArray(
+	[
+		$mdgriffith$elm_ui$Element$Font$size(60),
+		$mdgriffith$elm_ui$Element$padding(30),
+		$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
+		$mdgriffith$elm_ui$Element$Border$rounded(18),
+		$mdgriffith$elm_ui$Element$Background$gradient(
+		{
+			angle: 0,
+			steps: _List_fromArray(
+				[$author$project$Phone$Colors$lightestBlue, $author$project$Phone$Colors$grayThirtyFour])
+		})
+	]);
 var $author$project$Phone$EmailComp$btnEmailClipboard = A2(
 	$mdgriffith$elm_ui$Element$Input$button,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$Font$size(60),
-			$mdgriffith$elm_ui$Element$padding(10),
-			$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
-			$mdgriffith$elm_ui$Element$padding(30),
-			$mdgriffith$elm_ui$Element$Border$rounded(18)
-		]),
+	$author$project$Phone$EmailComp$btnAttributes,
 	{
 		label: $mdgriffith$elm_ui$Element$text('To Clipboard'),
 		onPress: $elm$core$Maybe$Just(
@@ -12356,13 +12363,7 @@ var $author$project$Phone$EmailComp$btnEmailClipboard = A2(
 	});
 var $author$project$Phone$EmailComp$btnEmailNow = A2(
 	$mdgriffith$elm_ui$Element$link,
-	_List_fromArray(
-		[
-			$mdgriffith$elm_ui$Element$Font$size(60),
-			$mdgriffith$elm_ui$Element$padding(30),
-			$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
-			$mdgriffith$elm_ui$Element$Border$rounded(18)
-		]),
+	$author$project$Phone$EmailComp$btnAttributes,
 	{
 		label: $mdgriffith$elm_ui$Element$text('Email Now'),
 		url: 'mailto:' + $author$project$Data$myEmail
@@ -12485,7 +12486,13 @@ var $author$project$Phone$GithubComp$gitHubContentComp = function () {
 			$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$gray),
 			$mdgriffith$elm_ui$Element$padding(30),
 			$mdgriffith$elm_ui$Element$centerX,
-			$mdgriffith$elm_ui$Element$Border$rounded(18)
+			$mdgriffith$elm_ui$Element$Border$rounded(18),
+			$mdgriffith$elm_ui$Element$Background$gradient(
+			{
+				angle: 0,
+				steps: _List_fromArray(
+					[$author$project$Phone$Colors$lightestBlue, $author$project$Phone$Colors$grayThirtyFour])
+			})
 		]);
 	var siteSourceLink = A2(
 		$mdgriffith$elm_ui$Element$newTabLink,
