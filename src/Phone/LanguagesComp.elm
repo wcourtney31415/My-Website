@@ -15,19 +15,23 @@ import Phone.TitleContentComp exposing (..)
 languagesComp =
     Element.column
         [ spacing 35
+        , paddingEach { top = 0, bottom = 0, left = 50, right = 50 }
         ]
         [ Element.paragraph
             [ Font.size 50
             ]
             [ text "A list of lanuages I have experience with." ]
-        , declarative
-        , imperative
+        , declarative []
+        , imperative []
         ]
 
 
-paradigmBlock : String -> List ( String, String ) -> Element msg
-paradigmBlock title languages =
+paradigmBlock : List (Attribute msg) -> String -> List ( String, String ) -> Element msg
+paradigmBlock attr title languages =
     let
+        myAttr =
+            [ width fill ] ++ attr
+
         strToElem : ( String, String ) -> Element msg
         strToElem ( label, url ) =
             newTabLink
@@ -47,7 +51,7 @@ paradigmBlock title languages =
                     languages
     in
     titleContentComp
-        [ width fill ]
+        myAttr
         { title = title
         , titleAttr =
             [ Font.color black
@@ -61,8 +65,8 @@ paradigmBlock title languages =
         }
 
 
-declarative =
-    paradigmBlock
+declarative attr =
+    paradigmBlock attr
         "Declarative"
         [ ( "Haskell"
           , "https://www.haskell.org/"
@@ -73,8 +77,8 @@ declarative =
         ]
 
 
-imperative =
-    paradigmBlock
+imperative attr =
+    paradigmBlock attr
         "Imperative"
         [ ( "Java"
           , "https://docs.oracle.com/javase/8/docs/technotes/guides/language/index.html"
