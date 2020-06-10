@@ -12659,7 +12659,7 @@ var $author$project$Phone$LanguagesComp$paradigmBlock = F3(
 								])
 						}),
 						$mdgriffith$elm_ui$Element$height(
-						$mdgriffith$elm_ui$Element$px(100)),
+						$mdgriffith$elm_ui$Element$px(150)),
 						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
 					]),
 				{
