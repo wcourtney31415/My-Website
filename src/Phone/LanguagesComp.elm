@@ -1,11 +1,14 @@
 module Phone.LanguagesComp exposing (..)
 
+import BasicColors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import HelperFunctions exposing (..)
+import Phone.Colors exposing (..)
+import Phone.ContentComp exposing (..)
 import Phone.TitleContentComp exposing (..)
 
 
@@ -25,13 +28,6 @@ languagesComp =
 paradigmBlock : String -> List ( String, String ) -> Element msg
 paradigmBlock title languages =
     let
-        titleElem =
-            textElement
-                [ Font.size 60
-                , Font.bold
-                ]
-                title
-
         strToElem : ( String, String ) -> Element msg
         strToElem ( label, url ) =
             newTabLink
@@ -50,10 +46,20 @@ paradigmBlock title languages =
                     strToElem
                     languages
     in
-    Element.column [ centerX ]
-        [ titleElem
-        , langColumn
-        ]
+    titleContentComp
+        { headerClr = red
+        , contentClr = blue
+        , title = "Declarative"
+        , titleAttr =
+            [ Font.color white
+            , Background.color darkerBlue
+            ]
+        , contentAttr =
+            [ Font.color black
+            , Background.color lighterBlue
+            ]
+        , contents = [ langColumn ]
+        }
 
 
 declarative =

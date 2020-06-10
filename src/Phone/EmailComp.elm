@@ -14,7 +14,20 @@ import Phone.TitleContentComp exposing (..)
 
 
 emailComponent =
-    roundedBlock ( darkerBlue, lighterBlue ) "Email" [ buttons ]
+    titleContentComp
+        { headerClr = darkerBlue
+        , contentClr = lighterBlue
+        , title = "Email"
+        , titleAttr =
+            [ Font.color white
+            , Background.color darkerBlue
+            ]
+        , contentAttr =
+            [ Font.color black
+            , Background.color lighterBlue
+            ]
+        , contents = [ buttons ]
+        }
 
 
 buttons =

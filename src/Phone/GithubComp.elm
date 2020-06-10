@@ -52,4 +52,4 @@ gitHubContentComp =
                 , siteSourceLink
                 ]
     in
-    contentComp [ buttons ]
+    contentComp (rgb255 102 148 194) [ buttons ]

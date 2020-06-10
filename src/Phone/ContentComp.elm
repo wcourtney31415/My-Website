@@ -7,21 +7,17 @@ import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import HelperFunctions exposing (..)
+import Phone.Colors exposing (..)
+import Phone.Shadow exposing (..)
 
 
-contentComp contents =
+contentComp bkgColor contents =
     Element.column
         [ centerX
         , Border.rounded 32
         , centerY
-        , Border.shadow
-            { offset = ( 10, 10 )
-            , size = 1
-            , blur = 20
-            , color = rgb255 90 90 90
-            }
-        , Background.color <|
-            rgb255 102 148 194
+        , phoneShadow
+        , Background.color bkgColor
         , Border.rounded 25
         , padding 30
         ]

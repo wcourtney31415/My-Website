@@ -22,3 +22,7 @@ darkerBlue =
 
 lighterBlue =
     rgb255 102 148 194
+
+
+shadowColor =
+    rgb255 90 90 90
