@@ -7,6 +7,7 @@ import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import HelperFunctions exposing (..)
+import Phone.Shadow exposing (..)
 
 
 titleContentComp :
@@ -23,12 +24,7 @@ titleContentComp record =
         [ centerX
         , centerY
         , Border.rounded 32
-        , Border.shadow
-            { offset = ( 10, 10 )
-            , size = 1
-            , blur = 20
-            , color = rgb255 90 90 90
-            }
+        , phoneShadow
         ]
         [ title record
         , content record
