@@ -18,3 +18,7 @@ blue =
 
 black =
     rgb 0 0 0
+
+
+shadowColor =
+    rgb255 90 90 90

@@ -59,4 +59,4 @@ gitHubContentComp =
                 , siteSourceLink
                 ]
     in
-    contentComp (rgb255 102 148 194) [ buttons ]
+    contentComp lighterBlue [ buttons ]

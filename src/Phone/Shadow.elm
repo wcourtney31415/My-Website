@@ -1,5 +1,6 @@
 module Phone.Shadow exposing (..)
 
+import BasicColors exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border

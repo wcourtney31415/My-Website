@@ -118,7 +118,7 @@ dropNav =
             { offset = ( 5, 5 )
             , size = 1
             , blur = 10
-            , color = rgb255 90 90 90
+            , color = shadowColor
             }
         , Font.glow white 0 --override contactButton glow
         ]

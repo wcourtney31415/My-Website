@@ -27,7 +27,7 @@ phoneView model =
             35
     in
     Element.layout
-        [ Background.color <| rgb255 194 194 194
+        [ Background.color theBackground
         ]
         (Element.column
             [ centerX

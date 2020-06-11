@@ -58,7 +58,7 @@ heading =
                             ++ List.repeat 1 (rgb255 z z z)
                     }
                 , Font.bold
-                , Font.color <| rgb255 52 89 127
+                , Font.color myNameColor
                 , width fill
                 , padding 20
                 , paddingEach

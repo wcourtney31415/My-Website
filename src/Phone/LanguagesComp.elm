@@ -40,7 +40,7 @@ paradigmBlock attr title languages =
                 , Background.gradient
                     { angle = 0
                     , steps =
-                        [ rgb255 228 228 228
+                        [ gradientColor1
                         , grayThirtyFour
                         ]
                     }
@@ -54,8 +54,6 @@ paradigmBlock attr title languages =
         langColumn =
             Element.column
                 [ centerX
-
-                -- , spacing 35
                 , width fill
                 ]
             <|

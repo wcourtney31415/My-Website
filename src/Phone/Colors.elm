@@ -4,6 +4,18 @@ import BasicColors exposing (..)
 import Element exposing (..)
 
 
+theBackground =
+    rgb255 194 194 194
+
+
+gradientColor1 =
+    rgb255 228 228 228
+
+
+myNameColor =
+    rgb255 52 89 127
+
+
 grayThirtyFour =
     rgb255 234 234 234
 
@@ -22,10 +34,6 @@ darkerBlue =
 
 lighterBlue =
     rgb255 102 148 194
-
-
-shadowColor =
-    rgb255 90 90 90
 
 
 darkerGray =
