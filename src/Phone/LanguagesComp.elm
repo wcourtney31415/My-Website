@@ -14,8 +14,13 @@ import Phone.TitleContentComp exposing (..)
 
 languagesComp =
     Element.column
-        [ spacing 35
-        , paddingEach { top = 0, bottom = 0, left = 50, right = 50 }
+        [ spacing 50
+        , paddingEach
+            { top = 0
+            , bottom = 50
+            , left = 50
+            , right = 50
+            }
         ]
         [ Element.paragraph
             [ Font.size 50
