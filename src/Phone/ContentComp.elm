@@ -1,16 +1,19 @@
-module Phone.ContentComp exposing (..)
+module Phone.ContentComp exposing (contentComp)
 
-import BasicColors exposing (..)
-import Element exposing (..)
+import Element
+    exposing
+        ( Color
+        , Element
+        , centerX
+        , centerY
+        , padding
+        )
 import Element.Background as Background
 import Element.Border as Border
-import Element.Font as Font
-import Element.Input as Input
-import HelperFunctions exposing (..)
-import Phone.Colors exposing (..)
-import Phone.Shadow exposing (..)
+import Phone.Shadow exposing (phoneShadow)
 
 
+contentComp : Color -> List (Element msg) -> Element msg
 contentComp bkgColor contents =
     Element.column
         [ centerX
