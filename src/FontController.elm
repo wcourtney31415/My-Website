@@ -1,5 +1,6 @@
-module FontController exposing (..)
+module FontController exposing (remoteGoogleFont)
 
+import Element exposing (Attribute)
 import Element.Font as Font
 
 
@@ -37,10 +38,12 @@ getUntilDelimeter str =
     r_getUntilDelimeter "" str
 
 
+removeLeading : String -> String
 removeLeading url =
     String.replace "https://fonts.googleapis.com/css2?family=" "" url
 
 
+remoteGoogleFont : String -> Attribute msg
 remoteGoogleFont url =
     let
         withoutLead =
