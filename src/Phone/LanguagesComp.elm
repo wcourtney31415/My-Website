@@ -1,17 +1,36 @@
-module Phone.LanguagesComp exposing (..)
+module Phone.LanguagesComp exposing (languagesComp)
 
-import BasicColors exposing (..)
-import Element exposing (..)
+import BasicColors exposing (white)
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , centerX
+        , fill
+        , height
+        , newTabLink
+        , padding
+        , paddingEach
+        , px
+        , spacing
+        , text
+        , width
+        )
 import Element.Background as Background
-import Element.Border as Border
 import Element.Font as Font
-import Element.Input as Input
-import HelperFunctions exposing (..)
-import Phone.Colors exposing (..)
-import Phone.ContentComp exposing (..)
-import Phone.TitleContentComp exposing (..)
+import HelperFunctions exposing (textElement)
+import Phone.Colors
+    exposing
+        ( darkerBlue
+        , gradientColor1
+        , grayThirtyFour
+        , lighterBlue
+        , lighterGray
+        )
+import Phone.TitleContentComp exposing (titleContentComp)
 
 
+languagesComp : Element msg
 languagesComp =
     Element.column
         [ spacing 50
@@ -35,7 +54,7 @@ paradigmBlock : List (Attribute msg) -> String -> List ( String, String ) -> Ele
 paradigmBlock attr title languages =
     let
         myAttr =
-            [ width fill ] ++ attr
+            width fill :: attr
 
         strToElem : ( String, String ) -> Element msg
         strToElem ( label, url ) =
@@ -82,6 +101,7 @@ paradigmBlock attr title languages =
         }
 
 
+declarative : List (Attribute msg) -> Element msg
 declarative attr =
     paradigmBlock attr
         "Declarative"
@@ -94,6 +114,7 @@ declarative attr =
         ]
 
 
+imperative : List (Attribute msg) -> Element msg
 imperative attr =
     paradigmBlock attr
         "Imperative"
