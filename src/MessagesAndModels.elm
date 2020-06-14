@@ -1,6 +1,6 @@
-module MessagesAndModels exposing (..)
+module MessagesAndModels exposing (Flags, Model, Msg(..), OpenOrClosed(..), Page(..))
 
-import Element exposing (..)
+import Element exposing (Device)
 
 
 type alias Model =
