@@ -1,11 +1,9 @@
-module Fonts exposing (..)
+module Fonts exposing (fontDesktopHeader)
 
-import FontController exposing (..)
-
-
-customFont =
-    remoteGoogleFont "https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap"
+import Element exposing (Attribute)
+import FontController exposing (remoteGoogleFont)
 
 
+fontDesktopHeader : Attribute msg
 fontDesktopHeader =
     remoteGoogleFont "https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap"
