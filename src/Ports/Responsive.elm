@@ -2,7 +2,9 @@ port module Ports.Responsive exposing (onResize)
 
 
 type alias Size =
-    { width : Int, height : Int }
+    { width : Int
+    , height : Int
+    }
 
 
 port onResizePort : (Size -> msg) -> Sub msg
