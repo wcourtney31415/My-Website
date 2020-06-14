@@ -6,7 +6,7 @@ import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import HelperFunctions exposing (..)
+import HelperFunctions exposing (bkgAttributes, textElement)
 import MessagesAndModels exposing (..)
 import Tablet.Colors exposing (..)
 

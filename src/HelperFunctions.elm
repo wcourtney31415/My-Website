@@ -1,7 +1,15 @@
-module HelperFunctions exposing (..)
+module HelperFunctions exposing
+    ( bkgAttributes
+    , flip
+    , speedIf
+    , textElement
+    )
 
 import Element exposing (..)
-import MessagesAndModels exposing (..)
+import MessagesAndModels
+    exposing
+        ( OpenOrClosed(..)
+        )
 
 
 bkgAttributes : List (Attribute msg) -> Attribute msg

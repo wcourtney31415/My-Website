@@ -7,7 +7,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import HelperFunctions exposing (..)
+import HelperFunctions exposing (textElement)
 import MessagesAndModels exposing (..)
 import Phone.Colors exposing (..)
 

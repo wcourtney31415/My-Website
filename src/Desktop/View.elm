@@ -28,7 +28,7 @@ desktopView model =
                     homepage model
 
                 AboutMe ->
-                    aboutPage model
+                    aboutPage
     in
     Element.layoutWith
         { options = [ focusStyle myFocusStyle ] }
