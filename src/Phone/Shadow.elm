@@ -1,14 +1,11 @@
-module Phone.Shadow exposing (..)
+module Phone.Shadow exposing (phoneShadow)
 
-import BasicColors exposing (..)
-import Element exposing (..)
-import Element.Background as Background
+import BasicColors exposing (shadowColor)
+import Element exposing (Attr)
 import Element.Border as Border
-import Element.Font as Font
-import Element.Input as Input
-import Phone.Colors exposing (..)
 
 
+phoneShadow : Attr decorative msg
 phoneShadow =
     Border.shadow
         { offset = ( 10, 10 )
