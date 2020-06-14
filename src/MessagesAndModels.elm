@@ -30,4 +30,6 @@ type OpenOrClosed
 
 
 type alias Flags =
-    { windowWidth : Int, windowHeight : Int }
+    { windowWidth : Int
+    , windowHeight : Int
+    }

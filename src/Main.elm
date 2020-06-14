@@ -1,12 +1,19 @@
-module Main exposing (..)
+module Main exposing (init, main, subscriptions, update, view)
 
 import Browser
-import Data exposing (..)
-import Element exposing (..)
-import MessagesAndModels exposing (..)
-import Ports.Clipboard exposing (..)
+import Data exposing (myName)
+import Element exposing (classifyDevice)
+import MessagesAndModels
+    exposing
+        ( Flags
+        , Model
+        , Msg(..)
+        , OpenOrClosed(..)
+        , Page(..)
+        )
+import Ports.Clipboard exposing (copyToClipboard)
 import Ports.Responsive as Responsive
-import View_Controller exposing (..)
+import View_Controller exposing (siteView)
 
 
 main : Program Flags Model Msg
