@@ -25,7 +25,7 @@ desktopView model =
         selectedPage =
             case model.selectedPage of
                 Home ->
-                    homepage model
+                    homepage
 
                 AboutMe ->
                     aboutPage
