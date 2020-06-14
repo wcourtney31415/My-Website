@@ -1,14 +1,29 @@
-module Phone.GithubComp exposing (..)
+module Phone.GithubComp exposing (githubComponent)
 
-import Data exposing (..)
-import Element exposing (..)
+import Data exposing (gitHub, siteSource)
+import Element
+    exposing
+        ( Element
+        , centerX
+        , newTabLink
+        , padding
+        , spacing
+        , text
+        )
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import Phone.Colors exposing (..)
-import Phone.ContentComp exposing (..)
+import Phone.Colors
+    exposing
+        ( gray
+        , grayThirtyFour
+        , lighterBlue
+        , lightestBlue
+        )
+import Phone.ContentComp exposing (contentComp)
 
 
+githubComponent : Element msg
 githubComponent =
     Element.column [ spacing 60 ]
         [ Element.paragraph
@@ -19,6 +34,7 @@ githubComponent =
         ]
 
 
+gitHubContentComp : Element msg
 gitHubContentComp =
     let
         linkAttributes =
