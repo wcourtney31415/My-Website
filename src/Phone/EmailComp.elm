@@ -1,18 +1,33 @@
-module Phone.EmailComp exposing (..)
+module Phone.EmailComp exposing (emailComponent)
 
-import BasicColors exposing (..)
-import Data exposing (..)
-import Element exposing (..)
+import BasicColors exposing (black, white)
+import Data exposing (myEmail)
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , centerX
+        , padding
+        , spacing
+        , text
+        )
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import HelperFunctions exposing (..)
-import MessagesAndModels exposing (..)
-import Phone.Colors exposing (..)
-import Phone.TitleContentComp exposing (..)
+import MessagesAndModels exposing (Msg(..))
+import Phone.Colors
+    exposing
+        ( darkerBlue
+        , gray
+        , grayThirtyFour
+        , lighterBlue
+        , lightestBlue
+        )
+import Phone.TitleContentComp exposing (titleContentComp)
 
 
+emailComponent : Element Msg
 emailComponent =
     titleContentComp
         []
@@ -29,6 +44,7 @@ emailComponent =
         }
 
 
+buttons : Element Msg
 buttons =
     Element.row
         [ spacing 45
@@ -39,6 +55,7 @@ buttons =
         ]
 
 
+btnAttributes : List (Attribute msg)
 btnAttributes =
     [ Font.size 60
     , padding 30
@@ -54,6 +71,7 @@ btnAttributes =
     ]
 
 
+btnEmailNow : Element msg
 btnEmailNow =
     Element.link
         btnAttributes
@@ -62,6 +80,7 @@ btnEmailNow =
         }
 
 
+btnEmailClipboard : Element Msg
 btnEmailClipboard =
     Input.button
         btnAttributes
