@@ -1,13 +1,19 @@
 module Phone.TitleContentComp exposing (titleContentComp)
 
-import BasicColors exposing (..)
-import Element exposing (..)
-import Element.Background as Background
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , centerX
+        , centerY
+        , fill
+        , paddingEach
+        , width
+        )
 import Element.Border as Border
 import Element.Font as Font
-import Element.Input as Input
 import HelperFunctions exposing (textElement)
-import Phone.Shadow exposing (..)
+import Phone.Shadow exposing (phoneShadow)
 
 
 titleContentComp :
@@ -36,6 +42,13 @@ titleContentComp attributes record =
         ]
 
 
+title :
+    { contentAttr : List (Attribute msg)
+    , contents : List (Element msg)
+    , title : String
+    , titleAttr : List (Attribute msg)
+    }
+    -> Element msg
 title record =
     let
         myAttr =
@@ -66,6 +79,13 @@ title record =
         )
 
 
+content :
+    { contentAttr : List (Attribute msg)
+    , contents : List (Element msg)
+    , title : String
+    , titleAttr : List (Attribute msg)
+    }
+    -> Element msg
 content record =
     let
         myAttr =
