@@ -1,17 +1,25 @@
-module Phone.HeadingComp exposing (..)
+module Phone.HeadingComp exposing (heading)
 
-import BasicColors exposing (..)
-import Data exposing (..)
-import Element exposing (..)
+import BasicColors exposing (white)
+import Element
+    exposing
+        ( Element
+        , centerX
+        , fill
+        , height
+        , padding
+        , paddingEach
+        , rgb255
+        , width
+        )
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import Element.Input as Input
 import HelperFunctions exposing (textElement)
-import MessagesAndModels exposing (..)
-import Phone.Colors exposing (..)
+import Phone.Colors exposing (myNameColor, viewHeaderCol)
 
 
+heading : Element msg
 heading =
     let
         titleSdev =
