@@ -1,15 +1,34 @@
 module Tablet.Navbar exposing (navBar)
 
-import BasicColors exposing (..)
-import Data exposing (..)
-import Element exposing (..)
+import BasicColors exposing (shadowColor, white)
+import Data exposing (gitHub, myEmail)
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , alignRight
+        , alpha
+        , centerX
+        , mouseOver
+        , moveDown
+        , newTabLink
+        , padding
+        , spacing
+        , text
+        )
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import HelperFunctions exposing (bkgAttributes, flip, speedIf)
-import MessagesAndModels exposing (..)
-import Tablet.Colors exposing (..)
+import MessagesAndModels
+    exposing
+        ( Model
+        , Msg(..)
+        , OpenOrClosed(..)
+        , Page(..)
+        )
+import Tablet.Colors exposing (dropNavColor, grayFortyTwo)
 
 
 contactButton : Model -> Element Msg
@@ -34,14 +53,13 @@ contactButton model =
                 ]
     in
     Input.button
-        ([ hovered ]
-            ++ dropNavIfOpen
-        )
+        (hovered :: dropNavIfOpen)
         { onPress = Just <| Update toggledModel
         , label = text "Contact"
         }
 
 
+hovered : Attribute msg
 hovered =
     mouseOver [ Font.glow white 3.5 ]
 
