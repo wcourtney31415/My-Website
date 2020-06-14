@@ -1,7 +1,6 @@
-module Tablet.Colors exposing (..)
+module Tablet.Colors exposing (dropNavColor, grayFortyTwo)
 
-import BasicColors exposing (..)
-import Element exposing (..)
+import Element exposing (Color, rgb255)
 
 
 grayFortyTwo : Color
