@@ -1,31 +1,33 @@
 module Phone.View exposing (phoneView)
 
-import BasicColors exposing (..)
-import Data exposing (..)
-import Element exposing (..)
+import BasicColors exposing (white)
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , centerX
+        , fill
+        , height
+        , minimum
+        , paddingEach
+        , spacing
+        , text
+        , width
+        )
 import Element.Background as Background
-import Element.Border as Border
 import Element.Font as Font
-import Element.Input as Input
-import HelperFunctions exposing (..)
+import HelperFunctions exposing (textElement)
 import Html exposing (Html)
-import MessagesAndModels exposing (..)
-import Phone.Colors exposing (..)
-import Phone.EmailComp exposing (..)
-import Phone.GithubComp exposing (..)
-import Phone.HeadingComp exposing (..)
-import Phone.LanguagesComp exposing (..)
+import MessagesAndModels exposing (Msg)
+import Phone.Colors exposing (grayThirtyFour, theBackground)
+import Phone.EmailComp exposing (emailComponent)
+import Phone.GithubComp exposing (githubComponent)
+import Phone.HeadingComp exposing (heading)
+import Phone.LanguagesComp exposing (languagesComp)
 
 
-phoneView : Model -> Html.Html Msg
-phoneView model =
-    let
-        vBorderSpacing =
-            60
-
-        hBorderSpacing =
-            35
-    in
+phoneView : Html Msg
+phoneView =
     Element.layout
         [ Background.color theBackground
         ]

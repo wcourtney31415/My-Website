@@ -36,7 +36,7 @@ siteView model =
         responsiveView =
             case deviceClass of
                 Phone ->
-                    phoneView model
+                    phoneView
 
                 Tablet ->
                     tabletView model
