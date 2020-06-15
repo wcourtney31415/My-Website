@@ -1,17 +1,31 @@
 module Tablet.Index exposing (homepage)
 
-import BasicColors exposing (..)
-import Data exposing (..)
-import Element exposing (..)
+import BasicColors exposing (white)
+import Data exposing (myEmail, myName)
+import Element
+    exposing
+        ( Element
+        , alpha
+        , centerX
+        , centerY
+        , fill
+        , moveUp
+        , padding
+        , px
+        , spacing
+        , text
+        , width
+        )
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import HelperFunctions exposing (bkgAttributes, textElement)
-import MessagesAndModels exposing (..)
-import Tablet.Colors exposing (..)
+import MessagesAndModels exposing (Msg)
+import Tablet.Colors exposing (grayFortyTwo)
 
 
-homepage model =
+homepage : Element Msg
+homepage =
     homepageItems
 
 
