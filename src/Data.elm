@@ -1,5 +1,6 @@
 module Data exposing
-    ( backgroundPath
+    ( aboutMeRawText1
+    , backgroundPath
     , gitHub
     , myEmail
     , myName
@@ -30,3 +31,8 @@ gitHub =
 siteSource : String
 siteSource =
     "https://github.com/wcourtney31415/My-Website"
+
+
+aboutMeRawText1 : String
+aboutMeRawText1 =
+    "Here is my \"about me\" paragraph."

@@ -1,6 +1,7 @@
 module Phone.View exposing (phoneView)
 
 import BasicColors exposing (white)
+import Data exposing (aboutMeRawText1)
 import Element
     exposing
         ( Attribute
@@ -16,7 +17,6 @@ import Element
         )
 import Element.Background as Background
 import Element.Font as Font
-import HelperFunctions exposing (textElement)
 import Html exposing (Html)
 import MessagesAndModels exposing (Msg)
 import Phone.Colors exposing (grayThirtyFour, theBackground)
@@ -51,7 +51,7 @@ phoneView =
                     [ languagesComp ]
                 , block "About Me"
                     []
-                    [ textElement [ Font.size 50 ] "about me text"
+                    [ aboutMeParagraph
                     ]
                 , block "Github"
                     [ paddingEach
@@ -66,6 +66,15 @@ phoneView =
                 ]
             ]
         )
+
+
+aboutMeParagraph : Element msg
+aboutMeParagraph =
+    Element.paragraph
+        [ Font.size 50
+        , spacing 30
+        ]
+        [ text aboutMeRawText1 ]
 
 
 block : String -> List (Attribute Msg) -> List (Element Msg) -> Element Msg
