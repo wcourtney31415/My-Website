@@ -1,18 +1,29 @@
 module Desktop.View exposing (desktopView)
 
-import Data exposing (..)
-import Desktop.About exposing (..)
-import Desktop.Index exposing (..)
-import Desktop.Navbar exposing (..)
-import Element exposing (..)
+import Data exposing (backgroundPath)
+import Desktop.About exposing (aboutPage)
+import Desktop.Index exposing (homepage)
+import Desktop.Navbar exposing (navBar)
+import Element
+    exposing
+        ( FocusStyle
+        , fill
+        , focusStyle
+        , height
+        , spacing
+        , width
+        )
 import Element.Background as Background
-import Element.Border as Border
-import Element.Font as Font
 import Html exposing (Html)
-import MessagesAndModels exposing (..)
+import MessagesAndModels
+    exposing
+        ( Model
+        , Msg
+        , Page(..)
+        )
 
 
-desktopView : Model -> Html.Html Msg
+desktopView : Model -> Html Msg
 desktopView model =
     let
         myFocusStyle : FocusStyle
