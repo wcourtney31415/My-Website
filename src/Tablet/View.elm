@@ -39,7 +39,7 @@ tabletView model =
                     homepage
 
                 AboutMe ->
-                    aboutPage model
+                    aboutPage
     in
     Element.layoutWith
         { options = [ focusStyle myFocusStyle ] }
