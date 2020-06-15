@@ -1,30 +1,11 @@
 module View_Controller exposing (siteView)
 
-import Desktop.View exposing (..)
-import Element exposing (..)
-import Element.Background as Background
-import Element.Border as Border
-import Element.Font as Font
+import Desktop.View exposing (desktopView)
+import Element exposing (DeviceClass(..))
 import Html exposing (Html)
-import MessagesAndModels exposing (..)
-import Phone.View exposing (..)
-import Tablet.View exposing (..)
-
-
-classString : Device -> String
-classString device =
-    case device.class of
-        Phone ->
-            "Phone"
-
-        Tablet ->
-            "Tablet"
-
-        Desktop ->
-            "Desktop"
-
-        BigDesktop ->
-            "Big Desktop"
+import MessagesAndModels exposing (Model, Msg)
+import Phone.View exposing (phoneView)
+import Tablet.View exposing (tabletView)
 
 
 siteView : Model -> Html Msg
