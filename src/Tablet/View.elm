@@ -1,18 +1,29 @@
 module Tablet.View exposing (tabletView)
 
-import Data exposing (..)
-import Element exposing (..)
+import Data exposing (backgroundPath)
+import Element
+    exposing
+        ( FocusStyle
+        , fill
+        , focusStyle
+        , height
+        , spacing
+        , width
+        )
 import Element.Background as Background
-import Element.Border as Border
-import Element.Font as Font
 import Html exposing (Html)
-import MessagesAndModels exposing (..)
-import Tablet.About exposing (..)
-import Tablet.Index exposing (..)
-import Tablet.Navbar exposing (..)
+import MessagesAndModels
+    exposing
+        ( Model
+        , Msg
+        , Page(..)
+        )
+import Tablet.About exposing (aboutPage)
+import Tablet.Index exposing (homepage)
+import Tablet.Navbar exposing (navBar)
 
 
-tabletView : Model -> Html.Html Msg
+tabletView : Model -> Html Msg
 tabletView model =
     let
         myFocusStyle : FocusStyle
