@@ -1,15 +1,34 @@
 module Desktop.Navbar exposing (navBar)
 
-import BasicColors exposing (..)
-import Data exposing (..)
-import Desktop.Colors exposing (..)
-import Element exposing (..)
+import BasicColors exposing (shadowColor, white)
+import Data exposing (gitHub, myEmail)
+import Desktop.Colors exposing (dropNavColor, grayFortyTwo)
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , alignRight
+        , alpha
+        , centerX
+        , mouseOver
+        , moveDown
+        , newTabLink
+        , padding
+        , spacing
+        , text
+        )
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
 import HelperFunctions exposing (bkgAttributes, flip, speedIf)
-import MessagesAndModels exposing (..)
+import MessagesAndModels
+    exposing
+        ( Model
+        , Msg(..)
+        , OpenOrClosed(..)
+        , Page(..)
+        )
 
 
 contactButton : Model -> Element Msg
@@ -34,14 +53,15 @@ contactButton model =
                 ]
     in
     Input.button
-        ([ hovered ]
-            ++ dropNavIfOpen
+        (hovered
+            :: dropNavIfOpen
         )
         { onPress = Just <| Update toggledModel
         , label = text "Contact"
         }
 
 
+hovered : Attribute msg
 hovered =
     mouseOver [ Font.glow white 3.5 ]
 
