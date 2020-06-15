@@ -5,7 +5,15 @@ module HelperFunctions exposing
     , textElement
     )
 
-import Element exposing (..)
+import Element
+    exposing
+        ( Attribute
+        , Element
+        , fill
+        , height
+        , text
+        , width
+        )
 import MessagesAndModels
     exposing
         ( OpenOrClosed(..)
@@ -39,5 +47,6 @@ flip a =
     speedIf (a == Open) Closed Open
 
 
+textElement : List (Attribute msg) -> String -> Element msg
 textElement attributes myText =
     Element.el attributes <| text myText
