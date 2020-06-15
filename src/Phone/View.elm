@@ -10,7 +10,9 @@ import Element
         , fill
         , height
         , minimum
+        , padding
         , paddingEach
+        , paddingXY
         , spacing
         , text
         , width
@@ -36,12 +38,7 @@ phoneView =
             ]
             [ heading
             , Element.column
-                [ paddingEach
-                    { right = 0
-                    , left = 0
-                    , top = 0
-                    , bottom = 0
-                    }
+                [ padding 0
                 ]
                 [ block "Contact"
                     []
@@ -90,12 +87,7 @@ block title attributes contents =
                 ]
             }
          , spacing 40
-         , paddingEach
-            { left = 30
-            , right = 30
-            , top = 30
-            , bottom = 30
-            }
+         , padding 30
          ]
             ++ attributes
         )
@@ -108,12 +100,7 @@ block title attributes contents =
         , Element.column
             [ width fill
             , height fill
-            , paddingEach
-                { left = 20
-                , right = 20
-                , top = 0
-                , bottom = 0
-                }
+            , paddingXY 20 0
             ]
             contents
         ]
