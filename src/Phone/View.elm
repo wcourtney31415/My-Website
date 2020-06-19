@@ -46,13 +46,13 @@ phoneView =
                 [ block "Contact"
                     []
                     [ emailComponent ]
-                , block "Languages"
-                    []
-                    [ languagesComp ]
                 , block "Github"
                     []
                     [ githubComponent
                     ]
+                , block "Languages"
+                    []
+                    [ languagesComp ]
                 , block "About Me"
                     [ paddingEach
                         { top = 30
