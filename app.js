@@ -11172,9 +11172,7 @@ var $author$project$Desktop$About$homepageItems = A2(
 		]),
 	_List_fromArray(
 		[$author$project$Desktop$About$titleBox, $author$project$Desktop$About$frontPageParagraph]));
-var $author$project$Desktop$About$aboutPage = function (model) {
-	return $author$project$Desktop$About$homepageItems;
-};
+var $author$project$Desktop$About$aboutPage = $author$project$Desktop$About$homepageItems;
 var $author$project$Data$backgroundPath = './Images/background.jpg';
 var $mdgriffith$elm_ui$Internal$Model$FocusStyleOption = function (a) {
 	return {$: 'FocusStyleOption', a: a};
@@ -11420,9 +11418,7 @@ var $author$project$Desktop$Index$homepageItems = A2(
 		]),
 	_List_fromArray(
 		[$author$project$Desktop$Index$titleBox, $author$project$Desktop$Index$frontPageParagraph]));
-var $author$project$Desktop$Index$homepage = function (model) {
-	return $author$project$Desktop$Index$homepageItems;
-};
+var $author$project$Desktop$Index$homepage = $author$project$Desktop$Index$homepageItems;
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $mdgriffith$elm_ui$Element$Background$image = function (src) {
 	return $mdgriffith$elm_ui$Internal$Model$Attr(
@@ -12007,6 +12003,7 @@ var $mdgriffith$elm_ui$Element$Border$shadow = function (almostShade) {
 			'box-shadow',
 			$mdgriffith$elm_ui$Internal$Model$formatBoxShadow(shade)));
 };
+var $author$project$BasicColors$shadowColor = A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90);
 var $author$project$Desktop$Navbar$dropNav = function () {
 	var emailClipboardLnk = A2(
 		$mdgriffith$elm_ui$Element$Input$button,
@@ -12038,7 +12035,7 @@ var $author$project$Desktop$Navbar$dropNav = function () {
 				$mdgriffith$elm_ui$Element$Border$shadow(
 				{
 					blur: 10,
-					color: A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90),
+					color: $author$project$BasicColors$shadowColor,
 					offset: _Utils_Tuple2(5, 5),
 					size: 1
 				}),
@@ -12075,10 +12072,7 @@ var $author$project$Desktop$Navbar$contactButton = function (model) {
 			]));
 	return A2(
 		$mdgriffith$elm_ui$Element$Input$button,
-		_Utils_ap(
-			_List_fromArray(
-				[$author$project$Desktop$Navbar$hovered]),
-			dropNavIfOpen),
+		A2($elm$core$List$cons, $author$project$Desktop$Navbar$hovered, dropNavIfOpen),
 		{
 			label: $mdgriffith$elm_ui$Element$text('Contact'),
 			onPress: $elm$core$Maybe$Just(
@@ -12179,9 +12173,9 @@ var $author$project$Desktop$View$desktopView = function (model) {
 	var selectedPage = function () {
 		var _v0 = model.selectedPage;
 		if (_v0.$ === 'Home') {
-			return $author$project$Desktop$Index$homepage(model);
+			return $author$project$Desktop$Index$homepage;
 		} else {
-			return $author$project$Desktop$About$aboutPage(model);
+			return $author$project$Desktop$About$aboutPage;
 		}
 	}();
 	var myFocusStyle = {backgroundColor: $elm$core$Maybe$Nothing, borderColor: $elm$core$Maybe$Nothing, shadow: $elm$core$Maybe$Nothing};
@@ -12211,6 +12205,166 @@ var $author$project$Desktop$View$desktopView = function (model) {
 					selectedPage
 				])));
 };
+var $author$project$Data$aboutMeRawText1 = '\tMy introduction to the world of programming began at the age of ten. In fifth grade my best friend and I discovered a video game development platform known as Gamemaker. We became quite capable in it’s scripting language through the years as we worked on our hobby projects. Between this and dabbling in C++, I found my passion. I knew since the beginning I wanted to write code, but once I enrolled in college I came to the conclusion that it was software development in general I was drawn to, not just video games. Throughout my college career, I experimented with various languages. My primary being Java, and I found I was drawn to application and server side development.';
+var $author$project$Phone$AboutMeComp$indAmt = 3;
+var $elm$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (n <= 0) {
+				return result;
+			} else {
+				var $temp$result = A2($elm$core$List$cons, value, result),
+					$temp$n = n - 1,
+					$temp$value = value;
+				result = $temp$result;
+				n = $temp$n;
+				value = $temp$value;
+				continue repeatHelp;
+			}
+		}
+	});
+var $elm$core$List$repeat = F2(
+	function (n, value) {
+		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
+	});
+var $author$project$Data$indent = function (len) {
+	return $elm$core$String$concat(
+		A2($elm$core$List$repeat, len, '\u00A0'));
+};
+var $author$project$Phone$AboutMeComp$aboutMeParagraph1 = A2(
+	$mdgriffith$elm_ui$Element$paragraph,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(50),
+			$mdgriffith$elm_ui$Element$spacing(30)
+		]),
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$text(
+			_Utils_ap(
+				$author$project$Data$indent($author$project$Phone$AboutMeComp$indAmt),
+				$author$project$Data$aboutMeRawText1))
+		]));
+var $author$project$Data$aboutMeRawText2 = 'I worked as an IT administrator for several years, working on PC’s and servers for various companies.';
+var $author$project$Phone$AboutMeComp$aboutMeParagraph2 = A2(
+	$mdgriffith$elm_ui$Element$paragraph,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(50),
+			$mdgriffith$elm_ui$Element$spacing(30)
+		]),
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$text(
+			_Utils_ap(
+				$author$project$Data$indent($author$project$Phone$AboutMeComp$indAmt),
+				$author$project$Data$aboutMeRawText2))
+		]));
+var $author$project$Data$aboutMeRawText3 = '\tTowards the beginning of 2020 I took some time to study functional programming. I taught myself Elm, and then soon after Haskell. It has shifted my way of coding for the better, and has made me a better programmer. Additionally, I’ve gotten much better at front end development using Elm, which was the inspiration for making this website.';
+var $author$project$Phone$AboutMeComp$aboutMeParagraph3 = A2(
+	$mdgriffith$elm_ui$Element$paragraph,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(50),
+			$mdgriffith$elm_ui$Element$spacing(30)
+		]),
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$text(
+			_Utils_ap(
+				$author$project$Data$indent($author$project$Phone$AboutMeComp$indAmt),
+				$author$project$Data$aboutMeRawText3))
+		]));
+var $author$project$Data$aboutMeRawText4 = '\tProgramming is my passion, and I’m looking forward to turning it into a career. I’m eager to join a team where I can challenge myself, improve my trade, and create/maintain powerful tools. ';
+var $author$project$Phone$AboutMeComp$aboutMeParagraph4 = A2(
+	$mdgriffith$elm_ui$Element$paragraph,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Font$size(50),
+			$mdgriffith$elm_ui$Element$spacing(30)
+		]),
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$text(
+			_Utils_ap(
+				$author$project$Data$indent($author$project$Phone$AboutMeComp$indAmt),
+				$author$project$Data$aboutMeRawText4))
+		]));
+var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
+	function (top, right, bottom, left) {
+		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));
+	});
+var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
+	var top = _v0.top;
+	var right = _v0.right;
+	var bottom = _v0.bottom;
+	var left = _v0.left;
+	return (_Utils_eq(top, right) && (_Utils_eq(top, bottom) && _Utils_eq(top, left))) ? A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			'p-' + $elm$core$String$fromInt(top),
+			top,
+			top,
+			top,
+			top)) : A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$padding,
+		A5(
+			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+			A4($mdgriffith$elm_ui$Internal$Model$paddingName, top, right, bottom, left),
+			top,
+			right,
+			bottom,
+			left));
+};
+var $mdgriffith$elm_ui$Internal$Model$AsTextColumn = {$: 'AsTextColumn'};
+var $mdgriffith$elm_ui$Internal$Model$asTextColumn = $mdgriffith$elm_ui$Internal$Model$AsTextColumn;
+var $mdgriffith$elm_ui$Internal$Model$Max = F2(
+	function (a, b) {
+		return {$: 'Max', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$maximum = F2(
+	function (i, l) {
+		return A2($mdgriffith$elm_ui$Internal$Model$Max, i, l);
+	});
+var $mdgriffith$elm_ui$Internal$Model$Min = F2(
+	function (a, b) {
+		return {$: 'Min', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Element$minimum = F2(
+	function (i, l) {
+		return A2($mdgriffith$elm_ui$Internal$Model$Min, i, l);
+	});
+var $mdgriffith$elm_ui$Element$textColumn = F2(
+	function (attrs, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asTextColumn,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Element$width(
+					A2(
+						$mdgriffith$elm_ui$Element$maximum,
+						750,
+						A2($mdgriffith$elm_ui$Element$minimum, 500, $mdgriffith$elm_ui$Element$fill))),
+				attrs),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
+var $author$project$Phone$AboutMeComp$aboutMeComp = A2(
+	$mdgriffith$elm_ui$Element$textColumn,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$spacing(40),
+			$mdgriffith$elm_ui$Element$paddingEach(
+			{bottom: 0, left: 0, right: 0, top: 20}),
+			$mdgriffith$elm_ui$Element$centerX
+		]),
+	_List_fromArray(
+		[$author$project$Phone$AboutMeComp$aboutMeParagraph4, $author$project$Phone$AboutMeComp$aboutMeParagraph1, $author$project$Phone$AboutMeComp$aboutMeParagraph2, $author$project$Phone$AboutMeComp$aboutMeParagraph3]));
 var $mdgriffith$elm_ui$Internal$Flag$bgGradient = $mdgriffith$elm_ui$Internal$Flag$flag(10);
 var $mdgriffith$elm_ui$Element$Background$gradient = function (_v0) {
 	var angle = _v0.angle;
@@ -12253,43 +12407,28 @@ var $mdgriffith$elm_ui$Element$Background$gradient = function (_v0) {
 	}
 };
 var $author$project$Phone$Colors$grayThirtyFour = A3($mdgriffith$elm_ui$Element$rgb255, 234, 234, 234);
-var $mdgriffith$elm_ui$Internal$Model$Min = F2(
-	function (a, b) {
-		return {$: 'Min', a: a, b: b};
+var $mdgriffith$elm_ui$Element$paddingXY = F2(
+	function (x, y) {
+		return _Utils_eq(x, y) ? A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				'p-' + $elm$core$String$fromInt(x),
+				x,
+				x,
+				x,
+				x)) : A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				'p-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y))),
+				y,
+				x,
+				y,
+				x));
 	});
-var $mdgriffith$elm_ui$Element$minimum = F2(
-	function (i, l) {
-		return A2($mdgriffith$elm_ui$Internal$Model$Min, i, l);
-	});
-var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
-	function (top, right, bottom, left) {
-		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));
-	});
-var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
-	var top = _v0.top;
-	var right = _v0.right;
-	var bottom = _v0.bottom;
-	var left = _v0.left;
-	return (_Utils_eq(top, right) && (_Utils_eq(top, bottom) && _Utils_eq(top, left))) ? A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$padding,
-		A5(
-			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-			'p-' + $elm$core$String$fromInt(top),
-			top,
-			top,
-			top,
-			top)) : A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$padding,
-		A5(
-			$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-			A4($mdgriffith$elm_ui$Internal$Model$paddingName, top, right, bottom, left),
-			top,
-			right,
-			bottom,
-			left));
-};
 var $author$project$Phone$View$block = F3(
 	function (title, attributes, contents) {
 		return A2(
@@ -12307,8 +12446,7 @@ var $author$project$Phone$View$block = F3(
 								[$author$project$BasicColors$white, $author$project$Phone$Colors$grayThirtyFour])
 						}),
 						$mdgriffith$elm_ui$Element$spacing(40),
-						$mdgriffith$elm_ui$Element$paddingEach(
-						{bottom: 30, left: 30, right: 30, top: 30})
+						$mdgriffith$elm_ui$Element$padding(30)
 					]),
 				attributes),
 			_List_fromArray(
@@ -12327,8 +12465,7 @@ var $author$project$Phone$View$block = F3(
 						[
 							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 							$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-							$mdgriffith$elm_ui$Element$paddingEach(
-							{bottom: 0, left: 20, right: 20, top: 0})
+							A2($mdgriffith$elm_ui$Element$paddingXY, 20, 0)
 						]),
 					contents)
 				]));
@@ -12393,11 +12530,10 @@ var $author$project$Phone$TitleContentComp$content = function (record) {
 		record.contentAttr);
 	return A2($mdgriffith$elm_ui$Element$column, myAttr, record.contents);
 };
-var $author$project$Phone$Colors$shadowColor = A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90);
 var $author$project$Phone$Shadow$phoneShadow = $mdgriffith$elm_ui$Element$Border$shadow(
 	{
 		blur: 20,
-		color: $author$project$Phone$Colors$shadowColor,
+		color: $author$project$BasicColors$shadowColor,
 		offset: _Utils_Tuple2(10, 10),
 		size: 1
 	});
@@ -12518,7 +12654,7 @@ var $author$project$Phone$GithubComp$gitHubContentComp = function () {
 			[gitHubLink, siteSourceLink]));
 	return A2(
 		$author$project$Phone$ContentComp$contentComp,
-		A3($mdgriffith$elm_ui$Element$rgb255, 102, 148, 194),
+		$author$project$Phone$Colors$lighterBlue,
 		_List_fromArray(
 			[buttons]));
 }();
@@ -12542,27 +12678,7 @@ var $author$project$Phone$GithubComp$githubComponent = A2(
 				])),
 			$author$project$Phone$GithubComp$gitHubContentComp
 		]));
-var $elm$core$List$repeatHelp = F3(
-	function (result, n, value) {
-		repeatHelp:
-		while (true) {
-			if (n <= 0) {
-				return result;
-			} else {
-				var $temp$result = A2($elm$core$List$cons, value, result),
-					$temp$n = n - 1,
-					$temp$value = value;
-				result = $temp$result;
-				n = $temp$n;
-				value = $temp$value;
-				continue repeatHelp;
-			}
-		}
-	});
-var $elm$core$List$repeat = F2(
-	function (n, value) {
-		return A3($elm$core$List$repeatHelp, _List_Nil, n, value);
-	});
+var $author$project$Phone$Colors$myNameColor = A3($mdgriffith$elm_ui$Element$rgb255, 52, 89, 127);
 var $author$project$Phone$Colors$viewHeaderCol = A3($mdgriffith$elm_ui$Element$rgb255, 101, 147, 193);
 var $author$project$Phone$HeadingComp$heading = function () {
 	var titleSdev = A2(
@@ -12618,8 +12734,7 @@ var $author$project$Phone$HeadingComp$heading = function () {
 									A3($mdgriffith$elm_ui$Element$rgb255, z, z, z))))
 					}),
 					$mdgriffith$elm_ui$Element$Font$bold,
-					$mdgriffith$elm_ui$Element$Font$color(
-					A3($mdgriffith$elm_ui$Element$rgb255, 52, 89, 127)),
+					$mdgriffith$elm_ui$Element$Font$color($author$project$Phone$Colors$myNameColor),
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$padding(20),
 					$mdgriffith$elm_ui$Element$paddingEach(
@@ -12644,6 +12759,7 @@ var $author$project$Phone$HeadingComp$heading = function () {
 		_List_fromArray(
 			[titleSdev, titleName]));
 }();
+var $author$project$Phone$Colors$gradientColor1 = A3($mdgriffith$elm_ui$Element$rgb255, 228, 228, 228);
 var $author$project$Phone$Colors$lighterGray = A3($mdgriffith$elm_ui$Element$rgb255, 230, 230, 230);
 var $author$project$Phone$LanguagesComp$paradigmBlock = F3(
 	function (attr, title, languages) {
@@ -12660,10 +12776,7 @@ var $author$project$Phone$LanguagesComp$paradigmBlock = F3(
 						{
 							angle: 0,
 							steps: _List_fromArray(
-								[
-									A3($mdgriffith$elm_ui$Element$rgb255, 228, 228, 228),
-									$author$project$Phone$Colors$grayThirtyFour
-								])
+								[$author$project$Phone$Colors$gradientColor1, $author$project$Phone$Colors$grayThirtyFour])
 						}),
 						$mdgriffith$elm_ui$Element$height(
 						$mdgriffith$elm_ui$Element$px(150)),
@@ -12678,11 +12791,9 @@ var $author$project$Phone$LanguagesComp$paradigmBlock = F3(
 					url: url
 				});
 		};
-		var myAttr = _Utils_ap(
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
-				]),
+		var myAttr = A2(
+			$elm$core$List$cons,
+			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 			attr);
 		var langColumn = A2(
 			$mdgriffith$elm_ui$Element$column,
@@ -12741,9 +12852,9 @@ var $author$project$Phone$LanguagesComp$languagesComp = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
 		[
-			$mdgriffith$elm_ui$Element$spacing(35),
+			$mdgriffith$elm_ui$Element$spacing(50),
 			$mdgriffith$elm_ui$Element$paddingEach(
-			{bottom: 0, left: 50, right: 50, top: 0})
+			{bottom: 50, left: 50, right: 50, top: 0})
 		]),
 	_List_fromArray(
 		[
@@ -12762,71 +12873,58 @@ var $author$project$Phone$LanguagesComp$languagesComp = A2(
 		]));
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
-var $author$project$Phone$View$phoneView = function (model) {
-	var vBorderSpacing = 60;
-	var hBorderSpacing = 35;
-	return A2(
-		$mdgriffith$elm_ui$Element$layout,
+var $author$project$Phone$Colors$theBackground = A3($mdgriffith$elm_ui$Element$rgb255, 194, 194, 194);
+var $author$project$Phone$View$phoneView = A2(
+	$mdgriffith$elm_ui$Element$layout,
+	_List_fromArray(
+		[
+			$mdgriffith$elm_ui$Element$Background$color($author$project$Phone$Colors$theBackground)
+		]),
+	A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[$mdgriffith$elm_ui$Element$centerX]),
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$Background$color(
-				A3($mdgriffith$elm_ui$Element$rgb255, 194, 194, 194))
-			]),
-		A2(
-			$mdgriffith$elm_ui$Element$column,
-			_List_fromArray(
-				[$mdgriffith$elm_ui$Element$centerX]),
-			_List_fromArray(
-				[
-					$author$project$Phone$HeadingComp$heading,
-					A2(
-					$mdgriffith$elm_ui$Element$column,
-					_List_fromArray(
-						[
-							$mdgriffith$elm_ui$Element$paddingEach(
-							{bottom: 0, left: 0, right: 0, top: 0})
-						]),
-					_List_fromArray(
-						[
-							A3(
-							$author$project$Phone$View$block,
-							'Contact',
-							_List_Nil,
-							_List_fromArray(
-								[$author$project$Phone$EmailComp$emailComponent])),
-							A3(
-							$author$project$Phone$View$block,
-							'Languages',
-							_List_Nil,
-							_List_fromArray(
-								[$author$project$Phone$LanguagesComp$languagesComp])),
-							A3(
-							$author$project$Phone$View$block,
-							'About Me',
-							_List_Nil,
-							_List_fromArray(
-								[
-									A2(
-									$author$project$HelperFunctions$textElement,
-									_List_fromArray(
-										[
-											$mdgriffith$elm_ui$Element$Font$size(50)
-										]),
-									'about me text')
-								])),
-							A3(
-							$author$project$Phone$View$block,
-							'Github',
-							_List_fromArray(
-								[
-									$mdgriffith$elm_ui$Element$paddingEach(
-									{bottom: 200, left: 20, right: 20, top: 30})
-								]),
-							_List_fromArray(
-								[$author$project$Phone$GithubComp$githubComponent]))
-						]))
-				])));
-};
+				$author$project$Phone$HeadingComp$heading,
+				A2(
+				$mdgriffith$elm_ui$Element$column,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$padding(0)
+					]),
+				_List_fromArray(
+					[
+						A3(
+						$author$project$Phone$View$block,
+						'Contact',
+						_List_Nil,
+						_List_fromArray(
+							[$author$project$Phone$EmailComp$emailComponent])),
+						A3(
+						$author$project$Phone$View$block,
+						'Languages',
+						_List_Nil,
+						_List_fromArray(
+							[$author$project$Phone$LanguagesComp$languagesComp])),
+						A3(
+						$author$project$Phone$View$block,
+						'Github',
+						_List_Nil,
+						_List_fromArray(
+							[$author$project$Phone$GithubComp$githubComponent])),
+						A3(
+						$author$project$Phone$View$block,
+						'About Me',
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$paddingEach(
+								{bottom: 200, left: 20, right: 20, top: 30})
+							]),
+						_List_fromArray(
+							[$author$project$Phone$AboutMeComp$aboutMeComp]))
+					]))
+			])));
 var $author$project$Tablet$Colors$grayFortyTwo = A3($mdgriffith$elm_ui$Element$rgb255, 42, 42, 42);
 var $author$project$Tablet$About$frontPageParagraph = function () {
 	var frontPageText = 'For professional inqueries, please contact me at ' + ($author$project$Data$myEmail + ' and I will get back to you as soon as possible. I look forward to speaking with you.');
@@ -12896,9 +12994,7 @@ var $author$project$Tablet$About$homepageItems = A2(
 		]),
 	_List_fromArray(
 		[$author$project$Tablet$About$titleBox, $author$project$Tablet$About$frontPageParagraph]));
-var $author$project$Tablet$About$aboutPage = function (model) {
-	return $author$project$Tablet$About$homepageItems;
-};
+var $author$project$Tablet$About$aboutPage = $author$project$Tablet$About$homepageItems;
 var $author$project$Tablet$Index$frontPageParagraph = function () {
 	var preLink = 'For professional inqueries, please contact me at ';
 	var postLink = ' and I will get back to you as soon as possible. I look forward to speaking with you.';
@@ -12984,9 +13080,7 @@ var $author$project$Tablet$Index$homepageItems = A2(
 		]),
 	_List_fromArray(
 		[$author$project$Tablet$Index$titleBox, $author$project$Tablet$Index$frontPageParagraph]));
-var $author$project$Tablet$Index$homepage = function (model) {
-	return $author$project$Tablet$Index$homepageItems;
-};
+var $author$project$Tablet$Index$homepage = $author$project$Tablet$Index$homepageItems;
 var $author$project$Tablet$Navbar$hovered = $mdgriffith$elm_ui$Element$mouseOver(
 	_List_fromArray(
 		[
@@ -13038,7 +13132,7 @@ var $author$project$Tablet$Navbar$dropNav = function () {
 				$mdgriffith$elm_ui$Element$Border$shadow(
 				{
 					blur: 10,
-					color: A3($mdgriffith$elm_ui$Element$rgb255, 90, 90, 90),
+					color: $author$project$BasicColors$shadowColor,
 					offset: _Utils_Tuple2(5, 5),
 					size: 1
 				}),
@@ -13063,10 +13157,7 @@ var $author$project$Tablet$Navbar$contactButton = function (model) {
 			]));
 	return A2(
 		$mdgriffith$elm_ui$Element$Input$button,
-		_Utils_ap(
-			_List_fromArray(
-				[$author$project$Tablet$Navbar$hovered]),
-			dropNavIfOpen),
+		A2($elm$core$List$cons, $author$project$Tablet$Navbar$hovered, dropNavIfOpen),
 		{
 			label: $mdgriffith$elm_ui$Element$text('Contact'),
 			onPress: $elm$core$Maybe$Just(
@@ -13111,9 +13202,9 @@ var $author$project$Tablet$View$tabletView = function (model) {
 	var selectedPage = function () {
 		var _v0 = model.selectedPage;
 		if (_v0.$ === 'Home') {
-			return $author$project$Tablet$Index$homepage(model);
+			return $author$project$Tablet$Index$homepage;
 		} else {
-			return $author$project$Tablet$About$aboutPage(model);
+			return $author$project$Tablet$About$aboutPage;
 		}
 	}();
 	var myFocusStyle = {backgroundColor: $elm$core$Maybe$Nothing, borderColor: $elm$core$Maybe$Nothing, shadow: $elm$core$Maybe$Nothing};
@@ -13148,7 +13239,7 @@ var $author$project$View_Controller$siteView = function (model) {
 	var responsiveView = function () {
 		switch (deviceClass.$) {
 			case 'Phone':
-				return $author$project$Phone$View$phoneView(model);
+				return $author$project$Phone$View$phoneView;
 			case 'Tablet':
 				return $author$project$Tablet$View$tabletView(model);
 			case 'Desktop':
