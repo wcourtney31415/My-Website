@@ -1,14 +1,16 @@
 module Phone.View exposing (phoneView)
 
 import BasicColors exposing (white)
-import Data exposing (aboutMeRawText1)
 import Element
     exposing
         ( Attribute
         , Element
         , centerX
+        , column
+        , el
         , fill
         , height
+        , layout
         , minimum
         , padding
         , paddingEach
@@ -21,6 +23,7 @@ import Element.Background as Background
 import Element.Font as Font
 import Html exposing (Html)
 import MessagesAndModels exposing (Msg)
+import Phone.AboutMeComp exposing (aboutMeComp)
 import Phone.Colors exposing (grayThirtyFour, theBackground)
 import Phone.EmailComp exposing (emailComponent)
 import Phone.GithubComp exposing (githubComponent)
@@ -30,14 +33,14 @@ import Phone.LanguagesComp exposing (languagesComp)
 
 phoneView : Html Msg
 phoneView =
-    Element.layout
+    layout
         [ Background.color theBackground
         ]
-        (Element.column
+        (column
             [ centerX
             ]
             [ heading
-            , Element.column
+            , column
                 [ padding 0
                 ]
                 [ block "Contact"
@@ -48,7 +51,7 @@ phoneView =
                     [ languagesComp ]
                 , block "About Me"
                     []
-                    [ aboutMeParagraph
+                    [ aboutMeComp
                     ]
                 , block "Github"
                     [ paddingEach
@@ -65,18 +68,9 @@ phoneView =
         )
 
 
-aboutMeParagraph : Element msg
-aboutMeParagraph =
-    Element.paragraph
-        [ Font.size 50
-        , spacing 30
-        ]
-        [ text aboutMeRawText1 ]
-
-
 block : String -> List (Attribute Msg) -> List (Element Msg) -> Element Msg
 block title attributes contents =
-    Element.column
+    column
         ([ height (fill |> minimum 500)
          , width fill
          , Background.gradient
@@ -92,12 +86,12 @@ block title attributes contents =
             ++ attributes
         )
     <|
-        [ Element.el
+        [ el
             [ Font.size 80
             , Font.bold
             ]
             (text title)
-        , Element.column
+        , column
             [ width fill
             , height fill
             , paddingXY 20 0

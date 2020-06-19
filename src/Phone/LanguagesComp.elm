@@ -6,11 +6,13 @@ import Element
         ( Attribute
         , Element
         , centerX
+        , column
         , fill
         , height
         , newTabLink
         , padding
         , paddingEach
+        , paragraph
         , px
         , spacing
         , text
@@ -32,7 +34,7 @@ import Phone.TitleContentComp exposing (titleContentComp)
 
 languagesComp : Element msg
 languagesComp =
-    Element.column
+    column
         [ spacing 50
         , paddingEach
             { top = 0
@@ -41,7 +43,7 @@ languagesComp =
             , right = 50
             }
         ]
-        [ Element.paragraph
+        [ paragraph
             [ Font.size 50
             ]
             [ text "A list of lanuages I have experience with." ]
@@ -76,7 +78,7 @@ paradigmBlock attr title languages =
                 }
 
         langColumn =
-            Element.column
+            column
                 [ centerX
                 , width fill
                 ]

@@ -5,8 +5,11 @@ import Element
     exposing
         ( Element
         , centerX
+        , column
         , newTabLink
         , padding
+        , paragraph
+        , row
         , spacing
         , text
         )
@@ -25,8 +28,8 @@ import Phone.ContentComp exposing (contentComp)
 
 githubComponent : Element msg
 githubComponent =
-    Element.column [ spacing 60 ]
-        [ Element.paragraph
+    column [ spacing 60 ]
+        [ paragraph
             [ Font.size 65
             ]
             [ text "Check out my github profile to see what projects I've been working on lately." ]
@@ -68,7 +71,7 @@ gitHubContentComp =
                 }
 
         buttons =
-            Element.row
+            row
                 [ spacing 45
                 ]
                 [ gitHubLink

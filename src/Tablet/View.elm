@@ -4,9 +4,11 @@ import Data exposing (backgroundPath)
 import Element
     exposing
         ( FocusStyle
+        , column
         , fill
         , focusStyle
         , height
+        , layoutWith
         , spacing
         , width
         )
@@ -41,12 +43,12 @@ tabletView model =
                 AboutMe ->
                     aboutPage
     in
-    Element.layoutWith
+    layoutWith
         { options = [ focusStyle myFocusStyle ] }
         [ Background.image backgroundPath
         ]
     <|
-        Element.column
+        column
             [ width fill
             , height fill
             , spacing 40

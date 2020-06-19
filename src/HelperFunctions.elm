@@ -9,6 +9,8 @@ import Element
     exposing
         ( Attribute
         , Element
+        , behindContent
+        , el
         , fill
         , height
         , text
@@ -30,7 +32,7 @@ bkgAttributes attr =
                 ]
                 attr
     in
-    Element.behindContent <| textElement attributes ""
+    behindContent <| textElement attributes ""
 
 
 speedIf : Bool -> a -> a -> a
@@ -49,4 +51,4 @@ flip a =
 
 textElement : List (Attribute msg) -> String -> Element msg
 textElement attributes myText =
-    Element.el attributes <| text myText
+    el attributes <| text myText

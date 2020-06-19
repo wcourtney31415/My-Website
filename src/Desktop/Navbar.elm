@@ -9,11 +9,15 @@ import Element
         , Element
         , alignRight
         , alpha
+        , below
         , centerX
+        , column
+        , link
         , mouseOver
         , moveDown
         , newTabLink
         , padding
+        , row
         , spacing
         , text
         )
@@ -48,7 +52,7 @@ contactButton model =
             speedIf
                 (model.contactDropdown == Closed)
                 []
-                [ Element.below dropNav
+                [ below dropNav
                 , Font.glow white 3.5
                 ]
     in
@@ -99,7 +103,7 @@ navBar model =
                     }
                 ]
     in
-    Element.row
+    row
         [ alignRight
         , padding 10
         , Font.color white
@@ -116,7 +120,7 @@ dropNav : Element Msg
 dropNav =
     let
         emailClientLnk =
-            Element.link [ hovered ]
+            link [ hovered ]
                 { url = "mailto:" ++ myEmail
                 , label = text "Email using Client"
                 }
@@ -127,7 +131,7 @@ dropNav =
                 , label = text "Copy Email to Clipboard"
                 }
     in
-    Element.column
+    column
         [ Background.color dropNavColor
         , moveDown 15
         , padding 15

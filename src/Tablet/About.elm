@@ -8,9 +8,11 @@ import Element
         , alpha
         , centerX
         , centerY
+        , column
         , fill
         , moveUp
         , padding
+        , paragraph
         , px
         , spacing
         , text
@@ -31,7 +33,7 @@ aboutPage =
 
 homepageItems : Element Msg
 homepageItems =
-    Element.column
+    column
         [ centerX
         , centerY
         , moveUp 100
@@ -41,7 +43,7 @@ homepageItems =
 
 titleBox : Element Msg
 titleBox =
-    Element.column
+    column
         [ centerX
         , centerY
         , padding 10
@@ -74,7 +76,7 @@ frontPageParagraph =
         frontPageText =
             "For professional inqueries, please contact me at " ++ myEmail ++ " and I will get back to you as soon as possible. I look forward to speaking with you."
     in
-    Element.paragraph
+    paragraph
         [ centerX
         , centerY
         , Font.color white

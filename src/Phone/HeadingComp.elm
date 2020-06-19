@@ -5,11 +5,13 @@ import Element
     exposing
         ( Element
         , centerX
+        , column
         , fill
         , height
         , padding
         , paddingEach
         , rgb255
+        , row
         , width
         )
 import Element.Background as Background
@@ -23,7 +25,7 @@ heading : Element msg
 heading =
     let
         titleSdev =
-            Element.row
+            row
                 [ Font.bold
                 , Font.size 95
                 , Background.color viewHeaderCol
@@ -55,7 +57,7 @@ heading =
                 z =
                     y - 20
             in
-            Element.row
+            row
                 [ centerX
                 , Font.size 90
                 , Background.gradient
@@ -82,7 +84,7 @@ heading =
                     "Wesley Courtney"
                 ]
     in
-    Element.column
+    column
         [ width fill
         , height fill
         ]

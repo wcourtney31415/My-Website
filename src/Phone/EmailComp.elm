@@ -7,7 +7,9 @@ import Element
         ( Attribute
         , Element
         , centerX
+        , link
         , padding
+        , row
         , spacing
         , text
         )
@@ -46,7 +48,7 @@ emailComponent =
 
 buttons : Element Msg
 buttons =
-    Element.row
+    row
         [ spacing 45
         , centerX
         ]
@@ -73,7 +75,7 @@ btnAttributes =
 
 btnEmailNow : Element msg
 btnEmailNow =
-    Element.link
+    link
         btnAttributes
         { url = "mailto:" ++ myEmail
         , label = text "Email Now"

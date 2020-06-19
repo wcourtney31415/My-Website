@@ -9,9 +9,13 @@ import Element
         , alpha
         , centerX
         , centerY
+        , column
+        , el
         , fill
+        , link
         , moveUp
         , padding
+        , paragraph
         , px
         , spacing
         , text
@@ -32,7 +36,7 @@ homepage =
 
 homepageItems : Element Msg
 homepageItems =
-    Element.column
+    column
         [ centerX
         , centerY
         , moveUp 100
@@ -42,7 +46,7 @@ homepageItems =
 
 titleBox : Element Msg
 titleBox =
-    Element.column
+    column
         [ centerX
         , centerY
         , padding 10
@@ -67,7 +71,7 @@ titleBox =
             , centerX
             ]
             "Software Developer"
-        , Element.el
+        , el
             [ Font.size 20
             , centerX
             ]
@@ -84,7 +88,7 @@ frontPageParagraph =
         postLink =
             " and I will get back to you as soon as possible. I look forward to speaking with you."
     in
-    Element.paragraph
+    paragraph
         [ centerX
         , centerY
         , Font.color white
@@ -103,7 +107,7 @@ frontPageParagraph =
             ]
         ]
         [ text preLink
-        , Element.link []
+        , link []
             { url = "mailto:" ++ myEmail
             , label = text myEmail
             }

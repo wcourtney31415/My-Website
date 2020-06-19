@@ -6,6 +6,8 @@ import Element
         , Element
         , centerX
         , centerY
+        , column
+        , el
         , fill
         , paddingEach
         , width
@@ -35,7 +37,7 @@ titleContentComp attributes record =
             ]
                 ++ attributes
     in
-    Element.column
+    column
         myAttributes
         [ title record
         , content record
@@ -70,7 +72,7 @@ title record =
             ]
                 ++ record.titleAttr
     in
-    Element.el
+    el
         myAttr
         (textElement
             [ centerX
@@ -106,6 +108,6 @@ content record =
             ]
                 ++ record.contentAttr
     in
-    Element.column
+    column
         myAttr
         record.contents

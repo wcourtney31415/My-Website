@@ -6,6 +6,7 @@ import Element
         , Element
         , centerX
         , centerY
+        , column
         , padding
         )
 import Element.Background as Background
@@ -15,7 +16,7 @@ import Phone.Shadow exposing (phoneShadow)
 
 contentComp : Color -> List (Element msg) -> Element msg
 contentComp bkgColor contents =
-    Element.column
+    column
         [ centerX
         , Border.rounded 32
         , centerY
