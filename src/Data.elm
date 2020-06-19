@@ -5,10 +5,16 @@ module Data exposing
     , aboutMeRawText4
     , backgroundPath
     , gitHub
+    , indent
     , myEmail
     , myName
     , siteSource
     )
+
+
+indent : Int -> String
+indent len =
+    String.concat <| List.repeat len "\u{00A0}"
 
 
 myName : String

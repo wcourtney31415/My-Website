@@ -49,11 +49,11 @@ phoneView =
                 , block "Languages"
                     []
                     [ languagesComp ]
-                , block "About Me"
-                    []
-                    [ aboutMeComp
-                    ]
                 , block "Github"
+                    []
+                    [ githubComponent
+                    ]
+                , block "About Me"
                     [ paddingEach
                         { top = 30
                         , left = 20
@@ -61,7 +61,7 @@ phoneView =
                         , bottom = 200
                         }
                     ]
-                    [ githubComponent
+                    [ aboutMeComp
                     ]
                 ]
             ]

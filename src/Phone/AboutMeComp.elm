@@ -6,10 +6,13 @@ import Data
         , aboutMeRawText2
         , aboutMeRawText3
         , aboutMeRawText4
+        , indent
         )
 import Element
     exposing
         ( Element
+        , centerX
+        , paddingEach
         , paragraph
         , spacing
         , text
@@ -20,12 +23,22 @@ import Element.Font as Font
 
 aboutMeComp : Element msg
 aboutMeComp =
-    textColumn []
-        [ aboutMeParagraph1
+    textColumn
+        [ spacing 40
+        , paddingEach
+            { top = 20, bottom = 0, left = 0, right = 0 }
+        , centerX
+        ]
+        [ aboutMeParagraph4
+        , aboutMeParagraph1
         , aboutMeParagraph2
         , aboutMeParagraph3
-        , aboutMeParagraph4
         ]
+
+
+indAmt : Int
+indAmt =
+    3
 
 
 aboutMeParagraph1 : Element msg
@@ -34,7 +47,7 @@ aboutMeParagraph1 =
         [ Font.size 50
         , spacing 30
         ]
-        [ text aboutMeRawText1
+        [ text <| indent indAmt ++ aboutMeRawText1
         ]
 
 
@@ -44,7 +57,7 @@ aboutMeParagraph2 =
         [ Font.size 50
         , spacing 30
         ]
-        [ text aboutMeRawText2
+        [ text <| indent indAmt ++ aboutMeRawText2
         ]
 
 
@@ -54,7 +67,7 @@ aboutMeParagraph3 =
         [ Font.size 50
         , spacing 30
         ]
-        [ text aboutMeRawText3
+        [ text <| indent indAmt ++ aboutMeRawText3
         ]
 
 
@@ -64,5 +77,5 @@ aboutMeParagraph4 =
         [ Font.size 50
         , spacing 30
         ]
-        [ text aboutMeRawText4
+        [ text <| indent indAmt ++ aboutMeRawText4
         ]
