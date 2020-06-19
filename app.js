@@ -12903,16 +12903,16 @@ var $author$project$Phone$View$phoneView = A2(
 							[$author$project$Phone$EmailComp$emailComponent])),
 						A3(
 						$author$project$Phone$View$block,
-						'Languages',
-						_List_Nil,
-						_List_fromArray(
-							[$author$project$Phone$LanguagesComp$languagesComp])),
-						A3(
-						$author$project$Phone$View$block,
 						'Github',
 						_List_Nil,
 						_List_fromArray(
 							[$author$project$Phone$GithubComp$githubComponent])),
+						A3(
+						$author$project$Phone$View$block,
+						'Languages',
+						_List_Nil,
+						_List_fromArray(
+							[$author$project$Phone$LanguagesComp$languagesComp])),
 						A3(
 						$author$project$Phone$View$block,
 						'About Me',
