@@ -36,18 +36,13 @@ import MessagesAndModels exposing (Msg)
 
 aboutPage : Element Msg
 aboutPage =
-    homepageItems
-
-
-homepageItems : Element Msg
-homepageItems =
     column
         [ centerX
         , centerY
         , moveUp 100
         ]
         [ titleBox
-        , frontPageParagraph
+        , aboutMeText
         ]
 
 
@@ -80,8 +75,8 @@ titleBox =
         ]
 
 
-frontPageParagraph : Element Msg
-frontPageParagraph =
+aboutMeText : Element Msg
+aboutMeText =
     textColumn
         [ centerX
         , centerY

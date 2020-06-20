@@ -31,11 +31,6 @@ import MessagesAndModels exposing (Msg)
 
 homepage : Element Msg
 homepage =
-    homepageItems
-
-
-homepageItems : Element Msg
-homepageItems =
     column
         [ centerX
         , centerY
