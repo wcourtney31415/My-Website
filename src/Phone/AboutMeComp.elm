@@ -10,7 +10,8 @@ import Data
         )
 import Element
     exposing
-        ( Element
+        ( Attribute
+        , Element
         , centerX
         , paddingEach
         , paragraph
@@ -41,12 +42,17 @@ indAmt =
     3
 
 
+paragraphAttr : List (Attribute msg)
+paragraphAttr =
+    [ Font.size 50
+    , spacing 30
+    ]
+
+
 aboutMeParagraph1 : Element msg
 aboutMeParagraph1 =
     paragraph
-        [ Font.size 50
-        , spacing 30
-        ]
+        paragraphAttr
         [ text <| indent indAmt ++ aboutMeRawText1
         ]
 
@@ -54,9 +60,7 @@ aboutMeParagraph1 =
 aboutMeParagraph2 : Element msg
 aboutMeParagraph2 =
     paragraph
-        [ Font.size 50
-        , spacing 30
-        ]
+        paragraphAttr
         [ text <| indent indAmt ++ aboutMeRawText2
         ]
 
@@ -64,9 +68,7 @@ aboutMeParagraph2 =
 aboutMeParagraph3 : Element msg
 aboutMeParagraph3 =
     paragraph
-        [ Font.size 50
-        , spacing 30
-        ]
+        paragraphAttr
         [ text <| indent indAmt ++ aboutMeRawText3
         ]
 
@@ -74,8 +76,6 @@ aboutMeParagraph3 =
 aboutMeParagraph4 : Element msg
 aboutMeParagraph4 =
     paragraph
-        [ Font.size 50
-        , spacing 30
-        ]
+        paragraphAttr
         [ text <| indent indAmt ++ aboutMeRawText4
         ]

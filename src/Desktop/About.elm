@@ -1,11 +1,19 @@
 module Desktop.About exposing (aboutPage)
 
 import BasicColors exposing (white)
-import Data exposing (myEmail)
+import Data
+    exposing
+        ( aboutMeRawText1
+        , aboutMeRawText2
+        , aboutMeRawText3
+        , aboutMeRawText4
+        , indent
+        )
 import Desktop.Colors exposing (grayFortyTwo)
 import Element
     exposing
-        ( Element
+        ( Attribute
+        , Element
         , alpha
         , centerX
         , centerY
@@ -17,6 +25,7 @@ import Element
         , px
         , spacing
         , text
+        , textColumn
         , width
         )
 import Element.Background as Background
@@ -74,16 +83,13 @@ titleBox =
 
 frontPageParagraph : Element Msg
 frontPageParagraph =
-    let
-        frontPageText =
-            "For professional inqueries, please contact me at " ++ myEmail ++ " and I will get back to you as soon as possible. I look forward to speaking with you."
-    in
-    paragraph
+    textColumn
         [ centerX
         , centerY
         , Font.color white
         , padding 25
         , width <| px 1050
+        , spacing 30
         , bkgAttributes
             [ Background.color grayFortyTwo
             , alpha 0.6
@@ -96,4 +102,50 @@ frontPageParagraph =
                 }
             ]
         ]
-        [ text frontPageText ]
+        [ aboutMeParagraph4
+        , aboutMeParagraph1
+        , aboutMeParagraph2
+        , aboutMeParagraph3
+        ]
+
+
+indAmt : Int
+indAmt =
+    5
+
+
+paragraphAttr : List (Attribute msg)
+paragraphAttr =
+    []
+
+
+aboutMeParagraph1 : Element msg
+aboutMeParagraph1 =
+    paragraph
+        paragraphAttr
+        [ text <| indent indAmt ++ aboutMeRawText1
+        ]
+
+
+aboutMeParagraph2 : Element msg
+aboutMeParagraph2 =
+    paragraph
+        paragraphAttr
+        [ text <| indent indAmt ++ aboutMeRawText2
+        ]
+
+
+aboutMeParagraph3 : Element msg
+aboutMeParagraph3 =
+    paragraph
+        paragraphAttr
+        [ text <| indent indAmt ++ aboutMeRawText3
+        ]
+
+
+aboutMeParagraph4 : Element msg
+aboutMeParagraph4 =
+    paragraph
+        paragraphAttr
+        [ text <| indent indAmt ++ aboutMeRawText4
+        ]
