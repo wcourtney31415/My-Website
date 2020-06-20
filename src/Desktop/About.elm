@@ -12,8 +12,7 @@ import Data
 import Desktop.Colors exposing (grayFortyTwo)
 import Element
     exposing
-        ( Attribute
-        , Element
+        ( Element
         , alpha
         , centerX
         , centerY
@@ -102,50 +101,23 @@ frontPageParagraph =
                 }
             ]
         ]
-        [ aboutMeParagraph4
-        , aboutMeParagraph1
-        , aboutMeParagraph2
-        , aboutMeParagraph3
-        ]
+    <|
+        makeParagraphs
+            [ aboutMeRawText4
+            , aboutMeRawText1
+            , aboutMeRawText2
+            , aboutMeRawText3
+            ]
 
 
-indAmt : Int
-indAmt =
-    5
-
-
-paragraphAttr : List (Attribute msg)
-paragraphAttr =
-    []
-
-
-aboutMeParagraph1 : Element msg
-aboutMeParagraph1 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText1
-        ]
-
-
-aboutMeParagraph2 : Element msg
-aboutMeParagraph2 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText2
-        ]
-
-
-aboutMeParagraph3 : Element msg
-aboutMeParagraph3 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText3
-        ]
-
-
-aboutMeParagraph4 : Element msg
-aboutMeParagraph4 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText4
-        ]
+makeParagraphs : List String -> List (Element msg)
+makeParagraphs lst =
+    let
+        toParagraph : String -> Element msg
+        toParagraph str =
+            paragraph
+                []
+            <|
+                [ text <| indent 5 ++ str ]
+    in
+    List.map toParagraph lst

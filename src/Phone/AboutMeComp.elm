@@ -41,10 +41,6 @@ aboutMeComp =
 makeParagraphs : List String -> List (Element msg)
 makeParagraphs lst =
     let
-        indAmt : Int
-        indAmt =
-            3
-
         toParagraph : String -> Element msg
         toParagraph str =
             paragraph
@@ -52,6 +48,6 @@ makeParagraphs lst =
                 , spacing 30
                 ]
             <|
-                [ text (indent indAmt ++ str) ]
+                [ text <| indent 3 ++ str ]
     in
     List.map toParagraph lst
