@@ -10,8 +10,7 @@ import Data
         )
 import Element
     exposing
-        ( Attribute
-        , Element
+        ( Element
         , centerX
         , paddingEach
         , paragraph
@@ -30,52 +29,29 @@ aboutMeComp =
             { top = 20, bottom = 0, left = 0, right = 0 }
         , centerX
         ]
-        [ aboutMeParagraph4
-        , aboutMeParagraph1
-        , aboutMeParagraph2
-        , aboutMeParagraph3
-        ]
+    <|
+        makeParagraphs
+            [ aboutMeRawText4
+            , aboutMeRawText1
+            , aboutMeRawText2
+            , aboutMeRawText3
+            ]
 
 
-indAmt : Int
-indAmt =
-    3
+makeParagraphs : List String -> List (Element msg)
+makeParagraphs lst =
+    let
+        indAmt : Int
+        indAmt =
+            3
 
-
-paragraphAttr : List (Attribute msg)
-paragraphAttr =
-    [ Font.size 50
-    , spacing 30
-    ]
-
-
-aboutMeParagraph1 : Element msg
-aboutMeParagraph1 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText1
-        ]
-
-
-aboutMeParagraph2 : Element msg
-aboutMeParagraph2 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText2
-        ]
-
-
-aboutMeParagraph3 : Element msg
-aboutMeParagraph3 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText3
-        ]
-
-
-aboutMeParagraph4 : Element msg
-aboutMeParagraph4 =
-    paragraph
-        paragraphAttr
-        [ text <| indent indAmt ++ aboutMeRawText4
-        ]
+        toParagraph : String -> Element msg
+        toParagraph str =
+            paragraph
+                [ Font.size 50
+                , spacing 30
+                ]
+            <|
+                [ text (indent indAmt ++ str) ]
+    in
+    List.map toParagraph lst
