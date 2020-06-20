@@ -86,7 +86,7 @@ aboutMeText =
         , spacing 30
         , bkgAttributes
             [ Background.color grayFortyTwo
-            , alpha 0.6
+            , alpha 0.8
             , Border.rounded 10
             , Border.roundEach
                 { topLeft = 0
