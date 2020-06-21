@@ -13,6 +13,13 @@ type alias Model =
     }
 
 
+
+-- "responsive" field : In the event that the implimentation used to aquire the
+-- screen width and height was to fail due to updates from the browser or the
+-- feature itself, this responsive field can be toggled off to temporarily
+-- disable the responsiveness of the site.
+
+
 type Page
     = Home
     | AboutMe
