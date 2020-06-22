@@ -18,6 +18,7 @@ import Element
         , centerY
         , column
         , fill
+        , maximum
         , moveUp
         , padding
         , paragraph
@@ -40,7 +41,7 @@ aboutPage =
         [ centerX
         , centerY
         , moveUp 100
-        , width fill
+        , width (fill |> maximum 1100)
         , padding 35
         ]
         [ titleBox
