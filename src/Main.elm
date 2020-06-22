@@ -53,7 +53,7 @@ init flags =
             , device = device
             , responsive = True
             , contactDropdown = Closed
-            , selectedPage = AboutMe
+            , selectedPage = Home
             }
     in
     ( initialModel, Cmd.none )
