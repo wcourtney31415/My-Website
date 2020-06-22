@@ -20,7 +20,6 @@ import Element
         , moveUp
         , padding
         , paragraph
-        , px
         , spacing
         , text
         , textColumn
@@ -40,6 +39,8 @@ aboutPage =
         [ centerX
         , centerY
         , moveUp 100
+        , width fill
+        , padding 35
         ]
         [ titleBox
         , aboutMeText
@@ -82,7 +83,7 @@ aboutMeText =
         , centerY
         , Font.color white
         , padding 25
-        , width <| px 1050
+        , width fill
         , spacing 30
         , bkgAttributes
             [ Background.color grayFortyTwo
