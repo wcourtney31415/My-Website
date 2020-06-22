@@ -1,7 +1,14 @@
 module Tablet.About exposing (aboutPage)
 
 import BasicColors exposing (white)
-import Data exposing (myEmail)
+import Data
+    exposing
+        ( aboutMeRawText1
+        , aboutMeRawText2
+        , aboutMeRawText3
+        , aboutMeRawText4
+        , indent
+        )
 import Element
     exposing
         ( Element
@@ -16,6 +23,7 @@ import Element
         , px
         , spacing
         , text
+        , textColumn
         , width
         )
 import Element.Background as Background
@@ -28,17 +36,14 @@ import Tablet.Colors exposing (grayFortyTwo)
 
 aboutPage : Element Msg
 aboutPage =
-    homepageItems
-
-
-homepageItems : Element Msg
-homepageItems =
     column
         [ centerX
         , centerY
         , moveUp 100
         ]
-        [ titleBox, frontPageParagraph ]
+        [ titleBox
+        , aboutMeText
+        ]
 
 
 titleBox : Element Msg
@@ -70,21 +75,18 @@ titleBox =
         ]
 
 
-frontPageParagraph : Element Msg
-frontPageParagraph =
-    let
-        frontPageText =
-            "For professional inqueries, please contact me at " ++ myEmail ++ " and I will get back to you as soon as possible. I look forward to speaking with you."
-    in
-    paragraph
+aboutMeText : Element Msg
+aboutMeText =
+    textColumn
         [ centerX
         , centerY
         , Font.color white
         , padding 25
         , width <| px 1050
+        , spacing 30
         , bkgAttributes
             [ Background.color grayFortyTwo
-            , alpha 0.6
+            , alpha 0.8
             , Border.rounded 10
             , Border.roundEach
                 { topLeft = 0
@@ -94,4 +96,23 @@ frontPageParagraph =
                 }
             ]
         ]
-        [ text frontPageText ]
+    <|
+        makeParagraphs
+            [ aboutMeRawText4
+            , aboutMeRawText1
+            , aboutMeRawText2
+            , aboutMeRawText3
+            ]
+
+
+makeParagraphs : List String -> List (Element msg)
+makeParagraphs lst =
+    let
+        toParagraph : String -> Element msg
+        toParagraph str =
+            paragraph
+                []
+            <|
+                [ text <| indent 5 ++ str ]
+    in
+    List.map toParagraph lst
