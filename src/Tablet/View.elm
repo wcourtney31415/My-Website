@@ -8,6 +8,7 @@ import Element
         , fill
         , focusStyle
         , height
+        , inFront
         , layoutWith
         , spacing
         , width
@@ -46,6 +47,7 @@ tabletView model =
     layoutWith
         { options = [ focusStyle myFocusStyle ] }
         [ Background.image backgroundPath
+        , inFront <| navBar model
         ]
     <|
         column
@@ -53,6 +55,5 @@ tabletView model =
             , height fill
             , spacing 40
             ]
-            [ navBar model
-            , selectedPage
+            [ selectedPage
             ]
