@@ -17,7 +17,6 @@ import Element
         , centerY
         , column
         , fill
-        , moveUp
         , padding
         , paragraph
         , spacing
@@ -38,7 +37,6 @@ aboutPage =
     column
         [ centerX
         , centerY
-        , moveUp 100
         , width fill
         , padding 35
         ]

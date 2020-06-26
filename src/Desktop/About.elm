@@ -19,7 +19,6 @@ import Element
         , column
         , fill
         , maximum
-        , moveUp
         , padding
         , paragraph
         , px
@@ -40,7 +39,6 @@ aboutPage =
     column
         [ centerX
         , centerY
-        , moveUp 100
         , width (fill |> maximum 1100)
         , padding 35
         ]
