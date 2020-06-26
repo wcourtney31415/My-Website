@@ -18,7 +18,7 @@ import Element
         , centerY
         , column
         , fill
-        , moveUp
+        , maximum
         , padding
         , paragraph
         , px
@@ -39,7 +39,8 @@ aboutPage =
     column
         [ centerX
         , centerY
-        , moveUp 100
+        , width (fill |> maximum 1100)
+        , padding 35
         ]
         [ titleBox
         , aboutMeText
@@ -82,7 +83,7 @@ aboutMeText =
         , centerY
         , Font.color white
         , padding 25
-        , width <| px 1050
+        , width fill
         , spacing 30
         , bkgAttributes
             [ Background.color grayFortyTwo

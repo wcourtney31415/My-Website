@@ -13,7 +13,6 @@ import Element
         , el
         , fill
         , link
-        , moveUp
         , padding
         , paragraph
         , px
@@ -34,7 +33,6 @@ homepage =
     column
         [ centerX
         , centerY
-        , moveUp 100
         ]
         [ titleBox, frontPageParagraph ]
 

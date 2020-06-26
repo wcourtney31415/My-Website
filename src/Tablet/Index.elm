@@ -12,7 +12,6 @@ import Element
         , el
         , fill
         , link
-        , moveUp
         , padding
         , paragraph
         , px
@@ -38,7 +37,6 @@ homepageItems =
     column
         [ centerX
         , centerY
-        , moveUp 100
         ]
         [ titleBox, frontPageParagraph ]
 
