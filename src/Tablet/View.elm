@@ -10,6 +10,7 @@ import Element
         , height
         , inFront
         , layoutWith
+        , padding
         , spacing
         , width
         )
@@ -54,6 +55,7 @@ tabletView model =
             [ width fill
             , height fill
             , spacing 40
+            , padding 35
             ]
             [ selectedPage
             ]
