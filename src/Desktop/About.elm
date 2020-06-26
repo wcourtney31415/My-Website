@@ -20,6 +20,7 @@ import Element
         , fill
         , maximum
         , padding
+        , paddingXY
         , paragraph
         , px
         , spacing
@@ -40,7 +41,7 @@ aboutPage =
         [ centerX
         , centerY
         , width (fill |> maximum 1100)
-        , padding 35
+        , paddingXY 35 55
         ]
         [ titleBox
         , aboutMeText

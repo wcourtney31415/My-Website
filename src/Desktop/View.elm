@@ -14,6 +14,7 @@ import Element
         , inFront
         , layoutWith
         , padding
+        , paddingXY
         , spacing
         , width
         )
@@ -55,7 +56,7 @@ desktopView model =
             [ width fill
             , height fill
             , spacing 40
-            , padding 35
+            , paddingXY 0 10
             ]
             [ selectedPage
             ]

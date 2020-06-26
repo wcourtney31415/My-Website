@@ -13,7 +13,9 @@ import Element
         , el
         , fill
         , link
+        , maximum
         , padding
+        , paddingXY
         , paragraph
         , px
         , spacing
@@ -33,6 +35,7 @@ homepage =
     column
         [ centerX
         , centerY
+        , paddingXY 35 55
         ]
         [ titleBox, frontPageParagraph ]
 
@@ -86,7 +89,7 @@ frontPageParagraph =
         , centerY
         , Font.color white
         , padding 25
-        , width <| px 800
+        , width (fill |> maximum 800)
         , bkgAttributes
             [ Background.color grayFortyTwo
             , alpha 0.6
