@@ -14,6 +14,7 @@ import Element
         , link
         , maximum
         , padding
+        , paddingXY
         , paragraph
         , px
         , spacing
@@ -38,6 +39,7 @@ homepageItems =
     column
         [ centerX
         , centerY
+        , paddingXY 35 55
         ]
         [ titleBox, frontPageParagraph ]
 

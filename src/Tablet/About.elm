@@ -18,6 +18,7 @@ import Element
         , column
         , fill
         , padding
+        , paddingXY
         , paragraph
         , spacing
         , text
@@ -38,7 +39,7 @@ aboutPage =
         [ centerX
         , centerY
         , width fill
-        , padding 35
+        , paddingXY 35 55
         ]
         [ titleBox
         , aboutMeText
