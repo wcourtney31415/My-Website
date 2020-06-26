@@ -11170,20 +11170,28 @@ var $mdgriffith$elm_ui$Element$column = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
-var $mdgriffith$elm_ui$Internal$Model$MoveY = function (a) {
-	return {$: 'MoveY', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$TransformComponent = F2(
-	function (a, b) {
-		return {$: 'TransformComponent', a: a, b: b};
+var $mdgriffith$elm_ui$Element$paddingXY = F2(
+	function (x, y) {
+		return _Utils_eq(x, y) ? A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				'p-' + $elm$core$String$fromInt(x),
+				x,
+				x,
+				x,
+				x)) : A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				'p-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y))),
+				y,
+				x,
+				y,
+				x));
 	});
-var $mdgriffith$elm_ui$Internal$Flag$moveY = $mdgriffith$elm_ui$Internal$Flag$flag(26);
-var $mdgriffith$elm_ui$Element$moveUp = function (y) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$TransformComponent,
-		$mdgriffith$elm_ui$Internal$Flag$moveY,
-		$mdgriffith$elm_ui$Internal$Model$MoveY(-y));
-};
 var $mdgriffith$elm_ui$Internal$Model$Class = F2(
 	function (a, b) {
 		return {$: 'Class', a: a, b: b};
@@ -11237,10 +11245,9 @@ var $author$project$Desktop$About$aboutPage = A2(
 		[
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$centerY,
-			$mdgriffith$elm_ui$Element$moveUp(100),
 			$mdgriffith$elm_ui$Element$width(
 			A2($mdgriffith$elm_ui$Element$maximum, 1100, $mdgriffith$elm_ui$Element$fill)),
-			$mdgriffith$elm_ui$Element$padding(35)
+			A2($mdgriffith$elm_ui$Element$paddingXY, 35, 55)
 		]),
 	_List_fromArray(
 		[$author$project$Desktop$About$titleBox, $author$project$Desktop$About$aboutMeText]));
@@ -11287,10 +11294,6 @@ var $mdgriffith$elm_ui$Element$link = F2(
 					[label])));
 	});
 var $author$project$Data$myEmail = 'wcourtney31415@gmail.com';
-var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
-	return {$: 'Px', a: a};
-};
-var $mdgriffith$elm_ui$Element$px = $mdgriffith$elm_ui$Internal$Model$Px;
 var $author$project$Desktop$Index$frontPageParagraph = function () {
 	var preLink = 'For professional inqueries, please contact me at ';
 	var postLink = ' and I will get back to you as soon as possible. I look forward to speaking with you.';
@@ -11303,7 +11306,7 @@ var $author$project$Desktop$Index$frontPageParagraph = function () {
 				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
 				$mdgriffith$elm_ui$Element$padding(25),
 				$mdgriffith$elm_ui$Element$width(
-				$mdgriffith$elm_ui$Element$px(800)),
+				A2($mdgriffith$elm_ui$Element$maximum, 800, $mdgriffith$elm_ui$Element$fill)),
 				$author$project$HelperFunctions$bkgAttributes(
 				_List_fromArray(
 					[
@@ -11490,7 +11493,7 @@ var $author$project$Desktop$Index$homepage = A2(
 		[
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$centerY,
-			$mdgriffith$elm_ui$Element$moveUp(100)
+			A2($mdgriffith$elm_ui$Element$paddingXY, 35, 55)
 		]),
 	_List_fromArray(
 		[$author$project$Desktop$Index$titleBox, $author$project$Desktop$Index$frontPageParagraph]));
@@ -11498,6 +11501,10 @@ var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $mdgriffith$elm_ui$Element$Background$image = function (src) {
 	return $mdgriffith$elm_ui$Internal$Model$Attr(
 		A2($elm$virtual_dom$VirtualDom$style, 'background', 'url(\"' + (src + '\") center / cover no-repeat')));
+};
+var $mdgriffith$elm_ui$Internal$Model$InFront = {$: 'InFront'};
+var $mdgriffith$elm_ui$Element$inFront = function (element) {
+	return A2($mdgriffith$elm_ui$Element$createNearby, $mdgriffith$elm_ui$Internal$Model$InFront, element);
 };
 var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
 	function (a, b) {
@@ -11895,6 +11902,10 @@ var $mdgriffith$elm_ui$Internal$Model$PseudoSelector = F2(
 		return {$: 'PseudoSelector', a: a, b: b};
 	});
 var $mdgriffith$elm_ui$Internal$Flag$hover = $mdgriffith$elm_ui$Internal$Flag$flag(33);
+var $mdgriffith$elm_ui$Internal$Model$TransformComponent = F2(
+	function (a, b) {
+		return {$: 'TransformComponent', a: a, b: b};
+	});
 var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
 var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
 var $mdgriffith$elm_ui$Internal$Model$map = F2(
@@ -12048,6 +12059,10 @@ var $author$project$MessagesAndModels$CopyToClipboard = function (a) {
 	return {$: 'CopyToClipboard', a: a};
 };
 var $author$project$Desktop$Colors$dropNavColor = A3($mdgriffith$elm_ui$Element$rgb255, 105, 108, 112);
+var $mdgriffith$elm_ui$Internal$Model$MoveY = function (a) {
+	return {$: 'MoveY', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Flag$moveY = $mdgriffith$elm_ui$Internal$Flag$flag(26);
 var $mdgriffith$elm_ui$Element$moveDown = function (y) {
 	return A2(
 		$mdgriffith$elm_ui$Internal$Model$TransformComponent,
@@ -12264,7 +12279,9 @@ var $author$project$Desktop$View$desktopView = function (model) {
 		},
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$Background$image($author$project$Data$backgroundPath)
+				$mdgriffith$elm_ui$Element$Background$image($author$project$Data$backgroundPath),
+				$mdgriffith$elm_ui$Element$inFront(
+				$author$project$Desktop$Navbar$navBar(model))
 			]),
 		A2(
 			$mdgriffith$elm_ui$Element$column,
@@ -12272,13 +12289,11 @@ var $author$project$Desktop$View$desktopView = function (model) {
 				[
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-					$mdgriffith$elm_ui$Element$spacing(40)
+					$mdgriffith$elm_ui$Element$spacing(40),
+					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 10)
 				]),
 			_List_fromArray(
-				[
-					$author$project$Desktop$Navbar$navBar(model),
-					selectedPage
-				])));
+				[selectedPage])));
 };
 var $author$project$Phone$AboutMeComp$makeParagraphs = function (lst) {
 	var toParagraph = function (str) {
@@ -12382,28 +12397,6 @@ var $mdgriffith$elm_ui$Element$Background$gradient = function (_v0) {
 	}
 };
 var $author$project$Phone$Colors$grayThirtyFour = A3($mdgriffith$elm_ui$Element$rgb255, 234, 234, 234);
-var $mdgriffith$elm_ui$Element$paddingXY = F2(
-	function (x, y) {
-		return _Utils_eq(x, y) ? A2(
-			$mdgriffith$elm_ui$Internal$Model$StyleClass,
-			$mdgriffith$elm_ui$Internal$Flag$padding,
-			A5(
-				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-				'p-' + $elm$core$String$fromInt(x),
-				x,
-				x,
-				x,
-				x)) : A2(
-			$mdgriffith$elm_ui$Internal$Model$StyleClass,
-			$mdgriffith$elm_ui$Internal$Flag$padding,
-			A5(
-				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-				'p-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y))),
-				y,
-				x,
-				y,
-				x));
-	});
 var $author$project$Phone$View$block = F3(
 	function (title, attributes, contents) {
 		return A2(
@@ -12736,6 +12729,10 @@ var $author$project$Phone$HeadingComp$heading = function () {
 }();
 var $author$project$Phone$Colors$gradientColor1 = A3($mdgriffith$elm_ui$Element$rgb255, 228, 228, 228);
 var $author$project$Phone$Colors$lighterGray = A3($mdgriffith$elm_ui$Element$rgb255, 230, 230, 230);
+var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
+	return {$: 'Px', a: a};
+};
+var $mdgriffith$elm_ui$Element$px = $mdgriffith$elm_ui$Internal$Model$Px;
 var $author$project$Phone$LanguagesComp$paradigmBlock = F3(
 	function (attr, title, languages) {
 		var strToElem = function (_v0) {
@@ -12976,9 +12973,8 @@ var $author$project$Tablet$About$aboutPage = A2(
 		[
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$centerY,
-			$mdgriffith$elm_ui$Element$moveUp(100),
 			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-			$mdgriffith$elm_ui$Element$padding(35)
+			A2($mdgriffith$elm_ui$Element$paddingXY, 35, 55)
 		]),
 	_List_fromArray(
 		[$author$project$Tablet$About$titleBox, $author$project$Tablet$About$aboutMeText]));
@@ -12994,7 +12990,7 @@ var $author$project$Tablet$Index$frontPageParagraph = function () {
 				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
 				$mdgriffith$elm_ui$Element$padding(25),
 				$mdgriffith$elm_ui$Element$width(
-				$mdgriffith$elm_ui$Element$px(800)),
+				A2($mdgriffith$elm_ui$Element$maximum, 800, $mdgriffith$elm_ui$Element$fill)),
 				$author$project$HelperFunctions$bkgAttributes(
 				_List_fromArray(
 					[
@@ -13063,7 +13059,7 @@ var $author$project$Tablet$Index$homepageItems = A2(
 		[
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$centerY,
-			$mdgriffith$elm_ui$Element$moveUp(100)
+			A2($mdgriffith$elm_ui$Element$paddingXY, 35, 55)
 		]),
 	_List_fromArray(
 		[$author$project$Tablet$Index$titleBox, $author$project$Tablet$Index$frontPageParagraph]));
@@ -13205,7 +13201,9 @@ var $author$project$Tablet$View$tabletView = function (model) {
 		},
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$Background$image($author$project$Data$backgroundPath)
+				$mdgriffith$elm_ui$Element$Background$image($author$project$Data$backgroundPath),
+				$mdgriffith$elm_ui$Element$inFront(
+				$author$project$Tablet$Navbar$navBar(model))
 			]),
 		A2(
 			$mdgriffith$elm_ui$Element$column,
@@ -13213,13 +13211,11 @@ var $author$project$Tablet$View$tabletView = function (model) {
 				[
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
-					$mdgriffith$elm_ui$Element$spacing(40)
+					$mdgriffith$elm_ui$Element$spacing(40),
+					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 10)
 				]),
 			_List_fromArray(
-				[
-					$author$project$Tablet$Navbar$navBar(model),
-					selectedPage
-				])));
+				[selectedPage])));
 };
 var $author$project$View_Controller$siteView = function (model) {
 	var deviceClass = model.device._class;
