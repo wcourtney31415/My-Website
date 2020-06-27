@@ -10,7 +10,6 @@ import Element
         , height
         , inFront
         , layoutWith
-        , padding
         , paddingXY
         , spacing
         , width
