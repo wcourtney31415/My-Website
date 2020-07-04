@@ -107,6 +107,7 @@ navBar model =
         , Font.color white
         , spacing 20
         , bkgAttr
+        , Font.size 37
         ]
         [ contactButton model
         , aboutMe model
