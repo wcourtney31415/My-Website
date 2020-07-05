@@ -39,7 +39,7 @@ aboutPage =
         [ centerX
         , centerY
         , width fill
-        , paddingXY 35 55
+        , paddingXY 35 0
         ]
         [ titleBox
         , aboutMeText
