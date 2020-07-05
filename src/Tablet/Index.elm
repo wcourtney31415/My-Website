@@ -65,12 +65,12 @@ titleBox =
             ]
         ]
         [ textElement
-            [ Font.size 40
+            [ Font.size 50
             , centerX
             ]
             "Software Developer"
         , el
-            [ Font.size 20
+            [ Font.size 30
             , centerX
             ]
             (text myName)
@@ -90,8 +90,9 @@ frontPageParagraph =
         [ centerX
         , centerY
         , Font.color white
-        , padding 25
+        , padding 30
         , width (fill |> maximum 800)
+        , spacing 30
         , bkgAttributes
             [ Background.color grayFortyTwo
             , alpha 0.6
