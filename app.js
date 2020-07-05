@@ -11028,6 +11028,16 @@ var $mdgriffith$elm_ui$Element$paragraph = F2(
 						attrs))),
 			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
+var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
+	return {$: 'FontSize', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Flag$fontSize = $mdgriffith$elm_ui$Internal$Flag$flag(4);
+var $mdgriffith$elm_ui$Element$Font$size = function (i) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontSize,
+		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
+};
 var $author$project$Desktop$About$makeParagraphs = function (lst) {
 	var toParagraph = function (str) {
 		return A2(
@@ -11035,10 +11045,16 @@ var $author$project$Desktop$About$makeParagraphs = function (lst) {
 			_List_Nil,
 			_List_fromArray(
 				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$size(20)
+						]),
 					$mdgriffith$elm_ui$Element$text(
-					_Utils_ap(
-						$author$project$Data$indent(5),
-						str))
+						_Utils_ap(
+							$author$project$Data$indent(5),
+							str)))
 				]));
 	};
 	return A2($elm$core$List$map, toParagraph, lst);
@@ -11198,16 +11214,6 @@ var $mdgriffith$elm_ui$Internal$Model$Class = F2(
 	});
 var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
 var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.bold);
-var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
-	return {$: 'FontSize', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Flag$fontSize = $mdgriffith$elm_ui$Internal$Flag$flag(4);
-var $mdgriffith$elm_ui$Element$Font$size = function (i) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$fontSize,
-		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
-};
 var $author$project$Desktop$About$titleBox = A2(
 	$mdgriffith$elm_ui$Element$column,
 	_List_fromArray(
@@ -12905,10 +12911,16 @@ var $author$project$Tablet$About$makeParagraphs = function (lst) {
 			_List_Nil,
 			_List_fromArray(
 				[
+					A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$size(35)
+						]),
 					$mdgriffith$elm_ui$Element$text(
-					_Utils_ap(
-						$author$project$Data$indent(5),
-						str))
+						_Utils_ap(
+							$author$project$Data$indent(5),
+							str)))
 				]));
 	};
 	return A2($elm$core$List$map, toParagraph, lst);
@@ -12974,7 +12986,7 @@ var $author$project$Tablet$About$aboutPage = A2(
 			$mdgriffith$elm_ui$Element$centerX,
 			$mdgriffith$elm_ui$Element$centerY,
 			$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-			A2($mdgriffith$elm_ui$Element$paddingXY, 35, 55)
+			A2($mdgriffith$elm_ui$Element$paddingXY, 35, 0)
 		]),
 	_List_fromArray(
 		[$author$project$Tablet$About$titleBox, $author$project$Tablet$About$aboutMeText]));
@@ -12988,9 +13000,10 @@ var $author$project$Tablet$Index$frontPageParagraph = function () {
 				$mdgriffith$elm_ui$Element$centerX,
 				$mdgriffith$elm_ui$Element$centerY,
 				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
-				$mdgriffith$elm_ui$Element$padding(25),
+				$mdgriffith$elm_ui$Element$padding(30),
 				$mdgriffith$elm_ui$Element$width(
 				A2($mdgriffith$elm_ui$Element$maximum, 800, $mdgriffith$elm_ui$Element$fill)),
+				$mdgriffith$elm_ui$Element$spacing(30),
 				$author$project$HelperFunctions$bkgAttributes(
 				_List_fromArray(
 					[
@@ -13003,15 +13016,31 @@ var $author$project$Tablet$Index$frontPageParagraph = function () {
 			]),
 		_List_fromArray(
 			[
-				$mdgriffith$elm_ui$Element$text(preLink),
+				A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(35)
+					]),
+				$mdgriffith$elm_ui$Element$text(preLink)),
 				A2(
 				$mdgriffith$elm_ui$Element$link,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(30),
+						$mdgriffith$elm_ui$Element$Font$bold
+					]),
 				{
 					label: $mdgriffith$elm_ui$Element$text($author$project$Data$myEmail),
 					url: 'mailto:' + $author$project$Data$myEmail
 				}),
-				$mdgriffith$elm_ui$Element$text(postLink)
+				A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(35)
+					]),
+				$mdgriffith$elm_ui$Element$text(postLink))
 			]));
 }();
 var $author$project$Tablet$Index$titleBox = A2(
@@ -13040,7 +13069,7 @@ var $author$project$Tablet$Index$titleBox = A2(
 			$author$project$HelperFunctions$textElement,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$Font$size(40),
+					$mdgriffith$elm_ui$Element$Font$size(50),
 					$mdgriffith$elm_ui$Element$centerX
 				]),
 			'Software Developer'),
@@ -13048,7 +13077,7 @@ var $author$project$Tablet$Index$titleBox = A2(
 			$mdgriffith$elm_ui$Element$el,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$Font$size(20),
+					$mdgriffith$elm_ui$Element$Font$size(30),
 					$mdgriffith$elm_ui$Element$centerX
 				]),
 			$mdgriffith$elm_ui$Element$text($author$project$Data$myName))
@@ -13172,7 +13201,8 @@ var $author$project$Tablet$Navbar$navBar = function (model) {
 				$mdgriffith$elm_ui$Element$padding(10),
 				$mdgriffith$elm_ui$Element$Font$color($author$project$BasicColors$white),
 				$mdgriffith$elm_ui$Element$spacing(20),
-				bkgAttr
+				bkgAttr,
+				$mdgriffith$elm_ui$Element$Font$size(37)
 			]),
 		_List_fromArray(
 			[
@@ -13212,7 +13242,7 @@ var $author$project$Tablet$View$tabletView = function (model) {
 					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
 					$mdgriffith$elm_ui$Element$spacing(40),
-					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 10)
+					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 100)
 				]),
 			_List_fromArray(
 				[selectedPage])));
