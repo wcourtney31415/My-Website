@@ -113,6 +113,13 @@ makeParagraphs lst =
             paragraph
                 []
             <|
-                [ text <| indent 5 ++ str ]
+                [ Element.el
+                    [ Font.size 35
+                    ]
+                  <|
+                    text <|
+                        indent 5
+                            ++ str
+                ]
     in
     List.map toParagraph lst
