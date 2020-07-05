@@ -104,10 +104,13 @@ frontPageParagraph =
                 }
             ]
         ]
-        [ text preLink
-        , link []
+        [ Element.el [ Font.size 35 ] <| text preLink
+        , link
+            [ Font.size 30
+            , Font.bold
+            ]
             { url = "mailto:" ++ myEmail
             , label = text myEmail
             }
-        , text postLink
+        , Element.el [ Font.size 35 ] <| text postLink
         ]
