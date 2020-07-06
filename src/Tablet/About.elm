@@ -70,6 +70,7 @@ titleBox =
         [ textElement
             [ Font.size 40
             , centerX
+            , padding 15
             ]
             "About Me"
         ]

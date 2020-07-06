@@ -55,7 +55,7 @@ titleBox =
         , width fill
         , bkgAttributes
             [ Background.color grayFortyTwo
-            , alpha 0.75
+            , alpha 0.83
             , Border.roundEach
                 { topLeft = 10
                 , topRight = 10
@@ -95,7 +95,7 @@ frontPageParagraph =
         , spacing 50
         , bkgAttributes
             [ Background.color grayFortyTwo
-            , alpha 0.6
+            , alpha 0.95
             , Border.rounded 10
             , Border.roundEach
                 { topLeft = 0
