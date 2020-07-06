@@ -39,7 +39,7 @@ aboutPage =
         [ centerX
         , centerY
         , width fill
-        , paddingXY 35 55
+        , paddingXY 35 0
         ]
         [ titleBox
         , aboutMeText
@@ -113,6 +113,13 @@ makeParagraphs lst =
             paragraph
                 []
             <|
-                [ text <| indent 5 ++ str ]
+                [ Element.el
+                    [ Font.size 35
+                    ]
+                  <|
+                    text <|
+                        indent 5
+                            ++ str
+                ]
     in
     List.map toParagraph lst

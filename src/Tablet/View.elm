@@ -55,7 +55,7 @@ tabletView model =
             [ width fill
             , height fill
             , spacing 40
-            , paddingXY 0 10
+            , paddingXY 0 100
             ]
             [ selectedPage
             ]
