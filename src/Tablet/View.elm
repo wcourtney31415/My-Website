@@ -1,6 +1,6 @@
 module Tablet.View exposing (tabletView)
 
-import Data exposing (backgroundPath)
+import BasicColors exposing (white)
 import Element
     exposing
         ( FocusStyle
@@ -11,6 +11,7 @@ import Element
         , inFront
         , layoutWith
         , paddingXY
+        , rgb255
         , spacing
         , width
         )
@@ -47,7 +48,21 @@ tabletView model =
     in
     layoutWith
         { options = [ focusStyle myFocusStyle ] }
-        [ Background.image backgroundPath
+        [ Background.gradient
+            { angle = 0
+            , steps =
+                [ rgb255 179 219 255
+                , rgb255 179 219 255
+                , rgb255 179 219 255
+                , rgb255 230 243 255
+                , rgb255 230 243 255
+                , rgb255 230 243 255
+                , rgb255 230 243 255
+                , white
+                , white
+                , white
+                ]
+            }
         , inFront <| navBar model
         ]
     <|
