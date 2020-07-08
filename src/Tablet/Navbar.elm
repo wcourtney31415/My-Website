@@ -16,6 +16,7 @@ import Element
         , moveDown
         , newTabLink
         , padding
+        , paddingXY
         , row
         , spacing
         , text
@@ -105,7 +106,7 @@ navBar model =
         [ alignRight
         , padding 10
         , Font.color white
-        , spacing 20
+        , spacing 40
         , bkgAttr
         , Font.size 37
         ]
@@ -133,10 +134,10 @@ dropNav =
     column
         [ Background.color dropNavColor
         , moveDown 15
-        , padding 15
+        , paddingXY 30 30
         , Border.rounded 10
         , centerX
-        , spacing 10
+        , spacing 40
         , Border.shadow
             { offset = ( 5, 5 )
             , size = 1

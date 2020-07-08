@@ -48,14 +48,14 @@ titleBox =
     column
         [ centerX
         , centerY
-        , padding 10
+        , padding 25
         , Font.color white
         , spacing 10
         , Font.bold
         , width fill
         , bkgAttributes
             [ Background.color grayFortyTwo
-            , alpha 0.75
+            , alpha 0.83
             , Border.roundEach
                 { topLeft = 10
                 , topRight = 10
@@ -70,7 +70,7 @@ titleBox =
             ]
             "Software Developer"
         , el
-            [ Font.size 30
+            [ Font.size 40
             , centerX
             ]
             (text myName)
@@ -90,12 +90,12 @@ frontPageParagraph =
         [ centerX
         , centerY
         , Font.color white
-        , padding 30
+        , padding 50
         , width (fill |> maximum 800)
-        , spacing 30
+        , spacing 50
         , bkgAttributes
             [ Background.color grayFortyTwo
-            , alpha 0.6
+            , alpha 0.95
             , Border.rounded 10
             , Border.roundEach
                 { topLeft = 0
