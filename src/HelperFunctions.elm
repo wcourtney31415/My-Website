@@ -1,16 +1,10 @@
 module HelperFunctions exposing
     ( bkgAttributes
     , flip
-    , hsl
     , speedIf
     , textElement
-    , toEUI
     )
 
-import Color
-    exposing
-        ( toRgba
-        )
 import Element
     exposing
         ( Attribute
@@ -19,7 +13,6 @@ import Element
         , el
         , fill
         , height
-        , rgba
         , text
         , width
         )
@@ -59,23 +52,3 @@ flip a =
 textElement : List (Attribute msg) -> String -> Element msg
 textElement attributes myText =
     el attributes <| text myText
-
-
-toEUI : Color.Color -> Element.Color
-toEUI color =
-    let
-        colorRecord =
-            toRgba color
-
-        elmUiColor =
-            rgba colorRecord.red
-                colorRecord.green
-                colorRecord.blue
-                colorRecord.alpha
-    in
-    elmUiColor
-
-
-hsl : Float -> Float -> Float -> Element.Color
-hsl hue saturation lightness =
-    toEUI <| Color.hsl (hue / 360) saturation lightness
