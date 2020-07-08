@@ -1,6 +1,7 @@
 module HelperFunctions exposing
     ( bkgAttributes
     , flip
+    , hsl
     , speedIf
     , textElement
     , toEUI
@@ -73,3 +74,8 @@ toEUI color =
                 colorRecord.alpha
     in
     elmUiColor
+
+
+hsl : Float -> Float -> Float -> Element.Color
+hsl hue saturation lightness =
+    toEUI <| Color.hsl (hue / 360) saturation lightness
