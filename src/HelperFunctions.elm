@@ -5,6 +5,10 @@ module HelperFunctions exposing
     , textElement
     )
 
+import Color
+    exposing
+        ( toRgba
+        )
 import Element
     exposing
         ( Attribute
@@ -13,6 +17,7 @@ import Element
         , el
         , fill
         , height
+        , rgba
         , text
         , width
         )
@@ -52,3 +57,18 @@ flip a =
 textElement : List (Attribute msg) -> String -> Element msg
 textElement attributes myText =
     el attributes <| text myText
+
+
+toEUI : Color.Color -> Element.Color
+toEUI color =
+    let
+        colorRecord =
+            toRgba color
+
+        elmUiColor =
+            rgba colorRecord.red
+                colorRecord.green
+                colorRecord.blue
+                colorRecord.alpha
+    in
+    elmUiColor
