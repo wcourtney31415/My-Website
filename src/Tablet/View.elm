@@ -2,8 +2,7 @@ module Tablet.View exposing (tabletView)
 
 import Data
     exposing
-        ( backgroundPath
-        , tabBackgroundPath
+        ( tabBackgroundPath
         )
 import Element
     exposing
