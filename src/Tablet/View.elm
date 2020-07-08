@@ -1,6 +1,9 @@
 module Tablet.View exposing (tabletView)
 
-import Data exposing (backgroundPath)
+import Data
+    exposing
+        ( tabBackgroundPath
+        )
 import Element
     exposing
         ( FocusStyle
@@ -47,7 +50,7 @@ tabletView model =
     in
     layoutWith
         { options = [ focusStyle myFocusStyle ] }
-        [ Background.image backgroundPath
+        [ Background.image tabBackgroundPath
         , inFront <| navBar model
         ]
     <|
