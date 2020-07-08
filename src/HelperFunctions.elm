@@ -3,6 +3,7 @@ module HelperFunctions exposing
     , flip
     , speedIf
     , textElement
+    , toEUI
     )
 
 import Color
