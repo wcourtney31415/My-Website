@@ -18,6 +18,7 @@ import Element
         , paragraph
         , spacing
         , text
+        , textColumn
         , width
         )
 import Element.Background as Background
@@ -85,13 +86,20 @@ frontPageParagraph =
 
         postLink =
             " and I will get back to you as soon as possible. I look forward to speaking with you."
+
+        emailLink =
+            link
+                [ Font.size 30
+                , Font.bold
+                ]
+                { url = "mailto:" ++ myEmail
+                , label = text myEmail
+                }
     in
-    paragraph
-        [ centerX
-        , centerY
+    textColumn
+        [ width (fill |> maximum 800)
         , Font.color white
         , padding 50
-        , width (fill |> maximum 800)
         , spacing 50
         , bkgAttributes
             [ Background.color grayFortyTwo
@@ -105,13 +113,16 @@ frontPageParagraph =
                 }
             ]
         ]
-        [ Element.el [ Font.size 35 ] <| text preLink
-        , link
-            [ Font.size 30
-            , Font.bold
+        [ paragraph
+            [ spacing 40
             ]
-            { url = "mailto:" ++ myEmail
-            , label = text myEmail
-            }
-        , Element.el [ Font.size 35 ] <| text postLink
+            [ el [ Font.size 35 ] <| text "Thanks for visiting my website. Here you can find information regarding my education, prefered languages, and background in programming. "
+            ]
+        , paragraph
+            [ spacing 40
+            ]
+            [ el [ Font.size 35 ] <| text preLink
+            , emailLink
+            , el [ Font.size 35 ] <| text postLink
+            ]
         ]
