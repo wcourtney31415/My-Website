@@ -1,5 +1,6 @@
 module Tablet.Index exposing (homepage)
 
+import BasicColors exposing (white)
 import Color as C
 import Data exposing (myEmail, myName)
 import Element
@@ -24,7 +25,7 @@ import Element
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import HelperFunctions exposing (bkgAttributes, convertColor, textElement)
+import HelperFunctions exposing (bkgAttributes, textElement)
 import MessagesAndModels exposing (Msg)
 import Tablet.Colors exposing (grayFortyTwo)
 
@@ -50,7 +51,7 @@ titleBox =
         [ centerX
         , centerY
         , padding 25
-        , Font.color <| convertColor C.white
+        , Font.color white
         , spacing 10
         , Font.bold
         , width fill
@@ -98,7 +99,7 @@ frontPageParagraph =
     in
     textColumn
         [ width (fill |> maximum 800)
-        , Font.color <| convertColor C.white
+        , Font.color white
         , padding 50
         , spacing 50
         , bkgAttributes

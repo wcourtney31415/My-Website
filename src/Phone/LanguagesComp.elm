@@ -1,5 +1,6 @@
 module Phone.LanguagesComp exposing (languagesComp)
 
+import BasicColors exposing (white)
 import Color as C
 import Element
     exposing
@@ -20,7 +21,7 @@ import Element
         )
 import Element.Background as Background
 import Element.Font as Font
-import HelperFunctions exposing (convertColor, textElement)
+import HelperFunctions exposing (textElement)
 import Phone.Colors
     exposing
         ( darkerBlue
@@ -91,7 +92,7 @@ paradigmBlock attr title languages =
         myAttr
         { title = title
         , titleAttr =
-            [ Font.color <| convertColor C.white
+            [ Font.color white
             , Background.color lighterBlue
             ]
         , contentAttr =

@@ -1,5 +1,6 @@
 module Phone.HeadingComp exposing (heading)
 
+import BasicColors exposing (white)
 import Color as C
 import Element
     exposing
@@ -17,7 +18,7 @@ import Element
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import HelperFunctions exposing (convertColor, textElement)
+import HelperFunctions exposing (textElement)
 import Phone.Colors exposing (myNameColor, viewHeaderCol)
 
 
@@ -41,7 +42,7 @@ heading =
                 ]
                 [ textElement
                     [ centerX
-                    , Font.color <| convertColor C.white
+                    , Font.color white
                     ]
                     "Software Developer"
                 ]
