@@ -1,11 +1,13 @@
 module HelperFunctions exposing
     ( bkgAttributes
+    , convertColor
     , flip
     , speedIf
     , textElement
     )
 
-import Element
+import Color as C
+import Element as E
     exposing
         ( Attribute
         , Element
@@ -52,3 +54,19 @@ flip a =
 textElement : List (Attribute msg) -> String -> Element msg
 textElement attributes myText =
     el attributes <| text myText
+
+
+convertColor : C.Color -> E.Color
+convertColor color =
+    let
+        this =
+            C.toRgba color
+
+        eUIColor =
+            E.rgba
+                this.red
+                this.green
+                this.blue
+                this.alpha
+    in
+    eUIColor

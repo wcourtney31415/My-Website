@@ -11,54 +11,56 @@ module Phone.Colors exposing
     , viewHeaderCol
     )
 
-import Element exposing (Color, rgb255)
+import Color as C
+import Element as E
+import HelperFunctions exposing (convertColor)
 
 
-theBackground : Color
+theBackground : E.Color
 theBackground =
-    rgb255 194 194 194
+    convertColor <| C.rgb255 194 194 194
 
 
-gradientColor1 : Color
+gradientColor1 : E.Color
 gradientColor1 =
-    rgb255 228 228 228
+    convertColor <| C.rgb255 228 228 228
 
 
-myNameColor : Color
+myNameColor : E.Color
 myNameColor =
-    rgb255 52 89 127
+    convertColor <| C.rgb255 52 89 127
 
 
-grayThirtyFour : Color
+grayThirtyFour : E.Color
 grayThirtyFour =
-    rgb255 234 234 234
+    convertColor <| C.rgb255 234 234 234
 
 
-gray : Color
+gray : E.Color
 gray =
-    rgb255 200 200 200
+    convertColor <| C.rgb255 200 200 200
 
 
-viewHeaderCol : Color
+viewHeaderCol : E.Color
 viewHeaderCol =
-    rgb255 101 147 193
+    convertColor <| C.rgb255 101 147 193
 
 
-darkerBlue : Color
+darkerBlue : E.Color
 darkerBlue =
-    rgb255 65 115 164
+    convertColor <| C.rgb255 65 115 164
 
 
-lighterBlue : Color
+lighterBlue : E.Color
 lighterBlue =
-    rgb255 102 148 194
+    convertColor <| C.rgb255 102 148 194
 
 
-lighterGray : Color
+lighterGray : E.Color
 lighterGray =
-    rgb255 230 230 230
+    convertColor <| C.rgb255 230 230 230
 
 
-lightestBlue : Color
+lightestBlue : E.Color
 lightestBlue =
-    rgb255 182 205 226
+    convertColor <| C.rgb255 182 205 226

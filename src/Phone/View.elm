@@ -1,6 +1,6 @@
 module Phone.View exposing (phoneView)
 
-import BasicColors exposing (white)
+import Color as C
 import Element
     exposing
         ( Attribute
@@ -21,6 +21,7 @@ import Element
         )
 import Element.Background as Background
 import Element.Font as Font
+import HelperFunctions exposing (convertColor)
 import Html exposing (Html)
 import MessagesAndModels exposing (Msg)
 import Phone.AboutMeComp exposing (aboutMeComp)
@@ -76,7 +77,7 @@ block title attributes contents =
          , Background.gradient
             { angle = 0
             , steps =
-                [ white
+                [ convertColor C.white
                 , grayThirtyFour
                 ]
             }

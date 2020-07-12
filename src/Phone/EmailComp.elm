@@ -1,6 +1,6 @@
 module Phone.EmailComp exposing (emailComponent)
 
-import BasicColors exposing (black, white)
+import Color as C
 import Data exposing (myEmail)
 import Element
     exposing
@@ -17,6 +17,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
+import HelperFunctions exposing (convertColor)
 import MessagesAndModels exposing (Msg(..))
 import Phone.Colors
     exposing
@@ -35,11 +36,11 @@ emailComponent =
         []
         { title = "Email"
         , titleAttr =
-            [ Font.color white
+            [ Font.color <| convertColor C.white
             , Background.color darkerBlue
             ]
         , contentAttr =
-            [ Font.color black
+            [ Font.color <| convertColor C.black
             , Background.color lighterBlue
             ]
         , contents = [ buttons ]

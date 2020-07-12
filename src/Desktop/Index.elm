@@ -1,6 +1,6 @@
 module Desktop.Index exposing (homepage)
 
-import BasicColors exposing (white)
+import Color as C
 import Data exposing (myEmail, myName)
 import Desktop.Colors exposing (grayFortyTwo)
 import Element
@@ -25,7 +25,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Fonts exposing (fontDesktopHeader)
-import HelperFunctions exposing (bkgAttributes, textElement)
+import HelperFunctions exposing (bkgAttributes, convertColor, textElement)
 import MessagesAndModels exposing (Msg)
 
 
@@ -45,7 +45,7 @@ titleBox =
         [ centerX
         , centerY
         , padding 10
-        , Font.color white
+        , Font.color <| convertColor C.white
         , fontDesktopHeader
         , spacing 10
         , Font.bold
@@ -86,7 +86,7 @@ frontPageParagraph =
     paragraph
         [ centerX
         , centerY
-        , Font.color white
+        , Font.color <| convertColor C.white
         , padding 25
         , width (fill |> maximum 800)
         , bkgAttributes

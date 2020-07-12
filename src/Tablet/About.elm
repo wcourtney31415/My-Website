@@ -1,6 +1,6 @@
 module Tablet.About exposing (aboutPage)
 
-import BasicColors exposing (white)
+import Color as C
 import Data
     exposing
         ( aboutMeRawText1
@@ -28,7 +28,7 @@ import Element
 import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
-import HelperFunctions exposing (bkgAttributes, textElement)
+import HelperFunctions exposing (bkgAttributes, convertColor, textElement)
 import MessagesAndModels exposing (Msg)
 import Tablet.Colors exposing (grayFortyTwo)
 
@@ -52,7 +52,7 @@ titleBox =
         [ centerX
         , centerY
         , padding 10
-        , Font.color white
+        , Font.color <| convertColor C.white
         , spacing 10
         , Font.bold
         , width fill
@@ -81,7 +81,7 @@ aboutMeText =
     textColumn
         [ centerX
         , centerY
-        , Font.color white
+        , Font.color <| convertColor C.white
         , padding 25
         , width fill
         , spacing 30

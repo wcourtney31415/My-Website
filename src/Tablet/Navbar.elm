@@ -1,6 +1,7 @@
 module Tablet.Navbar exposing (navBar)
 
-import BasicColors exposing (shadowColor, white)
+import BasicColors exposing (shadowColor)
+import Color as C
 import Data exposing (gitHub, myEmail)
 import Element
     exposing
@@ -25,7 +26,7 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
-import HelperFunctions exposing (bkgAttributes, flip, speedIf)
+import HelperFunctions exposing (bkgAttributes, convertColor, flip, speedIf)
 import MessagesAndModels
     exposing
         ( Model
@@ -54,7 +55,7 @@ contactButton model =
                 (model.contactDropdown == Closed)
                 []
                 [ below dropNav
-                , Font.glow white 3.5
+                , Font.glow (convertColor C.white) 3.5
                 ]
     in
     Input.button
@@ -66,7 +67,7 @@ contactButton model =
 
 hovered : Attribute msg
 hovered =
-    mouseOver [ Font.glow white 3.5 ]
+    mouseOver [ Font.glow (convertColor C.white) 3.5 ]
 
 
 gitHubLink : Element Msg
@@ -105,7 +106,7 @@ navBar model =
     row
         [ alignRight
         , padding 10
-        , Font.color white
+        , Font.color <| convertColor C.white
         , spacing 40
         , bkgAttr
         , Font.size 37
@@ -144,7 +145,7 @@ dropNav =
             , blur = 10
             , color = shadowColor
             }
-        , Font.glow white 0 --override contactButton glow
+        , Font.glow (convertColor C.white) 0 --override contactButton glow
         ]
         [ emailClientLnk
         , emailClipboardLnk
