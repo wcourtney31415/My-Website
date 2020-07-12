@@ -1,6 +1,7 @@
 module Phone.View exposing (phoneView)
 
 import BasicColors exposing (white)
+import Color as C
 import Element
     exposing
         ( Attribute
@@ -24,7 +25,11 @@ import Element.Font as Font
 import Html exposing (Html)
 import MessagesAndModels exposing (Msg)
 import Phone.AboutMeComp exposing (aboutMeComp)
-import Phone.Colors exposing (grayThirtyFour, theBackground)
+import Phone.Colors
+    exposing
+        ( grayThirtyFour
+        , theBackground
+        )
 import Phone.EmailComp exposing (emailComponent)
 import Phone.GithubComp exposing (githubComponent)
 import Phone.HeadingComp exposing (heading)

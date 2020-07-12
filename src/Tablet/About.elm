@@ -1,6 +1,7 @@
 module Tablet.About exposing (aboutPage)
 
 import BasicColors exposing (white)
+import Color as C
 import Data
     exposing
         ( aboutMeRawText1

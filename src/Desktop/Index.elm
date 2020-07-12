@@ -1,6 +1,7 @@
 module Desktop.Index exposing (homepage)
 
 import BasicColors exposing (white)
+import Color as C
 import Data exposing (myEmail, myName)
 import Desktop.Colors exposing (grayFortyTwo)
 import Element

@@ -1,6 +1,7 @@
 module Phone.HeadingComp exposing (heading)
 
 import BasicColors exposing (white)
+import Color as C
 import Element
     exposing
         ( Element

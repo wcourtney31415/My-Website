@@ -1,6 +1,7 @@
 module Phone.EmailComp exposing (emailComponent)
 
-import BasicColors exposing (black, white)
+import BasicColors exposing (white)
+import Color as C
 import Data exposing (myEmail)
 import Element
     exposing
@@ -39,7 +40,7 @@ emailComponent =
             , Background.color darkerBlue
             ]
         , contentAttr =
-            [ Font.color black
+            [ Font.color white
             , Background.color lighterBlue
             ]
         , contents = [ buttons ]

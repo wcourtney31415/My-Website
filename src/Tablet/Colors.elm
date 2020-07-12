@@ -1,13 +1,15 @@
 module Tablet.Colors exposing (dropNavColor, grayFortyTwo)
 
-import Element exposing (Color, rgb255)
+import Color as C
+import Element as E
+import HelperFunctions exposing (convertColor)
 
 
-grayFortyTwo : Color
+grayFortyTwo : E.Color
 grayFortyTwo =
-    rgb255 42 42 42
+    convertColor <| C.rgb255 42 42 42
 
 
-dropNavColor : Color
+dropNavColor : E.Color
 dropNavColor =
-    rgb255 105 108 112
+    convertColor <| C.rgb255 105 108 112

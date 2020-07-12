@@ -1,6 +1,7 @@
 module Tablet.Index exposing (homepage)
 
 import BasicColors exposing (white)
+import Color as C
 import Data exposing (myEmail, myName)
 import Element
     exposing

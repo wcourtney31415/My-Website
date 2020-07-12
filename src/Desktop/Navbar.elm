@@ -1,6 +1,7 @@
 module Desktop.Navbar exposing (navBar)
 
 import BasicColors exposing (shadowColor, white)
+import Color as C
 import Data exposing (gitHub, myEmail)
 import Desktop.Colors exposing (dropNavColor, grayFortyTwo)
 import Element
