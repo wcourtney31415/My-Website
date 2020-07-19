@@ -1,4 +1,7 @@
-port module Ports.Responsive exposing (onResize)
+port module Ports.Ports exposing (copyToClipboard, onResize)
+
+
+port copyToClipboard : String -> Cmd msg
 
 
 type alias Size =

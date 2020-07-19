@@ -11,8 +11,7 @@ import MessagesAndModels
         , OpenOrClosed(..)
         , Page(..)
         )
-import Ports.Clipboard exposing (copyToClipboard)
-import Ports.Responsive as Responsive
+import Ports.Ports as Clipboard exposing (copyToClipboard)
 import View_Controller exposing (siteView)
 
 
@@ -28,7 +27,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Responsive.onResize (\w h -> GotNewResolution w h)
+    Clipboard.onResize (\w h -> GotNewResolution w h)
 
 
 init : Flags -> ( Model, Cmd Msg )
