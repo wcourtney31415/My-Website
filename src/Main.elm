@@ -11,7 +11,7 @@ import MessagesAndModels
         , OpenOrClosed(..)
         , Page(..)
         )
-import Ports.Ports as Clipboard exposing (copyToClipboard)
+import Ports.Ports as Ports exposing (copyToClipboard)
 import View_Controller exposing (siteView)
 
 
@@ -27,7 +27,7 @@ main =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Clipboard.onResize (\w h -> GotNewResolution w h)
+    Ports.onResize (\w h -> GotNewResolution w h)
 
 
 init : Flags -> ( Model, Cmd Msg )
