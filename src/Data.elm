@@ -10,6 +10,7 @@ module Data exposing
     , myName
     , siteSource
     , tabBackgroundPath
+    , facePath
     )
 
 
@@ -26,6 +27,11 @@ myName =
 backgroundPath : String
 backgroundPath =
     "./Images/background.jpg"
+
+
+facePath : String
+facePath =
+    "./Images/me.png"
 
 
 tabBackgroundPath : String

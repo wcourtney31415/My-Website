@@ -1,4 +1,4 @@
-module Desktop.Colors exposing (dropNavColor, grayFortyTwo)
+module Desktop.Colors exposing (black, dropNavColor, grayFortyTwo)
 
 import Color as C
 import Element as E
@@ -13,3 +13,7 @@ grayFortyTwo =
 dropNavColor : E.Color
 dropNavColor =
     convertColor <| C.rgb255 105 108 112
+
+black : E.Color
+black =
+    convertColor <| C.rgb255 0 0 0
