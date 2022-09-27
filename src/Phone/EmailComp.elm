@@ -8,7 +8,7 @@ import Element
         ( Attribute
         , Element
         , centerX
-        , link
+        , link, rgb255
         , padding
         , row
         , spacing
@@ -64,6 +64,7 @@ btnAttributes =
     , padding 30
     , Background.color gray
     , Border.rounded 18
+    , Font.color <| rgb255 0 0 0
     , Background.gradient
         { angle = 0
         , steps =

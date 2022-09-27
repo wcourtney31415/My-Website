@@ -7,6 +7,7 @@ import Desktop.Colors exposing (black, grayFortyTwo)
 import Element
     exposing
         ( Element
+        , alignTop
         , alpha
         , centerX
         , centerY
@@ -14,6 +15,7 @@ import Element
         , column
         , el
         , fill
+        , height
         , link
         , maximum
         , minimum
@@ -21,6 +23,7 @@ import Element
         , padding
         , paddingXY
         , paragraph
+        , px
         , rgb255
         , spacing
         , text
@@ -79,6 +82,10 @@ titleBox =
         ]
 
 
+grey y =
+    rgb255 y y y
+
+
 frontPageParagraph : Element Msg
 frontPageParagraph =
     let
@@ -98,7 +105,7 @@ frontPageParagraph =
                 |> maximum 1000
             )
         , bkgAttributes
-            [ Background.color grayFortyTwo
+            [ Background.color <| grey 10
             , alpha 0.6
             , Border.rounded 10
             , Border.roundEach
@@ -114,7 +121,7 @@ frontPageParagraph =
         , Element.column
             [ width fill
             , spacing 20
-            , Font.size 22
+            , Font.size 18
             ]
           <|
             List.map
@@ -130,21 +137,17 @@ frontPageParagraph =
                 , "Today I code in my professional endeavors, and also as a hobby, and  aspire to make a full time career of it."
                 , "For career related inquiries, contact me at wcourtney31415@gmail.com"
                 ]
-
-        -- [ text preLink
-        -- , link []
-        --     { url = "mailto:" ++ myEmail
-        --     , label = text myEmail
-        --     }
-        -- , text postLink
-        -- ]
         ]
 
 
 imageOfMe =
+    let
+        size =
+            250
+    in
     Element.column
         [ padding 12
-        , moveUp 55
+        , alignTop
         , Border.rounded 1000
         , Background.color <| rgb255 165 169 172
         , Border.shadow
@@ -155,7 +158,9 @@ imageOfMe =
             }
         ]
         [ Element.image
-            []
+            [ width <| px size
+            , height <| px size
+            ]
             { src = facePath
             , description = "An image of Wes Courtney"
             }

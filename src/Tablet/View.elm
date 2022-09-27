@@ -14,6 +14,7 @@ import Element
         , inFront
         , layoutWith
         , paddingXY
+        , rgb255
         , spacing
         , width
         )
@@ -50,7 +51,18 @@ tabletView model =
     in
     layoutWith
         { options = [ focusStyle myFocusStyle ] }
-        [ Background.image tabBackgroundPath
+        [ Background.gradient
+            { angle = 1150
+            , steps =
+                [ 
+                    rgb255 100 100 100
+                    ,rgb255 109 160 182
+                , rgb255 204 222 229
+                , rgb255 255 255 255
+                ]
+            }
+
+        -- , Background.image tabBackgroundPath
         , inFront <| navBar model
         ]
     <|

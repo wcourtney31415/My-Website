@@ -2,10 +2,11 @@ module Tablet.Index exposing (homepage)
 
 import BasicColors exposing (white)
 import Color as C
-import Data exposing (myEmail, myName)
+import Data exposing (facePath, myEmail, myName)
 import Element
     exposing
         ( Element
+        , alignTop
         , alpha
         , centerX
         , centerY
@@ -17,6 +18,9 @@ import Element
         , padding
         , paddingXY
         , paragraph
+        , rgb255
+        , row
+        , shrink
         , spacing
         , text
         , textColumn
@@ -40,42 +44,66 @@ homepageItems =
     column
         [ centerX
         , centerY
-        , paddingXY 35 55
         ]
         [ titleBox, frontPageParagraph ]
 
 
 titleBox : Element Msg
 titleBox =
-    column
+    row
         [ centerX
         , centerY
         , padding 25
         , Font.color white
-        , spacing 10
+        , spacing 20
         , Font.bold
         , width fill
         , bkgAttributes
             [ Background.color grayFortyTwo
             , alpha 0.75
             , Border.roundEach
-                { topLeft = 10
-                , topRight = 10
+                { topLeft = 20
+                , topRight = 20
                 , bottomLeft = 0
                 , bottomRight = 0
                 }
             ]
         ]
-        [ textElement
-            [ Font.size 50
-            , centerX
+        [ imageOfMe
+        , column
+            [ spacing 10 ]
+            [ textElement
+                [ Font.size 50
+                , centerX
+                ]
+                "Software Developer"
+            , el
+                [ Font.size 40
+                , centerX
+                ]
+                (text myName)
             ]
-            "Software Developer"
-        , el
-            [ Font.size 40
-            , centerX
-            ]
-            (text myName)
+        ]
+
+
+imageOfMe =
+    Element.column
+        [ padding 12
+        , alignTop
+        , Border.rounded 1000
+        , Background.color <| rgb255 165 169 172
+        , Border.shadow
+            { size = 1
+            , blur = 10
+            , offset = ( 4, 2 )
+            , color = rgb255 0 0 0
+            }
+        ]
+        [ Element.image
+            []
+            { src = facePath
+            , description = "An image of Wes Courtney"
+            }
         ]
 
 
@@ -98,7 +126,7 @@ frontPageParagraph =
                 }
     in
     textColumn
-        [ width (fill |> maximum 800)
+        [ width (fill |> maximum 900)
         , Font.color white
         , padding 50
         , spacing 50
@@ -109,21 +137,28 @@ frontPageParagraph =
             , Border.roundEach
                 { topLeft = 0
                 , topRight = 0
-                , bottomLeft = 10
-                , bottomRight = 10
+                , bottomLeft = 20
+                , bottomRight = 20
                 }
             ]
         ]
-        [ paragraph
-            [ spacing 40
+        [ Element.column
+            [ width fill
+            , spacing 20
+            , Font.size 25
             ]
-            [ el [ Font.size 35 ] <| text "Thanks for visiting my website. Here you can find information regarding my education, prefered languages, and background in programming. "
-            ]
-        , paragraph
-            [ spacing 40
-            ]
-            [ el [ Font.size 35 ] <| text preLink
-            , emailLink
-            , el [ Font.size 35 ] <| text postLink
-            ]
+          <|
+            List.map
+                (\x ->
+                    paragraph
+                        []
+                        [ text x
+                        ]
+                )
+                [ "Welcome to my site! My name is Wes Courtney, and I am a software developer. Coding is my passion and I have been doing it for 19 years."
+                , "My career in software development began with video game design when I was in 5th grade."
+                , "Over the years I found that my gratification wasn't exclusive to game design but was instead the product of coding itself. This broadened my horizon, and opened me up to new languages and paradigms."
+                , "Today I code in my professional endeavors, and also as a hobby, and  aspire to make a full time career of it."
+                , "For career related inquiries, contact me at wcourtney31415@gmail.com"
+                ]
         ]
