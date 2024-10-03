@@ -1,4 +1,5 @@
 Published/
 elm-stuff/
-target
+build
 gh-pages
+package-lock.json

@@ -1,0 +1,25 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "description": "My portfolio website.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "install-tools": "npm install -g elm elm-lint live-server; npm install;",
+    "build": "bash scripts/build.sh",
+    "destroy": "rm -rf build",
+    "serve": "live-server build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wcourtney31415/My-Website.git"
+  },
+  "author": "Wesley Courtney",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wcourtney31415/My-Website/issues"
+  },
+  "homepage": "https://github.com/wcourtney31415/My-Website#readme"
+}
