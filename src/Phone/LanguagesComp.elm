@@ -1,7 +1,6 @@
 module Phone.LanguagesComp exposing (languagesComp)
 
 import BasicColors exposing (white)
-import Color as C
 import Element
     exposing
         ( Attribute

@@ -1,15 +1,15 @@
 module Phone.EmailComp exposing (emailComponent)
 
 import BasicColors exposing (white)
-import Color as C
 import Data exposing (myEmail)
 import Element
     exposing
         ( Attribute
         , Element
         , centerX
-        , link, rgb255
+        , link
         , padding
+        , rgb255
         , row
         , spacing
         , text

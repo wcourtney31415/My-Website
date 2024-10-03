@@ -1,7 +1,6 @@
 module Tablet.Navbar exposing (navBar)
 
 import BasicColors exposing (shadowColor, white)
-import Color as C
 import Data exposing (gitHub, myEmail)
 import Element
     exposing

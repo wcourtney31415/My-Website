@@ -1,9 +1,5 @@
 module Tablet.View exposing (tabletView)
 
-import Data
-    exposing
-        ( tabBackgroundPath
-        )
 import Element
     exposing
         ( FocusStyle
@@ -54,9 +50,8 @@ tabletView model =
         [ Background.gradient
             { angle = 1150
             , steps =
-                [ 
-                    rgb255 100 100 100
-                    ,rgb255 109 160 182
+                [ rgb255 100 100 100
+                , rgb255 109 160 182
                 , rgb255 204 222 229
                 , rgb255 255 255 255
                 ]

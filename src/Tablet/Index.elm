@@ -1,8 +1,11 @@
 module Tablet.Index exposing (homepage)
 
 import BasicColors exposing (white)
-import Color as C
-import Data exposing (facePath, myEmail, myName)
+import Data
+    exposing
+        ( facePath
+        , myName
+        )
 import Element
     exposing
         ( Element
@@ -13,14 +16,11 @@ import Element
         , column
         , el
         , fill
-        , link
         , maximum
         , padding
-        , paddingXY
         , paragraph
         , rgb255
         , row
-        , shrink
         , spacing
         , text
         , textColumn
@@ -86,6 +86,7 @@ titleBox =
         ]
 
 
+imageOfMe : Element msg
 imageOfMe =
     Element.column
         [ padding 12
@@ -109,22 +110,6 @@ imageOfMe =
 
 frontPageParagraph : Element Msg
 frontPageParagraph =
-    let
-        preLink =
-            "For professional inqueries, please contact me at "
-
-        postLink =
-            " and I will get back to you as soon as possible. I look forward to speaking with you."
-
-        emailLink =
-            link
-                [ Font.size 30
-                , Font.bold
-                ]
-                { url = "mailto:" ++ myEmail
-                , label = text myEmail
-                }
-    in
     textColumn
         [ width (fill |> maximum 900)
         , Font.color white

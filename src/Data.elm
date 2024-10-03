@@ -4,13 +4,13 @@ module Data exposing
     , aboutMeRawText3
     , aboutMeRawText4
     , backgroundPath
+    , facePath
     , gitHub
     , indent
     , myEmail
     , myName
     , siteSource
     , tabBackgroundPath
-    , facePath
     )
 
 

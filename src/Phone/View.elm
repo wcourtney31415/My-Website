@@ -1,8 +1,10 @@
 module Phone.View exposing (phoneView)
 
 import BasicColors exposing (white)
-import Color as C
-import Data exposing (facePath, myEmail, myName)
+import Data
+    exposing
+        ( facePath
+        )
 import Element
     exposing
         ( Attribute
@@ -80,6 +82,7 @@ phoneView =
         )
 
 
+imageOfMe : Element msg
 imageOfMe =
     let
         size =

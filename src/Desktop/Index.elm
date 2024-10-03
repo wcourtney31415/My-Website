@@ -1,9 +1,8 @@
 module Desktop.Index exposing (homepage)
 
 import BasicColors exposing (white)
-import Color as C
-import Data exposing (facePath, myEmail, myName)
-import Desktop.Colors exposing (black, grayFortyTwo)
+import Data exposing (facePath, myName)
+import Desktop.Colors exposing (grayFortyTwo)
 import Element
     exposing
         ( Element
@@ -11,15 +10,11 @@ import Element
         , alpha
         , centerX
         , centerY
-        , clip
         , column
         , el
         , fill
         , height
-        , link
         , maximum
-        , minimum
-        , moveUp
         , padding
         , paddingXY
         , paragraph
@@ -82,19 +77,13 @@ titleBox =
         ]
 
 
+grey : Int -> Element.Color
 grey y =
     rgb255 y y y
 
 
 frontPageParagraph : Element Msg
 frontPageParagraph =
-    let
-        preLink =
-            "For professional inqueries, please contact me at "
-
-        postLink =
-            " and I will get back to you as soon as possible. I look forward to speaking with you."
-    in
     Element.row
         [ centerX
         , centerY
@@ -140,6 +129,7 @@ frontPageParagraph =
         ]
 
 
+imageOfMe : Element msg
 imageOfMe =
     let
         size =
