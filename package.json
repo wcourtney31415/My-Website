@@ -10,7 +10,7 @@
     "install-tools": "npm install -g elm elm-lint live-server; npm install;",
     "build": "bash scripts/build.sh",
     "destroy": "rm -rf build",
-    "serve": "live-server build"
+    "serve": "bash scripts/serve.sh"
   },
   "repository": {
     "type": "git",
