@@ -1,1 +1,0 @@
-live-server build & elm-analyse -s -o & echo "Serving"
