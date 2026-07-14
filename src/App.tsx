@@ -4,6 +4,9 @@ import { ButtonGroup } from "./components/ui/button-group"
 import { Card, CardContent } from "./components/ui/card"
 import { toast, Toaster, type ExternalToast } from "sonner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./components/ui/dropdown-menu";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "./components/ui/item";
+import { CodeXml, } from "lucide-react"
+
 
 export function App() {
 
@@ -67,13 +70,67 @@ export function App() {
     </Card>
   )
 
+  const myTools = [
+    {
+      iconType: "language"
+      , title: "React"
+      , description: "The library for web and native user interfaces"
+      , url: "https://www.react.dev"
+    }
+    , {
+      iconType: "language"
+      , title: "Vue"
+      , description: "An approachable, performant and versatile framework for building web user interfaces"
+      , url: "https://www.vuejs.org/"
+    }
+    , {
+      iconType: "language"
+      , title: "Elm"
+      , description: "A delightful language for reliable web applications"
+      , url: "https://elm-lang.org/"
+    }
+    , {
+      iconType: "language"
+      , title: "Haskell"
+      , description: "Haskell is a purely functional programming language that features referential transparency, immutability and lazy evaluation"
+      , url: "https://www.haskell.org/"
+    }
+    , {
+      iconType: "language"
+      , title: "Java"
+      , description: "Java is a programming language and computing platform first released by Sun Microsystems in 1995"
+      , url: "https://www.java.com"
+    }
+    , {
+      iconType: "language"
+      , title: "C#"
+      , description: "The C# language is the most popular language for the .NET platform, a free, cross-platform, open source development environment"
+      , url: "https://learn.microsoft.com/en-us/dotnet/csharp/"
+    }
+  ]
 
+  const buildATool = tool => {
+    return (
+      <Item variant={"outline"}>
+        <ItemMedia variant="icon">
+          <CodeXml className="size-5" />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>{tool.title}</ItemTitle>
+          <ItemDescription>{tool.description}</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button onClick={_ => window.open(tool.url, '_blank')}>Website</Button>
+        </ItemActions>
+      </Item>
+    )
+  }
 
   // Page: Tools
   const tools: React.JSX.Element = (
     <Card className="w-full h-full">
-      <CardContent>
-        <div>Tools</div>
+      <CardContent className="grid grid-cols-3 gap-4">
+        {myTools.map(buildATool)}
       </CardContent>
     </Card>
   )
