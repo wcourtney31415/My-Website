@@ -6,6 +6,9 @@ import { toast, Toaster, type ExternalToast } from "sonner";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./components/ui/dropdown-menu";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "./components/ui/item";
 import { CodeXml, } from "lucide-react"
+import { Field, FieldContent } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { copyToClipboard, toastSettings } from "./helper-functions/helper-functions";
 
 
 export function App() {
@@ -47,7 +50,7 @@ export function App() {
           ✉️ Send Email
         </DropdownMenuItem>
         <DropdownMenuItem
-          onClick={_ => copyToClipboard("wcourtney31415@gmail.com")}
+          onClick={_ => copyToClipboard("wcourtney31415@gmail.com", toast)}
         >
           📋 Copy to Clipboard
         </DropdownMenuItem>
@@ -109,26 +112,39 @@ export function App() {
     }
   ]
 
-  const buildATool = tool => {
-    return (
-      <Item variant={"outline"}>
-        <ItemMedia variant="icon">
-          <CodeXml className="size-5" />
-        </ItemMedia>
-        <ItemContent>
-          <ItemTitle>{tool.title}</ItemTitle>
-          <ItemDescription>{tool.description}</ItemDescription>
-        </ItemContent>
-        <ItemActions>
-          <Button onClick={_ => window.open(tool.url, '_blank')}>Website</Button>
-        </ItemActions>
-      </Item>
-    )
+  const [searchText, setSearchText] = useState("Re");
+
+  const buildATool = (tool: any) => {
+    const titleMatchesSearch = tool.title.toUpperCase().includes(searchText.toUpperCase());
+    if (titleMatchesSearch) {
+      return (
+        <Item variant={"outline"}>
+          <ItemMedia variant="icon">
+            <CodeXml className="size-5" />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>{tool.title}</ItemTitle>
+            <ItemDescription>{tool.description}</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <Button onClick={_ => window.open(tool.url, '_blank')}>Website</Button>
+          </ItemActions>
+        </Item>
+      )
+    }
+  }
+
+  const searchTextChange = (event) => {
+    setSearchText(event.target.value);
   }
 
   // Page: Tools
   const tools: React.JSX.Element = (
-    <Card className="w-full h-full">
+    <Card className="w-full h-full p-6">
+      <Field className="flex max-w-100 self-center" orientation="horizontal">
+        <Input type="search" placeholder="Search..." onChange={searchTextChange} />
+        <Button>Search</Button>
+      </Field>
       <CardContent className="grid grid-cols-3 gap-4">
         {myTools.map(buildATool)}
       </CardContent>
@@ -151,17 +167,9 @@ export function App() {
   }
 
 
-  const toastSettings: ExternalToast = { position: "top-right" };
+  
 
-  const copyToClipboard = (stringToCopy: string) => {
-    navigator.clipboard.writeText(stringToCopy)
-      .then(_ => {
-        toast.success(`Successfully copied "${stringToCopy}" to clipboard.`, toastSettings);
-      })
-      .catch(_ => {
-        toast.error(`Failed to copy to clipboard.`, toastSettings);
-      });
-  }
+  
 
   // Main Page
   return (
