@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, type BaseSyntheticEvent } from "react";
 import { Button } from "./components/ui/button"
 import { ButtonGroup } from "./components/ui/button-group"
 import { Card, CardContent } from "./components/ui/card"
-import { toast, Toaster, type ExternalToast } from "sonner";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "./components/ui/dropdown-menu";
+import { toast, Toaster } from "sonner";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./components/ui/dropdown-menu";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "./components/ui/item";
 import { CodeXml, } from "lucide-react"
-import { Field, FieldContent } from "@/components/ui/field"
+import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { copyToClipboard, toastSettings } from "./helper-functions/helper-functions";
 
@@ -75,50 +75,54 @@ export function App() {
 
   const myTools = [
     {
-      iconType: "language"
+      key : crypto.randomUUID()
+      , iconType: "language"
       , title: "React"
       , description: "The library for web and native user interfaces"
       , url: "https://www.react.dev"
     }
     , {
-      iconType: "language"
+      key : crypto.randomUUID()
+      , iconType: "language"
       , title: "Vue"
       , description: "An approachable, performant and versatile framework for building web user interfaces"
       , url: "https://www.vuejs.org/"
     }
     , {
-      iconType: "language"
+      key : crypto.randomUUID()
+      , iconType: "language"
       , title: "Elm"
       , description: "A delightful language for reliable web applications"
       , url: "https://elm-lang.org/"
     }
     , {
-      iconType: "language"
+      key : crypto.randomUUID()
+      , iconType: "language"
       , title: "Haskell"
       , description: "Haskell is a purely functional programming language that features referential transparency, immutability and lazy evaluation"
       , url: "https://www.haskell.org/"
     }
     , {
-      iconType: "language"
+      key : crypto.randomUUID()
+      , iconType: "language"
       , title: "Java"
       , description: "Java is a programming language and computing platform first released by Sun Microsystems in 1995"
       , url: "https://www.java.com"
     }
     , {
-      iconType: "language"
+      key : crypto.randomUUID()
+      , iconType: "language"
       , title: "C#"
       , description: "The C# language is the most popular language for the .NET platform, a free, cross-platform, open source development environment"
       , url: "https://learn.microsoft.com/en-us/dotnet/csharp/"
     }
   ]
 
-  const [searchText, setSearchText] = useState("Re");
+  const [searchText, setSearchText] = useState("");
 
-  const buildATool = (tool: any) => {
-    const titleMatchesSearch = tool.title.toUpperCase().includes(searchText.toUpperCase());
-    if (titleMatchesSearch) {
+  const buildATool = (tool: any, index: number) => {
       return (
-        <Item variant={"outline"}>
+        <Item key={tool.key} variant={"outline"} className={"animate-animated-fade opacity-0"} style={{'--delay': `${index * 0.1}s`} as React.CSSProperties}>
           <ItemMedia variant="icon">
             <CodeXml className="size-5" />
           </ItemMedia>
@@ -131,11 +135,19 @@ export function App() {
           </ItemActions>
         </Item>
       )
-    }
   }
 
-  const searchTextChange = (event) => {
+  const searchTextChange = (event: BaseSyntheticEvent) => {
     setSearchText(event.target.value);
+  }
+
+  const getToolsMatchingSearch = () => {
+    const toolsMatchingSearch = myTools.filter((element) => {
+      const titleUpper = element.title.toUpperCase();
+      const searchTextUpper = searchText.toUpperCase();
+      return titleUpper.includes(searchTextUpper);
+    });
+    return toolsMatchingSearch.map(buildATool);
   }
 
   // Page: Tools
@@ -146,7 +158,7 @@ export function App() {
         <Button>Search</Button>
       </Field>
       <CardContent className="grid grid-cols-3 gap-4">
-        {myTools.map(buildATool)}
+        {getToolsMatchingSearch()}
       </CardContent>
     </Card>
   )
@@ -167,9 +179,9 @@ export function App() {
   }
 
 
-  
 
-  
+
+
 
   // Main Page
   return (
