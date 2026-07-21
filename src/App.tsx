@@ -9,7 +9,8 @@ import { CodeXml, } from "lucide-react"
 import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { copyToClipboard, toastSettings } from "./helper-functions/helper-functions";
-
+import jsonData from './data-content/tools.json'
+console.log(jsonData);
 
 export function App() {
 
@@ -73,68 +74,31 @@ export function App() {
     </Card>
   )
 
-  const myTools = [
-    {
-      key : crypto.randomUUID()
-      , iconType: "language"
-      , title: "React"
-      , description: "The library for web and native user interfaces"
-      , url: "https://www.react.dev"
-    }
-    , {
-      key : crypto.randomUUID()
-      , iconType: "language"
-      , title: "Vue"
-      , description: "An approachable, performant and versatile framework for building web user interfaces"
-      , url: "https://www.vuejs.org/"
-    }
-    , {
-      key : crypto.randomUUID()
-      , iconType: "language"
-      , title: "Elm"
-      , description: "A delightful language for reliable web applications"
-      , url: "https://elm-lang.org/"
-    }
-    , {
-      key : crypto.randomUUID()
-      , iconType: "language"
-      , title: "Haskell"
-      , description: "Haskell is a purely functional programming language that features referential transparency, immutability and lazy evaluation"
-      , url: "https://www.haskell.org/"
-    }
-    , {
-      key : crypto.randomUUID()
-      , iconType: "language"
-      , title: "Java"
-      , description: "Java is a programming language and computing platform first released by Sun Microsystems in 1995"
-      , url: "https://www.java.com"
-    }
-    , {
-      key : crypto.randomUUID()
-      , iconType: "language"
-      , title: "C#"
-      , description: "The C# language is the most popular language for the .NET platform, a free, cross-platform, open source development environment"
-      , url: "https://learn.microsoft.com/en-us/dotnet/csharp/"
-    }
-  ]
+
+  const toolsWithKeys = jsonData.tools.map(tool => ({ key: crypto.randomUUID, ...tool }));
+
+
+  const [myTools] = useState(toolsWithKeys);
+
+
 
   const [searchText, setSearchText] = useState("");
 
   const buildATool = (tool: any, index: number) => {
-      return (
-        <Item key={tool.key} variant={"outline"} className={"animate-animated-fade opacity-0"} style={{'--delay': `${index * 0.1}s`} as React.CSSProperties}>
-          <ItemMedia variant="icon">
-            <CodeXml className="size-5" />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>{tool.title}</ItemTitle>
-            <ItemDescription>{tool.description}</ItemDescription>
-          </ItemContent>
-          <ItemActions>
-            <Button onClick={_ => window.open(tool.url, '_blank')}>Website</Button>
-          </ItemActions>
-        </Item>
-      )
+    return (
+      <Item key={tool.key} variant={"outline"} className={"animate-animated-fade opacity-0"} style={{ '--delay': `${index * 0.1}s` } as React.CSSProperties}>
+        <ItemMedia variant="icon">
+          <CodeXml className="size-5" />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>{tool.title}</ItemTitle>
+          <ItemDescription>{tool.description}</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button onClick={_ => window.open(tool.url, '_blank')}>Website</Button>
+        </ItemActions>
+      </Item>
+    )
   }
 
   const searchTextChange = (event: BaseSyntheticEvent) => {

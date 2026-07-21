@@ -1,0 +1,29 @@
+{
+    "tools": [
+        {
+            "iconType": "language",
+            "title": "Vue",
+            "description": "An approachable, performant and versatile framework for building web user interfaces", "url": "https://www.vuejs.org/"
+        },
+        {
+            "iconType": "language",
+            "title": "Elm",
+            "description": "A delightful language for reliable web applications", "url": "https://elm-lang.org/"
+        },
+        {
+            "iconType": "language",
+            "title": "Haskell",
+            "description": "Haskell is a purely functional programming language that features referential transparency, immutability and lazy evaluation", "url": "https://www.haskell.org/"
+        },
+        {
+            "iconType": "language",
+            "title": "Java",
+            "description": "Java is a programming language and computing platform first released by Sun Microsystems in 1995", "url": "https://www.java.com"
+        },
+        {
+            "iconType": "language",
+            "title": "C#",
+            "description": "The C# language is the most popular language for the .NET platform, a free, cross-platform, open source development environment", "url": "https://learn.microsoft.com/en-us/dotnet/csharp/"
+        }
+    ]
+}
