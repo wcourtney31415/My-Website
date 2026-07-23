@@ -1,6 +1,5 @@
-import type { ExternalToast } from "sonner";
 
-const copyToClipboard = (stringToCopy: string, toast: any) => {
+const copyToClipboard = (stringToCopy: string, toast: any ) => {
     navigator.clipboard.writeText(stringToCopy)
         .then(_ => {
             toast.success(`Successfully copied "${stringToCopy}" to clipboard.`, toastSettings);
@@ -10,11 +9,12 @@ const copyToClipboard = (stringToCopy: string, toast: any) => {
 }
 
 const sendEmail = (emailAddress: string, toast: any) => {
+    console.table(typeof toast);
     const url = `mailto:${emailAddress}`;
     toast.info(`Launching default mail application...`, toastSettings)
     window.location.href = url;
 }
 
-const toastSettings: ExternalToast = { position: "top-right" };
+const toastSettings = { position: "top-right" };
 
 export {copyToClipboard, toastSettings, sendEmail}

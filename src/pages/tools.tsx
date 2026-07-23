@@ -3,7 +3,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Field } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@/components/ui/item"
+import type { Tool } from "@/data-content/types"
 import { CodeXml } from "lucide-react"
+import type { BaseSyntheticEvent } from "react"
 
 const buildATool = (tool: any, index: number) => {
     return (
@@ -22,7 +24,7 @@ const buildATool = (tool: any, index: number) => {
     )
 }
 
-const getToolsMatchingSearch = (myTools, searchText) => {
+const getToolsMatchingSearch = (myTools: Tool[], searchText: String) => {
     const toolsMatchingSearch = myTools.filter((element) => {
         const titleUpper = element.title.toUpperCase();
         const searchTextUpper = searchText.toUpperCase();
@@ -32,7 +34,9 @@ const getToolsMatchingSearch = (myTools, searchText) => {
 }
 
 // Page: Tools
-const tools = (myTools, searchText, onChangeFunc) => {
+const tools = (myTools: Tool[], searchText: String, onChangeFunc: (event: BaseSyntheticEvent) => void) => {
+    console.log("Structure: ", myTools[0]);
+    console.table(myTools[0]);
     return (
         <Card className="w-full h-full p-6">
             <Field className="flex max-w-100 self-center" orientation="horizontal">
