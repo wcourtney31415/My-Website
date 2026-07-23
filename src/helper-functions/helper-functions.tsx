@@ -9,6 +9,12 @@ const copyToClipboard = (stringToCopy: string, toast: any) => {
         });
 }
 
+const sendEmail = (emailAddress: string, toast: any) => {
+    const url = `mailto:${emailAddress}`;
+    toast.info(`Launching default mail application...`, toastSettings)
+    window.location.href = url;
+}
+
 const toastSettings: ExternalToast = { position: "top-right" };
 
-export {copyToClipboard, toastSettings}
+export {copyToClipboard, toastSettings, sendEmail}
