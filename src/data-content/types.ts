@@ -5,3 +5,10 @@ export interface Tool {
     description: string;
     url: string;
 }
+
+export interface Project {
+    key?: string;
+    name: string;
+    image: string;
+    description: string;
+}

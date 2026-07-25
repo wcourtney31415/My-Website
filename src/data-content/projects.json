@@ -1,23 +1,28 @@
 {
-    "tools": [
+    "projects": [
         {
             "name": "My Website",
+            "image": "/src/assets/my-website.png",
             "description": "This website you are currently visiting."
         },
         {
             "name": "My Website",
+            "image": "/src/assets/my-website.png",
             "description": "This website you are currently visiting."
         },
         {
             "name": "My Website",
+            "image": "/src/assets/my-website.png",
             "description": "This website you are currently visiting."
         },
         {
             "name": "My Website",
+            "image": "/src/assets/my-website.png",
             "description": "This website you are currently visiting."
         },
         {
             "name": "My Website",
+            "image": "/src/assets/my-website.png",
             "description": "This website you are currently visiting."
         }
     ]
