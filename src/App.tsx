@@ -40,7 +40,7 @@ export function App() {
         page = tools(myTools, searchText, searchTextChange)
         break;
       case "projects":
-        page = projects(myProjects, searchText, searchTextChange)
+        page = projects(myProjects)
         break;
       default:
         page = <div>Unfortunately this page wasn't found.</div>

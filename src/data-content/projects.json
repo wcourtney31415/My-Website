@@ -3,27 +3,38 @@
         {
             "name": "My Website",
             "image": "/src/assets/my-website.png",
-            "description": "This website you are currently visiting."
+            "description": "This website you are currently visiting.",
+            "url": ""
         },
         {
-            "name": "My Website",
-            "image": "/src/assets/my-website.png",
-            "description": "This website you are currently visiting."
+            "name": "My Old Website",
+            "image": "/src/assets/my-old-website.png",
+            "description": "Written in elm, this was my previous Portfolio website.",
+            "url": "/src/assets/my-old-website.html"
         },
         {
-            "name": "My Website",
-            "image": "/src/assets/my-website.png",
-            "description": "This website you are currently visiting."
+            "name": "TCS Parser",
+            "image": "/src/assets/tcs-icon.ico",
+            "description": "This website you are currently visiting.",
+            "url": ""
         },
         {
-            "name": "My Website",
-            "image": "/src/assets/my-website.png",
-            "description": "This website you are currently visiting."
+            "name": "Job Interview Challenge",
+            "image": "/src/assets/slingshot-challenge.png",
+            "description": "This website you are currently visiting.",
+            "url": ""
         },
         {
-            "name": "My Website",
-            "image": "/src/assets/my-website.png",
-            "description": "This website you are currently visiting."
+            "name": "MCS Tech Dashboard",
+            "image": "/src/assets/mcs-tech-dashboard.png",
+            "description": "This website you are currently visiting.",
+            "url": ""
+        },
+        {
+            "name": "Venn Listogram",
+            "image": "/src/assets/venn-listogram.png",
+            "description": "This website you are currently visiting.",
+            "url": "/src/assets/venn-listogram.html"
         }
     ]
 }
